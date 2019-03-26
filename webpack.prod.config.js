@@ -57,7 +57,9 @@ var config = {
     'jsdom': 'window',
     'cheerio': 'window',
     'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': 'window'
+    'react/lib/ReactContext': 'window',
+    'react/addons': true,
+    'window': 'window'
   },
   devServer: {
     historyApiFallback: true
