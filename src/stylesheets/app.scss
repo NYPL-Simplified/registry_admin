@@ -1,5 +1,5 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap.css";
-@import "../../node_modules/opds-web-client/lib/stylesheets/app.scss";
+@import "../../node_modules/library-simplified-reusable-components/lib/stylesheets/app.scss";
 
 @import "mixins";
 @import "colors";
@@ -10,5 +10,4 @@
 @import "list";
 @import "reusables/form";
 @import "reusables/header";
-@import "reusables/panel";
 @import "reusables/tabs";
