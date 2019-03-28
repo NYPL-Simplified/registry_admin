@@ -20,7 +20,7 @@
   "dependencies": {
     "@nypl/dgx-svg-icons": "^0.3.9",
     "bootstrap": "^3.3.6",
-    "library-simplified-reusable-components": "^1.1.0",
+    "library-simplified-reusable-components": "^1.1.1",
     "opds-web-client": "0.1.27",
     "react": "^15.4.0",
     "react-bootstrap": "0.29.4",
