@@ -54,10 +54,12 @@ var config = {
     root: path.resolve(__dirname, "node_modules")
   },
   externals: {
+    'window': 'window',
     'jsdom': 'window',
     'cheerio': 'window',
     'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': 'window'
+    'react/lib/ReactContext': 'window',
+    'react/addons': true
   },
   devServer: {
     historyApiFallback: true
