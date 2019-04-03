@@ -22,10 +22,10 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
     this.state = { color };
     this.colorCode = this.colorCode.bind(this);
     this.updateColor = this.updateColor.bind(this);
-    this.body = this.body.bind(this);
+    this.content = this.content.bind(this);
   }
 
-  body() {
+  content() {
     return (
         <LibraryDetailPage
           library={this.props.library}
@@ -57,7 +57,7 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
     let { name, short_name } = this.props.library.basic_info;
     let headerText = `${name} (${short_name})`;
     return(
-      <Panel style={style} headerText={headerText} body={this.body()} />
+      <Panel style={style} headerText={headerText} content={this.content()} />
     );
   }
 }
