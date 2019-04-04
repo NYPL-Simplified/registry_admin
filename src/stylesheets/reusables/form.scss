@@ -101,30 +101,4 @@ form {
     }
   }
 
-  button.btn {
-    display: block;
-    background: $blue;
-    border-radius: .25em;
-    padding: 6px 12px;
-    font-weight: bold;
-    transition: background 1s, color 1s;
-    margin: .5em;
-    min-height: 24px;
-    &:hover {
-      background: $gray-brown;
-      color: $white;
-    }
-    &:disabled {
-      pointer-events: none;
-    }
-    svg {
-      fill: $white;
-      float: right;
-      width: 1.5em;
-      height: 100%;
-      margin-left: 1em;
-      vertical-align: middle;
-    }
-  }
-
 }
