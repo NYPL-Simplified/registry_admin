@@ -1,8 +1,12 @@
 ## Changelog
 
+### v1.0.4
+#### Updated
+- Integrated the Panel component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package
+
 ### v1.0.3
 #### Updated
-- Made the validation timestamp automatically update as soon as a user validates an email address 
+- Made the validation timestamp automatically update as soon as a user validates an email address
 
 ### v1.0.2
 #### Updated
