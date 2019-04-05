@@ -1,5 +1,6 @@
 import * as React from "react";
 import { LogoutIcon } from "@nypl/dgx-svg-icons";
+import { Button } from "library-simplified-reusable-components";
 
 export interface HeaderProps {
   text?: string;
@@ -20,10 +21,11 @@ export default class Header extends React.Component<HeaderProps, void> {
             <img className="navbar-brand img-rounded" alt={this.props.alt || ""} src={src} />
           }
         </div>
-        <a href={this.props.logOut} className="btn navbar-btn">
-          <span>Log Out</span>
-          <LogoutIcon />
-        </a>
+        <Button
+          className="navbar-btn"
+          href={this.props.logOut}
+          content={<span>Log Out<LogoutIcon /></span>}
+        />
       </nav>
     );
   }

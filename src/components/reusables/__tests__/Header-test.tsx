@@ -5,9 +5,9 @@ import * as Enzyme from "enzyme";
 import Header from "../Header";
 
 describe("Header", () => {
-  let wrapper: Enzyme.ShallowWrapper<any, {}>;
+  let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   beforeEach(() => {
-    wrapper = Enzyme.shallow(
+    wrapper = Enzyme.mount(
       <Header text="Test Header!" logOut="logout_url"/>
     );
   });
@@ -19,7 +19,7 @@ describe("Header", () => {
     let logout = wrapper.find(".navbar-btn");
     expect(logout.length).to.equal(1);
     expect(logout.find(".logoutIcon").length).to.equal(1);
-    expect(logout.find("span").text()).to.equal("Log Out");
+    expect(logout.find("span").text()).to.contain("Log Out");
     expect((logout.props() as any).href).to.equal("logout_url");
   });
 });
