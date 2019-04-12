@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.0.5
+#### Updated
+- Integrated the Button component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package 
+
 ### v1.0.4
 #### Updated
 - Integrated the Panel component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package
