@@ -146,21 +146,21 @@ describe("Form", () => {
   });
 
   it("should render a Button", () => {
-    let button = wrapper.find("Button");
+    let button = wrapper.find(Button);
     expect(button.length).to.equal(1);
     expect(button.props()["submit"]).to.equal((wrapper.instance() as any)["save"]);
   });
 
   it("should optionally send props to the Button", () => {
     wrapper.setProps({ buttonClass: "success", buttonContent: "testing...", disableButton: true });
-    let button = wrapper.find("Button");
+    let button = wrapper.find(Button);
     expect(button.prop("className")).to.equal("success");
     expect(button.text()).to.equal("testing...");
     expect(button.prop("disabled")).to.be.true;
   });
 
   it("should call the onSave prop", () => {
-    let button = wrapper.find("Button");
+    let button = wrapper.find(Button);
     button.simulate("click");
     expect(onSubmit.callCount).to.equal(1);
 
