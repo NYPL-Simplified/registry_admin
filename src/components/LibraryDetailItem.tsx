@@ -4,7 +4,7 @@ export interface LibraryDetailItemProps {
   label: string;
   value: string;
 }
-export default class LibraryDetailItem extends React.Component<LibraryDetailItemProps, void> {
+export default class LibraryDetailItem extends React.Component<LibraryDetailItemProps, {}> {
   render(): JSX.Element {
     return(
       <li className="list-group-item">

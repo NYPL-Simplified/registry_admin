@@ -5,7 +5,7 @@ export interface LibraryStageItemProps {
   label: string;
   value: string;
 }
-export default class LibraryStageItem extends React.Component<LibraryStageItemProps, void> {
+export default class LibraryStageItem extends React.Component<LibraryStageItemProps, {}> {
   render(): JSX.Element {
     const colors = {
       "testing": "warning",
