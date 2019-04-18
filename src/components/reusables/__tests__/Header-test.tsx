@@ -19,7 +19,7 @@ describe("Header", () => {
     let logout = wrapper.find(".navbar-btn");
     expect(logout.length).to.equal(1);
     expect(logout.find(".logoutIcon").length).to.equal(1);
-    expect(logout.find("span").text()).to.contain("Log Out");
+    expect(logout.text()).to.contain("Log Out");
     expect((logout.props() as any).href).to.equal("logout_url");
   });
 });
