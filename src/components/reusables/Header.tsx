@@ -1,6 +1,5 @@
 import * as React from "react";
 import { LogoutIcon } from "@nypl/dgx-svg-icons";
-import { Button } from "library-simplified-reusable-components";
 
 export interface HeaderProps {
   text?: string;
