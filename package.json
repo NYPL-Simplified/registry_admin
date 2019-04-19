@@ -1,6 +1,6 @@
 {
   "name": "simplified-registry-admin",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Web Front-end for Library Simplified Circulation Manager Admin Interface",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "@nypl/dgx-svg-icons": "^0.3.9",
     "bootstrap": "^3.3.6",
     "library-simplified-reusable-components": "1.3.0",
-    "opds-web-client": "0.1.27",
+    "opds-web-client": "0.2.0",
     "prop-types": "^15.7.2",
     "react": "^15.4.0",
     "react-bootstrap": "0.29.4",

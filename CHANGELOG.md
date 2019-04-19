@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.0
+#### Updated
+- Updated `typings` to `@types`, updated Typescript, and updated unit tests with fetch-mock. These updates are needed to import the updated `opds-web-client` package.
+
 ### v1.0.5
 #### Updated
 - Updating the `reusable-components` npm package version to 1.3.0.
