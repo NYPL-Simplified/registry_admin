@@ -25,7 +25,7 @@ const fetcher = new MockDataFetcher() as any;
 const actions = new ActionCreator(fetcher);
 
 describe("actions", () => {
-  describe.only("postForm", () => {
+  describe("postForm", () => {
     const type = "TEST";
     const url = "http://example.com/test";
     const formData = new (window as any).FormData();

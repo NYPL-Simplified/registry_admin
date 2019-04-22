@@ -134,14 +134,14 @@ describe("LibraryDetailPage", () => {
       expect(options.at(2).props().value).to.equal("cancelled");
     });
 
-    let submitButton = editForm.find("button");
-    expect(submitButton.length).to.equal(1);
+    let button = editForm.find("button");
+    expect(button.length).to.equal(1);
   });
 
   it("should submit the edit form and fetch new data", async () => {
     let form = wrapper.find("form").at(0);
-    let submitButton = form.find("button");
-    submitButton.simulate("click");
+    let button = form.find("button");
+    button.simulate("click");
 
     let newStages = { stages: { library_stage: "cancelled", registry_stage: "production" } };
     let fullLibrary = Object.assign({}, (wrapper.props() as any)["library"], newStages);

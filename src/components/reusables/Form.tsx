@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import SubmitButton from "./SubmitButton";
+import { Button } from "library-simplified-reusable-components";
 import Fieldset from "./Fieldset";
 
 export interface FormProps {
@@ -71,7 +71,7 @@ export default class Form extends React.Component<FormProps, {}> {
         }
         { this.props.content }
         <br />
-        <SubmitButton
+        <Button
           callback={this.submit}
           content={this.props.buttonContent && this.props.buttonContent}
           className={this.props.buttonClass && this.props.buttonClass}

@@ -6,7 +6,8 @@
 
 ### v1.0.5
 #### Updated
-- Updating the `reusable-components` npm package version to 1.3.0.
+- Integrated the Button component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package
+- Updating the `reusable-components` npm package version to 1.3.1.
 
 ### v1.0.4
 #### Updated

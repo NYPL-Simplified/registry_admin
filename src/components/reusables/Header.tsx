@@ -20,9 +20,11 @@ export default class Header extends React.Component<HeaderProps, {}> {
             <img className="navbar-brand img-rounded" alt={this.props.alt || ""} src={src} />
           }
         </div>
-        <a href={this.props.logOut} className="btn navbar-btn">
-          <span>Log Out</span>
-          <LogoutIcon />
+        <a
+          className="btn navbar-btn"
+          href={this.props.logOut}
+        >
+          <span>Log Out <LogoutIcon /></span>
         </a>
       </nav>
     );
