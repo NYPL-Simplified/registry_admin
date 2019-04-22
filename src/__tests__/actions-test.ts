@@ -25,7 +25,7 @@ const fetcher = new MockDataFetcher() as any;
 const actions = new ActionCreator(fetcher);
 
 describe("actions", () => {
-  describe("postForm", () => {
+  describe.only("postForm", () => {
     const type = "TEST";
     const url = "http://example.com/test";
     const formData = new (window as any).FormData();
@@ -37,9 +37,7 @@ describe("actions", () => {
 
     it("dispatches request, success, and load", async () => {
       const dispatch = stub();
-      const responseText = stub().returns(new Promise<string>((resolve) => {
-        resolve("response");
-      }));
+      const responseText = "response";
       fetchMock
         .mock(url, responseText);
 
@@ -50,7 +48,7 @@ describe("actions", () => {
       expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
       expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.SUCCESS}`);
       expect(dispatch.args[2][0].type).to.equal(`${type}_${ActionCreator.LOAD}`);
-      expect(dispatch.args[2][0].data).to.equal("response");
+      expect(dispatch.args[2][0].data).to.equal(responseText);
       expect(fetchMock.called()).to.equal(true);
       expect(fetchArgs[0][0]).to.equal(url);
       expect(fetchArgs[0][1].method).to.equal("POST");
@@ -61,9 +59,9 @@ describe("actions", () => {
 
     it("postForm with JSON response dispatches request, success, and load", async () => {
       const dispatch = stub();
-      const textResponse = "{\"id\": \"test\", \"name\": \"test\"}";
+      const responseText = "{\"id\": \"test\", \"name\": \"test\"}";
       fetchMock
-        .mock(url, { status: 200, text: textResponse });
+        .mock(url, responseText);
 
       await actions.postForm(type, url, formData, "POST", "", "JSON")(dispatch);
       let fetchArgs = fetchMock.calls();
@@ -72,7 +70,7 @@ describe("actions", () => {
       expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
       expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.SUCCESS}`);
       expect(dispatch.args[2][0].type).to.equal(`${type}_${ActionCreator.LOAD}`);
-      expect(dispatch.args[2][0].data.text).to.equal(textResponse);
+      expect(dispatch.args[2][0].data).to.deep.equal(JSON.parse(responseText));
       expect(fetchMock.called()).to.equal(true);
       expect(fetchArgs[0][0]).to.equal(url);
       expect(fetchArgs[0][1].method).to.equal("POST");
@@ -83,9 +81,7 @@ describe("actions", () => {
 
     it("dispatches a DELETE request", async () => {
       const dispatch = stub();
-      const responseText = new Promise<string>((resolve) => {
-        resolve("response");
-      });
+      const responseText = "response";
       fetchMock
         .mock(url, responseText);
 
