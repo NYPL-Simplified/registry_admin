@@ -6,7 +6,7 @@ import * as React from "react";
 import SearchForm from "../SearchForm";
 import Form from "../reusables/Form";
 
-describe.only("SearchForm", () => {
+describe("SearchForm", () => {
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let search = Sinon.stub();
 
