@@ -8,6 +8,7 @@ import { Panel } from "library-simplified-reusable-components";
 import ActionCreator from "../actions";
 import LibrariesListItem from "./LibrariesListItem";
 import { SearchIcon } from "@nypl/dgx-svg-icons";
+import SearchForm from "./SearchForm";
 import Form from "./reusables/Form";
 import Input from "./reusables/Input";
 
@@ -37,7 +38,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
   constructor(props: LibrariesListProps) {
     super(props);
     this.search = this.search.bind(this);
-    this.searchForm = this.searchForm.bind(this);
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
     this.state = { showAll: !this.props.libraryFromSearch, searchTerm: "" };
   }
@@ -48,7 +48,11 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
       let libraries = (this.state.showAll || !this.props.libraryFromSearch) ? this.props.libraries.libraries : [this.props.libraryFromSearch];
       return (
         <ul className="list">
-        { this.searchForm() }
+          <SearchForm
+            search={this.search}
+            updateSearchTerm={this.updateSearchTerm}
+            disableButton={this.state.showAll && !this.state.searchTerm.length}
+          />
         {
           this.props.libraries.libraries.map(library =>
             <LibrariesListItem
@@ -74,27 +78,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
 
   updateSearchTerm(e): void {
     this.setState({...this.state, searchTerm: e.currentTarget.value});
-  }
-
-  searchForm(): JSX.Element {
-    let form = (
-      <Form
-        onSubmit={this.search}
-        content={<Input name="name" callback={this.updateSearchTerm}/>}
-        buttonContent={<span>Search <SearchIcon /></span>}
-        className="inline"
-        disableButton={this.state.showAll && !this.state.searchTerm.length}
-      />
-    );
-
-    return(
-      <Panel
-        content={form}
-        style="info"
-        collapsible={false}
-        headerText="Search for a library by name"
-      />
-    );
   }
 
   async search(data: FormData) {

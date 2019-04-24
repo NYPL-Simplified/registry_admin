@@ -6,7 +6,7 @@ import buildStore from "../../store";
 
 import { LibrariesList } from "../LibrariesList";
 
-describe.only("LibrariesList", () => {
+describe("LibrariesList", () => {
   let libraries = {
     libraries:
       [{
