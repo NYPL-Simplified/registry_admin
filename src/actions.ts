@@ -12,6 +12,7 @@ export default class ActionCreator extends BaseActionCreator {
 
   static readonly GET_ALL_LIBRARIES = "GET_ALL_LIBRARIES";
   static readonly GET_ONE_LIBRARY = "GET_ONE_LIBRARY";
+  static readonly CLEAR_SEARCH = "CLEAR_SEARCH";
 
   static readonly VALIDATE_EMAIL = "VALIDATE_EMAIL";
   static readonly EDIT_STAGES = "EDIT_STAGES";
@@ -146,6 +147,16 @@ export default class ActionCreator extends BaseActionCreator {
   fetchLibrary(uuid: string) {
     let url = "/admin/libraries/" + uuid;
     return this.fetchJSON<LibraryData>(ActionCreator.GET_ONE_LIBRARY, url).bind(this);
+  }
+
+  search(data: FormData) {
+    let url = "/admin/libraries/search_by_name";
+    let result = this.postForm(ActionCreator.GET_ONE_LIBRARY, url, data, "POST", "", "JSON").bind(this);
+    return result;
+  }
+
+  clearSearch() {
+    return (dispatch) => dispatch(this.load<void>(ActionCreator.CLEAR_SEARCH, null));
   }
 
   validateEmail(data: FormData) {

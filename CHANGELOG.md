@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.0.6
+#### Added
+- Implemented a search feature for the list of libraries
+
 ### v1.0.5
 #### Updated
 - Integrated the Button component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package

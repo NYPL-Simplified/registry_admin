@@ -36,6 +36,24 @@ form {
     }
   }
 
+  &.inline {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 0;
+    margin: 0;
+    .btn {
+      margin: 0 .5em;
+    }
+    .form-group {
+      display: flex;
+      min-width: 60%;
+      flex-grow: 0;
+      margin: 0 2em 0 0;
+      float: left;
+    }
+  }
+
   .alert-danger {
     background-color: $red-error;
     color: $dark-gray;

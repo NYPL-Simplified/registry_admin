@@ -9,6 +9,7 @@ import { GenericWedgeIcon } from "@nypl/dgx-svg-icons";
 export interface LibrariesListItemProps {
   library: LibraryData;
   store: Store<State>;
+  current?: boolean;
 }
 
 export interface LibrariesListItemState {
@@ -57,7 +58,7 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
     let { name, short_name } = this.props.library.basic_info;
     let headerText = `${name} (${short_name})`;
     return(
-      <Panel style={style} headerText={headerText} content={this.content()} />
+      <Panel style={style} headerText={headerText} content={this.content()} openByDefault={this.props.current} />
     );
   }
 }

@@ -4,7 +4,7 @@ import { Button } from "library-simplified-reusable-components";
 import Fieldset from "./Fieldset";
 
 export interface FormProps {
-  content?: Array<JSX.Element>;
+  content?: JSX.Element | Array<JSX.Element>;
   onSubmit: any;
   title?: string;
   hiddenName?: string;

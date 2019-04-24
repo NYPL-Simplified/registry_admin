@@ -3,9 +3,16 @@
   margin: 30px auto;
   padding: 0;
   list-style: none;
+  position: relative;
 
   hr {
     margin: 2em auto;
     border-color: $blue-dark;
+  }
+
+  .panel-info {
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
 }
