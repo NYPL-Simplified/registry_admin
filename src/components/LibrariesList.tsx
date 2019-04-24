@@ -28,7 +28,6 @@ export interface LibrariesListDispatchProps {
 }
 
 export interface LibrariesListState {
-  showAll: boolean;
   searchTerm: string;
 }
 
@@ -39,19 +38,18 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
     super(props);
     this.search = this.search.bind(this);
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
-    this.state = { showAll: !this.props.libraryFromSearch, searchTerm: "" };
+    this.state = { searchTerm: "" };
   }
 
   render(): JSX.Element {
     let hasLibraries = (this.props.libraries && this.props.libraries.libraries && this.props.libraries.libraries.length > 0);
     if (hasLibraries) {
-      let libraries = (this.state.showAll || !this.props.libraryFromSearch) ? this.props.libraries.libraries : [this.props.libraryFromSearch];
       return (
         <ul className="list">
           <SearchForm
             search={this.search}
             updateSearchTerm={this.updateSearchTerm}
-            disableButton={this.state.showAll && !this.state.searchTerm.length}
+            disableButton={!this.state.searchTerm.length}
             text="Search for a library by name"
             inputName="name"
           />
@@ -79,17 +77,22 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
   }
 
   updateSearchTerm(e): void {
-    this.setState({...this.state, searchTerm: e.currentTarget.value});
+    this.setState({ searchTerm: e.currentTarget.value });
   }
 
   async search(data: FormData) {
+    let result = this.props.libraryFromSearch;
+    // If this library is already being displayed, do nothing.
+    if (result && (data as any).get("name").toUpperCase() === result.basic_info.name.toUpperCase()) {
+      return;
+    }
     this.props.clearSearch();
     await this.props.search(data);
-    if (this.props.libraryFromSearch && this.refs[this.props.libraryFromSearch.uuid]) {
-      let position = (ReactDOM.findDOMNode(this.refs[this.props.libraryFromSearch.uuid]) as any).offsetTop;
+    result = this.props.libraryFromSearch;
+    if (result && this.refs[result.uuid]) {
+      let position = (ReactDOM.findDOMNode(this.refs[result.uuid]) as any).offsetTop;
       window.scrollTo(0, position - 20);
     }
-    this.setState({...this.state, showAll: !this.state.showAll });
   }
 }
 

@@ -5,6 +5,8 @@ import * as React from "react";
 import buildStore from "../../store";
 
 import { LibrariesList } from "../LibrariesList";
+import LibrariesListItem from "../LibrariesListItem";
+import { Panel } from "library-simplified-reusable-components";
 
 describe("LibrariesList", () => {
   let libraries = {
@@ -94,6 +96,22 @@ describe("LibrariesList", () => {
       let header = wrapper.find(".page-header");
       expect(header.length).to.equal(1);
       expect(header.text()).to.equal("There are no libraries in this registry yet.");
+    });
+
+    it("should display a search form", () => {
+      let searchForm = wrapper.find(".panel-info");
+      expect(searchForm.length).to.equal(1);
+      expect(searchForm.find(".panel-title").text()).to.equal("Search for a library by name");
+    });
+
+    it("should show a search result", () => {
+      let libraryPanels = wrapper.find(LibrariesListItem);
+      let lib2 = libraryPanels.at(1);
+      expect(lib2.prop("current")).not.to.be.true;
+      expect(lib2.find(Panel).prop("openByDefault")).to.be.false;
+      wrapper.setProps({ libraryFromSearch: libraries.libraries[1] });
+      expect(lib2.prop("current")).to.be.true;
+      expect(lib2.find(Panel).prop("openByDefault")).to.be.true;
     });
   });
 });
