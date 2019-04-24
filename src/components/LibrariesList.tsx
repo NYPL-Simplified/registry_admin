@@ -52,6 +52,8 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
             search={this.search}
             updateSearchTerm={this.updateSearchTerm}
             disableButton={this.state.showAll && !this.state.searchTerm.length}
+            text="Search for a library by name"
+            inputName="name"
           />
         {
           this.props.libraries.libraries.map(library =>

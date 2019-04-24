@@ -9,15 +9,16 @@ export interface SearchFormOwnProps {
   search: (data: FormData) => void;
   updateSearchTerm: (e: any) => void;
   disableButton: boolean;
+  text: string;
+  inputName: string;
 }
-
 
 export default class SearchForm extends React.Component<SearchFormOwnProps, void> {
   render(): JSX.Element {
     let form = (
       <Form
         onSubmit={this.props.search}
-        content={<Input name="name" callback={this.props.updateSearchTerm}/>}
+        content={<Input name={this.props.inputName} callback={this.props.updateSearchTerm}/>}
         buttonContent={<span>Search <SearchIcon /></span>}
         className="inline"
         disableButton={this.props.disableButton}
@@ -29,7 +30,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, void
         content={form}
         style="info"
         collapsible={false}
-        headerText="Search for a library by name"
+        headerText={this.props.text}
       />
     );
   }
