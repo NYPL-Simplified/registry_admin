@@ -27,18 +27,12 @@ export interface LibrariesListDispatchProps {
   clearSearch?: () => void;
 }
 
-export interface LibrariesListState {
-  searchTerm: string;
-}
-
 export interface LibrariesListProps extends LibrariesListStateProps, LibrariesListOwnProps, LibrariesListDispatchProps {};
 
-export class LibrariesList extends React.Component<LibrariesListProps, LibrariesListState> {
+export class LibrariesList extends React.Component<LibrariesListProps, void> {
   constructor(props: LibrariesListProps) {
     super(props);
     this.search = this.search.bind(this);
-    this.updateSearchTerm = this.updateSearchTerm.bind(this);
-    this.state = { searchTerm: "" };
   }
 
   render(): JSX.Element {
@@ -48,8 +42,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
         <ul className="list">
           <SearchForm
             search={this.search}
-            updateSearchTerm={this.updateSearchTerm}
-            disableButton={!this.state.searchTerm.length}
             text="Search for a library by name"
             inputName="name"
           />
@@ -74,10 +66,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
 
   componentWillMount() {
     this.props.fetchData();
-  }
-
-  updateSearchTerm(e): void {
-    this.setState({ searchTerm: e.currentTarget.value });
   }
 
   async search(data: FormData) {

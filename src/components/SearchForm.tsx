@@ -7,21 +7,29 @@ import Input from "./reusables/Input";
 
 export interface SearchFormOwnProps {
   search: (data: FormData) => void;
-  updateSearchTerm: (e: any) => void;
-  disableButton: boolean;
   text: string;
   inputName: string;
 }
 
-export default class SearchForm extends React.Component<SearchFormOwnProps, void> {
+export interface SearchFormState {
+  searchTerm: string;
+}
+
+export default class SearchForm extends React.Component<SearchFormOwnProps, SearchFormState> {
+  constructor(props: SearchFormOwnProps) {
+    super(props);
+    this.updateSearchTerm = this.updateSearchTerm.bind(this);
+    this.state = { searchTerm: "" };
+  }
+
   render(): JSX.Element {
     let form = (
       <Form
         onSubmit={this.props.search}
-        content={<Input name={this.props.inputName} callback={this.props.updateSearchTerm}/>}
+        content={<Input name={this.props.inputName} callback={this.updateSearchTerm} />}
         buttonContent={<span>Search <SearchIcon /></span>}
         className="inline"
-        disableButton={this.props.disableButton}
+        disableButton={!this.state.searchTerm.length}
       />
     );
 
@@ -33,5 +41,9 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, void
         headerText={this.props.text}
       />
     );
+  }
+
+  updateSearchTerm(e): void {
+    this.setState({ searchTerm: e.target.value });
   }
 }
