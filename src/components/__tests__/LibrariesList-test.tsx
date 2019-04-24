@@ -6,7 +6,7 @@ import buildStore from "../../store";
 
 import { LibrariesList } from "../LibrariesList";
 
-describe("LibrariesList", () => {
+describe.only("LibrariesList", () => {
   let libraries = {
     libraries:
       [{
@@ -66,14 +66,14 @@ describe("LibrariesList", () => {
     });
 
     it("should display a list of libraries", () => {
-      let libraryItems = wrapper.find(".panel");
+      let libraryItems = wrapper.find(".panel").not(".panel-info");
       expect(libraryItems.length).to.equal(2);
     });
 
     it("should render each library's  name and short name", () => {
-      let lib1 = wrapper.find(".panel").at(0);
+      let lib1 = wrapper.find(".panel").not(".panel-info").at(0);
       expect(lib1.text()).to.contain("Test Library 1 (lib1)");
-      let lib2 = wrapper.find(".panel").at(1);
+      let lib2 = wrapper.find(".panel").not(".panel-info").at(1);
       expect(lib2.text()).to.contain("Test Library 2 (lib2)");
     });
 
@@ -83,8 +83,9 @@ describe("LibrariesList", () => {
       wrapper.setProps({ libraries: newProps });
 
       expect(fetchData.called).to.be.true;
-      expect(wrapper.find(".panel").length).to.equal(2);
-      expect(wrapper.find(".panel-title").at(0).text()).to.equal("New Library! (new)");
+      let libraryPanels = wrapper.find(".panel").not(".panel-info");
+      expect(libraryPanels.length).to.equal(2);
+      expect(libraryPanels.at(0).find(".panel-title").text()).to.equal("New Library! (new)");
     });
 
     it("should display a header if there are no libraries", () => {
