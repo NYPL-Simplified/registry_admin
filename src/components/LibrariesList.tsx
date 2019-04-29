@@ -20,7 +20,7 @@ export interface LibrariesListDispatchProps {
 
 export interface LibrariesListProps extends LibrariesListStateProps, LibrariesListOwnProps, LibrariesListDispatchProps {};
 
-export class LibrariesList extends React.Component<LibrariesListProps, void> {
+export class LibrariesList extends React.Component<LibrariesListProps, {}> {
 
   render(): JSX.Element {
     let hasLibraries = (this.props.libraries && this.props.libraries.libraries && this.props.libraries.libraries.length > 0);

@@ -7,6 +7,7 @@ import Input from "./Input";
 import ActionCreator from "../../actions";
 import { State } from "../../reducers/index";
 import { FetchErrorData } from "opds-web-client/lib/interfaces";
+import * as PropTypes from "prop-types";
 
 export interface LogInFormStateProps {
   error?: FetchErrorData;
@@ -28,11 +29,11 @@ export interface LogInFormContext {
 
 export interface LogInFormProps extends LogInFormStateProps, LogInFormOwnProps, LogInFormDispatchProps {};
 
-export class LogInForm extends React.Component<LogInFormProps, void> {
+export class LogInForm extends React.Component<LogInFormProps, {}> {
 
   context: LogInFormContext;
   static contextTypes: React.ValidationMap<LogInFormContext> = {
-    store: React.PropTypes.object.isRequired
+    store: PropTypes.object.isRequired
   };
 
   constructor(props: LogInFormProps) {

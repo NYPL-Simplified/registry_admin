@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.0
+#### Updated
+- Updated `typings` to `@types`, updated Typescript, and updated unit tests with fetch-mock. These updates are needed to import the updated `opds-web-client` v0.2.0 package.
+
 ### v1.0.5
 #### Updated
 - Integrated the Button component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package

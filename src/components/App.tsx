@@ -2,7 +2,7 @@ import * as React from "react";
 import Header from "./reusables/Header";
 import LibrariesListContainer from "./LibrariesListContainer";
 
-export default class App extends React.Component<void, void> {
+export default class App extends React.Component<{}, {}> {
 
   render(): JSX.Element {
     return(

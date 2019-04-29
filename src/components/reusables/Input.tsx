@@ -6,7 +6,7 @@ export interface InputProps {
   label: string;
 }
 
-export default class Input extends React.Component<InputProps, void> {
+export default class Input extends React.Component<InputProps, {}> {
   render(): JSX.Element {
     return(
       <div className="form-group">

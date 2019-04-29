@@ -18,7 +18,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
     this.state = { tab: 0 };
   }
 
-  select(e:  __React.KeyboardEvent & __React.MouseEvent) {
+  select(e:  React.KeyboardEvent<HTMLButtonElement> & React.MouseEvent<HTMLButtonElement>) {
     let idx = parseInt((e.currentTarget as HTMLElement).id);
     if (e.keyCode) {
       // Keyboard navigation with arrow keys
@@ -62,7 +62,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
         <li key={name} role="presentation" className={`tab-nav ${current ? "current" : ""}`}>
           <button
             aria-controls={`panel-${idx}`}
-            aria-selected={current.toString()}
+            aria-selected={current}
             className="btn btn-default"
             id={idx.toString()}
             onClick={this.select}
