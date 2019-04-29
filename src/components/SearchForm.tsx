@@ -24,10 +24,17 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
   }
 
   render(): JSX.Element {
+    let input = (
+      <Input
+        name={this.props.inputName}
+        callback={this.updateSearchTerm}
+      />
+    );
+
     let form = (
       <Form
         onSubmit={this.props.search}
-        content={<Input name={this.props.inputName} callback={this.updateSearchTerm} />}
+        content={input}
         buttonContent={<span>Search <SearchIcon /></span>}
         className="inline"
         disableButton={!this.state.searchTerm.length}
