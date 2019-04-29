@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { stub } from "sinon";
+const fetchMock =  require("fetch-mock");
 
 import ActionCreator from "../actions";
 
@@ -30,92 +31,88 @@ describe("actions", () => {
     const formData = new (window as any).FormData();
     formData.append("test", "test");
 
+    afterEach(() => {
+      fetchMock.restore();
+    });
+
     it("dispatches request, success, and load", async () => {
       const dispatch = stub();
-      const responseText = stub().returns(new Promise<string>((resolve) => {
-        resolve("response");
-      }));
-      const fetchMock = stub().returns(new Promise<any>((resolve, reject) => {
-        resolve({ status: 200, text: responseText });
-      }));
-      fetch = fetchMock;
+      const responseText = "response";
+      fetchMock
+        .mock(url, responseText);
 
       await actions.postForm(type, url, formData)(dispatch);
+      let fetchArgs = fetchMock.calls();
+
       expect(dispatch.callCount).to.equal(3);
       expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
       expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.SUCCESS}`);
       expect(dispatch.args[2][0].type).to.equal(`${type}_${ActionCreator.LOAD}`);
-      expect(dispatch.args[2][0].data).to.equal("response");
-      expect(fetchMock.callCount).to.equal(1);
-      expect(fetchMock.args[0][0]).to.equal(url);
-      expect(fetchMock.args[0][1].method).to.equal("POST");
+      expect(dispatch.args[2][0].data).to.equal(responseText);
+      expect(fetchMock.called()).to.equal(true);
+      expect(fetchArgs[0][0]).to.equal(url);
+      expect(fetchArgs[0][1].method).to.equal("POST");
       const expectedHeaders = new Headers();
-      expect(fetchMock.args[0][1].headers).to.deep.equal(expectedHeaders);
-      expect(fetchMock.args[0][1].body).to.equal(formData);
+      expect(fetchArgs[0][1].headers).to.deep.equal(expectedHeaders);
+      expect(fetchArgs[0][1].body).to.equal(formData);
     });
 
     it("postForm with JSON response dispatches request, success, and load", async () => {
       const dispatch = stub();
-      const textResponse = "{\"id\": \"test\", \"name\": \"test\"}";
-      const responseText = stub().returns(new Promise<any>((resolve) => {
-        resolve(textResponse);
-      }));
-      const fetchMock = stub().returns(new Promise<any>((resolve, reject) => {
-        resolve({ status: 200, text: responseText });
-      }));
-      fetch = fetchMock;
+      const responseText = "{\"id\": \"test\", \"name\": \"test\"}";
+      fetchMock
+        .mock(url, responseText);
 
       await actions.postForm(type, url, formData, "POST", "", "JSON")(dispatch);
+      let fetchArgs = fetchMock.calls();
+
       expect(dispatch.callCount).to.equal(3);
       expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
       expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.SUCCESS}`);
       expect(dispatch.args[2][0].type).to.equal(`${type}_${ActionCreator.LOAD}`);
-      expect(dispatch.args[2][0].data).to.equal(textResponse);
-      expect(fetchMock.callCount).to.equal(1);
-      expect(fetchMock.args[0][0]).to.equal(url);
-      expect(fetchMock.args[0][1].method).to.equal("POST");
+      expect(dispatch.args[2][0].data).to.deep.equal(JSON.parse(responseText));
+      expect(fetchMock.called()).to.equal(true);
+      expect(fetchArgs[0][0]).to.equal(url);
+      expect(fetchArgs[0][1].method).to.equal("POST");
       const expectedHeaders = new Headers();
-      expect(fetchMock.args[0][1].headers).to.deep.equal(expectedHeaders);
-      expect(fetchMock.args[0][1].body).to.equal(formData);
+      expect(fetchArgs[0][1].headers).to.deep.equal(expectedHeaders);
+      expect(fetchArgs[0][1].body).to.equal(formData);
     });
 
     it("dispatches a DELETE request", async () => {
       const dispatch = stub();
-      const responseText = stub().returns(new Promise<string>((resolve) => {
-        resolve("response");
-      }));
-      const fetchMock = stub().returns(new Promise<any>((resolve, reject) => {
-        resolve({ status: 200, text: responseText });
-      }));
-      fetch = fetchMock;
+      const responseText = "response";
+      fetchMock
+        .mock(url, responseText);
 
       await actions.postForm(type, url, formData, "DELETE")(dispatch);
+      let fetchArgs = fetchMock.calls();
+
       expect(dispatch.callCount).to.equal(3);
-      expect(fetchMock.callCount).to.equal(1);
-      expect(fetchMock.args[0][0]).to.equal(url);
-      expect(fetchMock.args[0][1].method).to.equal("DELETE");
+      expect(fetchMock.called()).to.equal(true);
+      expect(fetchArgs[0][0]).to.equal(url);
+      expect(fetchArgs[0][1].method).to.equal("DELETE");
       const expectedHeaders = new Headers();
-      expect(fetchMock.args[0][1].headers).to.deep.equal(expectedHeaders);
-      expect(fetchMock.args[0][1].body).to.equal(formData);
+      expect(fetchArgs[0][1].headers).to.deep.equal(expectedHeaders);
+      expect(fetchArgs[0][1].body).to.equal(formData);
     });
 
     it("dispatches failure on bad response", async () => {
       const dispatch = stub();
-      const jsonResponse = new Promise(resolve => resolve({ detail: "problem detail" }));
-      const fetchMock = stub().returns(new Promise<any>(resolve => {
-        resolve({ status: 500, json: () => jsonResponse });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(url, { status: 500, body: { detail: "problem detail" } });
 
       try {
         await actions.postForm(type, url, formData)(dispatch);
         // shouldn't get here
         expect(false).to.equal(true);
       } catch (err) {
+        let fetchArgs = fetchMock.calls();
+
         expect(dispatch.callCount).to.equal(2);
         expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
         expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.FAILURE}`);
-        expect(fetchMock.callCount).to.equal(1);
+        expect(fetchMock.called()).to.equal(true);
         expect(err).to.deep.equal({
           status: 500,
           response: "problem detail",
@@ -126,11 +123,8 @@ describe("actions", () => {
 
     it("dispatches failure on non-JSON response", async () => {
       const dispatch = stub();
-      const nonJsonResponse = new Promise(() => { throw "Not JSON"; });
-      const fetchMock = stub().returns(new Promise<any>(resolve => {
-        resolve({ status: 500, json: () => nonJsonResponse });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(url, { status: 500, body: "not json" });
 
       try {
         await actions.postForm(type, url, formData, "POST", "Default error")(dispatch);
@@ -140,7 +134,7 @@ describe("actions", () => {
         expect(dispatch.callCount).to.equal(2);
         expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
         expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.FAILURE}`);
-        expect(fetchMock.callCount).to.equal(1);
+        expect(fetchMock.called()).to.equal(true);
         expect(err).to.deep.equal({
           status: 500,
           response: "Default error",
@@ -151,10 +145,8 @@ describe("actions", () => {
 
     it("dispatches failure on no response", async () => {
       const dispatch = stub();
-      const fetchMock = stub().returns(new Promise<any>((resolve, reject) => {
-        reject({ message: "test error" });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(url, () => { throw { message: "test error" }; });
 
       try {
         await actions.postForm(type, url, formData)(dispatch);
@@ -164,7 +156,7 @@ describe("actions", () => {
         expect(dispatch.callCount).to.equal(2);
         expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
         expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.FAILURE}`);
-        expect(fetchMock.callCount).to.equal(1);
+        expect(fetchMock.called()).to.equal(true);
         expect(err).to.deep.equal({
           status: null,
           response: "test error",
@@ -179,34 +171,35 @@ describe("actions", () => {
     const url = "http://example.com/test";
     const jsonData = { "test": 1 };
 
+    afterEach(() => {
+      fetchMock.restore();
+    });
+
     it("dispatches request and success", async () => {
       const dispatch = stub();
-      const fetchMock = stub().returns(new Promise<any>((resolve, reject) => {
-        resolve({ status: 200 });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(url, 200);
 
       await actions.postJSON<{ test: number }>(type, url, jsonData)(dispatch);
+      let fetchArgs = fetchMock.calls();
+
       expect(dispatch.callCount).to.equal(2);
       expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
       expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.SUCCESS}`);
-      expect(fetchMock.callCount).to.equal(1);
-      expect(fetchMock.args[0][0]).to.equal(url);
-      expect(fetchMock.args[0][1].method).to.equal("POST");
+      expect(fetchMock.called()).to.equal(true);
+      expect(fetchArgs[0][0]).to.equal(url);
+      expect(fetchArgs[0][1].method).to.equal("POST");
       const expectedHeaders = new Headers();
       expectedHeaders.append("Accept", "application/json");
       expectedHeaders.append("Content-Type", "application/json");
-      expect(fetchMock.args[0][1].headers).to.deep.equal(expectedHeaders);
-      expect(fetchMock.args[0][1].body).to.equal(JSON.stringify(jsonData));
+      expect(fetchArgs[0][1].headers).to.deep.equal(expectedHeaders);
+      expect(fetchArgs[0][1].body).to.equal(JSON.stringify(jsonData));
     });
 
     it("dispatches failure on bad response", async () => {
       const dispatch = stub();
-      const jsonResponse = new Promise(resolve => resolve({ detail: "problem detail" }));
-      const fetchMock = stub().returns(new Promise<any>(resolve => {
-        resolve({ status: 500, json: () => jsonResponse });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(url, { status: 500, body: { detail: "problem detail" } });
 
       try {
         await actions.postJSON<{ test: number }>(type, url, jsonData)(dispatch);
@@ -216,7 +209,7 @@ describe("actions", () => {
         expect(dispatch.callCount).to.equal(2);
         expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
         expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.FAILURE}`);
-        expect(fetchMock.callCount).to.equal(1);
+        expect(fetchMock.called()).to.equal(true);
         expect(err).to.deep.equal({
           status: 500,
           response: "problem detail",
@@ -227,10 +220,8 @@ describe("actions", () => {
 
     it("dispatches failure on no response", async () => {
       const dispatch = stub();
-      const fetchMock = stub().returns(new Promise<any>((resolve, reject) => {
-        reject({ message: "test error" });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(url, () => { throw { message: "test error" }; });
 
       try {
         await actions.postJSON<{ test: number }>(type, url, jsonData)(dispatch);
@@ -240,7 +231,7 @@ describe("actions", () => {
         expect(dispatch.callCount).to.equal(2);
         expect(dispatch.args[0][0].type).to.equal(`${type}_${ActionCreator.REQUEST}`);
         expect(dispatch.args[1][0].type).to.equal(`${type}_${ActionCreator.FAILURE}`);
-        expect(fetchMock.callCount).to.equal(1);
+        expect(fetchMock.called()).to.equal(true);
         expect(err).to.deep.equal({
           status: null,
           response: "test error",
@@ -305,71 +296,81 @@ describe("actions", () => {
 
   describe("editStages", () => {
     it("dispatches request and success", async () => {
+      const registrationUrl = "/admin/libraries/registration";
       const dispatch = stub();
       const formData = new (window as any).FormData();
       formData.append("registration_stage", "production");
 
-      const fetchMock = stub().returns(new Promise<any>((update, reject) => {
-        update({ status: 200 });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(registrationUrl, "done");
 
       await actions.editStages(formData)(dispatch);
-      expect(dispatch.callCount).to.equal(2);
+      let fetchArgs = fetchMock.calls();
+
+      expect(dispatch.callCount).to.equal(3);
 
       expect(dispatch.args[0][0].type).to.equal(`${ActionCreator.EDIT_STAGES}_${ActionCreator.REQUEST}`);
       expect(dispatch.args[1][0].type).to.equal(`${ActionCreator.EDIT_STAGES}_${ActionCreator.SUCCESS}`);
 
-      expect(fetchMock.callCount).to.equal(1);
-      expect(fetchMock.args[0][0]).to.equal("/admin/libraries/registration");
-      expect(fetchMock.args[0][1].method).to.equal("POST");
-      expect(fetchMock.args[0][1].body).to.equal(formData);
+      expect(fetchMock.called()).to.equal(true);
+      expect(fetchArgs[0][0]).to.equal(registrationUrl);
+      expect(fetchArgs[0][1].method).to.equal("POST");
+      expect(fetchArgs[0][1].body).to.equal(formData);
+
+      fetchMock.restore();
     });
   });
 
   describe("validateEmail", () => {
     it("validates an email address", async () => {
+      const emailUrl = "/admin/libraries/email";
       const dispatch = stub();
       const formData = new (window as any).FormData();
       formData.append("uuid", "abc");
 
-      const fetchMock = stub().returns(new Promise<any>((update, reject) => {
-        update({ status: 200 });
-      }));
-      fetch = fetchMock;
+      fetchMock
+        .mock(emailUrl, "done");
 
       await actions.validateEmail(formData)(dispatch);
-      expect(dispatch.callCount).to.equal(2);
+      let fetchArgs = fetchMock.calls();
+
+      expect(dispatch.callCount).to.equal(3);
 
       expect(dispatch.args[0][0].type).to.equal("VALIDATE_EMAIL_REQUEST");
       expect(dispatch.args[1][0].type).to.equal("VALIDATE_EMAIL_SUCCESS");
 
-      expect(fetchMock.callCount).to.equal(1);
-      expect(fetchMock.args[0][0]).to.equal("/admin/libraries/email");
-      expect(fetchMock.args[0][1].method).to.equal("POST");
-      expect(fetchMock.args[0][1].body).to.equal(formData);
+      expect(fetchMock.called()).to.equal(true);
+      expect(fetchArgs[0][0]).to.equal(emailUrl);
+      expect(fetchArgs[0][1].method).to.equal("POST");
+      expect(fetchArgs[0][1].body).to.equal(formData);
+
+      fetchMock.restore();
     });
   });
 
   describe("logIn", () => {
     it("submits credentials", async () => {
+      const loginUrl = "/admin/log_in";
       const dispatch = stub();
       const formData = new (window as any).FormData();
       formData.append("admin", "123");
-      const fetchMock = stub().returns(new Promise<any>((update, reject) => {
-        update({ status: 200 });
-      }));
-      fetch = fetchMock;
-      await actions.logIn(formData)(dispatch);
 
-      expect(dispatch.callCount).to.equal(2);
+      fetchMock
+        .mock(loginUrl, "done");
+
+      await actions.logIn(formData)(dispatch);
+      let fetchArgs = fetchMock.calls();
+
+      expect(dispatch.callCount).to.equal(3);
       expect(dispatch.args[0][0].type).to.equal(`${ActionCreator.LOG_IN}_${ActionCreator.REQUEST}`);
       expect(dispatch.args[1][0].type).to.equal(`${ActionCreator.LOG_IN}_${ActionCreator.SUCCESS}`);
 
-      expect(fetchMock.callCount).to.equal(1);
-      expect(fetchMock.args[0][0]).to.equal("/admin/log_in");
-      expect(fetchMock.args[0][1].method).to.equal("POST");
-      expect(fetchMock.args[0][1].body).to.equal(formData);
+      expect(fetchMock.called()).to.equal(true);
+      expect(fetchArgs[0][0]).to.equal(loginUrl);
+      expect(fetchArgs[0][1].method).to.equal("POST");
+      expect(fetchArgs[0][1].body).to.equal(formData);
+
+      fetchMock.restore();
     });
   });
 });

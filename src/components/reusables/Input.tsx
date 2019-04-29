@@ -7,7 +7,7 @@ export interface InputProps {
   callback?: (e: any) => any;
 }
 
-export default class Input extends React.Component<InputProps, void> {
+export default class Input extends React.Component<InputProps, {}> {
   render(): JSX.Element {
     return(
       <div className="form-group">

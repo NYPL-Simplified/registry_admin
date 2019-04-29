@@ -18,7 +18,7 @@ export interface FormProps {
   disableButton?: boolean;
 }
 
-export default class Form extends React.Component<FormProps, void> {
+export default class Form extends React.Component<FormProps, {}> {
 
   constructor(props: FormProps) {
     super(props);
@@ -32,7 +32,7 @@ export default class Form extends React.Component<FormProps, void> {
     }
   }
 
-  submit(event: __React.MouseEvent): void {
+  submit(event: React.MouseEvent<HTMLButtonElement>): void {
     event.preventDefault();
     let form = (this.refs["form"] as any);
     const data = new (window as any).FormData(form);
