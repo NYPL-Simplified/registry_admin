@@ -56,9 +56,8 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
         }
         </ul>
       );
-    }
-    else {
-      return <span className="page-header">There are no libraries in this registry yet.</span>;
+    } else {
+        return <span className="page-header">There are no libraries in this registry yet.</span>;
     }
   }
 
@@ -67,7 +66,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
   }
 
   async search(data: FormData) {
-    console.log((data as any).get("name"));
     await this.props.search(data);
     this.setState({ showAll: false });
   }
