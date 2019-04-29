@@ -62,4 +62,19 @@ describe("SearchForm", () => {
     button = wrapper.find("button");
     expect(button.prop("disabled")).not.to.be.true;
   });
+
+  it("should optionally show a clear button", () => {
+    let clear = Sinon.stub();
+    let clearButton = wrapper.find(".inverted");
+    expect(clearButton.length).to.equal(0);
+    expect(clear.callCount).to.equal(0);
+
+    wrapper.setProps({ clear });
+
+    clearButton = wrapper.find(".inverted");
+    expect(clearButton.length).to.equal(1);
+    expect(clearButton.text()).to.equal("Clear search");
+    clearButton.simulate("click");
+    expect(clear.callCount).to.equal(1);
+  });
 });

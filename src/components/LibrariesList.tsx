@@ -1,20 +1,14 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import { Store, Reducer } from "redux";
 import { State } from "../reducers/index";
-import { LibrariesData, LibraryData } from "../interfaces";
+import { LibrariesData } from "../interfaces";
 import { connect } from "react-redux";
-import { Panel } from "library-simplified-reusable-components";
 import ActionCreator from "../actions";
 import LibrariesListItem from "./LibrariesListItem";
-import { SearchIcon } from "@nypl/dgx-svg-icons";
 import SearchForm from "./SearchForm";
-import Form from "./reusables/Form";
-import Input from "./reusables/Input";
 
 export interface LibrariesListStateProps {
   libraries?: LibrariesData;
-  libraryFromSearch?: LibraryData;
 }
 
 export interface LibrariesListOwnProps {
@@ -23,16 +17,21 @@ export interface LibrariesListOwnProps {
 
 export interface LibrariesListDispatchProps {
   fetchData: () => Promise<LibrariesData>;
-  search?: (data: FormData) => Promise<LibraryData>;
-  clearSearch?: () => void;
+  search: (data: FormData) => Promise<LibrariesData>;
+}
+
+export interface LibrariesListState {
+  showAll: boolean;
 }
 
 export interface LibrariesListProps extends LibrariesListStateProps, LibrariesListOwnProps, LibrariesListDispatchProps {};
 
-export class LibrariesList extends React.Component<LibrariesListProps, void> {
+export class LibrariesList extends React.Component<LibrariesListProps, LibrariesListState> {
   constructor(props: LibrariesListProps) {
     super(props);
     this.search = this.search.bind(this);
+    this.clear = this.clear.bind(this);
+    this.state = { showAll: true };
   }
 
   render(): JSX.Element {
@@ -44,6 +43,7 @@ export class LibrariesList extends React.Component<LibrariesListProps, void> {
             search={this.search}
             text="Search for a library by name"
             inputName="name"
+            clear={!this.state.showAll ? this.clear : null}
           />
         {
           this.props.libraries.libraries.map(library =>
@@ -51,8 +51,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, void> {
               key={library.uuid}
               library={library}
               store={this.props.store}
-              current={this.props.libraryFromSearch && library.uuid === this.props.libraryFromSearch.uuid}
-              ref={library.uuid}
             />
           )
         }
@@ -69,25 +67,20 @@ export class LibrariesList extends React.Component<LibrariesListProps, void> {
   }
 
   async search(data: FormData) {
-    let result = this.props.libraryFromSearch;
-    // If this library is already being displayed, do nothing.
-    if (result && (data as any).get("name").toUpperCase() === result.basic_info.name.toUpperCase()) {
-      return;
-    }
-    this.props.clearSearch();
+    console.log((data as any).get("name"));
     await this.props.search(data);
-    result = this.props.libraryFromSearch;
-    if (result && this.refs[result.uuid]) {
-      let position = (ReactDOM.findDOMNode(this.refs[result.uuid]) as any).offsetTop;
-      window.scrollTo(0, position - 20);
-    }
+    this.setState({ showAll: false });
+  }
+
+  async clear() {
+    await this.props.fetchData();
+    this.setState({ showAll: true });
   }
 }
 
 function mapStateToProps(state: State, ownProps: LibrariesListOwnProps) {
   return {
-    libraries: state.libraries && state.libraries.data,
-    libraryFromSearch: state.library && state.library.data
+    libraries: state.libraries && state.libraries.data
   };
 }
 
@@ -96,7 +89,6 @@ function mapDispatchToProps(dispatch: Function, ownProps: LibrariesListOwnProps)
   return {
     fetchData: () => dispatch(actions.fetchLibraries()),
     search: (data: FormData) => dispatch(actions.search(data)),
-    clearSearch: () => dispatch(actions.clearSearch())
   };
 }
 

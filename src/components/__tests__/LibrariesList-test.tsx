@@ -6,7 +6,7 @@ import buildStore from "../../store";
 
 import { LibrariesList } from "../LibrariesList";
 import LibrariesListItem from "../LibrariesListItem";
-import { Panel } from "library-simplified-reusable-components";
+import { Panel, Button } from "library-simplified-reusable-components";
 
 describe("LibrariesList", () => {
   let libraries = {
@@ -48,16 +48,19 @@ describe("LibrariesList", () => {
     ]
   };
   let fetchData: Sinon.SinonStub;
+  let search: Sinon.SinonStub;
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   describe("rendering", () => {
     fetchData = Sinon.stub();
+    search = Sinon.stub().returns(libraries.libraries[1]);
     beforeEach(() => {
       store = buildStore();
       wrapper = Enzyme.mount(
         <LibrariesList
           fetchData={fetchData}
           store={store}
+          search={search}
           libraries={libraries}
         />
       );
@@ -102,16 +105,32 @@ describe("LibrariesList", () => {
       let searchForm = wrapper.find(".panel-info");
       expect(searchForm.length).to.equal(1);
       expect(searchForm.find(".panel-title").text()).to.equal("Search for a library by name");
+      expect(searchForm.find(Button).length).to.equal(1);
+      wrapper.setState({ showAll: false });
+      // The "Clear search" button is showing now.
+      expect(searchForm.find(Button).length).to.equal(2);
     });
 
-    it("should show a search result", () => {
-      let libraryPanels = wrapper.find(LibrariesListItem);
-      let lib2 = libraryPanels.at(1);
-      expect(lib2.prop("current")).not.to.be.true;
-      expect(lib2.find(Panel).prop("openByDefault")).to.be.false;
-      wrapper.setProps({ libraryFromSearch: libraries.libraries[1] });
-      expect(lib2.prop("current")).to.be.true;
-      expect(lib2.find(Panel).prop("openByDefault")).to.be.true;
+    it("should search", async() => {
+      let spyClear = Sinon.spy(wrapper.instance(), "clear");
+
+      expect(wrapper.state()["showAll"]).to.be.true;
+      wrapper.find(".panel-info").find("input").simulate("change", {target: {value: "test_search_term"}});
+      wrapper.find(".panel-info").find(Button).simulate("click");
+      const pause = (): Promise<void> => {
+        return new Promise<void>(resolve => setTimeout(resolve, 0));
+      };
+      await pause();
+      expect(search.callCount).to.equal(1);
+      expect(wrapper.state()["showAll"]).to.be.false;
+
+      let clearButton = wrapper.find(".panel-info").find(Button).at(1);
+      clearButton.simulate("click");
+      await pause();
+      expect(spyClear.callCount).to.equal(1);
+      expect(wrapper.state()["showAll"]).to.be.true;
+
+      spyClear.restore();
     });
   });
 });

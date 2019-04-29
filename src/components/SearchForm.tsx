@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Panel } from "library-simplified-reusable-components";
+import { Panel, Button } from "library-simplified-reusable-components";
 import { SearchIcon } from "@nypl/dgx-svg-icons";
 import Form from "./reusables/Form";
 import Input from "./reusables/Input";
@@ -9,6 +9,7 @@ export interface SearchFormOwnProps {
   search: (data: FormData) => void;
   text: string;
   inputName: string;
+  clear?: () => any;
 }
 
 export interface SearchFormState {
@@ -33,9 +34,14 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
       />
     );
 
+    let clearButton = null;
+    if (this.props.clear) {
+      clearButton = <Button className="inverted" callback={this.props.clear} content="Clear search" />;
+    }
+
     return(
       <Panel
-        content={form}
+        content={[form, clearButton]}
         style="info"
         collapsible={false}
         headerText={this.props.text}
