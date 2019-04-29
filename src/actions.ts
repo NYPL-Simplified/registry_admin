@@ -149,7 +149,7 @@ export default class ActionCreator extends BaseActionCreator {
   }
 
   search(data: FormData) {
-    let url = "/admin/libraries/search_by_name";
+    let url = "/admin/libraries/search_details";
     let result = this.postForm(ActionCreator.GET_ALL_LIBRARIES, url, data, "POST", "", "JSON").bind(this);
     return result;
   }
