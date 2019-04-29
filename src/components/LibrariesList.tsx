@@ -57,7 +57,7 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
         </ul>
       );
     } else {
-        return <span className="page-header">There are no libraries in this registry yet.</span>;
+      return <span className="page-header">There are no libraries in this registry yet.</span>;
     }
   }
 
