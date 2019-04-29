@@ -10,6 +10,7 @@ export interface SearchFormOwnProps {
   text: string;
   inputName: string;
   clear?: () => any;
+  message?: {[type: string]: string};
 }
 
 export interface SearchFormState {
@@ -38,6 +39,8 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         buttonContent={<span>Search <SearchIcon /></span>}
         className="inline"
         disableButton={!this.state.searchTerm.length}
+        successText={this.props.message && this.props.message["success"] || null}
+        errorText={this.props.message && this.props.message["error"] || null}
       />
     );
 

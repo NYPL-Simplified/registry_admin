@@ -38,6 +38,7 @@ form {
 
   &.inline {
     display: flex;
+    flex-wrap: wrap-reverse;
     align-items: center;
     border: none;
     padding: 0;
@@ -51,6 +52,10 @@ form {
       flex-grow: 0;
       margin: 0 2em 0 0;
       float: left;
+    }
+    .alert-success, .alert-danger {
+      width: 100%;
+      margin-top: 20px;
     }
   }
 
