@@ -77,4 +77,24 @@ describe("SearchForm", () => {
     clearButton.simulate("click");
     expect(clear.callCount).to.equal(1);
   });
+
+  it("should optionally show a success message", () => {
+    let success = wrapper.find(".alert-success");
+    expect(success.length).to.equal(0);
+    let message = { "success": "Search successful!" };
+    wrapper.setProps({ message });
+    success = wrapper.find(".alert-success");
+    expect(success.length).to.equal(1);
+    expect(success.text()).to.equal("Search successful!");
+  });
+
+  it("should optionally show an error message", () => {
+    let error = wrapper.find(".alert-danger");
+    expect(error.length).to.equal(0);
+    let message = { "error": "Something went wrong..." };
+    wrapper.setProps({ message });
+    error = wrapper.find(".alert-danger");
+    expect(error.length).to.equal(1);
+    expect(error.text()).to.equal("Something went wrong...");
+  });
 });
