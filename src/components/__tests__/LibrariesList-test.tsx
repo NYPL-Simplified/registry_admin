@@ -123,7 +123,6 @@ describe("LibrariesList", () => {
       await pause();
       expect(search.callCount).to.equal(1);
       expect(wrapper.state()["showAll"]).to.be.false;
-
       let clearButton = wrapper.find(".panel-info").find(Button).at(1);
       clearButton.simulate("click");
       await pause();
@@ -131,6 +130,13 @@ describe("LibrariesList", () => {
       expect(wrapper.state()["showAll"]).to.be.true;
 
       spyClear.restore();
+    });
+
+    it("should generate success and error messages", async () => {
+      wrapper.setState({ searchTerm: "Test Library 1" });
+      expect(wrapper.instance().getFormMessage(0)).to.eql({"error": "No results found for Test Library 1."});
+      expect(wrapper.instance().getFormMessage(1)).to.eql({"success": "Displaying 1 result for Test Library 1:"});
+      expect(wrapper.instance().getFormMessage(2)).to.eql({"success": "Displaying 2 results for Test Library 1:"});
     });
   });
 });

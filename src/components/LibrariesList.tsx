@@ -49,16 +49,15 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
         />
       );
     } else {
-        libraryItems = <span className="page-header">There are no libraries in this registry yet.</span>;
+        libraryItems = !this.state.searchTerm.length && <span className="page-header">There are no libraries in this registry yet.</span>;
     }
 
-    let formMessage = this.getFormMessage;
     let form = (<SearchForm
       search={this.search}
       text="Search for a library by name"
       inputName="name"
       clear={!this.state.showAll ? this.clear : null}
-      message={this.getFormMessage(libraries && libraries.length)}
+      message={(hasLibraries || this.state.searchTerm) && this.getFormMessage(libraries && libraries.length)}
     />);
 
     return (
@@ -74,19 +73,17 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
   }
 
   getFormMessage(libraryCount: number | null): {} | null {
-    if (!this.state.searchTerm) {
+    if (!this.state.searchTerm.length) {
       return null;
     }
-
     let message = {};
     if (libraryCount) {
-      let resultsNumber = `${libraryCount} ${libraryCount > 1 ? "results" : "result"} `;
+      let resultsNumber = `${libraryCount} ${libraryCount > 1 ? "results" : "result"}`;
       message["success"] = this.state.searchTerm ? `Displaying ${resultsNumber} for ${this.state.searchTerm}:` : null;
     }
     else {
       message["error"] = `No results found for ${this.state.searchTerm}.`;
     }
-
     return message;
   }
 
