@@ -51,7 +51,6 @@ export default class Form extends React.Component<FormProps, {}> {
   }
 
   render(): JSX.Element {
-    console.log(this.refs);
     return(
       <form ref="form" className={`clearfix${this.props.className ? " " + this.props.className : ""}`}>
         {

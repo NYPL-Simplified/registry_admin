@@ -131,12 +131,5 @@ describe("LibrariesList", () => {
 
       spyClear.restore();
     });
-
-    it("should generate success and error messages", async () => {
-      wrapper.setState({ searchTerm: "Test Library 1" });
-      expect(wrapper.instance().getFormMessage(0)).to.eql({"error": "No results found for Test Library 1."});
-      expect(wrapper.instance().getFormMessage(1)).to.eql({"success": "Displaying 1 result for Test Library 1:"});
-      expect(wrapper.instance().getFormMessage(2)).to.eql({"success": "Displaying 2 results for Test Library 1:"});
-    });
   });
 });

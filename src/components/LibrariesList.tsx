@@ -32,7 +32,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
     super(props);
     this.search = this.search.bind(this);
     this.clear = this.clear.bind(this);
-    this.getFormMessage = this.getFormMessage.bind(this);
     this.state = { showAll: true, searchTerm: "" };
   }
 
@@ -54,10 +53,11 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
 
     let form = (<SearchForm
       search={this.search}
+      term={this.state.searchTerm}
       text="Search for a library by name"
       inputName="name"
       clear={!this.state.showAll ? this.clear : null}
-      message={(hasLibraries || this.state.searchTerm) && this.getFormMessage(libraries && libraries.length)}
+      resultsCount={libraries && libraries.length}
     />);
 
     return (
@@ -70,21 +70,6 @@ export class LibrariesList extends React.Component<LibrariesListProps, Libraries
 
   componentWillMount() {
     this.props.fetchData();
-  }
-
-  getFormMessage(libraryCount: number | null): {} | null {
-    if (!this.state.searchTerm.length) {
-      return null;
-    }
-    let message = {};
-    if (libraryCount) {
-      let resultsNumber = `${libraryCount} ${libraryCount > 1 ? "results" : "result"}`;
-      message["success"] = this.state.searchTerm ? `Displaying ${resultsNumber} for ${this.state.searchTerm}:` : null;
-    }
-    else {
-      message["error"] = `No results found for ${this.state.searchTerm}.`;
-    }
-    return message;
   }
 
   async search(data: FormData) {

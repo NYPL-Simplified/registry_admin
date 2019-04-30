@@ -10,7 +10,8 @@ export interface SearchFormOwnProps {
   text: string;
   inputName: string;
   clear?: () => any;
-  message?: {[type: string]: string};
+  term?: string;
+  resultsCount?: number;
 }
 
 export interface SearchFormState {
@@ -21,6 +22,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
   constructor(props: SearchFormOwnProps) {
     super(props);
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
+    this.message = this.message.bind(this);
     this.state = { searchTerm: "" };
   }
 
@@ -39,8 +41,8 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         buttonContent={<span>Search <SearchIcon /></span>}
         className="inline"
         disableButton={!this.state.searchTerm.length}
-        successText={this.props.message && this.props.message["success"] || null}
-        errorText={this.props.message && this.props.message["error"] || null}
+        successText={this.message()["success"]}
+        errorText={this.message()["error"]}
       />
     );
 
@@ -61,5 +63,20 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
   updateSearchTerm(e): void {
     this.setState({ searchTerm: e.target.value });
+  }
+
+  message(): {} {
+    let message = {};
+    if (!this.props.term) {
+      return message;
+    }
+    if (this.props.resultsCount) {
+      let resultsNumber = `${this.props.resultsCount} ${this.props.resultsCount > 1 ? "results" : "result"}`;
+      message["success"] = `Displaying ${resultsNumber} for ${this.props.term}:`;
+    }
+    else {
+      message["error"] = `No results found for ${this.props.term}.`;
+    }
+    return message;
   }
 }
