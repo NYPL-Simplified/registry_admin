@@ -30,6 +30,9 @@ export default class Form extends React.Component<FormProps, {}> {
     if (this.refs["errorMessage"]) {
       (this.refs["errorMessage"] as HTMLElement).focus();
     }
+    else if (this.refs["successMessage"]) {
+      (this.refs["successMessage"] as HTMLElement).focus();
+    }
   }
 
   submit(event: React.MouseEvent<HTMLButtonElement>): void {
@@ -41,13 +44,14 @@ export default class Form extends React.Component<FormProps, {}> {
 
   message(text: string, type: string): JSX.Element {
     return (
-      <p className={`alert alert-${type}`} role="alert" ref={`${type}Message`} tabIndex={-1}>
+      <p className={`alert alert-${type}`} role="alert" ref={`${type === "danger" ? "error" : type}Message`} tabIndex={-1}>
         {text}
       </p>
     );
   }
 
   render(): JSX.Element {
+    console.log(this.refs);
     return(
       <form ref="form" className={`clearfix${this.props.className ? " " + this.props.className : ""}`}>
         {
