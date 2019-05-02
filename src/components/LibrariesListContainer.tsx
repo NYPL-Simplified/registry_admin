@@ -1,5 +1,5 @@
 import * as React from "react";
-import LibrariesList from "./LibrariesList";
+import LibrariesPage from "./LibrariesPage";
 import { Store } from "redux";
 import { State } from "../reducers/index";
 import { LibrariesData, LibraryData } from "../interfaces";
@@ -19,7 +19,7 @@ export default class LibrariesListContainer extends React.Component<{}, {}> {
 
   render(): JSX.Element {
     return(
-      <LibrariesList store={this.context.store} />
+      <LibrariesPage store={this.context.store} />
     );
   }
 

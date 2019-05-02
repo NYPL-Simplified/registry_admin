@@ -7,7 +7,7 @@ import SearchForm from "../SearchForm";
 import Form from "../reusables/Form";
 
 describe("SearchForm", () => {
-  let wrapper: Enzyme.CommonWrapper<any, any, {}>;
+  let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;
   let search = Sinon.stub();
 
   beforeEach(() => {

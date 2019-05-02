@@ -34,6 +34,8 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
       />
     );
 
+    let message = this.message();
+
     let form = (
       <Form
         onSubmit={this.props.search}
@@ -41,8 +43,8 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         buttonContent={<span>Search <SearchIcon /></span>}
         className="inline"
         disableButton={!this.state.searchTerm.length}
-        successText={this.message()["success"]}
-        errorText={this.message()["error"]}
+        successText={message["success"]}
+        errorText={message["error"]}
       />
     );
 

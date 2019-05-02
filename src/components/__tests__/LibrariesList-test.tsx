@@ -4,14 +4,12 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 
-import { LibrariesList } from "../LibrariesList";
+import LibrariesList from "../LibrariesList";
 import LibrariesListItem from "../LibrariesListItem";
-import { Panel, Button } from "library-simplified-reusable-components";
 
 describe("LibrariesList", () => {
-  let libraries = {
-    libraries:
-      [{
+  let libraries = [
+       {
         uuid: "UUID1",
         basic_info: {
           "name": "Test Library 1",
@@ -45,29 +43,20 @@ describe("LibrariesList", () => {
           "registry_stage": "cancelled"
         }
       }
-    ]
-  };
-  let fetchData: Sinon.SinonStub;
-  let search: Sinon.SinonStub;
+    ];
+
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   describe("rendering", () => {
-    fetchData = Sinon.stub();
-    search = Sinon.stub().returns(libraries.libraries[1]);
+
     beforeEach(() => {
       store = buildStore();
       wrapper = Enzyme.mount(
         <LibrariesList
-          fetchData={fetchData}
           store={store}
-          search={search}
           libraries={libraries}
         />
       );
-    });
-
-    it("should call fetchData on load", () => {
-      expect(fetchData.callCount).to.equal(1);
     });
 
     it("should display a list of libraries", () => {
@@ -83,53 +72,20 @@ describe("LibrariesList", () => {
     });
 
     it("should update if the libraries prop changes", () => {
-      let newLib1 = Object.assign({}, libraries.libraries[0], { basic_info: { name: "New Library!", short_name: "new" } });
-      let newProps = Object.assign({}, libraries, { libraries: [newLib1, libraries.libraries[1]] });
+      let newLib1 = Object.assign({}, libraries[0], { basic_info: { name: "New Library!", short_name: "new" } });
+      let newProps = [newLib1, libraries[1]];
       wrapper.setProps({ libraries: newProps });
 
-      expect(fetchData.called).to.be.true;
       let libraryPanels = wrapper.find(".panel").not(".panel-info");
       expect(libraryPanels.length).to.equal(2);
       expect(libraryPanels.at(0).find(".panel-title").text()).to.equal("New Library! (new)");
     });
 
-    it("should display a header if there are no libraries", () => {
-      wrapper.setProps({ libraries: [] });
-      expect(fetchData.called).to.be.true;
-      let header = wrapper.find(".page-header");
-      expect(header.length).to.equal(1);
-      expect(header.text()).to.equal("There are no libraries in this registry yet.");
-    });
-
-    it("should display a search form", () => {
-      let searchForm = wrapper.find(".panel-info");
-      expect(searchForm.length).to.equal(1);
-      expect(searchForm.find(".panel-title").text()).to.equal("Search for a library by name");
-      expect(searchForm.find(Button).length).to.equal(1);
-      wrapper.setState({ showAll: false });
-      // The "Clear search" button is showing now.
-      expect(searchForm.find(Button).length).to.equal(2);
-    });
-
-    it("should search", async() => {
-      let spyClear = Sinon.spy(wrapper.instance(), "clear");
-
-      expect(wrapper.state()["showAll"]).to.be.true;
-      wrapper.find(".panel-info").find("input").simulate("change", {target: {value: "test_search_term"}});
-      wrapper.find(".panel-info").find(Button).simulate("click");
-      const pause = (): Promise<void> => {
-        return new Promise<void>(resolve => setTimeout(resolve, 0));
-      };
-      await pause();
-      expect(search.callCount).to.equal(1);
-      expect(wrapper.state()["showAll"]).to.be.false;
-      let clearButton = wrapper.find(".panel-info").find(Button).at(1);
-      clearButton.simulate("click");
-      await pause();
-      expect(spyClear.callCount).to.equal(1);
-      expect(wrapper.state()["showAll"]).to.be.true;
-
-      spyClear.restore();
+    it("should display a message if there are no libraries", () => {
+      wrapper.setProps({ libraries: null });
+      let message = wrapper.find("span");
+      expect(message.length).to.equal(1);
+      expect(message.text()).to.equal("There are no libraries in this registry yet.");
     });
   });
 });

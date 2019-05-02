@@ -76,11 +76,5 @@ describe("LibrariesListItem", () => {
       expect(wrapper.state().color).to.equal("success");
       expect(wrapper.find(".panel-success").length).to.equal(1);
     });
-    it("should optionally be open by default", () => {
-      let panel = wrapper.find(Panel);
-      expect(panel.prop("openByDefault")).to.be.false;
-      wrapper.setProps({ current: true });
-      expect(panel.prop("openByDefault")).to.be.true;
-    });
   });
 });

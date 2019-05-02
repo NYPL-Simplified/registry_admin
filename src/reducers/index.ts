@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import libraries from "./libraries";
+import { libraries, results } from "./libraries";
 import library from "./library";
 import admin from "./admin";
 import validation from "./validation";
@@ -15,6 +15,7 @@ import {
 
 export interface State {
   libraries: FetchEditState<LibrariesData>;
+  results: FetchEditState<LibrariesData>;
   library: FetchEditState<LibraryData>;
   admin: FetchEditState<AdminData>;
   validation: FetchEditState<ValidationData>;
@@ -22,6 +23,7 @@ export interface State {
 
 export default combineReducers<State>({
   libraries,
+  results,
   library,
   admin,
   validation
