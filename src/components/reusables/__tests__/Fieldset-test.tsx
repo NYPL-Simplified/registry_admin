@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as Enzyme from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import * as React from "react";
 import Fieldset from "../Fieldset";
 
@@ -9,7 +9,7 @@ describe("Fieldset", () => {
   let input1 = <input value="A" />;
   let input2 = <input value="B" />;
   beforeEach(() => {
-    wrapper = Enzyme.shallow(
+    wrapper = shallow(
       <Fieldset legend={legend} elements={[input1, input2]} />
     );
   });
