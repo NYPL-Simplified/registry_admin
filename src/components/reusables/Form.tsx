@@ -26,20 +26,19 @@ export default class Form extends React.Component<FormProps, {}> {
     this.message = this.message.bind(this);
   }
 
-  componentDidUpdate() {
-    if (this.refs["errorMessage"]) {
-      (this.refs["errorMessage"] as HTMLElement).focus();
-    }
-    else if (this.refs["successMessage"]) {
-      (this.refs["successMessage"] as HTMLElement).focus();
-    }
-  }
-
-  submit(event: React.MouseEvent<HTMLButtonElement>): void {
+  async submit(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     let form = (this.refs["form"] as any);
     const data = new (window as any).FormData(form);
-    this.props.onSubmit(data);
+    this.props.onSubmit(data).then(response => {
+      if (this.refs["successMessage"]) {
+        (this.refs["successMessage"] as HTMLElement).focus();
+      }
+    }).catch(err => {
+      if (this.refs["errorMessage"]) {
+        (this.refs["errorMessage"] as HTMLElement).focus();
+      }
+    });
   };
 
   message(text: string, type: string): JSX.Element {

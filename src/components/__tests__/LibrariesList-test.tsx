@@ -60,14 +60,14 @@ describe("LibrariesList", () => {
     });
 
     it("should display a list of libraries", () => {
-      let libraryItems = wrapper.find(".panel").not(".panel-info");
+      let libraryItems = wrapper.find(".list .panel");
       expect(libraryItems.length).to.equal(2);
     });
 
     it("should render each library's  name and short name", () => {
-      let lib1 = wrapper.find(".panel").not(".panel-info").at(0);
+      let lib1 = wrapper.find(".list .panel").at(0);
       expect(lib1.text()).to.contain("Test Library 1 (lib1)");
-      let lib2 = wrapper.find(".panel").not(".panel-info").at(1);
+      let lib2 = wrapper.find(".list .panel").at(1);
       expect(lib2.text()).to.contain("Test Library 2 (lib2)");
     });
 
@@ -76,7 +76,7 @@ describe("LibrariesList", () => {
       let newProps = [newLib1, libraries[1]];
       wrapper.setProps({ libraries: newProps });
 
-      let libraryPanels = wrapper.find(".panel").not(".panel-info");
+      let libraryPanels = wrapper.find(".list .panel");
       expect(libraryPanels.length).to.equal(2);
       expect(libraryPanels.at(0).find(".panel-title").text()).to.equal("New Library! (new)");
     });

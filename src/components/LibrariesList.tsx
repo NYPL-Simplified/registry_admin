@@ -11,8 +11,7 @@ export interface LibrariesListOwnProps {
 
 export default class LibrariesList extends React.Component<LibrariesListOwnProps, {}> {
   render(): JSX.Element {
-    return (
-          this.props.libraries ?
+    return (this.props.libraries ?
             <ul className="list">
               { this.props.libraries.map(library =>
                 <LibrariesListItem
@@ -22,6 +21,6 @@ export default class LibrariesList extends React.Component<LibrariesListOwnProps
                 />) }
             </ul> :
             <span>There are no libraries in this registry yet.</span>
-    );
+          );
   }
 }
