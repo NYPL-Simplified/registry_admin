@@ -22,6 +22,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
   constructor(props: SearchFormOwnProps) {
     super(props);
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
+    this.clear = this.clear.bind(this);
     this.message = this.message.bind(this);
     this.state = { searchTerm: "" };
   }
@@ -38,6 +39,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
     let form = (
       <Form
+        ref="form-component"
         onSubmit={this.props.search}
         content={input}
         buttonContent={<span>Search <SearchIcon /></span>}
@@ -50,7 +52,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
     let clearButton = null;
     if (this.props.clear) {
-      clearButton = <Button className="inverted" callback={this.props.clear} content="Clear search" />;
+      clearButton = <Button className="inverted" callback={this.clear} content="Clear search" />;
     }
 
     return(
@@ -65,6 +67,11 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
   updateSearchTerm(e): void {
     this.setState({ searchTerm: e.target.value });
+  }
+
+  clear(): void {
+    this.props.clear();
+    (this.refs["form-component"] as any).refs["form"].reset();
   }
 
   message(): {} {

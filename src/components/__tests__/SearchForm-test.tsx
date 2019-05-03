@@ -100,4 +100,13 @@ describe("SearchForm", () => {
     expect(error.length).to.equal(1);
     expect(error.text()).to.equal("No results found for Test search term.");
   });
+
+  it("should clear the input field when the clear button is clicked", () => {
+    let clear = Sinon.stub();
+    let input = wrapper.find("input").get(0);
+    input.value = "abc";
+    wrapper.setProps({ clear });
+    wrapper.find(".inverted").simulate("click");
+    expect(input.value).to.equal("");
+  });
 });
