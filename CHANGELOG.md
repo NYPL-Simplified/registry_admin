@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.1
+#### Added
+- Implemented a search feature for the list of libraries
+
 ### v1.1.0
 #### Updated
 - Updated `typings` to `@types`, updated Typescript, and updated unit tests with fetch-mock. These updates are needed to import the updated `opds-web-client` v0.2.0 package.

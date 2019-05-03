@@ -5,6 +5,7 @@ import * as Enzyme from "enzyme";
 import buildStore from "../../store";
 
 import LibrariesListItem from "../LibrariesListItem";
+import { Panel } from "library-simplified-reusable-components";
 
 describe("LibrariesListItem", () => {
   let library = {
