@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import Tabs from "../../reusables/Tabs";
+import Tabs from "../Tabs";
 
 describe("Tabs", () => {
   let wrapper;
