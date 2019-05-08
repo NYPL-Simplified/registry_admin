@@ -2,7 +2,7 @@ import { expect } from "chai";
 import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import Form from "../Form";
+import Form from "../reusables/Form";
 import { Button } from "library-simplified-reusable-components";
 
 describe("Form", () => {

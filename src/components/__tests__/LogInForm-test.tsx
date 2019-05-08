@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import * as Sinon from "sinon";
-import buildStore from "../../../store";
+import buildStore from "../../store";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import { LogInForm } from "../LogInForm";
-import Form from "../Form";
+import { LogInForm } from "../reusables/LogInForm";
+import Form from "../reusables/Form";
 
 describe("LogInForm", () => {
   let wrapper;

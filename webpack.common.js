@@ -10,7 +10,6 @@ var config = {
       "./src/stylesheets/app.scss", "./src/index.tsx"
     ]
   },
-  stats: { warnings: false },
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "registry-admin.js",
@@ -37,7 +36,7 @@ var config = {
       },
       {
         test: /\.tsx?$/,
-        exclude: [/node_modules/, /__tests__/],
+        exclude: [/node_modules/],
         loaders: ['ts-loader']
       },
       {

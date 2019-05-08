@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import Input from "../Input";
+import Input from "../reusables/Input";
 
 describe("Input", () => {
   let wrapper: Enzyme.ShallowWrapper<any, {}>;
