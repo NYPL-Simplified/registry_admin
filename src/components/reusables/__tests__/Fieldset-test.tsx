@@ -17,7 +17,7 @@ describe("Fieldset", () => {
     let legend = wrapper.find("legend");
     expect(legend.length).to.equal(1);
     expect(legend.text()).to.equal("TEST_LEGEND");
-  })
+  });
   it("displays elements", () => {
     let inputs = wrapper.find("input");
     expect(inputs.length).to.equal(2);

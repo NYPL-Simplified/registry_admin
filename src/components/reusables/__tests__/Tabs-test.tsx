@@ -15,7 +15,7 @@ describe("Tabs", () => {
         "content2": content2,
         "content3": content3
       }}/>
-    )
+    );
   });
   it("should render nav buttons", () => {
     let tabNavs = wrapper.find(".tab-nav");

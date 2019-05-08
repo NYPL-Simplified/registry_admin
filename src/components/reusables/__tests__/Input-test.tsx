@@ -31,5 +31,5 @@ describe("Input", () => {
     );
     let input = wrapper.find("input");
     expect(input.prop("type")).to.equal("radio");
-  })
+  });
 });

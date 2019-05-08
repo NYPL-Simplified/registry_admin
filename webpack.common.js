@@ -10,6 +10,7 @@ var config = {
       "./src/stylesheets/app.scss", "./src/index.tsx"
     ]
   },
+  stats: { warnings: false },
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "registry-admin.js",

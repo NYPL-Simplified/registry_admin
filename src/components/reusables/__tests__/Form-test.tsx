@@ -124,7 +124,7 @@ describe("Form", () => {
     expect(success.length).to.equal(0);
     expect(error.length).to.equal(1);
 
-    spyMessage.restore()
+    spyMessage.restore();
   });
 
   it("should optionally render an info message", () => {

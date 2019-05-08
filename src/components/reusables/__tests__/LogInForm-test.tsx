@@ -37,7 +37,7 @@ describe("LogInForm", () => {
     let legend = wrapper.find("legend");
     expect(legend.length).to.equal(1);
     expect(legend.text()).to.equal("Credentials");
-  })
+  });
   it("should optionally display a custom legend", () => {
     wrapper.setProps({ legend: "Something else..." });
     let legend = wrapper.find("legend");
@@ -120,6 +120,6 @@ describe("LogInForm", () => {
       expect(form.prop("errorText")).to.equal("Custom error text!");
       expect(error.length).to.equal(1);
       expect(error.text()).to.equal("Custom error text!");
-    })
+    });
   });
 });
