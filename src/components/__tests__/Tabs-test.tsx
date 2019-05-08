@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import Tabs from "../../reusables/Tabs";
+import Tabs from "../reusables/Tabs";
 
 describe("Tabs", () => {
   let wrapper;
@@ -15,7 +15,7 @@ describe("Tabs", () => {
         "content2": content2,
         "content3": content3
       }}/>
-    )
+    );
   });
   it("should render nav buttons", () => {
     let tabNavs = wrapper.find(".tab-nav");

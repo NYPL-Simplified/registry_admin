@@ -2,7 +2,7 @@ import { expect } from "chai";
 
 import * as React from "react";
 import * as Enzyme from "enzyme";
-import Header from "../Header";
+import Header from "../reusables/Header";
 
 describe("Header", () => {
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;

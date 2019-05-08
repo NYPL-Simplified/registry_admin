@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import Fieldset from "../Fieldset";
+import Fieldset from "../reusables/Fieldset";
 
 describe("Fieldset", () => {
   let wrapper: Enzyme.ShallowWrapper<any, {}>;
@@ -17,7 +17,7 @@ describe("Fieldset", () => {
     let legend = wrapper.find("legend");
     expect(legend.length).to.equal(1);
     expect(legend.text()).to.equal("TEST_LEGEND");
-  })
+  });
   it("displays elements", () => {
     let inputs = wrapper.find("input");
     expect(inputs.length).to.equal(2);

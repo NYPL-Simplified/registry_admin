@@ -2,7 +2,7 @@ import { expect } from "chai";
 import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import Form from "../Form";
+import Form from "../reusables/Form";
 import { Button } from "library-simplified-reusable-components";
 
 describe("Form", () => {
@@ -124,7 +124,7 @@ describe("Form", () => {
     expect(success.length).to.equal(0);
     expect(error.length).to.equal(1);
 
-    spyMessage.restore()
+    spyMessage.restore();
   });
 
   it("should optionally render an info message", () => {
