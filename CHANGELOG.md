@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.2
+#### Updated
+- Updating to Webpack 4.
+
 ### v1.1.1
 #### Added
 - Implemented a search feature for the list of libraries
