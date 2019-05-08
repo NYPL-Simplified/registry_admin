@@ -57,7 +57,7 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
     let { name, short_name } = this.props.library.basic_info;
     let headerText = `${name} (${short_name})`;
     return(
-      <Panel style={style} headerText={headerText} content={this.content()} />
+      <li><Panel style={style} headerText={headerText} content={this.content()} /></li>
     );
   }
 }

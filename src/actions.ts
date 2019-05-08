@@ -11,6 +11,7 @@ import BaseActionCreator from "opds-web-client/lib/actions";
 export default class ActionCreator extends BaseActionCreator {
 
   static readonly GET_ALL_LIBRARIES = "GET_ALL_LIBRARIES";
+  static readonly GET_SOME_LIBRARIES = "GET_SOME_LIBRARIES";
   static readonly GET_ONE_LIBRARY = "GET_ONE_LIBRARY";
 
   static readonly VALIDATE_EMAIL = "VALIDATE_EMAIL";
@@ -146,6 +147,11 @@ export default class ActionCreator extends BaseActionCreator {
   fetchLibrary(uuid: string) {
     let url = "/admin/libraries/" + uuid;
     return this.fetchJSON<LibraryData>(ActionCreator.GET_ONE_LIBRARY, url).bind(this);
+  }
+
+  search(data: FormData) {
+    let url = "/admin/libraries/search_details";
+    return this.postForm(ActionCreator.GET_SOME_LIBRARIES, url, data, "POST", "", "JSON").bind(this);
   }
 
   validateEmail(data: FormData) {
