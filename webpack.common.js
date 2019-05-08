@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var config = {
   entry: {
@@ -15,20 +17,15 @@ var config = {
     libraryTarget: "umd"
   },
   plugins: [
-    // jsdom is required by opds-web-client for server rendering, but causes
-    // errors in the browser even if it is never used, so we ignore it:
-    new webpack.IgnorePlugin(/jsdom$/),
-
+    new CleanWebpackPlugin(),
     // Extract separate css file.
     new MiniCssExtractPlugin({ filename: "registry-admin.css" })
   ],
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
   module: {
     rules: [
-      {
-        test: /\.tsx?$/,
-        exclude: [/node_modules/],
-        loader: 'ts-loader'
-      },
       {
         test: /\.scss$/,
         use: [
@@ -38,6 +35,11 @@ var config = {
         ]
       },
       {
+        test: /\.tsx?$/,
+        exclude: [/node_modules/, /__tests__/],
+        loaders: ['ts-loader']
+      },
+      {
         test: /\.(png|woff|woff2|eot|ttf|svg).*$/,
         loader: 'url-loader?limit=100000'
       }
@@ -45,14 +47,6 @@ var config = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".scss"],
-  },
-  externals: {
-    'window': 'window',
-    'jsdom': 'window',
-    'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': 'window',
-    'react/addons': true
   }
 };
 
