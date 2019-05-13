@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.3
+#### Updated
+- Updating the reusable-components package version which now uses React 16.
+
 ### v1.1.2
 #### Updated
 - Updating to Webpack 4.
