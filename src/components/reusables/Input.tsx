@@ -8,6 +8,9 @@ export interface InputProps {
 }
 
 export default class Input extends React.Component<InputProps, {}> {
+  constructor(props: InputProps) {
+    super(props);
+  }
   render(): JSX.Element {
     return(
       <div className="form-group">

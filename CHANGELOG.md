@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.3
+#### Updated
+- Utilized new built-in styling options for the Button component.
+
 ### v1.1.2
 #### Updated
 - Updating to Webpack 4.

@@ -44,8 +44,8 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
 
   render(): JSX.Element {
     let icon = this.state.sent ? <CheckSoloIcon /> : null;
-    let hasEmail = !!this.props.library.urls_and_contact.contact_email;
     let alreadyValidated = this.props.library.urls_and_contact.validated !== "Not validated";
+    let hasEmail = !!this.props.library.urls_and_contact.contact_email;
 
     let buttonText = hasEmail ? "Validate email address" : "No email address configured";
     let buttonContent = <span>{buttonText}{icon}</span>;
@@ -60,6 +60,7 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
           title="Validation"
           onSubmit={this.sendEmail}
           buttonContent={buttonContent}
+          buttonClass={`left-align top-align ${this.state.sent && "success"}`}
           disableButton={!hasEmail}
           infoText={infoText}
           errorText={this.props.error ? this.props.error.response : null}
