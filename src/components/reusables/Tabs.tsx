@@ -63,7 +63,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
           <button
             aria-controls={`panel-${idx}`}
             aria-selected={current}
-            className="btn bottom-align left-align bottom-sharp"
+            className="btn bottom-align left-align bottom-squared"
             id={idx.toString()}
             onClick={this.select}
             onKeyDown={this.select}
