@@ -4,13 +4,14 @@ export interface InputProps {
   type?: string;
   name: string;
   label?: string;
+  className?: string;
   callback?: (e: any) => any;
 }
 
 export default class Input extends React.Component<InputProps, {}> {
   render(): JSX.Element {
     return(
-      <div className="form-group">
+      <div className={`form-group ${this.props.className}`}>
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <input
           onChange={this.props.callback ? this.props.callback : null}

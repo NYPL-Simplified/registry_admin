@@ -15,3 +15,56 @@
     z-index: 1;
   }
 }
+
+.filter-box {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  padding: 10px 24px;
+  margin: 0;
+  background: $blue-dark;
+  width: 100%;
+  color: $white;
+  align-items: center;
+  label {
+    padding: 4px;
+    margin: 0;
+    text-align: center;
+    transition: background .5s, color .5s;
+    &.active {
+      background: $blue-tint;
+      color: $black;
+    }
+    &:first-child {
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+    &:last-child {
+      grid-column-start: 3;
+    }
+  }
+}
+
+.toggle {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  justify-self: center;
+  position: relative;
+  border-radius: 30px;
+  width: 55px;
+  height: 30px;
+  background: $white;
+
+  .slider {
+    background: $blue;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    width: 30px;
+    border: 2px solid $white;
+    left: 0%;
+    transition: left .5s;
+    &.slider-right {
+      left: 50%;
+    }
+  }
+}

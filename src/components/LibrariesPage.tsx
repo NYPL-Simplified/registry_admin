@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import LibrariesList from "./LibrariesList";
 import SearchForm from "./SearchForm";
+import Toggle from "./Toggle";
 
 export interface LibrariesPageStateProps {
   libraries?: LibrariesData;
@@ -19,11 +20,13 @@ export interface LibrariesPageOwnProps {
 export interface LibrariesPageDispatchProps {
   fetchData: () => Promise<LibrariesData>;
   search: (data: FormData) => Promise<LibrariesData>;
+  fetchQA: () => Promise<LibrariesData>;
 }
 
 export interface LibrariesPageState {
   showAll: boolean;
   searchTerm: string;
+  qa: boolean;
 }
 
 export interface LibrariesPageProps extends LibrariesPageStateProps, LibrariesPageOwnProps, LibrariesPageDispatchProps {};
@@ -33,7 +36,8 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     super(props);
     this.search = this.search.bind(this);
     this.clear = this.clear.bind(this);
-    this.state = { showAll: true, searchTerm: "" };
+    this.toggleQA = this.toggleQA.bind(this);
+    this.state = { showAll: true, searchTerm: "", qa: false };
   }
 
   render(): JSX.Element {
@@ -54,16 +58,20 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     // 4) A search has not been submitted, and the registry does not have libraries. Let the libraries
     // variable remain undefined; this will generate a "no libraries in this registry" message.
     let libraries = (results || noResults) || allLibraries;
+    let searchForm: JSX.Element = <SearchForm
+      search={this.search}
+      term={this.state.searchTerm}
+      text="Search for a library by name"
+      inputName="name"
+      clear={!this.state.showAll ? this.clear : null}
+      resultsCount={libraries && libraries.length}
+    />;
+    let toggle: JSX.Element = <Toggle filter={this.toggleQA} initialPosition={this.state.qa ? "right" : "left"}/>;
+
     return (
       <div className="libraries-page">
-        <SearchForm
-          search={this.search}
-          term={this.state.searchTerm}
-          text="Search for a library by name"
-          inputName="name"
-          clear={!this.state.showAll ? this.clear : null}
-          resultsCount={libraries && libraries.length}
-        />
+        { toggle }
+        { searchForm }
         <LibrariesList
           libraries={libraries}
           store={this.props.store}
@@ -76,6 +84,13 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.props.fetchData();
   }
 
+  async toggleQA(position: string) {
+    let showQA = position === "right";
+    this.setState({ "qa": showQA });
+    let fetch = showQA ? this.props.fetchQA : this.props.fetchData;
+    await fetch();
+  }
+
   async search(data: FormData) {
     this.setState({ showAll: false, searchTerm: (data.get("name") as string) });
     await this.props.search(data);
@@ -83,7 +98,8 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 
   async clear() {
     this.setState({ showAll: true, searchTerm: "" });
-    await this.props.fetchData();
+    let fetch = this.state.qa ? this.props.fetchQA : this.props.fetchData;
+    await fetch();
   }
 }
 
@@ -98,6 +114,7 @@ function mapDispatchToProps(dispatch: Function, ownProps: LibrariesPageOwnProps)
   let actions = new ActionCreator(null);
   return {
     fetchData: () => dispatch(actions.fetchLibraries()),
+    fetchQA: () => dispatch(actions.fetchLibraries("/qa")),
     search: (data: FormData) => dispatch(actions.search(data)),
   };
 }
