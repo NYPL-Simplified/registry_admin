@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.4
+#### Updated
+- Utilized new built-in styling options for the Button component.
+
 ### v1.1.3
 #### Updated
 - Updating the reusable-components package version which now uses React 16.
