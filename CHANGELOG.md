@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.4
+#### Added
+- Implemented a toggle for switching between production mode and QA mode.
+
 ### v1.1.3
 #### Updated
 - Updating the reusable-components package version which now uses React 16.

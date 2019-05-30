@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import LibrariesList from "./LibrariesList";
 import SearchForm from "./SearchForm";
-import Toggle from "./Toggle";
+import Toggle from "./reusables/Toggle";
 
 export interface LibrariesPageStateProps {
   libraries?: LibrariesData;
@@ -58,6 +58,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     // 4) A search has not been submitted, and the registry does not have libraries. Let the libraries
     // variable remain undefined; this will generate a "no libraries in this registry" message.
     let libraries = (results || noResults) || allLibraries;
+
     let searchForm: JSX.Element = <SearchForm
       search={this.search}
       term={this.state.searchTerm}
@@ -66,7 +67,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       clear={!this.state.showAll ? this.clear : null}
       resultsCount={libraries && libraries.length}
     />;
-    let toggle: JSX.Element = <Toggle filter={this.toggleQA} initialPosition={this.state.qa ? "right" : "left"}/>;
+    let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA" />;
 
     return (
       <div className="libraries-page">
@@ -84,8 +85,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.props.fetchData();
   }
 
-  async toggleQA(position: string) {
-    let showQA = position === "right";
+  async toggleQA(showQA: boolean) {
     this.setState({ "qa": showQA });
     let fetch = showQA ? this.props.fetchQA : this.props.fetchData;
     await fetch();

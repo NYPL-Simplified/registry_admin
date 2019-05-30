@@ -1,0 +1,62 @@
+.toggle-container {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  padding: 10px 24px;
+  margin: 0;
+  background: $blue-dark;
+  width: 100%;
+  align-items: center;
+  label {
+    color: $white;
+    mix-blend-mode: screen;
+    padding: 3px;
+    margin: 0;
+    text-align: center;
+    transition: all .25s ease-in;
+    border: 1px solid $white;
+    border-radius: 0% 0% 40% 40%;
+    background-image: linear-gradient(to left, transparent 50%, $white 50%);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+
+    &.active {
+      background-position: bottom left;
+      color: unset;
+    }
+  }
+}
+
+.toggle {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  justify-self: center;
+  position: relative;
+  border-radius: 30px;
+  width: 55px;
+  height: 30px;
+  background: $red-tint;
+  transition: background .5s;
+  &.toggle-on {
+    background: $green-bright;
+  }
+
+  .slider {
+    background: $white;
+    height: 32px;
+    border-radius: 50%;
+    position: absolute;
+    width: 32px;
+    left: 0%;
+    top: 50%;
+    margin-top: -16.5px;
+    border: 2px solid $dark-gray;
+    transition: left .5s, border-color .5s;
+    &:focus {
+      box-shadow: 2px 1px 3px $gray-brown;
+    }
+    &.slider-on {
+      left: 50%;
+    }
+  }
+}

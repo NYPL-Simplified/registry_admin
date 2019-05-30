@@ -6,6 +6,7 @@ import buildStore from "../../store";
 
 import { LibrariesPage } from "../LibrariesPage";
 import LibrariesList from "../LibrariesList";
+import Toggle from "../reusables/Toggle";
 import SearchForm from "../SearchForm";
 
 describe("LibrariesPage", () => {
@@ -25,7 +26,7 @@ describe("LibrariesPage", () => {
         },
         stages: {
           "library_stage": "production",
-          "registry_stage": "testing"
+          "registry_stage": "production"
         }
       },
       {
@@ -41,22 +42,27 @@ describe("LibrariesPage", () => {
           "web_url": "web2"
         },
         stages: {
-          "library_stage": "testing",
-          "registry_stage": "cancelled"
+          "library_stage": "production",
+          "registry_stage": "production"
         }
       }
     ];
-    let fetchData = Sinon.stub();
+
+    let fetchData;
+    let fetchQA;
     let search = Sinon.stub().returns(libraries[1]);
     let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;
     let store;
 
     beforeEach(() => {
+      fetchData = Sinon.stub();
+      fetchQA = Sinon.stub();
       store = buildStore();
       wrapper = Enzyme.mount(
         <LibrariesPage
           store={store}
           fetchData={fetchData}
+          fetchQA={fetchQA}
           search={search}
           libraries={{libraries: libraries}}
         />
@@ -65,6 +71,44 @@ describe("LibrariesPage", () => {
 
     it("should call fetchData on load", () => {
       expect(fetchData.callCount).to.equal(1);
+    });
+
+    it("should display a toggle", () => {
+      expect(wrapper.state()["qa"]).to.be.false;
+      let toggle = wrapper.find(Toggle);
+      expect(toggle.length).to.equal(1);
+      expect(toggle.text()).to.equal("QA");
+      expect(toggle.prop("initialOn")).to.be.false;
+
+      wrapper.setState({ "qa" : true });
+      expect(toggle.prop("initialOn")).to.be.true;
+    });
+
+    it("should toggle", async () => {
+      const pause = (): Promise<void> => {
+        return new Promise<void>(resolve => setTimeout(resolve, 0));
+      };
+
+      expect(fetchData.callCount).to.equal(1);
+      expect(fetchQA.callCount).to.equal(0);
+      expect(wrapper.state()["qa"]).to.be.false;
+      expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
+
+      wrapper.instance().toggleQA(true);
+      await pause();
+
+      expect(fetchData.callCount).to.equal(1);
+      expect(fetchQA.callCount).to.equal(1);
+      expect(wrapper.state()["qa"]).to.be.true;
+      expect(wrapper.find(Toggle).prop("initialOn")).to.be.true;
+
+      wrapper.instance().toggleQA(false);
+      await pause();
+
+      expect(fetchData.callCount).to.equal(2);
+      expect(fetchQA.callCount).to.equal(1);
+      expect(wrapper.state()["qa"]).to.be.false;
+      expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
     });
 
     it("should display a search form", () => {
@@ -91,7 +135,6 @@ describe("LibrariesPage", () => {
 
       expect(search.callCount).to.equal(1);
       expect(wrapper.state()["showAll"]).to.be.false;
-
       let clearButton = wrapper.find(".panel-info .btn").at(1);
       clearButton.simulate("click");
 
