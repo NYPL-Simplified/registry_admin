@@ -10,12 +10,16 @@ export interface LibraryData {
     short_name: string,
     timestamp?: string,
   };
-  urls_and_contact?: {
+  urls_and_contact: {
     authentication_url: string,
     contact_email: string,
     opds_url: string,
     web_url: string,
     validated?: string
+  };
+  areas: {
+    focus?: string[],
+    service?: string[]
   };
   stages: {
     library_stage: string,

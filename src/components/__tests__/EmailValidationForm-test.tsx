@@ -3,6 +3,7 @@ import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
+import { testLibrary1 } from "./library-data";
 import { EmailValidationForm } from "../EmailValidationForm";
 
 describe("EmailValidationForm", () => {
@@ -12,25 +13,8 @@ describe("EmailValidationForm", () => {
   let fetchLibrary: Sinon.SinonStub;
 
   beforeEach(() => {
-    let library = {
-      uuid: "UUID1",
-      basic_info: {
-        "name": "Test Library 1",
-        "short_name": "lib1",
-        "description": undefined
-      },
-      urls_and_contact: {
-        "authentication_url": "auth1",
-        "contact_email": "email1",
-        "opds_url": "opds1",
-        "web_url": "web1",
-        "validated": "Not validated"
-      },
-      stages: {
-        "library_stage": "production",
-        "registry_stage": "testing"
-      }
-    };
+    let library = {...testLibrary1, ...{urls_and_contact: {...testLibrary1.urls_and_contact, ...{validated: "Not validated"}}}};
+
     store = buildStore();
     validateEmail = Sinon.stub();
     fetchLibrary = Sinon.stub();

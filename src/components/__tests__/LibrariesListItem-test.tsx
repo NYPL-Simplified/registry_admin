@@ -3,29 +3,13 @@ import { expect } from "chai";
 import * as React from "react";
 import * as Enzyme from "enzyme";
 import buildStore from "../../store";
+import { testLibrary1 } from "./library-data";
 
 import LibrariesListItem from "../LibrariesListItem";
 import { Panel } from "library-simplified-reusable-components";
 
 describe("LibrariesListItem", () => {
-  let library = {
-    uuid: "UUID1",
-    basic_info: {
-      "name": "Test Library",
-      "short_name": "test_lib",
-
-    },
-    urls_and_contact: {
-      "authentication_url": "test_auth",
-      "contact_email": "test_email",
-      "opds_url": "test_opds",
-      "web_url": "test_web"
-    },
-    stages: {
-      "library_stage": "production",
-      "registry_stage": "testing"
-    }
-  };
+  let library = testLibrary1;
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   describe("rendering", () => {
@@ -46,7 +30,7 @@ describe("LibrariesListItem", () => {
       expect(header.length).to.equal(1);
       let title = header.find(".panel-title");
       expect(title.length).to.equal(1);
-      expect(title.text()).to.contain("Test Library (test_lib)");
+      expect(title.text()).to.contain("Test Library 1 (lib1)");
     });
     it("should display an icon in the header", () => {
       let header = wrapper.find(".panel-heading");

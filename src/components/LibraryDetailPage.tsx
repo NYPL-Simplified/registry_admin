@@ -46,10 +46,14 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
   }
 
   renderItems(category: {[key: string]: string}): JSX.Element {
+    // If the value is an array--e.g. of focus or service areas--format it as a semicolon-separated list.
+    let formatValue = (value: string | string[]) => {
+      return (Array.isArray(value) ? value.join("; ") : `${value}`);
+    };
 
     // Only create LibraryDetailItems for fields which actually have a value.
-    let fields = Object.keys(category).filter(label => category[label]).map(label =>
-      <LibraryDetailItem key={label} label={label} value={`${category[label]}`} />
+    let fields = Object.keys(category).filter(label => category[label] && category[label].length).map(label =>
+      <LibraryDetailItem key={label} label={label} value={formatValue(category[label])} />
     );
 
     return (
@@ -92,11 +96,16 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
 
     const categories = {
       "Basic Information": "basic_info",
-      "Contact & URLs": "urls_and_contact"
+      "Contact & URLs": "urls_and_contact",
+      "Areas": "areas"
     };
-
-    Object.keys(categories).forEach(tabName => {
-      tabItems[tabName] = this.renderItems(library[categories[tabName]]);
+    Object.entries(categories).filter(([k, v]) => library[v]).forEach(([k, v]) => {
+      let category = library[v];
+      let categoryItems: any[] = Object.values(category);
+      // If there are no meaningful items in this category--e.g. it's an Areas category in which
+      // both values are empty arrays--then don't bother making a blank tab for it.
+      let hasItems = categoryItems.some(x => x && x.length > 0);
+      hasItems && (tabItems[k] = this.renderItems(category));
     });
 
     return(

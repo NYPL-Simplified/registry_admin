@@ -3,48 +3,13 @@ import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
+import { testLibrary1, testLibrary2 } from "./library-data";
 
 import LibrariesList from "../LibrariesList";
 import LibrariesListItem from "../LibrariesListItem";
 
 describe("LibrariesList", () => {
-  let libraries = [
-       {
-        uuid: "UUID1",
-        basic_info: {
-          "name": "Test Library 1",
-          "short_name": "lib1",
-        },
-        urls_and_contact: {
-          "authentication_url": "auth1",
-          "contact_email": "email1",
-          "opds_url": "opds1",
-          "web_url": "web1"
-        },
-        stages: {
-          "library_stage": "production",
-          "registry_stage": "testing"
-        }
-      },
-      {
-        uuid: "UUID2",
-        basic_info: {
-          "name": "Test Library 2",
-          "short_name": "lib2",
-
-        },
-        urls_and_contact: {
-          "authentication_url": "auth2",
-          "contact_email": "email2",
-          "opds_url": "opds2",
-          "web_url": "web2"        },
-        stages: {
-          "library_stage": "testing",
-          "registry_stage": "cancelled"
-        }
-      }
-    ];
-
+  let libraries = [testLibrary1, testLibrary2];
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   describe("rendering", () => {
