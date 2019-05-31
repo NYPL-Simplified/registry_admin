@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.2.0
+#### Updated
+- React 16
+
 ### v1.1.4
 #### Updated
 - Utilized new built-in styling options for the Button component.

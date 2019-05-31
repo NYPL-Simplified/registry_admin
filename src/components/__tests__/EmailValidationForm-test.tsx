@@ -45,7 +45,7 @@ describe("EmailValidationForm", () => {
   });
 
   it("renders a form with a title, a hidden value, and a button", () => {
-    expect(wrapper.find(".validation").length).to.equal(1);
+    expect(wrapper.find(".validation").hostNodes().length).to.equal(1);
 
     let title = wrapper.find(".form-title");
     expect(title.length).to.equal(1);

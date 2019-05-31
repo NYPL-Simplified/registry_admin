@@ -178,14 +178,16 @@ describe("LibraryDetailPage", () => {
     let saveButton = editForm.find("button");
     saveButton.simulate("click");
     let newStages = { stages: { library_stage: "testing", registry_stage: "cancelled" } };
-    let fullLibrary = Object.assign({}, (wrapper.props() as any)["library"], newStages);
+    let fullLibrary = { ...(wrapper.props() as any)["library"], ...newStages };
     wrapper.setProps({ fullLibrary });
 
     const pause = (): Promise<void> => {
       return new Promise<void>(resolve => setTimeout(resolve, 0));
     };
     await pause();
+    wrapper.update();
 
+    editForm = wrapper.find("form").at(0);
     expect(wrapper.state()["libraryStage"]).to.equal("testing");
     expect(wrapper.state()["registryStage"]).to.equal("cancelled");
     expect(editForm.find(".badge").at(0).props().className).to.contain("warning");

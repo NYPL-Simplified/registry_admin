@@ -60,19 +60,19 @@ describe("Tabs", () => {
       // Start out on the leftmost tab, then press the right arrow key to go to the middle tab
       button1.simulate("keydown", {keyCode: 39, currentTarget: {id: "0"}});
       expect(wrapper.state()["tab"]).to.equal(1);
-      expect(button2.parent().hasClass("current")).to.be.true;
+      expect(button2.parents().at(0).render().hasClass("current")).to.be.true;
       expect(wrapper.find(".tab-content").at(1).hasClass("hidden")).to.be.false;
 
       // Press the right arrow key again to go to the rightmost tab
       button2.simulate("keydown", {keyCode: 39, currentTarget: {id: "1"}});
       expect(wrapper.state()["tab"]).to.equal(2);
-      expect(button3.parent().hasClass("current")).to.be.true;
+      expect(button3.parents().at(0).render().hasClass("current")).to.be.true;
       expect(wrapper.find(".tab-content").at(2).hasClass("hidden")).to.be.false;
 
       // Pressing the right arrow key again should loop back to the leftmost tab
       button3.simulate("keydown", {keyCode: 39, currentTarget: {id: "2"}});
       expect(wrapper.state()["tab"]).to.equal(0);
-      expect(button1.parent().hasClass("current")).to.be.true;
+      expect(button1.parents().at(0).render().hasClass("current")).to.be.true;
       expect(wrapper.find(".tab-content").at(0).hasClass("hidden")).to.be.false;
     });
 
@@ -84,19 +84,19 @@ describe("Tabs", () => {
       // Start out on the rightmost tab, then press the left arrow key to go to the middle tab
       button3.simulate("keydown", {keyCode: 37, currentTarget: {id: "2"}});
       expect(wrapper.state()["tab"]).to.equal(1);
-      expect(button2.parent().hasClass("current")).to.be.true;
+      expect(button2.parents().at(0).render().hasClass("current")).to.be.true;
       expect(wrapper.find(".tab-content").at(1).hasClass("hidden")).to.be.false;
 
       // Press the left arrow key again to go to the leftmost tab
       button2.simulate("keydown", {keyCode: 37, currentTarget: {id: "1"}});
       expect(wrapper.state()["tab"]).to.equal(0);
-      expect(button1.parent().hasClass("current")).to.be.true;
+      expect(button1.parents().at(0).render().hasClass("current")).to.be.true;
       expect(wrapper.find(".tab-content").at(0).hasClass("hidden")).to.be.false;
 
       // Pressing the left arrow key again should loop back to the rightmost tab
       button1.simulate("keydown", {keyCode: 37, currentTarget: {id: "0"}});
       expect(wrapper.state()["tab"]).to.equal(2);
-      expect(button3.parent().hasClass("current")).to.be.true;
+      expect(button3.parents().at(0).render().hasClass("current")).to.be.true;
       expect(wrapper.find(".tab-content").at(2).hasClass("hidden")).to.be.false;
     });
 
@@ -106,7 +106,7 @@ describe("Tabs", () => {
       button1.simulate("keydown", {keyCode: 65, currentTarget: {id: "0"}});
       // Nothing happened; we're still on the leftmost tab
       expect(wrapper.state()["tab"]).to.equal(0);
-      expect(button1.parent().hasClass("current")).to.be.true;
+      expect(button1.parents().at(0).render().hasClass("current")).to.be.true;
       expect(wrapper.find(".tab-content").at(0).hasClass("hidden")).to.be.false;
     });
   });

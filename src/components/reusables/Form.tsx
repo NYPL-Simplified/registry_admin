@@ -19,6 +19,8 @@ export interface FormProps {
 }
 
 export default class Form extends React.Component<FormProps, {}> {
+  private messageRef = React.createRef<HTMLParagraphElement>();
+  private formRef = React.createRef<HTMLFormElement>();
 
   constructor(props: FormProps) {
     super(props);
@@ -30,20 +32,16 @@ export default class Form extends React.Component<FormProps, {}> {
     event.preventDefault();
     let form = (this.refs["form"] as any);
     const data = new (window as any).FormData(form);
-    this.props.onSubmit(data).then(response => {
-      if (this.refs["successMessage"]) {
-        (this.refs["successMessage"] as HTMLElement).focus();
-      }
-    }).catch(err => {
-      if (this.refs["errorMessage"]) {
-        (this.refs["errorMessage"] as HTMLElement).focus();
-      }
-    });
+
+    await this.props.onSubmit(data);
+    if (this.messageRef.current) {
+      this.messageRef.current.focus();
+    }
   };
 
   message(text: string, type: string): JSX.Element {
     return (
-      <p className={`alert alert-${type}`} role="alert" ref={`${type === "danger" ? "error" : type}Message`} tabIndex={-1}>
+      <p className={`alert alert-${type}`} role="alert" ref={this.messageRef} tabIndex={-1}>
         {text}
       </p>
     );

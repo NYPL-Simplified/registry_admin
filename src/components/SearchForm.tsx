@@ -30,6 +30,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
   render(): JSX.Element {
     let input = (
       <Input
+        key="form-input"
         name={this.props.inputName}
         callback={this.updateSearchTerm}
       />
@@ -39,6 +40,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
     let form = (
       <Form
+        key="form-component"
         ref="form-component"
         onSubmit={this.props.search}
         content={input}
@@ -52,7 +54,13 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
     let clearButton = null;
     if (this.props.clear) {
-      clearButton = <Button className="left-align inverted" callback={this.clear} content="Clear search" />;
+      clearButton =
+        <Button
+          key="form-button"
+          className="left-align inverted"
+          callback={this.clear}
+          content="Clear search"
+        />;
     }
 
     return(
