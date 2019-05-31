@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.1.5
+#### Added
+- Created a new tab to display information about each library's focus area and service area.
+
 ### v1.1.4
 #### Updated
 - Utilized new built-in styling options for the Button component.
