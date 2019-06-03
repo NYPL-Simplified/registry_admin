@@ -1,6 +1,6 @@
 ## Changelog
 
-### v1.1.5
+### v1.2.0
 #### Updated
 - Updating to React 16 and Enzyme 3.9 with updates to unit tests.
 
