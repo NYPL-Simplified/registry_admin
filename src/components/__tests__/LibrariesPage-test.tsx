@@ -135,8 +135,7 @@ describe("LibrariesPage", () => {
 
     // Unsuccessful search:
     wrapper.setState({ showAll: false });
-    wrapper.setProps({ results: null })
-    ;
+    wrapper.setProps({ results: null });
     list = wrapper.find(LibrariesList);
     expect(list.prop("libraries")).to.eql([]);
     // Clear the search results:

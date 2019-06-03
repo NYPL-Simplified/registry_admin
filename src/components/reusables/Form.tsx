@@ -20,7 +20,6 @@ export interface FormProps {
 
 export default class Form extends React.Component<FormProps, {}> {
   private messageRef = React.createRef<HTMLParagraphElement>();
-  private formRef = React.createRef<HTMLFormElement>();
 
   constructor(props: FormProps) {
     super(props);
