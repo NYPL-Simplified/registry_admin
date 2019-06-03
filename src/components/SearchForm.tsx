@@ -52,7 +52,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
     let clearButton = null;
     if (this.props.clear) {
-      clearButton = <Button className="inverted" callback={this.clear} content="Clear search" />;
+      clearButton = <Button className="left-align inverted" callback={this.clear} content="Clear search" />;
     }
 
     return(

@@ -13,26 +13,11 @@ form {
     }
   }
 
-  &.log-in {
-    button.btn {
-      display: block;
-      margin: auto;
-      width: 25vw;
-      border: 1px solid $blue;
-      &:hover {
-        border-color: $gray-brown;
-      }
-    }
-  }
-
   &.validation {
     .form-title {
       text-align: left;
       margin: 0;
       width: 100%;
-    }
-    button.btn {
-      margin: 0;
     }
   }
 

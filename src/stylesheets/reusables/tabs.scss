@@ -12,12 +12,9 @@
           color: $white;
         }
       }
-      button {
+      .btn {
         background: $light-gray;
         color: $dark-gray;
-        margin-right: .25em;
-        border-top-left-radius: .5em;
-        border-top-right-radius: .5em;
         transition: background .5s, color .5s;
         &:hover {
           background: $gray-brown;

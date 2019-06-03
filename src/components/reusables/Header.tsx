@@ -21,7 +21,7 @@ export default class Header extends React.Component<HeaderProps, {}> {
           }
         </div>
         <a
-          className="btn navbar-btn"
+          className="btn navbar-btn big inverted"
           href={this.props.logOut}
         >
           <span>Log Out <LogoutIcon /></span>

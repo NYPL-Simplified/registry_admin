@@ -1,8 +1,12 @@
 ## Changelog
 
-### v1.1.4
+### v1.1.5
 #### Added
 - Implemented a toggle for switching between production mode and QA mode.
+
+### v1.1.4
+#### Updated
+- Utilized new built-in styling options for the Button component.
 
 ### v1.1.3
 #### Updated

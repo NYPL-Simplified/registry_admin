@@ -19,29 +19,9 @@ nav.navbar-default {
     }
   }
   .navbar-btn {
-    background: $white;
-    .logoutIcon {
-      width: 1.5em;
-      height: 100%;
-      margin-left: 1em;
-      vertical-align: middle;
-      fill: $blue-dark;
-    }
-    span {
-      color: $blue-dark;
-      vertical-align: middle;
-      font-size: 18px;
-      font-weight: bold;
-      transition: color .5s;
-    }
     float: right;
     margin: 0;
     &:hover {
-      background: $gray-brown;
-      transition: background .5s;
-      .logoutIcon {
-        fill: $white;
-      }
       span {
         color: $white;
       }
