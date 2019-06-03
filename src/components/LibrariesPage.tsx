@@ -19,9 +19,8 @@ export interface LibrariesPageOwnProps {
 
 export interface LibrariesPageDispatchProps {
   fetchData: () => Promise<LibrariesData>;
-  fetchQA: () => Promise<LibrariesData>;
   search: (data: FormData) => Promise<LibrariesData>;
-  searchQA?: (data: FormData) => Promise<LibrariesData>;
+  fetchQA: () => Promise<LibrariesData>;
 }
 
 export interface LibrariesPageState {
@@ -38,31 +37,12 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.search = this.search.bind(this);
     this.clear = this.clear.bind(this);
     this.toggleQA = this.toggleQA.bind(this);
+    this.filter = this.filter.bind(this);
     this.state = { showAll: true, searchTerm: "", qa: false };
   }
 
   render(): JSX.Element {
-    // Does the registry have libraries?
-    let hasLibraries = (this.props.libraries && this.props.libraries.libraries && this.props.libraries.libraries.length);
-    // List of all libraries for the registry:
-    let allLibraries =  hasLibraries && this.props.libraries.libraries;
-    // There might be QA libraries available, but the user only wants to see the production ones:
-    let filteredLibraries = !this.state.qa && allLibraries && allLibraries.filter(l => l.stages.registry_stage === "production");
-    // The user has submitted a search, and there are results:
-    let results = !this.state.showAll && this.props.results && this.props.results.libraries;
-    // The user has submitted a search, but there are no results:
-    let noResults = !this.state.showAll && !this.props.results && [];
-    // There are five possible scenarios:
-    // 1) A search has been submitted, and there are search results. Set the libraries variable to the list of results.
-    // 2) A search has been submitted, and there are not search results. Set the libraries variable to an empty array;
-    // this will generate a "no results were found" message.
-    // 3) A search has not been submitted, the registry has libraries, and QA mode is not active.  Set the libraries
-    // variable to a filtered list of libraries--just the ones that are in production.
-    // 4) A search has not been submitted, the registry has libraries, and QA mode is active. Set the libraries variable
-    // to the full list of the registry's libraries.
-    // 5) A search has not been submitted, and the registry does not have libraries. Let the libraries
-    // variable remain undefined; this will generate a "no libraries in this registry" message.
-    let libraries = (results || noResults) || filteredLibraries || allLibraries;
+    let libraries = this.getLibraryList();
 
     let searchForm: JSX.Element = <SearchForm
       search={this.search}
@@ -72,6 +52,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       clear={!this.state.showAll ? this.clear : null}
       resultsCount={libraries && libraries.length}
     />;
+
     let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA" />;
 
     return (
@@ -90,19 +71,58 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.props.fetchData();
   }
 
+  filter(libraries) {
+    return libraries.filter(l => l.stages.registry_stage === "production");
+  }
+
+  getLibraryList() {
+    // Does the registry have libraries?
+    let hasLibraries = (this.props.libraries && this.props.libraries.libraries && this.props.libraries.libraries.length);
+    // List of all libraries for the registry:
+    let allLibraries =  hasLibraries && this.props.libraries.libraries;
+    // There might be QA libraries available, but the user only wants to see the production ones:
+    let filteredLibraries = !this.state.qa && allLibraries && this.filter(allLibraries);
+    // The user has submitted a search, and there are results:
+    let allResults = !this.state.showAll && this.props.results && this.props.results.libraries;
+    // The user has submitted a search, but only wants to see results for production libraries:
+    let filteredResults = !this.state.qa && allResults && this.filter(allResults);
+    // The user has submitted a search, but there are no results:
+    let noResults = !this.state.showAll && !this.props.results && [];
+
+    // There are six possible scenarios:
+    // 1) A search has been submitted, QA mode is active, and there are search results. Set the libraries variable to the list of results.
+    // 2) A search has been submitted, QA mode is not active, and there are search results.  Set the libraries variable to a filtered list
+    // of results--just the ones that are in production.
+    // 3) A search has been submitted, and there are not search results. Set the libraries variable to an empty array;
+    // this will generate a "no results were found" message.
+    // 4) A search has not been submitted, the registry has libraries, and QA mode is not active.  Set the libraries
+    // variable to a filtered list of libraries--just the ones that are in production.
+    // 5) A search has not been submitted, the registry has libraries, and QA mode is active. Set the libraries variable
+    // to the full list of the registry's libraries.
+    // 6) A search has not been submitted, and the registry does not have libraries. Let the libraries
+    // variable remain undefined; this will generate a "no libraries in this registry" message.
+    return (filteredResults || allResults || noResults) || filteredLibraries || allLibraries;
+  }
+
   async toggleQA(showQA: boolean) {
     this.setState({ "qa": showQA });
     let hasAlreadyLoadedQA: boolean = this.props.libraries.libraries && !(this.props.libraries.libraries.every(l => l.stages.registry_stage === "production"));
+
     if (!hasAlreadyLoadedQA) {
       let fetch = showQA ? this.props.fetchQA : this.props.fetchData;
       await fetch();
+    }
+    if (showQA && this.state.searchTerm && !this.props.results) {
+      // The user searched for a QA library, but didn't switch to QA mode until after submitting the search.
+      let searchTerm = new (window as any).FormData;
+      searchTerm.append("name", this.state.searchTerm);
+      await this.search(searchTerm);
     }
   }
 
   async search(data: FormData) {
     this.setState({ showAll: false, searchTerm: (data.get("name") as string) });
-    let callback = this.state.qa ? this.props.searchQA : this.props.search;
-    await callback(data);
+    await this.props.search(data);
   }
 
   async clear() {
@@ -124,8 +144,7 @@ function mapDispatchToProps(dispatch: Function, ownProps: LibrariesPageOwnProps)
   return {
     fetchData: () => dispatch(actions.fetchLibraries()),
     fetchQA: () => dispatch(actions.fetchLibraries("/qa")),
-    search: (data: FormData) => dispatch(actions.search(data)),
-    searchQA: (data: FormData) => dispatch(actions.search(data, "/qa"))
+    search: (data: FormData) => dispatch(actions.search(data))
   };
 }
 

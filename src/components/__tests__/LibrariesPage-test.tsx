@@ -47,16 +47,34 @@ describe("LibrariesPage", () => {
         }
       }
     ];
+    let qaLib = {
+      uuid: "UUID3",
+      basic_info: {
+        "name": "QA Library",
+        "short_name": "qa",
+      },
+      urls_and_contact: {
+        "authentication_url": "qaURL",
+        "contact_email": "qaEmail",
+        "opds_url": "qaOpds",
+        "web_url": "qaWeb"
+      },
+      stages: {
+        "library_stage": "testing",
+        "registry_stage": "testing"
+      }
+    };
 
     let fetchData;
     let fetchQA;
-    let search = Sinon.stub().returns(libraries[1]);
+    let search;
     let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;
     let store;
 
     beforeEach(() => {
       fetchData = Sinon.stub();
       fetchQA = Sinon.stub();
+      search = Sinon.stub().returns(libraries[1]);
       store = buildStore();
       wrapper = Enzyme.mount(
         <LibrariesPage
@@ -102,13 +120,25 @@ describe("LibrariesPage", () => {
       expect(wrapper.state()["qa"]).to.be.true;
       expect(wrapper.find(Toggle).prop("initialOn")).to.be.true;
 
+      wrapper.setProps({ libraries: { libraries: libraries.concat(qaLib) }});
+
+      // We already have the production list once, so we don't need another server call.
       wrapper.instance().toggleQA(false);
       await pause();
 
-      expect(fetchData.callCount).to.equal(2);
+      expect(fetchData.callCount).to.equal(1);
       expect(fetchQA.callCount).to.equal(1);
       expect(wrapper.state()["qa"]).to.be.false;
       expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
+
+      // We've already loaded the QA list once, so we don't have to get it from the server again.
+      wrapper.instance().toggleQA(true);
+      await pause();
+
+      expect(fetchData.callCount).to.equal(1);
+      expect(fetchQA.callCount).to.equal(1);
+      expect(wrapper.state()["qa"]).to.be.true;
+      expect(wrapper.find(Toggle).prop("initialOn")).to.be.true;
     });
 
     it("should display a search form", () => {
@@ -122,7 +152,7 @@ describe("LibrariesPage", () => {
       expect(searchForm.find(".btn").length).to.equal(2);
     });
 
-    it("should search", async() => {
+    it("should search", async () => {
       let spyClear = Sinon.spy(wrapper.instance(), "clear");
       expect(wrapper.state()["showAll"]).to.be.true;
       wrapper.find(".panel-info").find("input").simulate("change", {target: {value: "test_search_term"}});
@@ -145,20 +175,46 @@ describe("LibrariesPage", () => {
       spyClear.restore();
     });
 
+    it("shouldn't display QA search results unless in QA mode", async () => {
+      wrapper.setProps({ results: { libraries: [qaLib] } });
+      wrapper.setState({ searchTerm: "QA Library", showAll: false });
+      let results = wrapper.find(".panel-warning");
+      expect(results.length).to.equal(0);
+
+      wrapper.setState({...wrapper.state(), ...{qa: true}});
+
+      results = wrapper.find(".panel-warning");
+      expect(results.length).to.equal(1);
+      expect(results.find(".panel-title").text()).to.equal("QA Library (qa)");
+    });
+
+    it("should let the user check QA if the production search was unsuccessful", async () => {
+      expect(search.callCount).to.equal(0);
+      wrapper.setState({ searchTerm: "QA Library"});
+      wrapper.instance().toggleQA(true);
+
+      const pause = (): Promise<void> => {
+        return new Promise<void>(resolve => setTimeout(resolve, 0));
+      };
+      await pause();
+
+      expect(search.callCount).to.equal(1);
+      expect(search.args[0][0].get("name")).to.equal("QA Library");
+    });
+
     it("should display a list", () => {
       let list = wrapper.find(LibrariesList);
       expect(list.length).to.equal(1);
-
       // All libraries:
-      expect(list.prop("libraries")).to.equal(wrapper.prop("libraries").libraries);
+      expect(list.prop("libraries")).to.eql(wrapper.prop("libraries").libraries);
 
       // Successful search:
       wrapper.setState({ showAll: false });
       wrapper.setProps({ results: { libraries: [libraries[1]] } });
-      expect(list.prop("libraries")).to.equal(wrapper.prop("results").libraries);
+      expect(list.prop("libraries")).to.eql(wrapper.prop("results").libraries);
       // Clear the search results:
       wrapper.setState({ showAll: true });
-      expect(list.prop("libraries")).to.equal(wrapper.prop("libraries").libraries);
+      expect(list.prop("libraries")).to.eql(wrapper.prop("libraries").libraries);
 
       // Unsuccessful search:
       wrapper.setState({ showAll: false });
@@ -166,11 +222,10 @@ describe("LibrariesPage", () => {
       expect(list.prop("libraries")).to.eql([]);
       // Clear the search results:
       wrapper.setState({ showAll: true });
-      expect(list.prop("libraries")).to.equal(wrapper.prop("libraries").libraries);
+      expect(list.prop("libraries")).to.eql(wrapper.prop("libraries").libraries);
 
       // No libraries:
       wrapper.setProps({ libraries: [] });
       expect(list.prop("libraries")).to.be.undefined;
     });
-
   });

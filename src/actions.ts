@@ -149,8 +149,8 @@ export default class ActionCreator extends BaseActionCreator {
     return this.fetchJSON<LibraryData>(ActionCreator.GET_ONE_LIBRARY, url).bind(this);
   }
 
-  search(data: FormData, qa?: string) {
-    let url = "/admin/libraries/search_details" + (qa || "");
+  search(data: FormData) {
+    let url = "/admin/libraries/search_details";
     return this.postForm(ActionCreator.GET_SOME_LIBRARIES, url, data, "POST", "", "JSON").bind(this);
   }
 
