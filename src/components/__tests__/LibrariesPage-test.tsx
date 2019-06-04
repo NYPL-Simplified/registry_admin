@@ -11,7 +11,7 @@ import SearchForm from "../SearchForm";
 
 describe("LibrariesPage", () => {
 
-    let libraries = [testLibrary1, testLibrary2];
+    const libraries = [testLibrary1, testLibrary2];
     let fetchData = Sinon.stub();
     let search = Sinon.stub().returns(libraries[1]);
     let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;

@@ -9,7 +9,7 @@ import LibrariesListItem from "../LibrariesListItem";
 import { Panel } from "library-simplified-reusable-components";
 
 describe("LibrariesListItem", () => {
-  let library = testLibrary1;
+  const library = testLibrary1;
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   describe("rendering", () => {

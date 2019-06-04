@@ -99,9 +99,10 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
       "Contact & URLs": "urls_and_contact",
       "Areas": "areas"
     };
-    Object.entries(categories).filter(([k, v]) => library[v]).forEach(([k, v]) => {
+    Object.entries(categories).forEach(([k, v]) => {
+    // Object.entries(categories).filter(([k, v]) => library[v]).forEach(([k, v]) => {
       let category = library[v];
-      let categoryItems: any[] = Object.values(category);
+      let categoryItems: (string | string[])[] = Object.values(category);
       // If there are no meaningful items in this category--e.g. it's an Areas category in which
       // both values are empty arrays--then don't bother making a blank tab for it.
       let hasItems = categoryItems.some(x => x && x.length > 0);

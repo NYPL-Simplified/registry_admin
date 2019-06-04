@@ -13,7 +13,7 @@ describe("LibraryDetailPage", () => {
   let uuid = "123";
   let store;
 
-  let library = testLibrary1;
+  const library = testLibrary1;
   let updateColor: Sinon.SinonStub;
   let editStages: Sinon.SinonStub;
   let fetchLibrary: Sinon.SinonStub;
@@ -102,7 +102,7 @@ describe("LibraryDetailPage", () => {
     let tabs = wrapper.find(".tab-nav");
     expect(tabs.length).to.equal(3);
     expect(wrapper.find(".tab-navs").text()).to.contain("Areas");
-    let libraryWithoutAreas = {...library, ...{areas: null}};
+    let libraryWithoutAreas = {...library, ...{areas: {focus: [], service: []}}};
     wrapper.setProps({library: libraryWithoutAreas});
     tabs = wrapper.find(".tab-nav");
     expect(tabs.length).to.equal(2);

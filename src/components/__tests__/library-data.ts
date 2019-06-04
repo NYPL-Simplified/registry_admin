@@ -31,7 +31,8 @@ export const testLibrary2 = {
     "authentication_url": "auth2",
     "contact_email": "email2",
     "opds_url": "opds2",
-    "web_url": "web2"        },
+    "web_url": "web2"
+  },
   stages: {
     "library_stage": "testing",
     "registry_stage": "cancelled"

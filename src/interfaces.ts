@@ -18,8 +18,8 @@ export interface LibraryData {
     validated?: string
   };
   areas: {
-    focus?: string[],
-    service?: string[]
+    focus: string[],
+    service: string[]
   };
   stages: {
     library_stage: string,

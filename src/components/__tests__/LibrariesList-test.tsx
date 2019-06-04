@@ -9,7 +9,7 @@ import LibrariesList from "../LibrariesList";
 import LibrariesListItem from "../LibrariesListItem";
 
 describe("LibrariesList", () => {
-  let libraries = [testLibrary1, testLibrary2];
+  const libraries = [testLibrary1, testLibrary2];
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   describe("rendering", () => {
