@@ -100,7 +100,6 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
       "Areas": "areas"
     };
     Object.entries(categories).forEach(([k, v]) => {
-    // Object.entries(categories).filter(([k, v]) => library[v]).forEach(([k, v]) => {
       let category = library[v];
       let categoryItems: (string | string[])[] = Object.values(category);
       // If there are no meaningful items in this category--e.g. it's an Areas category in which
