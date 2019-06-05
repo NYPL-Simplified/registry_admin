@@ -139,8 +139,8 @@ export default class ActionCreator extends BaseActionCreator {
     });
   }
 
-  fetchLibraries() {
-    let url = "/admin/libraries";
+  fetchLibraries(qa?: string) {
+    let url = "/admin/libraries" + (qa || "");
     return this.fetchJSON<LibrariesData>(ActionCreator.GET_ALL_LIBRARIES, url).bind(this);
   }
 
