@@ -5,7 +5,7 @@ import * as React from "react";
 import buildStore from "../../store";
 import { LibraryDetailPage } from "../LibraryDetailPage";
 import LibraryDetailItem from "../LibraryDetailItem";
-import { testLibrary1, modify } from "./library-data";
+import { testLibrary1, modifyLibrary } from "./TestUtils";
 
 describe("LibraryDetailPage", () => {
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
@@ -102,7 +102,7 @@ describe("LibraryDetailPage", () => {
     let tabs = wrapper.find(".tab-nav");
     expect(tabs.length).to.equal(3);
     expect(wrapper.find(".tab-navs").text()).to.contain("Areas");
-    let libraryWithoutAreas = modify(testLibrary1, {focus: [], service: []});
+    let libraryWithoutAreas = modifyLibrary(testLibrary1, {focus: [], service: []});
     wrapper.setProps({library: libraryWithoutAreas});
     tabs = wrapper.find(".tab-nav");
     expect(tabs.length).to.equal(2);
@@ -143,7 +143,7 @@ describe("LibraryDetailPage", () => {
     let form = wrapper.find("form").at(0);
     let button = form.find("button");
     button.simulate("click");
-    let fullLibrary = modify(testLibrary1, { library_stage: "cancelled", registry_stage: "production" });
+    let fullLibrary = modifyLibrary(testLibrary1, { library_stage: "cancelled", registry_stage: "production" });
     wrapper.setProps({ fullLibrary });
 
     expect(editStages.callCount).to.equal(1);
@@ -176,7 +176,7 @@ describe("LibraryDetailPage", () => {
 
     let saveButton = editForm.find("button");
     saveButton.simulate("click");
-    let fullLibrary = modify(library, { library_stage: "testing", registry_stage: "cancelled" });
+    let fullLibrary = modifyLibrary(library, { library_stage: "testing", registry_stage: "cancelled" });
     wrapper.setProps({ fullLibrary });
 
     const pause = (): Promise<void> => {

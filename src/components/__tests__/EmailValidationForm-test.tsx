@@ -3,7 +3,7 @@ import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
-import { testLibrary1, modify } from "./library-data";
+import { testLibrary1, modifyLibrary } from "./TestUtils";
 import { EmailValidationForm } from "../EmailValidationForm";
 
 describe("EmailValidationForm", () => {
@@ -13,7 +13,7 @@ describe("EmailValidationForm", () => {
   let fetchLibrary: Sinon.SinonStub;
 
   beforeEach(() => {
-    const library = modify(testLibrary1, {"validated": "Not validated"}, "urls_and_contact");
+    const library = modifyLibrary(testLibrary1, {"validated": "Not validated"}, "urls_and_contact");
     store = buildStore();
     validateEmail = Sinon.stub();
     fetchLibrary = Sinon.stub();
@@ -49,12 +49,12 @@ describe("EmailValidationForm", () => {
     expect(button.prop("disabled")).not.to.be.true;
 
     let library = wrapper.prop("library");
-    wrapper.setProps({ library: modify(library, {"validated": "validation time" })});
+    wrapper.setProps({ library: modifyLibrary(library, {"validated": "validation time" })});
     button = wrapper.find("button");
     expect(button.text()).to.contain("Validate email address");
     expect(button.prop("disabled")).not.to.be.true;
 
-    wrapper.setProps({ library: modify(library, {contact_email: null}) });
+    wrapper.setProps({ library: modifyLibrary(library, {contact_email: null}) });
     button = wrapper.find("button");
     expect(button.text()).to.equal("No email address configured");
     expect(button.prop("disabled")).to.be.true;
@@ -76,7 +76,7 @@ describe("EmailValidationForm", () => {
     expect(info.length).to.equal(0);
 
     let library = wrapper.prop("library");
-    wrapper.setProps({ library: modify(library, {"validated": "validation time" })});
+    wrapper.setProps({ library: modifyLibrary(library, {"validated": "validation time" })});
 
     info = wrapper.find(".alert-info");
     expect(info.length).to.equal(1);

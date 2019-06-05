@@ -4,7 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 
-import { testLibrary1, testLibrary2, modify } from "./library-data";
+import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 import { LibrariesPage } from "../LibrariesPage";
 import LibrariesList from "../LibrariesList";
 import Toggle from "../reusables/Toggle";
@@ -13,8 +13,8 @@ import SearchForm from "../SearchForm";
 describe("LibrariesPage", () => {
 
     const libraries = [
-      modify(testLibrary1, {registry_stage: "production"}),
-      modify(testLibrary2, {registry_stage: "production"})
+      modifyLibrary(testLibrary1, {registry_stage: "production"}),
+      modifyLibrary(testLibrary2, {registry_stage: "production"})
     ];
 
     let qaLib = {

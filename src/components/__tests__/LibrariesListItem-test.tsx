@@ -3,7 +3,7 @@ import { expect } from "chai";
 import * as React from "react";
 import * as Enzyme from "enzyme";
 import buildStore from "../../store";
-import { testLibrary1 } from "./library-data";
+import { testLibrary1 } from "./TestUtils";
 
 import LibrariesListItem from "../LibrariesListItem";
 import { Panel } from "library-simplified-reusable-components";
