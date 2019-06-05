@@ -3,7 +3,7 @@ import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
-import { testLibrary1, testLibrary2 } from "./library-data";
+import { testLibrary1, testLibrary2, modify } from "./library-data";
 
 import LibrariesList from "../LibrariesList";
 import LibrariesListItem from "../LibrariesListItem";
@@ -37,9 +37,8 @@ describe("LibrariesList", () => {
     });
 
     it("should update if the libraries prop changes", () => {
-      let newLib1 = Object.assign({}, libraries[0], { basic_info: { name: "New Library!", short_name: "new" } });
-      let newProps = [newLib1, libraries[1]];
-      wrapper.setProps({ libraries: newProps });
+      let newLib1 = modify(testLibrary1, { name: "New Library!", short_name: "new" });
+      wrapper.setProps({ libraries: [newLib1, libraries[1]] });
 
       let libraryPanels = wrapper.find(".list .panel");
       expect(libraryPanels.length).to.equal(2);
