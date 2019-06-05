@@ -1,8 +1,12 @@
 ## Changelog
 
-### v1.1.5
+### v1.1.6
 #### Added
 - Created a new tab to display information about each library's focus area and service area.
+
+### v1.1.5
+#### Added
+- Implemented a toggle for switching between production mode and QA mode.
 
 ### v1.1.4
 #### Updated
