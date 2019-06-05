@@ -227,12 +227,16 @@ describe("LibrariesPage", () => {
       let updatedLibrary = {...libraries[0], stages: {"library_stage": "testing", "registry_stage": "testing"}};
       let spyUpdateLibraryList = Sinon.spy(wrapper.instance(), "updateLibraryList");
       expect(spyUpdateLibraryList.callCount).to.equal(0);
+      // There are two production libraries to display.
+      expect(wrapper.find(".list .panel").length).to.equal(2);
 
       wrapper.setProps({ updatedLibrary });
 
       expect(spyUpdateLibraryList.callCount).to.equal(1);
       expect(spyUpdateLibraryList.args[0][0]).to.eql(libraries);
       expect(spyUpdateLibraryList.returnValues[0]).to.eql([updatedLibrary, libraries[1]]);
+      // The library we edited has been hidden; there is only one production library to display.
+      expect(wrapper.find(".list .panel").length).to.equal(1);
 
       spyUpdateLibraryList.restore();
     });
