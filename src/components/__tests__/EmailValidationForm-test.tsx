@@ -13,7 +13,7 @@ describe("EmailValidationForm", () => {
   let fetchLibrary: Sinon.SinonStub;
 
   beforeEach(() => {
-    const library = {...testLibrary1, ...{urls_and_contact: {...testLibrary1.urls_and_contact, ...{validated: "Not validated"}}}};
+    const library = {...testLibrary1, urls_and_contact: {...testLibrary1.urls_and_contact, validated: "Not validated"}};
 
     store = buildStore();
     validateEmail = Sinon.stub();
