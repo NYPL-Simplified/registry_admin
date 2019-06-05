@@ -46,9 +46,15 @@ export const testLibrary2: LibraryData = {
 };
 
 export const modifyLibrary = (baseLibrary: LibraryData, newData: {[key: string]: string | string[]}, category?: string): LibraryData => {
-  // A helper function so that tests can easily modifyLibrary a library's data or create a new library
-  // based off of an existing one.  The category variable only needs to be passed if the modification
-  // entails adding a new key.
+  /**
+   * modifyLibrary()
+   * @param {LibraryData} baseLibrary - the library to be modified
+   * @param {{[key: string]: string | string[]}} newData - key-value pairs with which to update the library
+   * @param {string} [category] - the category that the new values should go into.  This isn't necessary if we're
+     modifying the value of a key that already exists in the library; modifyLibrary will figure it out.
+     It's only necessary if we're adding a new key.
+  */
+
   let categories = Object.keys(baseLibrary);
   let newValue = {};
   let updatedLibrary = {...baseLibrary};
