@@ -95,25 +95,21 @@ describe("LibrariesPage", () => {
       expect(wrapper.state()["qa"]).to.be.false;
       let toggle = wrapper.find(Toggle);
       expect(toggle.length).to.equal(1);
-      expect(toggle.text()).to.equal("QA");
+      expect(toggle.text()).to.equal("QA Mode: Off");
       expect(toggle.prop("initialOn")).to.be.false;
 
-      wrapper.setState({ "qa" : true });
+      wrapper.setState({ "qa": true });
       expect(toggle.prop("initialOn")).to.be.true;
+      expect(toggle.text()).to.equal("QA Mode: On");
     });
 
     it("should toggle", async () => {
-      const pause = (): Promise<void> => {
-        return new Promise<void>(resolve => setTimeout(resolve, 0));
-      };
-
       expect(fetchData.callCount).to.equal(1);
       expect(fetchQA.callCount).to.equal(0);
       expect(wrapper.state()["qa"]).to.be.false;
       expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
 
-      wrapper.instance().toggleQA(true);
-      await pause();
+      await wrapper.instance().toggleQA(true);
 
       expect(fetchData.callCount).to.equal(1);
       expect(fetchQA.callCount).to.equal(1);
@@ -123,8 +119,7 @@ describe("LibrariesPage", () => {
       wrapper.setProps({ libraries: { libraries: libraries.concat(qaLib) }});
 
       // We already have the production list once, so we don't need another server call.
-      wrapper.instance().toggleQA(false);
-      await pause();
+      await wrapper.instance().toggleQA(false);
 
       expect(fetchData.callCount).to.equal(1);
       expect(fetchQA.callCount).to.equal(1);
@@ -132,8 +127,7 @@ describe("LibrariesPage", () => {
       expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
 
       // We've already loaded the QA list once, so we don't have to get it from the server again.
-      wrapper.instance().toggleQA(true);
-      await pause();
+      await wrapper.instance().toggleQA(true);
 
       expect(fetchData.callCount).to.equal(1);
       expect(fetchQA.callCount).to.equal(1);
@@ -227,5 +221,35 @@ describe("LibrariesPage", () => {
       // No libraries:
       wrapper.setProps({ libraries: [] });
       expect(list.prop("libraries")).to.be.undefined;
+    });
+
+    it("should render changes to a library", () => {
+      let updatedLibrary = {...libraries[0], stages: {"library_stage": "testing", "registry_stage": "testing"}};
+      let spyUpdateLibraryList = Sinon.spy(wrapper.instance(), "updateLibraryList");
+      expect(spyUpdateLibraryList.callCount).to.equal(0);
+
+      wrapper.setProps({ updatedLibrary });
+
+      expect(spyUpdateLibraryList.callCount).to.equal(1);
+      expect(spyUpdateLibraryList.args[0][0]).to.eql(libraries);
+      expect(spyUpdateLibraryList.returnValues[0]).to.eql([updatedLibrary, libraries[1]]);
+
+      spyUpdateLibraryList.restore();
+    });
+
+    it("should render changes to a search result", () => {
+      // Use case: admin searched for a library and then edited its stages.  Changes should be reflected immediately.
+      let updatedLibrary = {...libraries[0], stages: {"library_stage": "testing", "registry_stage": "testing"}};
+      wrapper.setState({ showAll: false });
+      let spyUpdateLibraryList = Sinon.spy(wrapper.instance(), "updateLibraryList");
+      expect(spyUpdateLibraryList.callCount).to.equal(0);
+
+      wrapper.setProps({ updatedLibrary, results: { libraries: [libraries[0]] } });
+
+      expect(spyUpdateLibraryList.callCount).to.equal(2);
+      expect(spyUpdateLibraryList.getCall(1).args[0][0]).to.equal(libraries[0]);
+      expect(spyUpdateLibraryList.returnValues[1][0]).to.equal(updatedLibrary);
+
+      spyUpdateLibraryList.restore();
     });
   });

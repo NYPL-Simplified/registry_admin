@@ -1,8 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Panel, Button } from "library-simplified-reusable-components";
-import { FilterIcon } from "@nypl/dgx-svg-icons";
-import Form from "./Form";
 
 export interface ToggleOwnProps {
   onToggle: (status: any) => void;
@@ -21,8 +19,12 @@ export default class Toggle extends React.Component<ToggleOwnProps, ToggleState>
     this.state = { on: this.props.initialOn || false };
   }
 
+  componentWillReceiveProps(newProps: ToggleOwnProps) {
+    this.setState({ on: newProps.initialOn });
+  }
+
   render(): JSX.Element {
-    let label = this.props.label || "On";
+    let label = this.props.label ? `${this.props.label}: ${this.state.on ? "On" : "Off"}` : "On";
     return (
       <form className="toggle-container">
         <label className={this.state.on ? "active" : ""}><span>{label}</span></label>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Store, Reducer } from "redux";
 import { State } from "../reducers/index";
-import { LibrariesData } from "../interfaces";
+import { LibrariesData, LibraryData } from "../interfaces";
 import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import LibrariesList from "./LibrariesList";
@@ -11,6 +11,7 @@ import Toggle from "./reusables/Toggle";
 export interface LibrariesPageStateProps {
   libraries?: LibrariesData;
   results?: LibrariesData;
+  updatedLibrary?: LibraryData;
 }
 
 export interface LibrariesPageOwnProps {
@@ -53,7 +54,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       resultsCount={libraries && libraries.length}
     />;
 
-    let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA" />;
+    let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA Mode" />;
 
     return (
       <div className="libraries-page">
@@ -71,6 +72,13 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.props.fetchData();
   }
 
+  updateLibraryList(libraryList) {
+    let newLibrary = this.props.updatedLibrary;
+    let oldLibraryIdx = libraryList.findIndex(l => l.uuid === newLibrary.uuid);
+    libraryList[oldLibraryIdx] = newLibrary;
+    return libraryList;
+  }
+
   filter(libraries) {
     return libraries.filter(l => l.stages.registry_stage === "production");
   }
@@ -80,10 +88,18 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     let hasLibraries = (this.props.libraries && this.props.libraries.libraries && this.props.libraries.libraries.length);
     // List of all libraries for the registry:
     let allLibraries =  hasLibraries && this.props.libraries.libraries;
+    // The user edited a library:
+    if (allLibraries && this.props.updatedLibrary) {
+      allLibraries = this.updateLibraryList(allLibraries);
+    }
     // There might be QA libraries available, but the user only wants to see the production ones:
     let filteredLibraries = !this.state.qa && allLibraries && this.filter(allLibraries);
     // The user has submitted a search, and there are results:
     let allResults = !this.state.showAll && this.props.results && this.props.results.libraries;
+    // The user edited a search result:
+    if (allResults && this.props.updatedLibrary) {
+      allResults = this.updateLibraryList(allResults);
+    }
     // The user has submitted a search, but only wants to see results for production libraries:
     let filteredResults = !this.state.qa && allResults && this.filter(allResults);
     // The user has submitted a search, but there are no results:
@@ -101,6 +117,9 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     // to the full list of the registry's libraries.
     // 6) A search has not been submitted, and the registry does not have libraries. Let the libraries
     // variable remain undefined; this will generate a "no libraries in this registry" message.
+
+    // If one of the libraries undergoes changes--e.g. is put into/taken out of production--the libraries variable will be updated accordingly.
+
     return (filteredResults || allResults || noResults) || filteredLibraries || allLibraries;
   }
 
@@ -109,8 +128,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     let hasAlreadyLoadedQA: boolean = this.props.libraries.libraries && !(this.props.libraries.libraries.every(l => l.stages.registry_stage === "production"));
 
     if (!hasAlreadyLoadedQA) {
-      let fetch = showQA ? this.props.fetchQA : this.props.fetchData;
-      await fetch();
+      await this.props.fetchQA();
     }
     if (showQA && this.state.searchTerm && !this.props.results) {
       // The user searched for a QA library, but didn't switch to QA mode until after submitting the search.
@@ -135,6 +153,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 function mapStateToProps(state: State, ownProps: LibrariesPageOwnProps) {
   return {
     libraries: state.libraries && state.libraries.data,
+    updatedLibrary: state.library && state.library.data,
     results: state.results && state.results.data
   };
 }

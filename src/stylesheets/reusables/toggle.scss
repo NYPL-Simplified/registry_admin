@@ -9,6 +9,8 @@
   label {
     color: $white;
     mix-blend-mode: screen;
+    grid-column-start: 1;
+    grid-column-end: 3;
     padding: 3px;
     margin: 0;
     text-align: center;
@@ -28,8 +30,8 @@
 }
 
 .toggle {
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
   justify-self: center;
   position: relative;
   border-radius: 30px;

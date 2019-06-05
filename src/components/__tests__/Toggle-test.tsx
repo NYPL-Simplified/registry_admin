@@ -44,7 +44,9 @@ describe("Toggle", () => {
     expect(label.text()).to.equal("On");
     wrapper.setProps({ "label": "Custom Label" });
     label = wrapper.find("label");
-    expect(label.text()).to.equal("Custom Label");
+    expect(label.text()).to.equal("Custom Label: Off");
+    wrapper.setState({ "on": true });
+    expect(label.text()).to.equal("Custom Label: On");
   });
 
 
