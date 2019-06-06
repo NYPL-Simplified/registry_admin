@@ -4,6 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 
+import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 import { LibrariesPage } from "../LibrariesPage";
 import LibrariesList from "../LibrariesList";
 import Toggle from "../reusables/Toggle";
@@ -11,42 +12,11 @@ import SearchForm from "../SearchForm";
 
 describe("LibrariesPage", () => {
 
-  let libraries = [
-       {
-        uuid: "UUID1",
-        basic_info: {
-          "name": "Test Library 1",
-          "short_name": "lib1",
-        },
-        urls_and_contact: {
-          "authentication_url": "auth1",
-          "contact_email": "email1",
-          "opds_url": "opds1",
-          "web_url": "web1"
-        },
-        stages: {
-          "library_stage": "production",
-          "registry_stage": "production"
-        }
-      },
-      {
-        uuid: "UUID2",
-        basic_info: {
-          "name": "Test Library 2",
-          "short_name": "lib2",
-        },
-        urls_and_contact: {
-          "authentication_url": "auth2",
-          "contact_email": "email2",
-          "opds_url": "opds2",
-          "web_url": "web2"
-        },
-        stages: {
-          "library_stage": "production",
-          "registry_stage": "production"
-        }
-      }
+    const libraries = [
+      modifyLibrary(testLibrary1, {registry_stage: "production"}),
+      modifyLibrary(testLibrary2, {registry_stage: "production"})
     ];
+
     let qaLib = {
       uuid: "UUID3",
       basic_info: {
@@ -62,6 +32,10 @@ describe("LibrariesPage", () => {
       stages: {
         "library_stage": "testing",
         "registry_stage": "testing"
+      },
+      areas: {
+        "focus": [],
+        "service": []
       }
     };
 
@@ -82,7 +56,7 @@ describe("LibrariesPage", () => {
           fetchData={fetchData}
           fetchQA={fetchQA}
           search={search}
-          libraries={{libraries: libraries}}
+          libraries={{libraries}}
         />
       );
     });
