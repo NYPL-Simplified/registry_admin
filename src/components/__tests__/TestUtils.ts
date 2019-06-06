@@ -58,13 +58,13 @@ It's only necessary if we're adding a new key.
 */
 export const modifyLibrary = (baseLibrary: LibraryData, newData: {[key: string]: string | string[]}, category?: string): LibraryData => {
   let updatedLibrary = {...baseLibrary};
+  let allCategories = Object.keys(baseLibrary);
 
   Object.entries(newData).forEach((pair) => {
     let categoryToUpdate = category || null;
     let newValue = {};
     let [key, value] = pair;
     if (!categoryToUpdate) {
-      let allCategories = Object.keys(baseLibrary);
       categoryToUpdate = allCategories.find((cat) => Object.keys(baseLibrary[cat]).includes(key));
     }
     newValue[key] = value;
