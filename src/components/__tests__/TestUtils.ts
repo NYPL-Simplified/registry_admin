@@ -57,7 +57,6 @@ modifying the value of a key that already exists in the library; modifyLibrary w
 It's only necessary if we're adding a new key.
 */
 export const modifyLibrary = (baseLibrary: LibraryData, newData: {[key: string]: string | string[]}, category?: string): LibraryData => {
-  let categories = Object.keys(baseLibrary);
   let updatedLibrary = {...baseLibrary};
 
   Object.entries(newData).forEach((pair) => {
@@ -69,7 +68,7 @@ export const modifyLibrary = (baseLibrary: LibraryData, newData: {[key: string]:
       categoryToUpdate = allCategories.find((cat) => Object.keys(baseLibrary[cat]).includes(key));
     }
     newValue[key] = value;
-    let updatedCategory = { ...(updatedLibrary[categoryToUpdate] || baseLibrary[categoryToUpdate]), ...newValue };
+    let updatedCategory = { ...updatedLibrary[categoryToUpdate], ...newValue };
     updatedLibrary[categoryToUpdate] = updatedCategory;
   });
   return updatedLibrary;
