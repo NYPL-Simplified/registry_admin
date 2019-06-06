@@ -3,48 +3,13 @@ import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
+import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 
 import LibrariesList from "../LibrariesList";
 import LibrariesListItem from "../LibrariesListItem";
 
 describe("LibrariesList", () => {
-  let libraries = [
-       {
-        uuid: "UUID1",
-        basic_info: {
-          "name": "Test Library 1",
-          "short_name": "lib1",
-        },
-        urls_and_contact: {
-          "authentication_url": "auth1",
-          "contact_email": "email1",
-          "opds_url": "opds1",
-          "web_url": "web1"
-        },
-        stages: {
-          "library_stage": "production",
-          "registry_stage": "testing"
-        }
-      },
-      {
-        uuid: "UUID2",
-        basic_info: {
-          "name": "Test Library 2",
-          "short_name": "lib2",
-
-        },
-        urls_and_contact: {
-          "authentication_url": "auth2",
-          "contact_email": "email2",
-          "opds_url": "opds2",
-          "web_url": "web2"        },
-        stages: {
-          "library_stage": "testing",
-          "registry_stage": "cancelled"
-        }
-      }
-    ];
-
+  const libraries = [testLibrary1, testLibrary2];
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   describe("rendering", () => {
@@ -72,9 +37,8 @@ describe("LibrariesList", () => {
     });
 
     it("should update if the libraries prop changes", () => {
-      let newLib1 = Object.assign({}, libraries[0], { basic_info: { name: "New Library!", short_name: "new" } });
-      let newProps = [newLib1, libraries[1]];
-      wrapper.setProps({ libraries: newProps });
+      let newLib1 = modifyLibrary(testLibrary1, { name: "New Library!", short_name: "new" });
+      wrapper.setProps({ libraries: [newLib1, libraries[1]] });
 
       let libraryPanels = wrapper.find(".list .panel");
       expect(libraryPanels.length).to.equal(2);

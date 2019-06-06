@@ -5,6 +5,7 @@ import * as React from "react";
 import buildStore from "../../store";
 import { LibraryDetailPage } from "../LibraryDetailPage";
 import LibraryDetailItem from "../LibraryDetailItem";
+import { testLibrary1, modifyLibrary } from "./TestUtils";
 
 describe("LibraryDetailPage", () => {
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
@@ -12,25 +13,7 @@ describe("LibraryDetailPage", () => {
   let uuid = "123";
   let store;
 
-  let library = {
-    uuid: "UUID1",
-    basic_info: {
-      "name": "Test Library 1",
-      "short_name": "lib1",
-      "description": undefined
-    },
-    urls_and_contact: {
-      "authentication_url": "auth1",
-      "contact_email": "email1",
-      "opds_url": "opds1",
-      "web_url": "web1"
-    },
-    stages: {
-      "library_stage": "production",
-      "registry_stage": "testing"
-    }
-  };
-
+  const library = testLibrary1;
   let updateColor: Sinon.SinonStub;
   let editStages: Sinon.SinonStub;
   let fetchLibrary: Sinon.SinonStub;
@@ -56,8 +39,8 @@ describe("LibraryDetailPage", () => {
     let spyRenderItems = Sinon.spy(wrapper.instance(), "renderItems");
     wrapper.instance().render();
 
-    expect(spyRenderItems.callCount).to.equal(2);
-    let [basicInfoCall, urlsContactCall] = [spyRenderItems.firstCall, spyRenderItems.secondCall];
+    expect(spyRenderItems.callCount).to.equal(3);
+    let [basicInfoCall, urlsContactCall, areasCall] = [spyRenderItems.firstCall, spyRenderItems.secondCall, spyRenderItems.thirdCall];
 
     expect(basicInfoCall.args[0]).to.equal(library.basic_info);
     expect(basicInfoCall.returnValue.type).to.equal("ul");
@@ -81,12 +64,19 @@ describe("LibraryDetailPage", () => {
     expect(web_url.props.label).to.equal("web_url");
     expect(web_url.props.value).to.equal("web1");
 
+    expect(areasCall.args[0]).to.equal(library.areas);
+    expect(areasCall.returnValue.type).to.equal("ul");
+    expect(areasCall.returnValue.props.children.length).to.equal(1);
+    let [focus] = areasCall.returnValue.props.children;
+    expect(focus.props.label).to.equal("focus");
+    expect(focus.props.value).to.equal(library.areas.focus.join("; "));
+
     spyRenderItems.restore();
   });
 
   it("should show the library information", () => {
     let list = wrapper.find(".list-group");
-    expect(list.length).to.equal(2);
+    expect(list.length).to.equal(3);
 
     let basicInfoItems = list.at(0).find("li");
     expect(basicInfoItems.length).to.equal(2);
@@ -106,6 +96,17 @@ describe("LibraryDetailPage", () => {
   it("should not display blank values", () => {
     let infoLabels = wrapper.find(".list-group-item .control-label").map((label: Enzyme.CommonWrapper<any, any, {}>) => label.text());
     expect(infoLabels.indexOf("description")).to.equal(-1);
+  });
+
+  it("should not display empty tabs", () => {
+    let tabs = wrapper.find(".tab-nav");
+    expect(tabs.length).to.equal(3);
+    expect(wrapper.find(".tab-navs").text()).to.contain("Areas");
+    let libraryWithoutAreas = modifyLibrary(testLibrary1, {focus: [], service: []});
+    wrapper.setProps({library: libraryWithoutAreas});
+    tabs = wrapper.find(".tab-nav");
+    expect(tabs.length).to.equal(2);
+    expect(wrapper.find(".tab-navs").text()).not.to.contain("Areas");
   });
 
   it("should display the edit form", () => {
@@ -142,9 +143,7 @@ describe("LibraryDetailPage", () => {
     let form = wrapper.find("form").at(0);
     let button = form.find("button");
     button.simulate("click");
-
-    let newStages = { stages: { library_stage: "cancelled", registry_stage: "production" } };
-    let fullLibrary = Object.assign({}, (wrapper.props() as any)["library"], newStages);
+    let fullLibrary = modifyLibrary(testLibrary1, { library_stage: "cancelled", registry_stage: "production" });
     wrapper.setProps({ fullLibrary });
 
     expect(editStages.callCount).to.equal(1);
@@ -177,8 +176,7 @@ describe("LibraryDetailPage", () => {
 
     let saveButton = editForm.find("button");
     saveButton.simulate("click");
-    let newStages = { stages: { library_stage: "testing", registry_stage: "cancelled" } };
-    let fullLibrary = Object.assign({}, (wrapper.props() as any)["library"], newStages);
+    let fullLibrary = modifyLibrary(library, { library_stage: "testing", registry_stage: "cancelled" });
     wrapper.setProps({ fullLibrary });
 
     const pause = (): Promise<void> => {
