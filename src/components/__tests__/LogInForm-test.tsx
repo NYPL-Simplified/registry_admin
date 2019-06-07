@@ -47,14 +47,14 @@ describe("LogInForm", () => {
   it("should display a username field with a label", () => {
     let usernameLabel = wrapper.find("fieldset").find("label").at(0);
     expect(usernameLabel.text()).to.equal("Username");
-    let username = wrapper.find("[name='username']");
+    let username = wrapper.find("[name='username']").hostNodes();
     expect(username.length).to.equal(1);
     expect(username.props().type).to.equal("text");
   });
   it("should display a password field with a label", () => {
     let passwordLabel = wrapper.find("fieldset").find("label").at(1);
     expect(passwordLabel.text()).to.equal("Password");
-    let password = wrapper.find("[name='password']");
+    let password = wrapper.find("[name='password']").hostNodes();
     expect(password.length).to.equal(1);
     expect(password.props().type).to.equal("password");
   });
@@ -74,11 +74,14 @@ describe("LogInForm", () => {
     expect(button.text()).to.equal("Log In");
   });
   it("should submit on click", () => {
-    let submit = Sinon.stub(wrapper.instance(), "submit");
-    wrapper.setProps({ submit });
+    let form = wrapper.find(Form);
+    let submit = Sinon.stub();
+    let formSubmit = Sinon.stub(form.instance(), "submit").callsFake(submit);
+    wrapper.setProps({ login: submit });
+    wrapper.update();
     wrapper.find("button").simulate("click");
     expect(submit.callCount).to.equal(1);
-    submit.restore();
+    formSubmit.restore();
   });
   it("should call logIn when the form is submitted", () => {
     const formData = new (window as any).FormData();

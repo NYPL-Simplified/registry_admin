@@ -49,10 +49,13 @@ describe("SearchForm", () => {
   });
 
   it("should call search", () => {
+    let form = wrapper.find(Form);
+    let formSubmit = Sinon.stub(form.instance(), "submit").callsFake(search);
     expect(search.callCount).to.equal(0);
     wrapper.setState({ searchTerm: "a string" });
     wrapper.find("button").simulate("click");
     expect(search.callCount).to.equal(1);
+    formSubmit.restore();
   });
 
   it("should optionally disable the button", () => {
@@ -65,13 +68,13 @@ describe("SearchForm", () => {
 
   it("should optionally show a clear button", () => {
     let clear = Sinon.stub();
-    let clearButton = wrapper.find(".inverted");
+    let clearButton = wrapper.find(".inverted").hostNodes();
     expect(clearButton.length).to.equal(0);
     expect(clear.callCount).to.equal(0);
 
     wrapper.setProps({ clear });
 
-    clearButton = wrapper.find(".inverted");
+    clearButton = wrapper.find(".inverted").hostNodes();
     expect(clearButton.length).to.equal(1);
     expect(clearButton.text()).to.equal("Clear search");
     clearButton.simulate("click");
@@ -89,7 +92,6 @@ describe("SearchForm", () => {
     success = wrapper.find(".alert-success");
     expect(success.length).to.equal(1);
     expect(success.text()).to.equal("Displaying 2 results for Test search term:");
-
   });
 
   it("should optionally show an error message", () => {
@@ -103,10 +105,10 @@ describe("SearchForm", () => {
 
   it("should clear the input field when the clear button is clicked", () => {
     let clear = Sinon.stub();
-    let input = wrapper.find("input").get(0);
+    let input = wrapper.find("input").getDOMNode();
     input.value = "abc";
     wrapper.setProps({ clear });
-    wrapper.find(".inverted").simulate("click");
+    wrapper.find(".inverted").hostNodes().simulate("click");
     expect(input.value).to.equal("");
   });
 });

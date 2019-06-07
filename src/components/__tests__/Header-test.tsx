@@ -18,7 +18,7 @@ describe("Header", () => {
   it("should render a logout button", () => {
     let logout = wrapper.find(".navbar-btn");
     expect(logout.length).to.equal(1);
-    expect(logout.find(".logoutIcon").length).to.equal(1);
+    expect(logout.find(".logoutIcon").hostNodes().length).to.equal(1);
     expect(logout.text()).to.contain("Log Out");
     expect((logout.props() as any).href).to.equal("logout_url");
   });

@@ -183,7 +183,9 @@ describe("LibraryDetailPage", () => {
       return new Promise<void>(resolve => setTimeout(resolve, 0));
     };
     await pause();
+    wrapper.update();
 
+    editForm = wrapper.find("form").at(0);
     expect(wrapper.state()["libraryStage"]).to.equal("testing");
     expect(wrapper.state()["registryStage"]).to.equal("cancelled");
     expect(editForm.find(".badge").at(0).props().className).to.contain("warning");

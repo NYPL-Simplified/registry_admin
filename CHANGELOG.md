@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.2.0
+#### Updated
+- Updating to React 16 and Enzyme 3.9 with updates to unit tests.
+
 ### v1.1.6
 #### Added
 - Created a new tab to display information about each library's focus area and service area.
