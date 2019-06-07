@@ -73,6 +73,8 @@ describe("LibrariesPage", () => {
     expect(toggle.prop("initialOn")).to.be.false;
 
     wrapper.setState({ "qa": true });
+
+    toggle = wrapper.find(Toggle);
     expect(toggle.prop("initialOn")).to.be.true;
     expect(toggle.text()).to.equal("QA Mode: On");
   });
@@ -84,6 +86,7 @@ describe("LibrariesPage", () => {
     expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
 
     await wrapper.instance().toggleQA(true);
+    wrapper.update();
 
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
@@ -94,6 +97,7 @@ describe("LibrariesPage", () => {
 
     // We already have the production list once, so we don't need another server call.
     await wrapper.instance().toggleQA(false);
+    wrapper.update();
 
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
@@ -102,6 +106,7 @@ describe("LibrariesPage", () => {
 
     // We've already loaded the QA list once, so we don't have to get it from the server again.
     await wrapper.instance().toggleQA(true);
+    wrapper.update();
 
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
@@ -116,7 +121,6 @@ describe("LibrariesPage", () => {
     expect(searchForm.find(".panel-title").text()).to.equal("Search for a library by name");
     expect(searchForm.find(".btn").length).to.equal(1);
     wrapper.setState({ showAll: false });
-    // wrapper.update();
 
     searchForm = wrapper.find(SearchForm);
     // The "Clear search" button is showing now.
@@ -153,12 +157,7 @@ describe("LibrariesPage", () => {
   it("should let the user check QA if the production search was unsuccessful", async () => {
     expect(search.callCount).to.equal(0);
     wrapper.setState({ searchTerm: "QA Library"});
-    wrapper.instance().toggleQA(true);
-
-    const pause = (): Promise<void> => {
-      return new Promise<void>(resolve => setTimeout(resolve, 0));
-    };
-    await pause();
+    await wrapper.instance().toggleQA(true);
 
     expect(search.callCount).to.equal(1);
     expect(search.args[0][0].get("name")).to.equal("QA Library");
@@ -173,18 +172,29 @@ describe("LibrariesPage", () => {
     // Successful search:
     wrapper.setState({ showAll: false });
     wrapper.setProps({ results: { libraries: [libraries[1]] } });
+
+    list = wrapper.find(LibrariesList);
     expect(list.prop("libraries")).to.eql(wrapper.prop("results").libraries);
     // Clear the search results:
     wrapper.setState({ showAll: true });
+
+    list = wrapper.find(LibrariesList);
     expect(list.prop("libraries")).to.eql(wrapper.prop("libraries").libraries);
 
     // Unsuccessful search:
     wrapper.setState({ showAll: false });
     wrapper.setProps({ results: null });
+    list = wrapper.find(LibrariesList);
     expect(list.prop("libraries")).to.eql([]);
     // Clear the search results:
     wrapper.setState({ showAll: true });
+    list = wrapper.find(LibrariesList);
     expect(list.prop("libraries")).to.eql(wrapper.prop("libraries").libraries);
+
+     // No libraries:
+     wrapper.setProps({ libraries: [] });
+     list = wrapper.find(LibrariesList);
+     expect(list.prop("libraries")).to.be.undefined;
   });
 
   it("should render changes to a library", () => {
