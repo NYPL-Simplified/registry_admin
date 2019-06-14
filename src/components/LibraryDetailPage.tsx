@@ -6,7 +6,7 @@ import { Store } from "redux";
 import { State } from "../reducers/index";
 import LibraryDetailItem from "./LibraryDetailItem";
 import LibraryStageItem from "./LibraryStageItem";
-import Form from "./reusables/Form";
+import { Form } from "library-simplified-reusable-components";
 import EmailValidationForm from "./EmailValidationForm";
 import Tabs from "./reusables/Tabs";
 

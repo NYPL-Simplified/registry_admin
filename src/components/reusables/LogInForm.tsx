@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Store } from "redux";
-import Form from "./Form";
+import { Form } from "library-simplified-reusable-components";
 import Fieldset from "./Fieldset";
 import Input from "./Input";
 import ActionCreator from "../../actions";

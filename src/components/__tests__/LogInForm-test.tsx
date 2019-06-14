@@ -4,7 +4,7 @@ import buildStore from "../../store";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import { LogInForm } from "../reusables/LogInForm";
-import Form from "../reusables/Form";
+import { Form } from "library-simplified-reusable-components";
 
 describe("LogInForm", () => {
   let wrapper;
@@ -97,28 +97,28 @@ describe("LogInForm", () => {
   });
   describe("error handling", () => {
     it("should render a default error message if necessary", () => {
-      let form = wrapper.find("form");
+      let form = wrapper.find(Form);
       let error = wrapper.find(".alert-danger");
       expect(form.prop("errorText")).to.be.undefined;
       expect(error.length).to.equal(0);
 
       wrapper.setProps({ error: { status: 401, url: "url" } });
 
-      form = wrapper.find("Form");
+      form = wrapper.find(Form);
       error = wrapper.find(".alert-danger");
       expect(form.prop("errorText")).to.equal("Invalid credentials");
       expect(error.length).to.equal(1);
       expect(error.text()).to.equal("Invalid credentials");
     });
     it("should render a specific error message", () => {
-      let form = wrapper.find("form");
+      let form = wrapper.find(Form);
       let error = wrapper.find(".alert-danger");
       expect(form.prop("errorText")).to.be.undefined;
       expect(error.length).to.equal(0);
 
       wrapper.setProps({ error: { status: 401, url: "url", response: "Custom error text!" } });
 
-      form = wrapper.find("Form");
+      form = wrapper.find(Form);
       error = wrapper.find(".alert-danger");
       expect(form.prop("errorText")).to.equal("Custom error text!");
       expect(error.length).to.equal(1);
