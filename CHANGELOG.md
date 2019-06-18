@@ -2,7 +2,7 @@
 
 ### v1.2.1
 #### Updated
-- Integrated the Form component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package
+- Integrated the Form component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package.
 
 ### v1.2.0
 #### Updated

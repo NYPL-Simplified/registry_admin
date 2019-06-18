@@ -20,7 +20,7 @@ describe("LogInForm", () => {
     );
   });
   it("should have the right className", () => {
-    expect(wrapper.find("form").hasClass("log-in")).to.be.true;
+    expect(wrapper.find("form").hasClass("centered")).to.be.true;
   });
   it("should display a default title", () => {
     let title = wrapper.find(".form-title");
