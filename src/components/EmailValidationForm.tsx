@@ -54,7 +54,7 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
 
     return (
         <Form
-          className="validation"
+          className="validation border"
           hiddenName="uuid"
           hiddenValue={this.props.library.uuid}
           title="Validation"

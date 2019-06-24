@@ -66,6 +66,7 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
   renderStages(): JSX.Element {
     return (
       <Form
+        className="border"
         hiddenName="uuid"
         hiddenValue={this.props.library.uuid}
         onSubmit={this.submit}

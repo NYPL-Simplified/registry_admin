@@ -56,7 +56,7 @@ export class LogInForm extends React.Component<LogInFormProps, {}> {
     let fieldset = <Fieldset key="credentials" legend={legend} elements={elements} />;
     return(
       <Form
-        className="centered"
+        className="centered border"
         title={title}
         content={[fieldset]}
         buttonContent="Log In"
