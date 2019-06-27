@@ -44,7 +44,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         onSubmit={this.props.search}
         content={input}
         buttonContent={<span>Search <SearchIcon /></span>}
-        className="inline"
+        className="search-form inline"
         disableButton={!this.state.searchTerm.length}
         successText={message["success"]}
         errorText={message["error"]}

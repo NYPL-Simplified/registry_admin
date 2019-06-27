@@ -1,0 +1,11 @@
+.search-form.inline {
+  width: 55vw;
+  .form-group {
+    flex: 1;
+    margin-right: 2.5vw;
+    .form-control {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
