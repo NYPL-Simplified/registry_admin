@@ -1,7 +1,6 @@
 .search-form.inline {
-  width: 55vw;
-  .form-group {
-    flex: 1;
+  div.form-group {
+    max-width: 40vw;
     margin-right: 2.5vw;
     .form-control {
       width: 100%;
