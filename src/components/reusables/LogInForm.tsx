@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Store } from "redux";
-import Form from "./Form";
+import { Form } from "library-simplified-reusable-components";
 import Fieldset from "./Fieldset";
 import Input from "./Input";
 import ActionCreator from "../../actions";
@@ -56,7 +56,7 @@ export class LogInForm extends React.Component<LogInFormProps, {}> {
     let fieldset = <Fieldset key="credentials" legend={legend} elements={elements} />;
     return(
       <Form
-        className="log-in"
+        className="centered border"
         title={title}
         content={[fieldset]}
         buttonContent="Log In"

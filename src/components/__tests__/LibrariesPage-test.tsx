@@ -9,7 +9,7 @@ import { LibrariesPage } from "../LibrariesPage";
 import LibrariesList from "../LibrariesList";
 import Toggle from "../reusables/Toggle";
 import SearchForm from "../SearchForm";
-import Form from "../reusables/Form";
+import { Form } from "library-simplified-reusable-components";
 
 describe("LibrariesPage", () => {
   const libraries = [

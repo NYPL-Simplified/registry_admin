@@ -4,7 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 
 import SearchForm from "../SearchForm";
-import Form from "../reusables/Form";
+import { Form } from "library-simplified-reusable-components";
 
 describe("SearchForm", () => {
   let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;

@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Panel, Button } from "library-simplified-reusable-components";
+import { Panel, Button, Form } from "library-simplified-reusable-components";
 import { SearchIcon } from "@nypl/dgx-svg-icons";
-import Form from "./reusables/Form";
 import Input from "./reusables/Input";
 
 export interface SearchFormOwnProps {
@@ -45,7 +44,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         onSubmit={this.props.search}
         content={input}
         buttonContent={<span>Search <SearchIcon /></span>}
-        className="inline"
+        className="search-form inline"
         disableButton={!this.state.searchTerm.length}
         successText={message["success"]}
         errorText={message["error"]}
@@ -79,7 +78,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
 
   clear(): void {
     this.props.clear();
-    (this.refs["form-component"] as any).refs["form"].reset();
+    (this.refs["form-component"] as any).formRef.current.reset();
   }
 
   message(): {} {

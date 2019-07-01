@@ -1,5 +1,5 @@
 import * as React from "react";
-import Form from "./reusables/Form";
+import { Form } from "library-simplified-reusable-components";
 import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import { FetchErrorData } from "opds-web-client/lib/interfaces";
@@ -54,7 +54,7 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
 
     return (
         <Form
-          className="validation"
+          className="validation border"
           hiddenName="uuid"
           hiddenValue={this.props.library.uuid}
           title="Validation"
