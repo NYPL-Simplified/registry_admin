@@ -1,5 +1,13 @@
 ## Changelog
 
+### v1.2.3
+#### Updated
+- Continuing to update the uglification plugin.
+
+### v1.2.2
+#### Fixed
+- Configuring the uglification plugin.
+
 ### v1.2.1
 #### Updated
 - Integrated the Form component from the [https://github.com/NYPL-Simplified/reusable-components](library-simplified-reusable-components) package.
