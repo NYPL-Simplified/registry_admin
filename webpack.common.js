@@ -23,7 +23,7 @@ var config = {
     new MiniCssExtractPlugin({ filename: "registry-admin.css" })
   ],
   optimization: {
-    minimizer: [new TerserPlugin()],
+    minimizer: [new TerserPlugin({ terserOptions: {keep_fnames: true} })],
   },
   module: {
     rules: [
