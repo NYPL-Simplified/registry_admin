@@ -4,7 +4,6 @@ import { Store } from "redux";
 import { State } from "../reducers/index";
 import { LibraryData } from "../interfaces";
 import LibraryDetailPage from "./LibraryDetailPage";
-import { GenericWedgeIcon } from "@nypl/dgx-svg-icons";
 
 export interface LibrariesListItemProps {
   library: LibraryData;
