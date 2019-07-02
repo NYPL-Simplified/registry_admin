@@ -1,8 +1,13 @@
 ## Changelog
 
+### v1.2.5
+#### Updated
+- Updated the minifier configuration options.
+
 ### v.1.2.4
 #### Updated
 - Updated to v1.3.9 of library-simplified-reusable-components.
+
 ### v1.2.3
 #### Updated
 - Continuing to update the uglification plugin.
