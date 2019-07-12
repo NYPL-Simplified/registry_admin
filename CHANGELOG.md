@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.2.6
+#### Updated
+- Updated the version of the opds-web-client, Redux, and Typescript.
+
 ### v1.2.5
 #### Updated
 - Updated the minifier configuration options.

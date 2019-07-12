@@ -7,7 +7,6 @@ import Input from "./Input";
 import ActionCreator from "../../actions";
 import { State } from "../../reducers/index";
 import { FetchErrorData } from "opds-web-client/lib/interfaces";
-import * as PropTypes from "prop-types";
 
 export interface LogInFormStateProps {
   error?: FetchErrorData;
@@ -17,25 +16,16 @@ export interface LogInFormOwnProps {
   extraFields?: Array<JSX.Element>;
   title?: string;
   legend?: string;
+  store?: Store<State>;
 }
 
 export interface LogInFormDispatchProps {
   logIn: (data: FormData) => Promise<void>;
 }
 
-export interface LogInFormContext {
-  store: Store<State>;
-}
-
 export interface LogInFormProps extends LogInFormStateProps, LogInFormOwnProps, LogInFormDispatchProps {};
 
 export class LogInForm extends React.Component<LogInFormProps, {}> {
-
-  context: LogInFormContext;
-  static contextTypes: React.ValidationMap<LogInFormContext> = {
-    store: PropTypes.object.isRequired
-  };
-
   constructor(props: LogInFormProps) {
     super(props);
     this.submit = this.submit.bind(this);
@@ -81,7 +71,7 @@ function mapDispatchToProps(dispatch: Function, ownProps: LogInFormOwnProps) {
   };
 }
 
-const ConnectedLogInForm = connect<{}, LogInFormDispatchProps, LogInFormOwnProps>(
+const ConnectedLogInForm = connect<LogInFormStateProps, LogInFormDispatchProps, LogInFormOwnProps>(
   mapStateToProps,
   mapDispatchToProps
 )(LogInForm);
