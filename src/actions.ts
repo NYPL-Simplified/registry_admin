@@ -16,6 +16,7 @@ export default class ActionCreator extends BaseActionCreator {
 
   static readonly VALIDATE_EMAIL = "VALIDATE_EMAIL";
   static readonly EDIT_STAGES = "EDIT_STAGES";
+  static readonly PLS_ID = "PLS_ID";
 
   static readonly LOG_IN = "LOG_IN";
 
@@ -162,6 +163,11 @@ export default class ActionCreator extends BaseActionCreator {
   editStages(data: FormData) {
     let url = "/admin/libraries/registration";
     return this.postForm(ActionCreator.EDIT_STAGES, url, data).bind(this);
+  }
+
+  plsID(data: FormData) {
+    let url = "/admin/libraries/pls_id";
+    return this.postForm(ActionCreator.PLS_ID, url, data).bind(this);
   }
 
   logIn(data: FormData) {

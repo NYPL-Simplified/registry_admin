@@ -3,7 +3,7 @@ import { expect } from "chai";
 import * as React from "react";
 import * as Enzyme from "enzyme";
 import buildStore from "../../store";
-import { testLibrary1 } from "./TestUtils";
+import { testLibrary1, modifyLibrary } from "./TestUtils";
 
 import LibrariesListItem from "../LibrariesListItem";
 import { Panel } from "library-simplified-reusable-components";
@@ -30,7 +30,14 @@ describe("LibrariesListItem", () => {
       expect(header.length).to.equal(1);
       let title = header.find(".panel-title");
       expect(title.length).to.equal(1);
-      expect(title.text()).to.contain("Test Library 1 (lib1)");
+      expect(title.text()).to.equal("Test Library 1 (lib1)");
+    });
+    it("should display the PLS ID, if there is one", () => {
+      const libraryWithPLS = modifyLibrary(testLibrary1, {"pls_id": "12345"}, "basic_info");
+      wrapper.setProps({ library: libraryWithPLS });
+      let title = wrapper.find(".panel-heading .panel-title");
+      expect(title.length).to.equal(1);
+      expect(title.text()).to.equal("Test Library 1 (lib1): 12345");
     });
     it("should display an icon in the header", () => {
       let header = wrapper.find(".panel-heading");

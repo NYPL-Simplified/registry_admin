@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.2.6
+#### Added
+- Enabled admins to add, edit, and view each library's PLS ID.
+
 ### v1.2.5
 #### Updated
 - Updated the minifier configuration options.
