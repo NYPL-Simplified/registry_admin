@@ -29,20 +29,20 @@ describe("LibrariesList", () => {
       expect(libraryItems.length).to.equal(2);
     });
 
-    it("should render each library's  name and short name", () => {
+    it("should render each library's  name", () => {
       let lib1 = wrapper.find(".list .panel").at(0);
-      expect(lib1.text()).to.contain("Test Library 1 (lib1)");
+      expect(lib1.text()).to.contain("Test Library 1");
       let lib2 = wrapper.find(".list .panel").at(1);
-      expect(lib2.text()).to.contain("Test Library 2 (lib2)");
+      expect(lib2.text()).to.contain("Test Library 2");
     });
 
     it("should update if the libraries prop changes", () => {
-      let newLib1 = modifyLibrary(testLibrary1, { name: "New Library!", short_name: "new" });
+      let newLib1 = modifyLibrary(testLibrary1, { name: "New Library!" });
       wrapper.setProps({ libraries: [newLib1, libraries[1]] });
 
       let libraryPanels = wrapper.find(".list .panel");
       expect(libraryPanels.length).to.equal(2);
-      expect(libraryPanels.at(0).find(".panel-title").text()).to.equal("New Library! (new)");
+      expect(libraryPanels.at(0).find(".panel-title").text()).to.equal("New Library!");
     });
 
     it("should display a message if there are no libraries", () => {

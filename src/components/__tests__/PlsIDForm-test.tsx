@@ -10,13 +10,13 @@ describe("PlsIDForm", () => {
   let wrapper: Enzyme.CommonWrapper<any, any, {}>;
   let store;
   let fetchLibrary: Sinon.SinonStub;
-  let plsID: Sinon.SinonStub;
+  let postPlsID: Sinon.SinonStub;
 
   beforeEach(() => {
     store = buildStore();
     fetchLibrary = Sinon.stub();
-    plsID = Sinon.stub();
-    wrapper = Enzyme.mount(<PlsIDForm store={store} fetchLibrary={fetchLibrary} plsID={plsID} uuid={testLibrary1.uuid} />);
+    postPlsID = Sinon.stub();
+    wrapper = Enzyme.mount(<PlsIDForm store={store} fetchLibrary={fetchLibrary} postPlsID={postPlsID} uuid={testLibrary1.uuid} />);
   });
 
   it("renders a form with a title, hidden input field, text input field, and button", () => {
@@ -52,7 +52,7 @@ describe("PlsIDForm", () => {
   });
 
   it("submits the form", async () => {
-    expect(plsID.callCount).to.equal(0);
+    expect(postPlsID.callCount).to.equal(0);
     expect(fetchLibrary.callCount).to.equal(0);
     expect(wrapper.state()["saved"]).to.be.false;
 
@@ -62,8 +62,8 @@ describe("PlsIDForm", () => {
     input.simulate("change");
     wrapper.find("button").simulate("click");
 
-    expect(plsID.callCount).to.equal(1);
-    expect(plsID.args[0][0].get("pls_id")).to.equal("12345");
+    expect(postPlsID.callCount).to.equal(1);
+    expect(postPlsID.args[0][0].get("pls_id")).to.equal("12345");
     const pause = (): Promise<void> => {
       return new Promise<void>(resolve => setTimeout(resolve, 0));
     };
@@ -75,7 +75,7 @@ describe("PlsIDForm", () => {
 
   it("prepopulates the input field with the current PLS ID, if there is one", () => {
     expect(wrapper.find("input").at(1).prop("defaultValue")).to.be.undefined;
-    wrapper.setProps({ current: "abcde" });
+    wrapper.setProps({ currentID: "abcde" });
     expect(wrapper.find("input").at(1).prop("defaultValue")).to.equal("abcde");
   });
 

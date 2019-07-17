@@ -113,15 +113,15 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     return(
       <div>
         { this.renderStages() }
-        <hr></hr>
+        <hr />
         <EmailValidationForm
           store={this.props.store}
           library={library}
           fetchLibrary={this.props.fetchLibrary}
         />
-        <hr></hr>
-        <PlsIDForm store={this.props.store} current={library.basic_info.pls_id} fetchLibrary={this.props.fetchLibrary} uuid={library.uuid} />
-        <hr></hr>
+        <hr />
+        <PlsIDForm store={this.props.store} currentID={library.basic_info.pls_id} fetchLibrary={this.props.fetchLibrary} uuid={library.uuid} />
+        <hr />
         <div className="detail-content">
           <Tabs items={tabItems}/>
         </div>

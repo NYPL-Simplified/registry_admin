@@ -30,14 +30,14 @@ describe("LibrariesListItem", () => {
       expect(header.length).to.equal(1);
       let title = header.find(".panel-title");
       expect(title.length).to.equal(1);
-      expect(title.text()).to.equal("Test Library 1 (lib1)");
+      expect(title.text()).to.equal("Test Library 1");
     });
     it("should display the PLS ID, if there is one", () => {
       const libraryWithPLS = modifyLibrary(testLibrary1, {"pls_id": "12345"}, "basic_info");
       wrapper.setProps({ library: libraryWithPLS });
       let title = wrapper.find(".panel-heading .panel-title");
       expect(title.length).to.equal(1);
-      expect(title.text()).to.equal("Test Library 1 (lib1): 12345");
+      expect(title.text()).to.equal("Test Library 1 (PLS ID: 12345)");
     });
     it("should display an icon in the header", () => {
       let header = wrapper.find(".panel-heading");

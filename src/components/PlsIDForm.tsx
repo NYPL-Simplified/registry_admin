@@ -13,7 +13,7 @@ export interface PlsIDFormOwnProps {
   uuid: string;
   store: Store<State>;
   fetchLibrary: (uuid: string) => LibraryData;
-  current?: string;
+  currentID?: string;
 }
 
 export interface PlsIDFormStateProps {
@@ -21,7 +21,7 @@ export interface PlsIDFormStateProps {
 }
 
 export interface PlsIDFormDispatchProps {
-  plsID?: (data: FormData) => Promise<void>;
+  postPlsID?: (data: FormData) => Promise<void>;
 }
 
 export interface PlsIDFormProps extends PlsIDFormOwnProps, PlsIDFormStateProps, PlsIDFormDispatchProps {}
@@ -37,7 +37,7 @@ export class PlsIDForm extends React.Component<PlsIDFormProps, PlsIDState> {
     this.submit = this.submit.bind(this);
   }
   async submit(data: FormData) {
-    await this.props.plsID(data);
+    await this.props.postPlsID(data);
     await this.props.fetchLibrary(this.props.uuid);
     this.setState({ saved: !this.props.error });
   }
@@ -52,7 +52,7 @@ export class PlsIDForm extends React.Component<PlsIDFormProps, PlsIDState> {
         buttonClass={`left-align top-align bottom-align ${isSaved && "success"}`}
         buttonContent={<span>{buttonText}{icon}</span>}
         onSubmit={this.submit}
-        content={<Input key="pls" name="pls_id" value={this.props.current} />}
+        content={<Input key="pls" name="pls_id" value={this.props.currentID} />}
         hiddenName="uuid"
         hiddenValue={this.props.uuid}
         errorText={this.props.error ? this.props.error.response : null}
@@ -70,7 +70,7 @@ function mapStateToProps(state: State, ownProps: PlsIDFormOwnProps) {
 function mapDispatchToProps(dispatch: Function, ownProps: PlsIDFormOwnProps) {
   let actions = new ActionCreator(null);
   return {
-    plsID: (data: FormData) => dispatch(actions.plsID(data)),
+    postPlsID: (data: FormData) => dispatch(actions.postPlsID(data)),
   };
 }
 
