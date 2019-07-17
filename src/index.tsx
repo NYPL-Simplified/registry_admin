@@ -1,13 +1,16 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Router, Route, browserHistory, hashHistory } from "react-router";
+import { Router, Route, browserHistory } from "react-router";
 import ContextProvider from "./components/ContextProvider";
 import App from "./components/App";
 import LogInForm from "./components/reusables/LogInForm";
+import buildStore from "./store";
 
 interface ConfigurationSettings {
   username?: string;
 }
+
+const store = buildStore();
 
 /** The main admin interface application. Create an instance of this class
     to render the app and set up routing. */
@@ -26,11 +29,10 @@ class RegistryAdmin {
         </ContextProvider>,
         document.getElementById("landing-page")
       );
-    }
-    else {
+    } else {
       ReactDOM.render(
         <ContextProvider {...config}>
-          <LogInForm title="Library Registry Interface" />
+          <LogInForm title="Library Registry Interface" store={store} />
         </ContextProvider>,
         document.getElementById("landing-page")
       );

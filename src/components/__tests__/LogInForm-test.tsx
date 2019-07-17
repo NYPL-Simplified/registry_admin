@@ -9,14 +9,12 @@ import { Form } from "library-simplified-reusable-components";
 describe("LogInForm", () => {
   let wrapper;
   let store;
-  let context;
   let logIn: Sinon.SinonStub;
   beforeEach(() => {
     store = buildStore();
-    context = { store };
     logIn = Sinon.stub();
     wrapper = Enzyme.mount(
-      <LogInForm logIn={logIn} />, { context }
+      <LogInForm logIn={logIn} />
     );
   });
   it("should have the right className", () => {
