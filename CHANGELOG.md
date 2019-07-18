@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.2.7
+#### Added
+- `tslint-react-a11y` linter extension to review accessibility in React components.
+
 ### v1.2.6
 #### Updated
 - Updated the version of the opds-web-client, Redux, and Typescript.
