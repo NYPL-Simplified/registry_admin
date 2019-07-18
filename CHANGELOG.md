@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.2.7
+#### Added
+- Enabled admins to add, edit, and view each library's PLS ID.
+
 ### v1.2.6
 #### Updated
 - Updated the version of the opds-web-client, Redux, and Typescript.

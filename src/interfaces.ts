@@ -9,6 +9,7 @@ export interface LibraryData {
     name: string,
     short_name: string,
     timestamp?: string,
+    pls_id?: string
   };
   urls_and_contact: {
     authentication_url: string,

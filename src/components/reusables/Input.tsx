@@ -6,6 +6,7 @@ export interface InputProps {
   label?: string;
   className?: string;
   callback?: (e: any) => any;
+  value?: any;
 }
 
 export default class Input extends React.Component<InputProps, {}> {
@@ -22,6 +23,8 @@ export default class Input extends React.Component<InputProps, {}> {
           type={this.props.type || "text"}
           name={this.props.name}
           id={this.props.name}
+          defaultValue={this.props.value}
+          readOnly={false}
         />
       </div>
     );

@@ -8,6 +8,7 @@ import LibraryDetailItem from "./LibraryDetailItem";
 import LibraryStageItem from "./LibraryStageItem";
 import { Form } from "library-simplified-reusable-components";
 import EmailValidationForm from "./EmailValidationForm";
+import PlsIDForm from "./PlsIDForm";
 import Tabs from "./reusables/Tabs";
 
 export interface LibraryDetailPageDispatchProps {
@@ -112,13 +113,15 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     return(
       <div>
         { this.renderStages() }
-        <hr></hr>
+        <hr />
         <EmailValidationForm
           store={this.props.store}
           library={library}
           fetchLibrary={this.props.fetchLibrary}
         />
-        <hr></hr>
+        <hr />
+        <PlsIDForm store={this.props.store} currentID={library.basic_info.pls_id} fetchLibrary={this.props.fetchLibrary} uuid={library.uuid} />
+        <hr />
         <div className="detail-content">
           <Tabs items={tabItems}/>
         </div>
