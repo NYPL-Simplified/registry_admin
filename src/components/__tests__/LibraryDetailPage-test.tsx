@@ -163,7 +163,12 @@ describe("LibraryDetailPage", () => {
 
   it("should display the validation form", () => {
     let validationForm = wrapper.find("form").at(1);
-    expect(validationForm.length).to.equal(1);
+    expect(validationForm.find(".form-title").text()).to.equal("Validation");
+  });
+
+  it("should display the PLS ID form", () => {
+    let plsIDForm = wrapper.find("form").at(2);
+    expect(plsIDForm.find(".form-title").text()).to.equal("PLS ID");
   });
 
   it("should re-render to reflect changes", async() => {

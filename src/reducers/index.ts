@@ -3,6 +3,7 @@ import { libraries, results } from "./libraries";
 import library from "./library";
 import admin from "./admin";
 import validation from "./validation";
+import plsID from "./plsID";
 
 import { FetchEditState } from "./createFetchEditReducer";
 
@@ -19,6 +20,7 @@ export interface State {
   library: FetchEditState<LibraryData>;
   admin: FetchEditState<AdminData>;
   validation: FetchEditState<ValidationData>;
+  plsID: FetchEditState<LibraryData>;
 }
 
 export default combineReducers<State>({
@@ -26,5 +28,6 @@ export default combineReducers<State>({
   results,
   library,
   admin,
-  validation
+  validation,
+  plsID
 });

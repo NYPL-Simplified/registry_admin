@@ -151,7 +151,7 @@ describe("LibrariesPage", () => {
 
     results = wrapper.find(".panel-warning");
     expect(results.length).to.equal(1);
-    expect(results.find(".panel-title").text()).to.equal("QA Library (qa)");
+    expect(results.find(".panel-title").text()).to.equal("QA Library");
   });
 
   it("should let the user check QA if the production search was unsuccessful", async () => {
