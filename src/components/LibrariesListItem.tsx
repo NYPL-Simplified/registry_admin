@@ -53,11 +53,9 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
 
   render(): JSX.Element {
     let style = this.state.color;
-    let { name, short_name } = this.props.library.basic_info;
-    let plsID = this.props.library.basic_info.pls_id ? ` (PLS ID: ${this.props.library.basic_info.pls_id})` : "";
-    let headerText = `${name}${plsID}`;
+    let { name } = this.props.library.basic_info;
     return(
-      <li><Panel style={style} headerText={headerText} content={this.content()} /></li>
+      <li><Panel style={style} headerText={name} content={this.content()} /></li>
     );
   }
 }
