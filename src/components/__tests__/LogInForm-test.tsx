@@ -58,7 +58,7 @@ describe("LogInForm", () => {
   });
   it("should optionally display extra fields", () => {
     let extraText = <input type="text" key="extraText" name="extraText"/>;
-    let extraCheckbox = <input type="checkbox" key="extraCheckbox" name="extraCheckbox"/>;
+    let extraCheckbox = <input type="checkbox" key="extraCheckbox" name="extraCheckbox" aria-checked={false} />;
     wrapper.setProps({ extraFields: [extraText, extraCheckbox] });
     let inputs = wrapper.find("input");
     expect(inputs.length).to.equal(4);
