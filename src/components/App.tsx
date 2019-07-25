@@ -1,14 +1,51 @@
 import * as React from "react";
 import Header from "./reusables/Header";
 import LibrariesListContainer from "./LibrariesListContainer";
+import { Route } from "react-router-dom";
+import LogInForm from "./reusables/LogInForm";
+import { Store } from "redux";
+import { State } from "../reducers/index";
+import * as PropTypes from "prop-types";
 
-export default class App extends React.Component<{}, {}> {
+export interface AppContext {
+  store: Store<State>;
+  username: string;
+}
+
+interface AppProps {
+  imgSrc?: string;
+}
+
+export default class App extends React.Component<AppProps, {}> {
+  static defaultProps = {
+    imgSrc: "./logo.png"
+  };
+
+  context: AppContext;
+  static contextTypes: React.ValidationMap<AppContext> = {
+    store: PropTypes.object.isRequired,
+    username: PropTypes.string
+  };
 
   render(): JSX.Element {
-    return(
+    const { username, store } = this.context;
+    return (
       <div id="main-app-component">
-        <Header text="Library Registry Interface" alt="SimplyE" imgSrc="./logo.png" logOut="/admin/log_out"/>
-        <LibrariesListContainer />
+        <Header
+          text="Library Registry Interface"
+          alt="SimplyE"
+          imgSrc={this.props.imgSrc}
+          logOut="/admin/log_out"
+          loggedIn={!!username}
+        />
+        <Route
+          path="/admin"
+          render={() => (
+            username ?
+              <LibrariesListContainer /> :
+              <LogInForm title="Library Registry Interface" store={store} />
+          )}
+        />
       </div>
     );
   }
