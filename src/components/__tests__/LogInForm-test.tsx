@@ -69,7 +69,7 @@ describe("LogInForm", () => {
   });
   it("should display a button", () => {
     let button = wrapper.find("button");
-    expect(button.text()).to.equal("Log In");
+    expect(button.text()).to.equal("Submit");
   });
   it("should submit on click", () => {
     let form = wrapper.find(Form);

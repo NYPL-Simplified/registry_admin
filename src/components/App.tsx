@@ -43,7 +43,7 @@ export default class App extends React.Component<AppProps, {}> {
           render={() => (
             username ?
               <LibrariesListContainer /> :
-              <LogInForm title="Library Registry Interface" store={store} />
+              <LogInForm store={store} />
           )}
         />
       </div>

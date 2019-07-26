@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.0
+#### Updated
+- Updated the version of react-router to v5. Updated the header to render all the time and how the main app is rendered with the router.
+
 ### v1.2.7
 #### Added
 - Enabled admins to add, edit, and view each library's PLS ID.
