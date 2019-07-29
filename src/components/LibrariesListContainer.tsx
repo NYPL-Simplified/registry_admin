@@ -2,9 +2,6 @@ import * as React from "react";
 import LibrariesPage from "./LibrariesPage";
 import { Store } from "redux";
 import { State } from "../reducers/index";
-import { LibrariesData, LibraryData } from "../interfaces";
-import { connect } from "react-redux";
-import ActionCreator from "../actions";
 import * as PropTypes from "prop-types";
 
 export interface LibrariesListContainerContext {

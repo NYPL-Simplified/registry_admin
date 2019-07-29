@@ -46,10 +46,10 @@ export class LogInForm extends React.Component<LogInFormProps, {}> {
     let fieldset = <Fieldset key="credentials" legend={legend} elements={elements} />;
     return(
       <Form
-        className="centered border"
+        className="centered border logIn"
         title={title}
         content={[fieldset]}
-        buttonContent="Log In"
+        buttonContent="Submit"
         buttonClass="centered"
         onSubmit={this.submit}
         errorText={this.props.error && (this.props.error.response || "Invalid credentials")}
