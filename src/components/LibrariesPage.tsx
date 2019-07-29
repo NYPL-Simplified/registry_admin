@@ -29,7 +29,7 @@ export interface LibrariesPageState {
   showAll: boolean;
   searchTerm: string;
   qa: boolean;
-  filters: { [key: string]: boolean };
+  filters: { [key: string]: any };
 }
 
 export interface LibrariesPageProps extends LibrariesPageStateProps, LibrariesPageOwnProps, LibrariesPageDispatchProps {};
@@ -43,7 +43,8 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.filter = this.filter.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.filterByAttribute = this.filterByAttribute.bind(this);
-    this.state = { showAll: true, searchTerm: "", qa: false, filters: {} };
+    this.flipFilter = this.flipFilter.bind(this);
+    this.state = { showAll: true, searchTerm: "", qa: false, filters: { flipped: false, attributes: { "pls_id": false }} };
   }
 
   render(): JSX.Element {
@@ -58,7 +59,12 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       resultsCount={libraries && libraries.length}
     />;
 
-    let filter: JSX.Element = <Filter filterKeys={["pls_id", "description", "focus", "basic_info"]} setFilter={this.setFilter} />;
+    let filter: JSX.Element = <Filter
+      filterKeys={this.state.filters.attributes}
+      setFilter={this.setFilter}
+      flipFilter={this.flipFilter}
+      title="Only show libraries which"
+    />;
 
     let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA Mode" />;
 
@@ -90,30 +96,32 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     return libraries.filter(l => l.stages.registry_stage === "production");
   }
 
-  setFilter(filters: { [key: string]: boolean }) {
-    this.setState({ filters });
+  setFilter(filter: string) {
+    let updatedFilters = this.state.filters.attributes;
+    updatedFilters[filter] = !this.state.filters.attributes[filter];
+    this.setState({ filters: {flipped: this.state.filters.flipped, attributes: updatedFilters} });
+  }
+
+  flipFilter() {
+    this.setState({ filters: {flipped: !this.state.filters.flipped, attributes: this.state.filters.attributes} });
   }
 
   filterByAttribute(libraries) {
-    let attributes = Object.keys(this.state.filters).filter(attr => this.state.filters[attr]);
     let hasAttr = (dict, attr) => {
       let isDict = (dict) => dict && typeof(dict) === "object" && !Array.isArray(dict);
       if (!isDict) {
         return;
       }
-
       if (Object.keys(dict).indexOf(attr) >= 0) {
         return !!dict[attr];
       }
       let subDicts = Object.values(dict).filter(v => isDict(v));
-      for (var i = 0; i < subDicts.length; i++) {
-        if (hasAttr(subDicts[i], attr)) {
-          return true;
-        }
-      }
+      return !!subDicts.filter((sd) => hasAttr(sd, attr)).length;
     };
-    attributes.forEach(attr => {
-      libraries = libraries.filter(l => hasAttr(l, attr));
+
+    let attributes = Object.keys(this.state.filters.attributes).filter(attr => this.state.filters.attributes[attr]);
+    libraries && attributes.forEach(attr => {
+      libraries = libraries.filter(l => this.state.filters.flipped ? !hasAttr(l, attr) : hasAttr(l, attr));
     });
     return libraries;
   }

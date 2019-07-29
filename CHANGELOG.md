@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.2.8
+#### Added
+- Enabled filtering the list of libraries by attribute.
+
 ### v1.2.7
 #### Added
 - Enabled admins to add, edit, and view each library's PLS ID.

@@ -12,10 +12,7 @@ import SearchForm from "../SearchForm";
 import { Form } from "library-simplified-reusable-components";
 
 describe("LibrariesPage", () => {
-  const libraries = [
-    modifyLibrary(testLibrary1, {registry_stage: "production"}),
-    modifyLibrary(testLibrary2, {registry_stage: "production"})
-  ];
+  let libraries;
 
   let qaLib = {
     uuid: "UUID3",
@@ -46,6 +43,10 @@ describe("LibrariesPage", () => {
   let store;
 
   beforeEach(() => {
+    libraries = [
+      modifyLibrary(testLibrary1, {registry_stage: "production"}),
+      modifyLibrary(testLibrary2, {registry_stage: "production"})
+    ];
     fetchData = Sinon.stub();
     fetchQA = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
@@ -217,18 +218,39 @@ describe("LibrariesPage", () => {
 
   it("should render changes to a search result", () => {
     // Use case: admin searched for a library and then edited its stages.  Changes should be reflected immediately.
-    let updatedLibrary = {...libraries[0], stages: {"library_stage": "testing", "registry_stage": "testing"}};
+    let updatedLibrary = modifyLibrary(libraries[0], {"library_stage": "testing", "registry_stage": "testing"});
     wrapper.setState({ showAll: false });
+
     let spyUpdateLibraryList = Sinon.spy(wrapper.instance(), "updateLibraryList");
     expect(spyUpdateLibraryList.callCount).to.equal(0);
 
     wrapper.setProps({ updatedLibrary, results: { libraries: [libraries[0]] } });
-
     expect(spyUpdateLibraryList.callCount).to.equal(2);
     expect(spyUpdateLibraryList.getCall(1).args[0][0]).to.equal(libraries[0]);
     expect(spyUpdateLibraryList.returnValues[1][0]).to.equal(updatedLibrary);
 
     spyUpdateLibraryList.restore();
+  });
+
+  it("should display a filter form", () => {
+    expect(wrapper.find(".filters").length).to.equal(1);
+  });
+
+  it("should filter", () => {
+    let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
+    wrapper.setProps({ libraries: { libraries: [libraryWithPLS, libraries[1]] } });
+    expect(wrapper.find(".list .panel").length).to.equal(2);
+    wrapper.instance().setFilter("pls_id");
+    wrapper.update();
+    expect(wrapper.find(".list .panel").length).to.equal(1);
+    expect(wrapper.find(".list .panel-title").text()).to.equal("Test Library 1");
+    wrapper.instance().flipFilter();
+    wrapper.update();
+    expect(wrapper.find(".list .panel").length).to.equal(1);
+    expect(wrapper.find(".list .panel-title").text()).to.equal("Test Library 2");
+    wrapper.instance().setFilter("pls_id");
+    wrapper.update();
+    expect(wrapper.find(".list .panel").length).to.equal(2);
   });
 
 });

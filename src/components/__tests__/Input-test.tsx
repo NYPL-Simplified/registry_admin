@@ -32,4 +32,12 @@ describe("Input", () => {
     let input = wrapper.find("input");
     expect(input.prop("type")).to.equal("radio");
   });
+  it("optionally accepts a value prop", () => {
+    wrapper.setProps({ value: "ABC" });
+    expect(wrapper.find("input").prop("defaultValue")).to.equal("ABC");
+  });
+  it("can check a checkbox by default", () => {
+    wrapper.setProps({ type: "checkbox", value: true });
+    expect(wrapper.find("input").prop("defaultChecked")).to.be.true;
+  });
 });

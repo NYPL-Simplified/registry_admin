@@ -1,35 +1,63 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Panel, Button, Form } from "library-simplified-reusable-components";
 import Input from "./reusables/Input";
+import { Button } from "library-simplified-reusable-components";
 
 export interface FilterProps {
-  setFilter: (filters: { [key: string]: boolean }) => void;
-  filterKeys: string[];
+  setFilter: (filter: string) => void;
+  filterKeys: { [key: string]: boolean };
+  flipFilter: () => void;
+  title?: string;
+  buttonText?: string[];
+  initialFlip?: boolean;
 }
 
 export interface FilterState {
-  filters: { [key: string]: boolean };
+  flip: boolean;
 }
 
-export default class Filter extends React.Component<FilterProps, FilterState>{
+export default class Filter extends React.Component<FilterProps, FilterState> {
   constructor(props: FilterProps) {
     super(props);
-    this.state = { filters: {} };
-    this.applyFilter = this.applyFilter.bind(this);
+    this.flip = this.flip.bind(this);
+    this.state = { flip: this.props.initialFlip || false };
   }
 
   applyFilter(e) {
-    let filterKey = e.currentTarget.name;
-    let isChecked = e.currentTarget.checked;
-    let filters = this.state.filters;
-    filters[filterKey] = isChecked;
-    this.setState({ filters: filters });
-    this.props.setFilter(this.state.filters);
+    this.props.setFilter(e.currentTarget.name);
+  }
+
+  flip() {
+    this.setState({ flip: !this.state.flip });
+    this.props.flipFilter();
   }
 
   render(): JSX.Element {
-    let filterInputs = this.props.filterKeys.map(k => <Input type="checkbox" name={k} value={k} label={k} callback={(e) => this.applyFilter(e)}/>);
-    return <Panel openByDefault={true} headerText="Filters" content={filterInputs} />;
+    let [flipped, unflipped] = this.props.buttonText || ["DO NOT have", "have"];
+    let filterButton = <Button className="inline inverted top-align" content={this.state.flip ? flipped : unflipped} callback={this.flip} />;
+    let title = <h3>{this.props.title || "Show items which"} {filterButton}</h3>;
+    let filterNames = Object.keys(this.props.filterKeys);
+    let isActive = (k) => this.props.filterKeys[k] ? " active" : "";
+    let isFlipped = this.state.flip ? " flipped" : "";
+    let filterInputs = filterNames.map((k) => {
+      return (
+        <Input
+          className={`filter-box${isActive(k)}${isFlipped}`}
+          type="checkbox"
+          key={k}
+          name={k}
+          value={this.props.filterKeys[k]}
+          label={k}
+          callback={(e) => this.applyFilter(e)}
+        />
+      );
+    });
+    return (
+      <div className="filters">
+        {title}
+        <hr/>
+        <ul>{filterInputs}</ul>
+      </div>
+    );
   }
 }
