@@ -4,7 +4,6 @@ import * as React from "react";
 import * as Redux from "redux";
 import * as Enzyme from "enzyme";
 import LibrariesListContainer from "../LibrariesListContainer";
-import LibrariesList from "../LibrariesList";
 
 describe("LibrariesListContainer", () => {
   let wrapper: Enzyme.CommonWrapper<any, {context: {}}, {}>;
