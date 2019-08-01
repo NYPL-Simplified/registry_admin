@@ -17,10 +17,14 @@ export interface FilterState {
 }
 
 export default class Filter extends React.Component<FilterProps, FilterState> {
+  static defaultProps = {
+    initialFlip: false,
+  };
+
   constructor(props: FilterProps) {
     super(props);
     this.flip = this.flip.bind(this);
-    this.state = { flip: this.props.initialFlip || false };
+    this.state = { flip: this.props.initialFlip };
   }
 
   applyFilter(e) {
@@ -35,21 +39,21 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
   render(): JSX.Element {
     let [flipped, unflipped] = this.props.buttonText || ["DO NOT have", "have"];
     let filterButton = <Button className="inline inverted top-align" content={this.state.flip ? flipped : unflipped} callback={this.flip} />;
-    let title = <h3>{this.props.title || "Show items which"} {filterButton}</h3>;
+    let title = <p>{this.props.title || "Show items which"} {filterButton}</p>;
     let filterNames = Object.keys(this.props.filterKeys);
     let isActive = (k) => this.props.filterKeys[k] ? " active" : "";
     let isFlipped = this.state.flip ? " flipped" : "";
     let filterInputs = filterNames.map((k) => {
       return (
-        <Input
+        <li><Input
           className={`filter-box${isActive(k)}${isFlipped}`}
           type="checkbox"
           key={k}
           name={k}
-          value={this.props.filterKeys[k]}
+          checked={this.props.filterKeys[k]}
           label={k}
           callback={(e) => this.applyFilter(e)}
-        />
+        /></li>
       );
     });
     return (

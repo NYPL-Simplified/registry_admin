@@ -7,6 +7,7 @@ export interface InputProps {
   className?: string;
   callback?: (e: any) => any;
   value?: any;
+  checked?: boolean;
 }
 
 export default class Input extends React.Component<InputProps, {}> {
@@ -25,7 +26,7 @@ export default class Input extends React.Component<InputProps, {}> {
           id={this.props.name}
           defaultValue={this.props.value}
           readOnly={false}
-          defaultChecked={this.props.type === "checkbox" && this.props.value}
+          defaultChecked={this.props.checked}
         />
       </div>
     );

@@ -253,4 +253,25 @@ describe("LibrariesPage", () => {
     expect(wrapper.find(".list .panel").length).to.equal(2);
   });
 
+  it("should filter libraries by attribute", () => {
+    let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
+    wrapper.setProps({ libraries: { libraries: [libraryWithPLS, libraries[1]] } });
+    wrapper.setState({ filters: { flipped: false, attributes: { "pls_id": true }}});
+    let filteredLibraries = wrapper.instance().filterByAttribute(wrapper.prop("libraries").libraries);
+    expect(filteredLibraries.length).to.equal(1);
+    expect(filteredLibraries[0]).to.equal(libraryWithPLS);
+  });
+
+  it("should check whether a library has an attribute", () => {
+    let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
+    expect(wrapper.instance().hasAttr(libraryWithPLS, "pls_id")).to.be.true;
+    expect(wrapper.instance().hasAttr(libraries[1], "pls_id")).to.be.false;
+  });
+
+  it.only("should convert between an attribute's display name and key name", () => {
+    expect(wrapper.instance().convertToAttrName("PLS ID")).to.equal("pls_id");
+    expect(wrapper.instance().convertToAttrName("Description")).to.equal("description");
+    expect(wrapper.instance().convertToAttrName("Basic Info")).to.equal("basic_info");
+  });
+
 });

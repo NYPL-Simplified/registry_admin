@@ -43,14 +43,14 @@ describe("Filter", () => {
   });
 
   it("renders checkboxes", () => {
-    let inputs = wrapper.find("ul > .filter-box");
+    let inputs = wrapper.find("ul > li > .filter-box");
     expect(inputs.length).to.equal(3);
     inputs.forEach((input, idx) => {
       let keyName = Object.keys(filterKeys)[idx];
       expect(input.prop("type")).to.equal("checkbox");
       expect(input.prop("name")).to.equal(keyName);
       expect(input.prop("label")).to.equal(keyName);
-      expect(input.prop("value")).to.equal(filterKeys[keyName]);
+      expect(input.prop("checked")).to.equal(filterKeys[keyName]);
     });
   });
 

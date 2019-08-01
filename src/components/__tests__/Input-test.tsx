@@ -37,7 +37,7 @@ describe("Input", () => {
     expect(wrapper.find("input").prop("defaultValue")).to.equal("ABC");
   });
   it("can check a checkbox by default", () => {
-    wrapper.setProps({ type: "checkbox", value: true });
+    wrapper.setProps({ type: "checkbox", checked: true });
     expect(wrapper.find("input").prop("defaultChecked")).to.be.true;
   });
 });

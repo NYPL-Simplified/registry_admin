@@ -44,7 +44,11 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.setFilter = this.setFilter.bind(this);
     this.filterByAttribute = this.filterByAttribute.bind(this);
     this.flipFilter = this.flipFilter.bind(this);
-    this.state = { showAll: true, searchTerm: "", qa: false, filters: { flipped: false, attributes: { "pls_id": false }} };
+    this.state = { showAll: true, searchTerm: "", qa: false, filters: { flipped: false, attributes: { "PLS ID": false }} };
+  }
+
+  convertToAttrName(name: string): string {
+    return name.toLowerCase().split(" ").join("_");
   }
 
   render(): JSX.Element {
@@ -106,22 +110,23 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.setState({ filters: {flipped: !this.state.filters.flipped, attributes: this.state.filters.attributes} });
   }
 
-  filterByAttribute(libraries) {
-    let hasAttr = (dict, attr) => {
-      let isDict = (dict) => dict && typeof(dict) === "object" && !Array.isArray(dict);
-      if (!isDict) {
-        return;
-      }
-      if (Object.keys(dict).indexOf(attr) >= 0) {
-        return !!dict[attr];
-      }
-      let subDicts = Object.values(dict).filter(v => isDict(v));
-      return !!subDicts.filter((sd) => hasAttr(sd, attr)).length;
-    };
+  hasAttr(dict, attr) {
+    let isDict = (dict) => dict && typeof(dict) === "object" && !Array.isArray(dict);
+    if (!isDict) {
+      return;
+    }
+    if (Object.keys(dict).indexOf(attr) >= 0) {
+      return !!dict[attr];
+    }
+    let subDicts = Object.values(dict).filter(v => isDict(v));
+    return !!subDicts.filter((sd) => this.hasAttr(sd, attr)).length;
+  }
 
+  filterByAttribute(libraries) {
     let attributes = Object.keys(this.state.filters.attributes).filter(attr => this.state.filters.attributes[attr]);
     libraries && attributes.forEach(attr => {
-      libraries = libraries.filter(l => this.state.filters.flipped ? !hasAttr(l, attr) : hasAttr(l, attr));
+      attr = this.convertToAttrName(attr);
+      libraries = libraries.filter(l => this.state.filters.flipped ? !this.hasAttr(l, attr) : this.hasAttr(l, attr));
     });
     return libraries;
   }

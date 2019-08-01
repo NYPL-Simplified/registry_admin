@@ -1,6 +1,7 @@
 .filters {
   margin: 0;
   padding: 16px 24px;
+  background: $white;
   h3 {
     margin: 0;
     font-size: 16px;
@@ -12,10 +13,10 @@
   ul {
     margin: 0;
     padding: 0;
+    list-style: none;
   }
   .filter-box {
     display: inline-grid;
-    background: $light-gray;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
     align-items: center;
@@ -27,16 +28,17 @@
     padding: 0 4px;
     margin-bottom: 0;
     margin-right: 4px;
-    background-image: linear-gradient(to left, transparent 50%, #809F69 50%);
+    background-image: linear-gradient(to left, transparent 50%, $blue 50%);
     background-size: 200% 100%;
     background-repeat: no-repeat;
     background-position: bottom right;
     transition: all .25s ease-in;
     &.active {
       background-position: bottom left;
+      color: $white;
     }
     &.flipped {
-      background-image: linear-gradient(to left, transparent 50%, $red-tint 50%);
+      background-image: linear-gradient(to left, transparent 50%, $black 50%);
     }
 
     label {
