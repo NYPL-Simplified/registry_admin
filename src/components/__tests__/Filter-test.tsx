@@ -4,6 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 
 import Filter from "../Filter";
+import Toggle from "../reusables/Toggle";
 
 describe("Filter", () => {
   let wrapper;
@@ -27,30 +28,29 @@ describe("Filter", () => {
   });
 
   it("renders a title", () => {
-    expect(wrapper.find("h3").text()).to.equal("Show items which have");
+    expect(wrapper.find("p").text()).to.equal("Show items which have");
     wrapper.setProps({ title: "Filtering out things if they" });
-    expect(wrapper.find("h3").text()).to.equal("Filtering out things if they have");
+    expect(wrapper.find("p").text()).to.equal("Filtering out things if they have");
   });
 
   it("renders custom button text", () => {
-    expect(wrapper.find("button").text()).to.equal("have");
+    expect(wrapper.find("button").at(1).text()).to.equal("have");
     wrapper.setState({ flip: true });
-    expect(wrapper.find("button").text()).to.equal("DO NOT have");
+    expect(wrapper.find("button").at(1).text()).to.equal("DO NOT have");
     wrapper.setProps({ buttonText: ["don't contain", "contain"] });
-    expect(wrapper.find("button").text()).to.equal("don't contain");
+    expect(wrapper.find("button").at(1).text()).to.equal("don't contain");
     wrapper.setState({ flip: false });
-    expect(wrapper.find("button").text()).to.equal("contain");
+    expect(wrapper.find("button").at(1).text()).to.equal("contain");
   });
 
-  it("renders checkboxes", () => {
-    let inputs = wrapper.find("ul > li > .filter-box");
-    expect(inputs.length).to.equal(3);
-    inputs.forEach((input, idx) => {
+  it("renders toggles", () => {
+    let toggles = wrapper.find(".filter-box");
+    expect(toggles.length).to.equal(3);
+    toggles.forEach((toggle, idx) => {
       let keyName = Object.keys(filterKeys)[idx];
-      expect(input.prop("type")).to.equal("checkbox");
-      expect(input.prop("name")).to.equal(keyName);
-      expect(input.prop("label")).to.equal(keyName);
-      expect(input.prop("checked")).to.equal(filterKeys[keyName]);
+      expect(toggle.find("label").text()).to.equal(keyName);
+      expect(toggle.find(Toggle).prop("name")).to.equal(keyName);
+      expect(toggle.find(Toggle).prop("initialOn")).to.equal(filterKeys[keyName]);
     });
   });
 
@@ -62,8 +62,8 @@ describe("Filter", () => {
 
   it("calls setFilter", () => {
     expect(setFilter.callCount).to.equal(0);
-    let box1 = wrapper.find(".filter-box").first().find("input");
-    box1.simulate("change");
+    let toggle1 = wrapper.find(".filter-box").first().find(Toggle).find("button");
+    toggle1.simulate("click");
     expect(setFilter.callCount).to.equal(1);
     expect(setFilter.args[0][0]).to.equal("key_1");
   });
@@ -71,24 +71,13 @@ describe("Filter", () => {
   it("calls flipFilter", () => {
     expect(flipFilter.callCount).to.equal(0);
     expect(wrapper.state("flip")).to.be.false;
-    let flipButton = wrapper.find("button");
+    let flipButton = wrapper.find("button").at(1);
     flipButton.simulate("click");
     expect(flipFilter.callCount).to.equal(1);
     expect(wrapper.state("flip")).to.be.true;
     flipButton.simulate("click");
     expect(flipFilter.callCount).to.equal(2);
     expect(wrapper.state("flip")).to.be.false;
-  });
-
-  it("sets the class name", () => {
-    let input = wrapper.find(".filter-box").first();
-    expect(input.prop("className")).to.equal("filter-box");
-    wrapper.setProps({ filterKeys: {...filterKeys, ...{key_1: true}}});
-    input = wrapper.find(".filter-box").first();
-    expect(input.prop("className")).to.equal("filter-box active");
-    wrapper.setState({ flip: true });
-    input = wrapper.find(".filter-box").first();
-    expect(input.prop("className")).to.equal("filter-box active flipped");
   });
 
 });

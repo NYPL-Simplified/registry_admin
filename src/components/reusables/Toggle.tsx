@@ -3,9 +3,10 @@ import * as ReactDOM from "react-dom";
 import { Panel, Button } from "library-simplified-reusable-components";
 
 export interface ToggleOwnProps {
-  onToggle: (status: any) => void;
+  onToggle: (status: boolean, name: string) => void;
   initialOn?: boolean;
   label?: string;
+  name?: string;
 }
 
 export interface ToggleState {
@@ -13,6 +14,10 @@ export interface ToggleState {
 }
 
 export default class Toggle extends React.Component<ToggleOwnProps, ToggleState> {
+  static defaultProps = {
+    name: "toggle"
+  };
+
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -24,10 +29,10 @@ export default class Toggle extends React.Component<ToggleOwnProps, ToggleState>
   }
 
   render(): JSX.Element {
-    let label = this.props.label ? `${this.props.label}: ${this.state.on ? "On" : "Off"}` : "On";
+    let label = this.props.label ? `${this.props.label}: ${this.state.on ? "On" : "Off"}` : null;
     return (
       <form className="toggle-container">
-        <label className={this.state.on ? "active" : ""}><span>{label}</span></label>
+        { label && <label className={this.state.on ? "active" : ""}><span>{label}</span></label> }
         <div className={`toggle${this.state.on ? " toggle-on" : ""}`}>
           <button tabIndex={0} className={`slider${this.state.on ? " slider-on" : ""}`} aria-pressed={this.state.on} onClick={this.toggle} />
         </div>
@@ -38,7 +43,7 @@ export default class Toggle extends React.Component<ToggleOwnProps, ToggleState>
  toggle(e) {
    e.preventDefault();
    let status = !this.state.on;
-   this.props.onToggle(status);
+   this.props.onToggle(status, this.props.name);
    this.setState({ on: status });
   }
 }

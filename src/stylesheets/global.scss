@@ -24,3 +24,8 @@
     @include basic-focus;
   }
 }
+
+.libraries-page > .panel {
+  border-radius: 0;
+  margin: 0;
+}

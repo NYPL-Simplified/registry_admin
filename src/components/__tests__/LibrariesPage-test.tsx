@@ -68,14 +68,13 @@ describe("LibrariesPage", () => {
 
   it("should display a toggle", () => {
     expect(wrapper.state()["qa"]).to.be.false;
-    let toggle = wrapper.find(Toggle);
-    expect(toggle.length).to.equal(1);
+    let toggle = wrapper.find(Toggle).first();
     expect(toggle.text()).to.equal("QA Mode: Off");
     expect(toggle.prop("initialOn")).to.be.false;
 
     wrapper.setState({ "qa": true });
 
-    toggle = wrapper.find(Toggle);
+    toggle = wrapper.find(Toggle).first();
     expect(toggle.prop("initialOn")).to.be.true;
     expect(toggle.text()).to.equal("QA Mode: On");
   });
@@ -84,7 +83,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(0);
     expect(wrapper.state()["qa"]).to.be.false;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.false;
 
     await wrapper.instance().toggleQA(true);
     wrapper.update();
@@ -92,7 +91,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.true;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.true;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.true;
 
     wrapper.setProps({ libraries: { libraries: libraries.concat(qaLib) }});
 
@@ -103,7 +102,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.false;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.false;
 
     // We've already loaded the QA list once, so we don't have to get it from the server again.
     await wrapper.instance().toggleQA(true);
@@ -112,7 +111,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.true;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.true;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.true;
   });
 
   it("should display a search form", () => {
@@ -268,7 +267,7 @@ describe("LibrariesPage", () => {
     expect(wrapper.instance().hasAttr(libraries[1], "pls_id")).to.be.false;
   });
 
-  it.only("should convert between an attribute's display name and key name", () => {
+  it("should convert between an attribute's display name and key name", () => {
     expect(wrapper.instance().convertToAttrName("PLS ID")).to.equal("pls_id");
     expect(wrapper.instance().convertToAttrName("Description")).to.equal("description");
     expect(wrapper.instance().convertToAttrName("Basic Info")).to.equal("basic_info");
