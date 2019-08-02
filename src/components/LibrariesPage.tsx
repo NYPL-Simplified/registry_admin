@@ -75,8 +75,8 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     return (
       <div className="libraries-page">
         { toggle }
-        { filter }
         { searchForm }
+        { filter }
         <LibrariesList
           libraries={libraries}
           store={this.props.store}
@@ -100,19 +100,31 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     return libraries.filter(l => l.stages.registry_stage === "production");
   }
 
+  /**
+  * setFilter()
+  * @param {string} filter - the library attribute to be filtered by
+  */
   setFilter(filter: string) {
     let updatedFilters = this.state.filters.attributes;
     updatedFilters[filter] = !this.state.filters.attributes[filter];
     this.setState({ filters: {flipped: this.state.filters.flipped, attributes: updatedFilters} });
   }
 
+  /**
+  * Switch between showing libraries which have the specified attributes and showing libraries which do not
+  * have them.
+  */
   flipFilter() {
     this.setState({ filters: {flipped: !this.state.filters.flipped, attributes: this.state.filters.attributes} });
   }
 
+
+  /**
+  * Recursively check whether a library has a truthy value for a particular attribute
+  */
   hasAttr(dict, attr) {
     let isDict = (dict) => dict && typeof(dict) === "object" && !Array.isArray(dict);
-    if (!isDict) {
+    if (!isDict(dict)) {
       return;
     }
     if (Object.keys(dict).indexOf(attr) >= 0) {
@@ -122,6 +134,9 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     return !!subDicts.filter((sd) => this.hasAttr(sd, attr)).length;
   }
 
+  /**
+  * For each attribute that the user wants to filter by, narrow down the list of libraries to display.
+  */
   filterByAttribute(libraries) {
     let attributes = Object.keys(this.state.filters.attributes).filter(attr => this.state.filters.attributes[attr]);
     libraries && attributes.forEach(attr => {

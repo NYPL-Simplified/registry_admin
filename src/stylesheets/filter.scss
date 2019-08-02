@@ -1,3 +1,17 @@
+.libraries-page > .panel:last-of-type {
+  border-color: $teal;
+  border-left: none;
+  border-right: none;
+  .panel-heading {
+    background: $teal-tint;
+    border-radius: 0;
+    border-bottom: 1px solid $teal;
+    &:hover {
+      background: $teal;
+    }
+  }
+}
+
 .filters {
   margin: 0;
   p {

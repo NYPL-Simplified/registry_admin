@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Panel, Button } from "library-simplified-reusable-components";
 
 export interface ToggleOwnProps {
-  onToggle: (status: boolean, name: string) => void;
+  onToggle: (status: boolean, name?: string) => void;
   initialOn?: boolean;
   label?: string;
   name?: string;
