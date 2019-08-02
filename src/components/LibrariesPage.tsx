@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import LibrariesList from "./LibrariesList";
 import SearchForm from "./SearchForm";
+import Filter from "./Filter";
 import Toggle from "./reusables/Toggle";
 
 export interface LibrariesPageStateProps {
@@ -28,6 +29,7 @@ export interface LibrariesPageState {
   showAll: boolean;
   searchTerm: string;
   qa: boolean;
+  filters: { [key: string]: any };
 }
 
 export interface LibrariesPageProps extends LibrariesPageStateProps, LibrariesPageOwnProps, LibrariesPageDispatchProps {};
@@ -39,7 +41,14 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.clear = this.clear.bind(this);
     this.toggleQA = this.toggleQA.bind(this);
     this.filter = this.filter.bind(this);
-    this.state = { showAll: true, searchTerm: "", qa: false };
+    this.setFilter = this.setFilter.bind(this);
+    this.filterByAttribute = this.filterByAttribute.bind(this);
+    this.flipFilter = this.flipFilter.bind(this);
+    this.state = { showAll: true, searchTerm: "", qa: false, filters: { flipped: false, attributes: { "PLS ID": false }} };
+  }
+
+  convertToAttrName(name: string): string {
+    return name.toLowerCase().split(" ").join("_");
   }
 
   render(): JSX.Element {
@@ -54,12 +63,20 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       resultsCount={libraries && libraries.length}
     />;
 
+    let filter: JSX.Element = <Filter
+      filterKeys={this.state.filters.attributes}
+      setFilter={this.setFilter}
+      flipFilter={this.flipFilter}
+      title="Only show libraries which"
+    />;
+
     let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA Mode" />;
 
     return (
       <div className="libraries-page">
         { toggle }
         { searchForm }
+        { filter }
         <LibrariesList
           libraries={libraries}
           store={this.props.store}
@@ -81,6 +98,52 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 
   filter(libraries) {
     return libraries.filter(l => l.stages.registry_stage === "production");
+  }
+
+  /**
+  * setFilter()
+  * @param {string} filter - the library attribute to be filtered by
+  */
+  setFilter(filter: string) {
+    let updatedFilters = this.state.filters.attributes;
+    updatedFilters[filter] = !this.state.filters.attributes[filter];
+    this.setState({ filters: {flipped: this.state.filters.flipped, attributes: updatedFilters} });
+  }
+
+  /**
+  * Switch between showing libraries which have the specified attributes and showing libraries which do not
+  * have them.
+  */
+  flipFilter() {
+    this.setState({ filters: {flipped: !this.state.filters.flipped, attributes: this.state.filters.attributes} });
+  }
+
+
+  /**
+  * Recursively check whether a library has a truthy value for a particular attribute
+  */
+  hasAttr(dict, attr) {
+    let isDict = (dict) => dict && typeof(dict) === "object" && !Array.isArray(dict);
+    if (!isDict(dict)) {
+      return;
+    }
+    if (Object.keys(dict).indexOf(attr) >= 0) {
+      return !!dict[attr];
+    }
+    let subDicts = Object.values(dict).filter(v => isDict(v));
+    return !!subDicts.filter((sd) => this.hasAttr(sd, attr)).length;
+  }
+
+  /**
+  * For each attribute that the user wants to filter by, narrow down the list of libraries to display.
+  */
+  filterByAttribute(libraries) {
+    let attributes = Object.keys(this.state.filters.attributes).filter(attr => this.state.filters.attributes[attr]);
+    libraries && attributes.forEach(attr => {
+      attr = this.convertToAttrName(attr);
+      libraries = libraries.filter(l => this.state.filters.flipped ? !this.hasAttr(l, attr) : this.hasAttr(l, attr));
+    });
+    return libraries;
   }
 
   getLibraryList() {
@@ -120,7 +183,8 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 
     // If one of the libraries undergoes changes--e.g. is put into/taken out of production--the libraries variable will be updated accordingly.
 
-    return (filteredResults || allResults || noResults) || filteredLibraries || allLibraries;
+    let list = (filteredResults || allResults || noResults) || filteredLibraries || allLibraries;
+    return this.filterByAttribute(list);
   }
 
   async toggleQA(showQA: boolean) {
@@ -139,7 +203,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
   }
 
   async search(data: FormData) {
-    this.setState({ showAll: false, searchTerm: (data.get("name") as string) });
+    this.setState({ showAll: false, searchTerm: (data.get("name") as string), filters: this.state.filters });
     await this.props.search(data);
   }
 

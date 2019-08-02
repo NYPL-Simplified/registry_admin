@@ -7,6 +7,7 @@ export interface InputProps {
   className?: string;
   callback?: (e: any) => any;
   value?: any;
+  checked?: boolean;
 }
 
 export default class Input extends React.Component<InputProps, {}> {
@@ -14,7 +15,7 @@ export default class Input extends React.Component<InputProps, {}> {
     super(props);
   }
   render(): JSX.Element {
-    return(
+   return(
       <div className={`form-group ${this.props.className}`}>
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <input
@@ -25,6 +26,7 @@ export default class Input extends React.Component<InputProps, {}> {
           id={this.props.name}
           defaultValue={this.props.value}
           readOnly={false}
+          defaultChecked={this.props.checked}
         />
       </div>
     );

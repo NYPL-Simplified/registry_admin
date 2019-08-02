@@ -13,6 +13,7 @@ describe("Toggle", () => {
     wrapper = Enzyme.mount(
       <Toggle
         onToggle={onToggle}
+        label="Filters"
       />
     );
   });
@@ -39,20 +40,9 @@ describe("Toggle", () => {
     expect(slider.hasClass("slider")).to.be.true;
   });
 
-  it("optionally renders label text", () => {
-    let label = wrapper.find("label");
-    expect(label.text()).to.equal("On");
-    wrapper.setProps({ "label": "Custom Label" });
-    label = wrapper.find("label");
-    expect(label.text()).to.equal("Custom Label: Off");
-    wrapper.setState({ "on": true });
-    expect(label.text()).to.equal("Custom Label: On");
-  });
-
-
   it("initially defaults to off", () => {
     isOn(false);
-    wrapper = Enzyme.mount(<Toggle onToggle={onToggle} initialOn={true} />);
+    wrapper = Enzyme.mount(<Toggle onToggle={onToggle} initialOn={true} label="Filters" />);
     isOn(true);
   });
 

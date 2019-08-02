@@ -12,10 +12,7 @@ import SearchForm from "../SearchForm";
 import { Form } from "library-simplified-reusable-components";
 
 describe("LibrariesPage", () => {
-  const libraries = [
-    modifyLibrary(testLibrary1, {registry_stage: "production"}),
-    modifyLibrary(testLibrary2, {registry_stage: "production"})
-  ];
+  let libraries;
 
   let qaLib = {
     uuid: "UUID3",
@@ -46,6 +43,10 @@ describe("LibrariesPage", () => {
   let store;
 
   beforeEach(() => {
+    libraries = [
+      modifyLibrary(testLibrary1, {registry_stage: "production"}),
+      modifyLibrary(testLibrary2, {registry_stage: "production"})
+    ];
     fetchData = Sinon.stub();
     fetchQA = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
@@ -67,14 +68,13 @@ describe("LibrariesPage", () => {
 
   it("should display a toggle", () => {
     expect(wrapper.state()["qa"]).to.be.false;
-    let toggle = wrapper.find(Toggle);
-    expect(toggle.length).to.equal(1);
+    let toggle = wrapper.find(Toggle).first();
     expect(toggle.text()).to.equal("QA Mode: Off");
     expect(toggle.prop("initialOn")).to.be.false;
 
     wrapper.setState({ "qa": true });
 
-    toggle = wrapper.find(Toggle);
+    toggle = wrapper.find(Toggle).first();
     expect(toggle.prop("initialOn")).to.be.true;
     expect(toggle.text()).to.equal("QA Mode: On");
   });
@@ -83,7 +83,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(0);
     expect(wrapper.state()["qa"]).to.be.false;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.false;
 
     await wrapper.instance().toggleQA(true);
     wrapper.update();
@@ -91,7 +91,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.true;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.true;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.true;
 
     wrapper.setProps({ libraries: { libraries: libraries.concat(qaLib) }});
 
@@ -102,7 +102,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.false;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.false;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.false;
 
     // We've already loaded the QA list once, so we don't have to get it from the server again.
     await wrapper.instance().toggleQA(true);
@@ -111,7 +111,7 @@ describe("LibrariesPage", () => {
     expect(fetchData.callCount).to.equal(1);
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.true;
-    expect(wrapper.find(Toggle).prop("initialOn")).to.be.true;
+    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.true;
   });
 
   it("should display a search form", () => {
@@ -217,18 +217,67 @@ describe("LibrariesPage", () => {
 
   it("should render changes to a search result", () => {
     // Use case: admin searched for a library and then edited its stages.  Changes should be reflected immediately.
-    let updatedLibrary = {...libraries[0], stages: {"library_stage": "testing", "registry_stage": "testing"}};
+    let updatedLibrary = modifyLibrary(libraries[0], {"library_stage": "testing", "registry_stage": "testing"});
     wrapper.setState({ showAll: false });
+
     let spyUpdateLibraryList = Sinon.spy(wrapper.instance(), "updateLibraryList");
     expect(spyUpdateLibraryList.callCount).to.equal(0);
 
     wrapper.setProps({ updatedLibrary, results: { libraries: [libraries[0]] } });
-
     expect(spyUpdateLibraryList.callCount).to.equal(2);
     expect(spyUpdateLibraryList.getCall(1).args[0][0]).to.equal(libraries[0]);
     expect(spyUpdateLibraryList.returnValues[1][0]).to.equal(updatedLibrary);
 
     spyUpdateLibraryList.restore();
+  });
+
+  it("should display a filter form", () => {
+    expect(wrapper.find(".filters").length).to.equal(1);
+  });
+
+  it("should filter", () => {
+    let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
+    wrapper.setProps({ libraries: { libraries: [libraryWithPLS, libraries[1]] } });
+    expect(wrapper.find(".list .panel").length).to.equal(2);
+    wrapper.instance().setFilter("pls_id");
+    wrapper.update();
+    expect(wrapper.find(".list .panel").length).to.equal(1);
+    expect(wrapper.find(".list .panel-title").text()).to.equal("Test Library 1");
+    wrapper.instance().flipFilter();
+    wrapper.update();
+    expect(wrapper.find(".list .panel").length).to.equal(1);
+    expect(wrapper.find(".list .panel-title").text()).to.equal("Test Library 2");
+    wrapper.instance().setFilter("pls_id");
+    wrapper.update();
+    expect(wrapper.find(".list .panel").length).to.equal(2);
+  });
+
+  it("should filter libraries by attribute", () => {
+    let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
+    wrapper.setProps({ libraries: { libraries: [libraryWithPLS, libraries[1]] } });
+    wrapper.setState({ filters: { flipped: false, attributes: { "pls_id": true }}});
+    let filteredLibraries = wrapper.instance().filterByAttribute(wrapper.prop("libraries").libraries);
+    expect(filteredLibraries.length).to.equal(1);
+    expect(filteredLibraries[0]).to.equal(libraryWithPLS);
+  });
+
+  it("should check whether a library has an attribute", () => {
+    let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
+    expect(wrapper.instance().hasAttr(libraryWithPLS, "pls_id")).to.be.true;
+    expect(wrapper.instance().hasAttr(libraries[1], "pls_id")).to.be.false;
+
+    const nested = { level1: { level2: { level3: { level4: "some value" }}}};
+    expect(wrapper.instance().hasAttr(nested, "level1")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level2")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level3")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level4")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level5")).to.be.false;
+  });
+
+  it("should convert between an attribute's display name and key name", () => {
+    expect(wrapper.instance().convertToAttrName("PLS ID")).to.equal("pls_id");
+    expect(wrapper.instance().convertToAttrName("Description")).to.equal("description");
+    expect(wrapper.instance().convertToAttrName("Basic Info")).to.equal("basic_info");
   });
 
 });
