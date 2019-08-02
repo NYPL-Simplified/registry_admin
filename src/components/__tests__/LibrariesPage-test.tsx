@@ -265,6 +265,13 @@ describe("LibrariesPage", () => {
     let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
     expect(wrapper.instance().hasAttr(libraryWithPLS, "pls_id")).to.be.true;
     expect(wrapper.instance().hasAttr(libraries[1], "pls_id")).to.be.false;
+
+    const nested = { level1: { level2: { level3: { level4: "some value" }}}};
+    expect(wrapper.instance().hasAttr(nested, "level1")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level2")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level3")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level4")).to.be.true;
+    expect(wrapper.instance().hasAttr(nested, "level5")).to.be.false;
   });
 
   it("should convert between an attribute's display name and key name", () => {
