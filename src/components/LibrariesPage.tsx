@@ -57,7 +57,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     let searchForm: JSX.Element = <SearchForm
       search={this.search}
       term={this.state.searchTerm}
-      text="Search for a library by name"
+      text="Search for a library by name, keyword, or location."
       inputName="name"
       clear={!this.state.showAll ? this.clear : null}
       resultsCount={libraries && libraries.length}

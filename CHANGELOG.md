@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.2
+#### Updated
+- Changed the label on the search form to reflect new functionality.
+
 ### v1.3.1
 #### Added
 - Enabled filtering the list of libraries by attribute.
