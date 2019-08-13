@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.3
+#### Added
+- Rendered a loading indicator component while the list of libraries is being loaded.
+
 ### v1.3.2
 #### Updated
 - Changed the label on the search form to reflect new functionality.

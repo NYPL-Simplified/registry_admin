@@ -7,6 +7,7 @@ import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 
 import LibrariesList from "../LibrariesList";
 import LibrariesListItem from "../LibrariesListItem";
+import LoadingIndicator from "opds-web-client/lib/components/LoadingIndicator";
 
 describe("LibrariesList", () => {
   const libraries = [testLibrary1, testLibrary2];
@@ -20,6 +21,7 @@ describe("LibrariesList", () => {
         <LibrariesList
           store={store}
           libraries={libraries}
+          isLoaded={true}
         />
       );
     });
@@ -50,6 +52,16 @@ describe("LibrariesList", () => {
       let message = wrapper.find("span");
       expect(message.length).to.equal(1);
       expect(message.text()).to.equal("There are no libraries in this registry yet.");
+    });
+
+    it("should display a loading indicator while the list of libraries is loading", () => {
+      let loader = wrapper.find(LoadingIndicator);
+      expect(loader.length).to.equal(0);
+      wrapper.setProps({ isLoaded: false });
+      loader = wrapper.find(LoadingIndicator);
+      expect(loader.length).to.equal(1);
+      // Don't show the "There are no libraries" message.
+      expect(wrapper.find("span").length).to.equal(0);
     });
   });
 });

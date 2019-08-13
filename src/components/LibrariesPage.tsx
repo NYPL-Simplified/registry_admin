@@ -13,6 +13,7 @@ export interface LibrariesPageStateProps {
   libraries?: LibrariesData;
   results?: LibrariesData;
   updatedLibrary?: LibraryData;
+  isLoaded?: boolean;
 }
 
 export interface LibrariesPageOwnProps {
@@ -71,7 +72,6 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     />;
 
     let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA Mode" />;
-
     return (
       <div className="libraries-page">
         { toggle }
@@ -80,6 +80,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
         <LibrariesList
           libraries={libraries}
           store={this.props.store}
+          isLoaded={this.props.isLoaded}
         />
       </div>
     );
@@ -218,7 +219,8 @@ function mapStateToProps(state: State, ownProps: LibrariesPageOwnProps) {
   return {
     libraries: state.libraries && state.libraries.data,
     updatedLibrary: state.library && state.library.data,
-    results: state.results && state.results.data
+    results: state.results && state.results.data,
+    isLoaded: state.libraries && state.libraries.isLoaded
   };
 }
 
