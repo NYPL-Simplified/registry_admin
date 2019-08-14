@@ -13,29 +13,7 @@ import { Form } from "library-simplified-reusable-components";
 
 describe("LibrariesPage", () => {
   let libraries;
-
-  let qaLib = {
-    uuid: "UUID3",
-    basic_info: {
-      "name": "QA Library",
-      "short_name": "qa",
-    },
-    urls_and_contact: {
-      "authentication_url": "qaURL",
-      "contact_email": "qaEmail",
-      "opds_url": "qaOpds",
-      "web_url": "qaWeb"
-    },
-    stages: {
-      "library_stage": "testing",
-      "registry_stage": "testing"
-    },
-    areas: {
-      "focus": [],
-      "service": []
-    }
-  };
-
+  let qaLib = modifyLibrary(testLibrary1, { "name": "QA Library", "uuid": "UUID3"});
   let fetchData;
   let fetchQA;
   let search;
@@ -58,6 +36,7 @@ describe("LibrariesPage", () => {
         fetchQA={fetchQA}
         search={search}
         libraries={{libraries}}
+        isLoaded={true}
       />
     );
   });
@@ -280,4 +259,11 @@ describe("LibrariesPage", () => {
     expect(wrapper.instance().convertToAttrName("Basic Info")).to.equal("basic_info");
   });
 
+  it("should let the LibrariesList know whether the list of libraries has finished loading", () => {
+    let list = wrapper.find(LibrariesList);
+    expect(list.prop("isLoaded")).to.be.true;
+    wrapper.setProps({ isLoaded: false });
+    list = wrapper.find(LibrariesList);
+    expect(list.prop("isLoaded")).to.be.false;
+  });
 });
