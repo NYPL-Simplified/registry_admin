@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.4
+#### Added
+- Typedoc for generating code documentation.
+
 ### v1.3.3
 #### Added
 - Rendered a loading indicator component while the list of libraries is being loaded.
