@@ -30,7 +30,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
     let input = (
       <Input
         id="search-input"
-        key="form-input"
+        key="search-input"
         name={this.props.inputName}
         callback={this.updateSearchTerm}
       />
