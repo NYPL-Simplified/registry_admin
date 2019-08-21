@@ -3,7 +3,7 @@ import { expect } from "chai";
 import * as React from "react";
 import * as Enzyme from "enzyme";
 import App from "../App";
-import Header from "../reusables/Header";
+import { Header } from "library-simplified-reusable-components";
 import LogInFrom from "../reusables/LogInForm";
 import LibrariesListContainer from "../LibrariesListContainer";
 import { MemoryRouter } from "react-router-dom";

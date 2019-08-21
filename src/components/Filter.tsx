@@ -1,6 +1,4 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-import Input from "./reusables/Input";
 import Toggle from "./reusables/Toggle";
 import { Button, Panel } from "library-simplified-reusable-components";
 
@@ -70,6 +68,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     });
     return (
       <Panel
+        id="filters"
         headerText="Filters"
         content={
           <div className="filters">

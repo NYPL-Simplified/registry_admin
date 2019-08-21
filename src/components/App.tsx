@@ -1,5 +1,5 @@
 import * as React from "react";
-import Header from "./reusables/Header";
+import { Header } from "library-simplified-reusable-components";
 import LibrariesListContainer from "./LibrariesListContainer";
 import { Route } from "react-router-dom";
 import LogInForm from "./reusables/LogInForm";

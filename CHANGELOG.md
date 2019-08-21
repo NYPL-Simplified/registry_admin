@@ -3,6 +3,8 @@
 ### v1.3.4
 #### Added
 - Typedoc for generating code documentation.
+#### Updated
+- Updated the Panel components to take in new props and using the Header from Reusable Components.
 
 ### v1.3.3
 #### Added

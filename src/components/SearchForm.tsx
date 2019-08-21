@@ -29,6 +29,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
   render(): JSX.Element {
     let input = (
       <Input
+        id="search-input"
         key="form-input"
         name={this.props.inputName}
         callback={this.updateSearchTerm}
@@ -62,8 +63,9 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         />;
     }
 
-    return(
+    return (
       <Panel
+        id="search"
         content={[form, clearButton]}
         style="info"
         collapsible={false}
