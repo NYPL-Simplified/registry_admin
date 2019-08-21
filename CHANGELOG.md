@@ -4,8 +4,8 @@
 #### Added
 - Typedoc for generating code documentation.
 #### Updated
-- Updated the Panel components to take in new props and using the Header from Reusable Components.
-- Updating the PlsIDForm to use an Id prop to render unique Ids on the page.
+- Updated the Panel components to take in new props and used the Header from Reusable Components.
+- Updated the PlsIDForm to use the `uuid` prop as an ID to its `Input` component for accessibility purposes.
 
 ### v1.3.3
 #### Added
