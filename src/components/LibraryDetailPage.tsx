@@ -125,7 +125,6 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
           currentID={library.basic_info.pls_id}
           fetchLibrary={this.props.fetchLibrary}
           uuid={library.uuid}
-          libraryName={library.basic_info.name}
         />
         <hr />
         <div className="detail-content">

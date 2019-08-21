@@ -17,7 +17,7 @@ describe("PlsIDForm", () => {
     fetchLibrary = Sinon.stub();
     postPlsID = Sinon.stub();
     wrapper = Enzyme.mount(
-      <PlsIDForm libraryName="name1" store={store} fetchLibrary={fetchLibrary} postPlsID={postPlsID} uuid={testLibrary1.uuid} />
+      <PlsIDForm store={store} fetchLibrary={fetchLibrary} postPlsID={postPlsID} uuid={testLibrary1.uuid} />
     );
   });
 
@@ -38,7 +38,7 @@ describe("PlsIDForm", () => {
     let textInput = wrapper.find("input").at(1);
     expect(textInput.prop("type")).to.equal("text");
     expect(textInput.prop("name")).to.equal("pls_id");
-    expect(textInput.prop("id")).to.equal("name1-id");
+    expect(textInput.prop("id")).to.equal(testLibrary1.uuid);
 
     let button = wrapper.find("button");
     expect(button.text()).to.equal("Save");

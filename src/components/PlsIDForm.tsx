@@ -13,7 +13,6 @@ export interface PlsIDFormOwnProps {
   uuid: string;
   store: Store<State>;
   fetchLibrary: (uuid: string) => LibraryData;
-  libraryName: string;
   currentID?: string;
 }
 
@@ -55,7 +54,7 @@ export class PlsIDForm extends React.Component<PlsIDFormProps, PlsIDState> {
         key="pls"
         name="pls_id"
         value={this.props.currentID}
-        id={`${this.props.libraryName.replace(/ /g, "")}-id`}
+        id={this.props.uuid}
       />;
     return (
       <Form
