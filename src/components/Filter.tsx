@@ -1,12 +1,6 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-import Input from "./reusables/Input";
 import Toggle from "./reusables/Toggle";
 import { Button, Panel } from "library-simplified-reusable-components";
-
-/**
-* A reusable class for generating a panel populated with toggles for each of a list of specified attributes
-*/
 
 export interface FilterProps {
   setFilter: (filter: string) => void;
@@ -21,6 +15,9 @@ export interface FilterState {
   flip: boolean;
 }
 
+/**
+* A reusable class for generating a panel populated with toggles for each of a list of specified attributes
+*/
 export default class Filter extends React.Component<FilterProps, FilterState> {
   static defaultProps = {
     initialFlip: false,
@@ -35,7 +32,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
 
   /**
   * applyFilter()
-  * @param {string} name - the name of the attribute being turned on or off.  This doesn't
+  * @param {string} name The name of the attribute being turned on or off.  This doesn't
   * affect whether we're filtering by the attribute's presence vs. by its absence; it just
   * determines whether the filter should take this attribute into account in the first place.
   */
@@ -71,6 +68,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     });
     return (
       <Panel
+        id="filters"
         headerText="Filters"
         content={
           <div className="filters">

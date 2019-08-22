@@ -102,8 +102,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
   }
 
   /**
-  * setFilter()
-  * @param {string} filter - the library attribute to be filtered by
+  * @param {string} filter The library attribute to be filtered by
   */
   setFilter(filter: string) {
     let updatedFilters = this.state.filters.attributes;

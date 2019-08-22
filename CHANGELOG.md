@@ -1,5 +1,12 @@
 ## Changelog
 
+### v1.3.4
+#### Added
+- Typedoc for generating code documentation.
+#### Updated
+- Updated the Panel components to take in new props and used the Header from Reusable Components.
+- Updated the PlsIDForm to use the `uuid` prop as an ID to its `Input` component for accessibility purposes.
+
 ### v1.3.3
 #### Added
 - Rendered a loading indicator component while the list of libraries is being loaded.

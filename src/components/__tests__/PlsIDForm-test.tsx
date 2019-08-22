@@ -16,7 +16,9 @@ describe("PlsIDForm", () => {
     store = buildStore();
     fetchLibrary = Sinon.stub();
     postPlsID = Sinon.stub();
-    wrapper = Enzyme.mount(<PlsIDForm store={store} fetchLibrary={fetchLibrary} postPlsID={postPlsID} uuid={testLibrary1.uuid} />);
+    wrapper = Enzyme.mount(
+      <PlsIDForm store={store} fetchLibrary={fetchLibrary} postPlsID={postPlsID} uuid={testLibrary1.uuid} />
+    );
   });
 
   it("renders a form with a title, info message, hidden input field, text input field, and button", () => {
@@ -36,6 +38,7 @@ describe("PlsIDForm", () => {
     let textInput = wrapper.find("input").at(1);
     expect(textInput.prop("type")).to.equal("text");
     expect(textInput.prop("name")).to.equal("pls_id");
+    expect(textInput.prop("id")).to.equal(testLibrary1.uuid);
 
     let button = wrapper.find("button");
     expect(button.text()).to.equal("Save");
