@@ -55,7 +55,9 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
     let style = this.state.color;
     let { name } = this.props.library.basic_info;
     return(
-      <li><Panel style={style} headerText={name} content={this.content()} /></li>
+      <li>
+        <Panel id={name.replace(/ /g, "-")} style={style} headerText={name} content={this.content()} />
+      </li>
     );
   }
 }

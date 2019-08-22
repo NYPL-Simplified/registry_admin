@@ -50,14 +50,20 @@ export class PlsIDForm extends React.Component<PlsIDFormProps, PlsIDState> {
     let isSaved = this.state.saved && !this.props.error;
     let icon = isSaved ? <CheckSoloIcon /> : null;
     let buttonText = isSaved ? "Saved" : "Save";
-    return(
+    let plsInput = <Input
+        key="pls"
+        name="pls_id"
+        value={this.props.currentID}
+        id={this.props.uuid}
+      />;
+    return (
       <Form
         className="border pls-id"
         title="PLS ID"
         buttonClass={`left-align top-align bottom-align ${isSaved && "success"}`}
         buttonContent={<span>{buttonText}{icon}</span>}
         onSubmit={this.submit}
-        content={<Input key="pls" name="pls_id" value={this.props.currentID} />}
+        content={plsInput}
         hiddenName="uuid"
         hiddenValue={this.props.uuid}
         errorText={this.props.error ? this.props.error.response : null}

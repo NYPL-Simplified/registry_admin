@@ -120,7 +120,12 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
           fetchLibrary={this.props.fetchLibrary}
         />
         <hr />
-        <PlsIDForm store={this.props.store} currentID={library.basic_info.pls_id} fetchLibrary={this.props.fetchLibrary} uuid={library.uuid} />
+        <PlsIDForm
+          store={this.props.store}
+          currentID={library.basic_info.pls_id}
+          fetchLibrary={this.props.fetchLibrary}
+          uuid={library.uuid}
+        />
         <hr />
         <div className="detail-content">
           <Tabs items={tabItems}/>

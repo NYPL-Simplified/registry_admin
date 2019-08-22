@@ -40,8 +40,8 @@ export class LogInForm extends React.Component<LogInFormProps, {}> {
     let title = this.props.title ? this.props.title : "Log In";
     let legend = this.props.legend ? this.props.legend : "Credentials";
 
-    let username = <Input key="username" name="username" label="Username" />;
-    let password = <Input key="password" type="password" name="password" label="Password" />;
+    let username = <Input id="username" key="username" name="username" label="Username" />;
+    let password = <Input id="password" key="password" type="password" name="password" label="Password" />;
     let elements = this.props.extraFields ? [username, password].concat(this.props.extraFields) : [username, password];
     let fieldset = <Fieldset key="credentials" legend={legend} elements={elements} />;
     return(
