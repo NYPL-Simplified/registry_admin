@@ -4,7 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 import { LibraryDetailPage } from "../LibraryDetailPage";
-import LibraryDetailItem from "../LibraryDetailItem";
+import Tabs from "../reusables/Tabs";
 import { testLibrary1, modifyLibrary } from "./TestUtils";
 
 describe("LibraryDetailPage", () => {
@@ -96,6 +96,11 @@ describe("LibraryDetailPage", () => {
   it("should not display blank values", () => {
     let infoLabels = wrapper.find(".list-group-item .control-label").map((label: Enzyme.CommonWrapper<any, any, {}>) => label.text());
     expect(infoLabels.indexOf("description")).to.equal(-1);
+  });
+
+  it("should pass the library's name to the Tabs component", () => {
+    // The Tabs component will use this to create unique IDs for its buttons and panels.
+    expect(wrapper.find(Tabs).prop("uniqueId")).to.equal("Test Library 1");
   });
 
   it("should not display empty tabs", () => {

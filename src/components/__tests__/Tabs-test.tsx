@@ -10,11 +10,14 @@ describe("Tabs", () => {
   let content3 = <p>More content!</p>;
   beforeEach(() => {
     wrapper = Enzyme.mount(
-      <Tabs items={{
-        "content1": content1,
-        "content2": content2,
-        "content3": content3
-      }}/>
+      <Tabs
+        items={{
+          "content1": content1,
+          "content2": content2,
+          "content3": content3
+        }}
+        uniqueId="test"
+      />
     );
   });
   it("should render nav buttons", () => {
@@ -50,7 +53,20 @@ describe("Tabs", () => {
     expect(tabNav2.hasClass("current")).to.be.true;
     expect(wrapper.find(".tab-content").at(1).hasClass("hidden")).to.be.false;
   });
-
+  it("should generate unique IDs", () => {
+    // Each button should have an ID in the format "button-{idx}-{this.props.uniqueId}",
+    // and an aria-controls property pointing to the ID of the corresponding panel.
+    wrapper.find(".tab-nav button").map((b, idx) => {
+      expect(b.prop("id")).to.equal(`button-${idx}-test`);
+      expect(b.prop("aria-controls")).to.equal(`panel-${idx}-test`);
+    });
+    // Each panel should have an ID in the format "panel-{idx}-{this.props.uniqueId}",
+    // and an aria-labelledby property pointing to the ID of the corresponding button.
+    wrapper.find(".tab-content").map((p, idx) => {
+      expect(p.prop("id")).to.equal(`panel-${idx}-test`);
+      expect(p.prop("aria-labelledby")).to.equal(`button-${idx}-test`);
+    });
+  });
   describe("keyboard navigation", () => {
     it("should switch tabs via the right arrow key", () => {
       let button1 = wrapper.find(".tab-nav button").at(0);

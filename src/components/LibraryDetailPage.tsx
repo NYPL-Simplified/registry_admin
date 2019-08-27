@@ -128,7 +128,7 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
         />
         <hr />
         <div className="detail-content">
-          <Tabs items={tabItems}/>
+          <Tabs items={tabItems} uniqueId={library.basic_info.name}/>
         </div>
       </div>
     );
