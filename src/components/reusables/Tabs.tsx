@@ -21,7 +21,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
 
   select(e:  React.KeyboardEvent<HTMLButtonElement> & React.MouseEvent<HTMLButtonElement>) {
     // The element's ID is in the form `button-{idx}-{uniqueId}`
-    let idx = parseInt((e.currentTarget as HTMLElement).id.split("button-")[1]);
+    let idx = parseInt((e.currentTarget as HTMLElement).id.split("button-")[1], 10);
     if (e.keyCode) {
       // Keyboard navigation with arrow keys
       // idx is the index of the tab you're already on, that you're trying to navigate away from;
@@ -65,7 +65,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
       let navItem = (
         <li key={name} role="presentation" className={`tab-nav ${current ? "current" : ""}`}>
           <button
-            aria-controls={`panel-${idString}`}
+            aria-controls={`content-${idString}`}
             aria-selected={current}
             className="btn bottom-align left-align bottom-squared"
             id={`button-${idString}`}
@@ -86,7 +86,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
         <section
           aria-labelledby={`button-${idString}`}
           className={`tab-content ${current ? "" : "hidden"}`}
-          id={`panel-${idString}`}
+          id={`content-${idString}`}
           key={name}
           role="tabpanel"
           tabIndex={0}

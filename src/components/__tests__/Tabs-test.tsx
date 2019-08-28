@@ -58,12 +58,12 @@ describe("Tabs", () => {
     // and an aria-controls property pointing to the ID of the corresponding panel.
     wrapper.find(".tab-nav button").map((b, idx) => {
       expect(b.prop("id")).to.equal(`button-${idx}-test`);
-      expect(b.prop("aria-controls")).to.equal(`panel-${idx}-test`);
+      expect(b.prop("aria-controls")).to.equal(`content-${idx}-test`);
     });
     // Each panel should have an ID in the format "panel-{idx}-{this.props.uniqueId}",
     // and an aria-labelledby property pointing to the ID of the corresponding button.
     wrapper.find(".tab-content").map((p, idx) => {
-      expect(p.prop("id")).to.equal(`panel-${idx}-test`);
+      expect(p.prop("id")).to.equal(`content-${idx}-test`);
       expect(p.prop("aria-labelledby")).to.equal(`button-${idx}-test`);
     });
   });
