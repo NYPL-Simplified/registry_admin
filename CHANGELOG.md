@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.5
+#### Added
+- Updated the Tabs component to comply with accessibility standards.
+
 ### v1.3.4
 #### Added
 - Typedoc for generating code documentation.
