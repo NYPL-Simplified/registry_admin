@@ -2,7 +2,7 @@
 
 ### v1.3.5
 #### Added
-- Updated the Tabs component to comply with accessibility standards.
+- Imported the reusable Tabs component, and passed it a uniqueId prop to comply with accessibility standards.
 
 ### v1.3.4
 #### Added

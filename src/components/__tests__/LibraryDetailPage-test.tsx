@@ -4,7 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 import { LibraryDetailPage } from "../LibraryDetailPage";
-import Tabs from "../reusables/Tabs";
+import { Tabs } from "library-simplified-reusable-components";
 import { testLibrary1, modifyLibrary } from "./TestUtils";
 
 describe("LibraryDetailPage", () => {
