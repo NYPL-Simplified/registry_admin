@@ -6,10 +6,9 @@ import { Store } from "redux";
 import { State } from "../reducers/index";
 import LibraryDetailItem from "./LibraryDetailItem";
 import LibraryStageItem from "./LibraryStageItem";
-import { Form } from "library-simplified-reusable-components";
+import { Form, Tabs } from "library-simplified-reusable-components";
 import EmailValidationForm from "./EmailValidationForm";
 import PlsIDForm from "./PlsIDForm";
-import Tabs from "./reusables/Tabs";
 
 export interface LibraryDetailPageDispatchProps {
   editStages: (data: FormData) => Promise<void>;
@@ -103,13 +102,14 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     };
     Object.entries(categories).forEach(([k, v]) => {
       let category = library[v];
-      let categoryItems: (string | string[])[] = Object.values(category);
-      // If there are no meaningful items in this category--e.g. it's an Areas category in which
-      // both values are empty arrays--then don't bother making a blank tab for it.
-      let hasItems = categoryItems.some(x => x && x.length > 0);
-      hasItems && (tabItems[k] = this.renderItems(category));
+      if (category) {
+        let categoryItems: (string | string[])[] = Object.values(category);
+        // // If there are no meaningful items in this category--e.g. it's an Areas category in which
+        // // both values are empty arrays--then don't bother making a blank tab for it.
+        let hasItems = categoryItems.some(x => x && x.length > 0);
+        hasItems && (tabItems[k] = this.renderItems(category));
+      }
     });
-
     return(
       <div>
         { this.renderStages() }
