@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.6
+#### Updated
+- Imported the reusable Input component and updated the SearchForm, LogInForm, and PlsIDForm components to comply with accessibility standards.
+
 ### v1.3.5
 #### Added
 - Imported the reusable Tabs component, and passed it a uniqueId prop to comply with accessibility standards.
