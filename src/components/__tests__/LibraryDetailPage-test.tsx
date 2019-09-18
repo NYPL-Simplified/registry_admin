@@ -173,7 +173,7 @@ describe("LibraryDetailPage", () => {
 
   it("should display the PLS ID form", () => {
     let plsIDForm = wrapper.find("form").at(2);
-    expect(plsIDForm.find(".form-title").text()).to.equal("PLS ID");
+    expect(plsIDForm.find(".form-title").text()).to.equal("Public Libraries Survey ID");
   });
 
   it("should re-render to reflect changes", async() => {

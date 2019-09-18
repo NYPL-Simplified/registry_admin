@@ -24,7 +24,7 @@ describe("PlsIDForm", () => {
   it("renders a form with a title, info message, hidden input field, text input field, and button", () => {
     let title = wrapper.find(".form-title");
     expect(title.length).to.equal(1);
-    expect(title.text()).to.equal("PLS ID");
+    expect(title.text()).to.equal("Public Libraries Survey ID");
 
     let infoMessage = wrapper.find(".alert-info");
     expect(infoMessage.length).to.equal(1);

@@ -59,7 +59,7 @@ export class PlsIDForm extends React.Component<PlsIDFormProps, PlsIDState> {
     return (
       <Form
         className="border pls-id"
-        title="PLS ID"
+        title="Public Libraries Survey ID"
         buttonClass={`left-align top-align bottom-align ${isSaved && "success"}`}
         buttonContent={<span>{buttonText}{icon}</span>}
         onSubmit={this.submit}
