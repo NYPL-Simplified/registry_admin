@@ -1,9 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Store } from "redux";
-import { Form } from "library-simplified-reusable-components";
+import { Form, Input } from "library-simplified-reusable-components";
 import Fieldset from "./Fieldset";
-import Input from "./Input";
 import ActionCreator from "../../actions";
 import { State } from "../../reducers/index";
 import { FetchErrorData } from "opds-web-client/lib/interfaces";

@@ -97,7 +97,7 @@ describe("LibrariesPage", () => {
     expect(wrapper.render().hasClass("libraries-page")).to.be.true;
     let searchForm = wrapper.find(SearchForm);
     expect(searchForm.length).to.equal(1);
-    expect(searchForm.find(".panel-title").text()).to.equal("Search for a library by name, keyword, or location.");
+    expect(searchForm.find(".panel-title").text()).to.equal("Search");
     expect(searchForm.find(".btn").length).to.equal(1);
     wrapper.setState({ showAll: false });
 

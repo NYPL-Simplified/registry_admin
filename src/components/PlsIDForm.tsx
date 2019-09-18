@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form } from "library-simplified-reusable-components";
+import { Form, Input } from "library-simplified-reusable-components";
 import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import { FetchErrorData } from "opds-web-client/lib/interfaces";
@@ -7,7 +7,6 @@ import { Store } from "redux";
 import { State } from "../reducers/index";
 import { LibraryData } from "../interfaces";
 import { CheckSoloIcon } from "@nypl/dgx-svg-icons";
-import Input from "./reusables/Input";
 
 export interface PlsIDFormOwnProps {
   uuid: string;
@@ -54,12 +53,13 @@ export class PlsIDForm extends React.Component<PlsIDFormProps, PlsIDState> {
         key="pls"
         name="pls_id"
         value={this.props.currentID}
+        label="Enter PLS ID"
         id={this.props.uuid}
       />;
     return (
       <Form
         className="border pls-id"
-        title="PLS ID"
+        title="Public Libraries Survey ID"
         buttonClass={`left-align top-align bottom-align ${isSaved && "success"}`}
         buttonContent={<span>{buttonText}{icon}</span>}
         onSubmit={this.submit}

@@ -1,8 +1,7 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { Panel, Button, Form } from "library-simplified-reusable-components";
+import { Panel, Button, Form, Input } from "library-simplified-reusable-components";
 import { SearchIcon } from "@nypl/dgx-svg-icons";
-import Input from "./reusables/Input";
+
 
 export interface SearchFormOwnProps {
   search: (data: FormData) => void;
@@ -32,6 +31,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         id="search-input"
         key="search-input"
         name={this.props.inputName}
+        label="Search for a library by name, keyword, or location."
         callback={this.updateSearchTerm}
       />
     );
