@@ -1,0 +1,95 @@
+.stats-panel {
+  .reusable-tabs {
+    margin: 0;
+    .tab-nav button {
+      width: 120px;
+    }
+    .tab-content {
+      min-height: 452px;
+      padding: 10px;
+    }
+  }
+  .recharts-bar-rectangles {
+    height: 100%;
+    width: 100%;
+  }
+  .chart-view {
+    display: flex;
+  }
+  .recharts-responsive-container {
+    border: 1px solid $dark-gray;
+    margin-right: 20px;
+  }
+  .recharts-surface, .recharts-bar, .recharts-bar-rectangles {
+    height: 100%;
+    width: 100%;
+    .recharts-pie-sector:first-child .recharts-sector, .recharts-bar-rectangle:first-child .recharts-rectangle {
+      fill: tint($green-dark, 30%);
+    }
+    .recharts-pie-sector:nth-child(2) .recharts-sector, .recharts-bar-rectangle:nth-child(2) .recharts-rectangle {
+      fill: tint($orange, 30%);
+    }
+    .recharts-pie-sector:nth-child(3) .recharts-sector, .recharts-bar-rectangle:nth-child(3) .recharts-rectangle  {
+      fill: lighten($red, 10);
+    }
+  }
+  .recharts-default-legend {
+    li.recharts-legend-item {
+      width: 100%;
+      height: 20px;
+      position: relative;
+      > .recharts-surface {
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+
+  .list-view {
+    .stats-list {
+      pointer-events: none;
+      margin: 0;
+      padding: 10px 0;
+      list-style: none;
+      width: 60%;
+      .stats-category {
+        padding: 5px 10px 0 0;
+        &:first-child > .stats-category-name {
+          background: darken($green-tint, 10);
+        }
+        &:nth-child(2) > .stats-category-name {
+          background: $yellow-tint;
+        }
+        &:last-child > .stats-category-name {
+          background: $red-error;
+        }
+        > .stats-category-name {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid $dark-gray;
+          margin-bottom: 0;
+          padding: 10px 20px;
+          font-size: 1em;
+          > span {
+            margin: 0;
+          }
+        }
+        .inner-stats-list {
+          padding: 10px 10px 10px 25px;
+          border-radius: 0;
+          border-left: 1px solid $dark-gray;
+          border-right: 1px solid $dark-gray;
+          border-bottom: 1px solid $dark-gray;
+
+          &.hidden {
+            display: none;
+          }
+        }
+      }
+      ul:not(.inner-stats-list) {
+        list-style: none;
+      }
+    }
+  }
+}

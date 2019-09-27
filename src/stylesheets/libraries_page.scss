@@ -1,6 +1,18 @@
 .libraries-page > .panel {
   border-radius: 0;
   margin: 0;
+  // Stats panel
+  &:first-of-type {
+    .panel-heading {
+      background: $light-gray;
+      border-radius: 0;
+      border-bottom: 1px solid darken($light-gray, 30);
+      &:hover {
+        background: darken($light-gray, 30);
+      }
+    }
+  }
+  // Filters panel
   &:last-of-type {
     border-color: $teal;
     border-left: none;
