@@ -190,11 +190,6 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 
   async toggleQA(showQA: boolean) {
     this.setState({ "qa": showQA });
-    let hasAlreadyLoadedQA: boolean = this.props.libraries.libraries && !(this.props.libraries.libraries.every(l => l.stages.registry_stage === "production"));
-
-    if (!hasAlreadyLoadedQA) {
-      await this.props.fetchQA();
-    }
     if (showQA && this.state.searchTerm && !this.props.results) {
       // The user searched for a QA library, but didn't switch to QA mode until after submitting the search.
       let searchTerm = new (window as any).FormData;

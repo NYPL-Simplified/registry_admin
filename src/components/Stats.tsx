@@ -18,6 +18,7 @@ export default class Stats extends React.Component<StatsProps, StatsState> {
 
   constructor(props: StatsProps) {
     super(props);
+    this.sortLibraries = this.sortLibraries.bind(this);
     this.renderListView = this.renderListView.bind(this);
     this.renderChartView = this.renderChartView.bind(this);
     this.copy = this.copy.bind(this);
@@ -27,6 +28,26 @@ export default class Stats extends React.Component<StatsProps, StatsState> {
   };
 
   render(): JSX.Element {
+    let sorted = this.sortLibraries();
+    let tabItems = {
+      "List": this.renderListView(sorted),
+      "Charts": this.renderChartView(sorted)
+    };
+
+    return (
+      <Panel
+        id="stats"
+        headerText={"Aggregate Data"}
+        content={
+          <div className="stats-panel">
+            <Tabs items={tabItems} uniqueId="stats-tabs"/>
+          </div>
+        }
+      />
+    );
+  }
+
+  sortLibraries() {
     let sorted = {"production": [], "testing": [], "cancelled": []};
     this.props.libraries && this.props.libraries.forEach((l) => {
       if (Object.values(l.stages).some(v => v === "cancelled")) {
@@ -39,24 +60,7 @@ export default class Stats extends React.Component<StatsProps, StatsState> {
         sorted.production.push(l);
       }
     });
-
-    let tabItems = {
-      "List": this.renderListView(sorted),
-      "Charts": this.renderChartView(sorted)
-    };
-
-    return (
-      <Panel
-        id="stats"
-        headerText={"Aggregate Data"}
-        openByDefault={true}
-        content={
-          <div className="stats-panel">
-            <Tabs items={tabItems} uniqueId="stats-tabs"/>
-          </div>
-        }
-      />
-    );
+    return sorted;
   }
 
   renderListView(sorted) {
