@@ -46,6 +46,21 @@
   }
 
   .list-view {
+    .buttons {
+      display: flex;
+    }
+    .copy-confirmation {
+      background: $green-tint;
+      margin: 8px 8px 8px 0;
+      padding: 6px 12px;
+      color: $green-dark;
+      border: 1px solid $green-dark;
+      opacity: 0;
+      transition: opacity 1s linear;
+      &.visible {
+        opacity: 1;
+      }
+    }
     .stats-list {
       pointer-events: none;
       margin: 0;
@@ -81,10 +96,6 @@
           border-left: 1px solid $dark-gray;
           border-right: 1px solid $dark-gray;
           border-bottom: 1px solid $dark-gray;
-
-          &.hidden {
-            display: none;
-          }
         }
       }
       ul:not(.inner-stats-list) {
