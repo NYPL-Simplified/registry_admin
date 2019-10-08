@@ -138,6 +138,9 @@
     &.dropdown-button-main {
       display: flex;
       align-items: center;
+      &:hover, &:active {
+        color: $white;
+      }
     }
   }
 }
