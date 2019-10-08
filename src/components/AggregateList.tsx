@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
+import DropdownButton from "./DropdownButton";
 
 export interface AggregateListProps {
   data: {[key: string]: LibraryData[]};
@@ -8,21 +9,26 @@ export interface AggregateListProps {
 
 export interface AggregateListState {
   copied: boolean;
-  expanded: boolean;
   styled: boolean;
   showConfirm: boolean;
+  production: boolean;
+  testing: boolean;
+  cancelled: boolean;
 }
 
 export default class AggregateList extends React.Component<AggregateListProps, AggregateListState> {
   private statsRef = React.createRef<HTMLUListElement>();
+  STAGES = ["Production", "Testing", "Cancelled"];
 
   constructor(props: AggregateListProps) {
     super(props);
     this.state = {
       copied: false,
-      expanded: false,
       styled: true,
-      showConfirm: false
+      showConfirm: false,
+      production: false,
+      testing: false,
+      cancelled: false
     };
     this.copy = this.copy.bind(this);
     this.toggleFormatting = this.toggleFormatting.bind(this);
@@ -40,10 +46,14 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         content={`${this.state.styled ? "Remove" : "Restore"} Formatting`}
         className={className}
       />,
-      <Button
-        key="expand"
-        callback={this.toggleExpanded}
-        content={`${this.state.expanded ? "Hide" : "Show"} Library Names`}
+      <DropdownButton
+        mainContent="Library Name Display"
+        callback={(e) => { this.toggleExpanded(e); }}
+        menuContent={
+          [`${this.STAGES.every(x => this.state[x.toLowerCase()]) ? "Hide" : "Show"} All`].concat(
+            this.STAGES.map(x => (this.state[x.toLowerCase()] ? "Hide " : "Show ") + x)
+          )
+        }
         className={className}
       />,
       <Button
@@ -91,8 +101,17 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     this.setState({ showConfirm: false });
   }
 
-  toggleExpanded() {
-    this.setState({ expanded: !this.state.expanded });
+  toggleExpanded(e) {
+    let [verb, category] = e.target.textContent.toLowerCase().split(" ");
+    let newState = {};
+    let newValue = verb === "show";
+    if (category === "all") {
+      this.STAGES.map(x => newState[x.toLowerCase()] = newValue);
+    }
+    else {
+      newState[category] = newValue;
+    }
+    this.setState({...this.state, ...newState});
   }
 
   toggleFormatting() {
@@ -123,7 +142,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
           { this.makeCategoryBar(category) }
         </section>
         {
-          this.state.expanded &&
+          this.state[category] &&
           <ul className={`${hasStyles ? "inner-stats-list " : ""}`}>
             {this.makeLibraryNameList(category)}
           </ul>
