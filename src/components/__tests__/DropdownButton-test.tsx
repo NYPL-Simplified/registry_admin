@@ -22,7 +22,7 @@ describe("DropdownButton", () => {
       />
     );
   });
-  it("opens and closes the menu", () => {
+  it("opens and closes the menu on click", () => {
     let spyToggle = Sinon.spy(wrapper.instance(), "toggle");
     wrapper.setProps({ toggle: spyToggle });
 
@@ -36,6 +36,7 @@ describe("DropdownButton", () => {
     mainButton.simulate("click");
 
     expect(spyToggle.callCount).to.equal(1);
+    expect(spyToggle.args[0][0]).to.be.true;
     expect(wrapper.state()["isOpen"]).to.be.true;
     expect(wrapper.find(".dropdown-button-menu").hasClass("hidden")).to.be.false;
     mainButton = wrapper.find(Button).at(0);
@@ -46,6 +47,42 @@ describe("DropdownButton", () => {
     mainButton.simulate("click");
 
     expect(spyToggle.callCount).to.equal(2);
+    expect(spyToggle.args[1][0]).to.be.false;
+    expect(wrapper.state()["isOpen"]).to.be.false;
+    expect(wrapper.find(".dropdown-button-menu").hasClass("hidden")).to.be.true;
+    mainButton = wrapper.find(Button).at(0);
+    [text, icon] = mainButton.prop("content");
+    expect(text).to.equal(mainContent);
+    expect(icon.props.className).to.equal("down-icon");
+
+    spyToggle.restore();
+  });
+  it("opens and closes the menu on mouseover", () => {
+    let spyToggle = Sinon.spy(wrapper.instance(), "toggle");
+    wrapper.setProps({ toggle: spyToggle });
+
+    expect(wrapper.state()["isOpen"]).to.be.false;
+    expect(wrapper.find(".dropdown-button-menu").hasClass("hidden")).to.be.true;
+    let mainButton = wrapper.find(Button).at(0);
+    let [text, icon] = mainButton.prop("content");
+    expect(text).to.equal(mainContent);
+    expect(icon.props.className).to.equal("down-icon");
+
+    wrapper.simulate("mouseenter");
+
+    expect(spyToggle.callCount).to.equal(1);
+    expect(spyToggle.args[0][0]).to.be.true;
+    expect(wrapper.state()["isOpen"]).to.be.true;
+    expect(wrapper.find(".dropdown-button-menu").hasClass("hidden")).to.be.false;
+    mainButton = wrapper.find(Button).at(0);
+    [text, icon] = mainButton.prop("content");
+    expect(text).to.equal(mainContent);
+    expect(icon.props.className).to.equal("up-icon");
+
+    wrapper.simulate("mouseleave");
+
+    expect(spyToggle.callCount).to.equal(2);
+    expect(spyToggle.args[1][0]).to.be.false;
     expect(wrapper.state()["isOpen"]).to.be.false;
     expect(wrapper.find(".dropdown-button-menu").hasClass("hidden")).to.be.true;
     mainButton = wrapper.find(Button).at(0);

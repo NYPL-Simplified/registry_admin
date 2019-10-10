@@ -24,10 +24,10 @@ export default class DropdownButton extends React.Component<DropdownButtonProps,
 
   render() {
     return (
-      <div className={`btn dropdown-button-container ${this.props.className}`} onMouseEnter={this.toggle} onMouseLeave={this.toggle}>
+      <div className={`btn dropdown-button-container ${this.props.className}`} onMouseEnter={() => { this.toggle(true); }} onMouseLeave={() => { this.toggle(false); }}>
         <Button
           content={[this.props.mainContent, <GenericWedgeIcon key="icon" className={`${this.state.isOpen ? "up" : "down"}-icon`}/>]}
-          callback={this.toggle}
+          callback={() => { this.toggle(!this.state.isOpen); }}
           className={`${this.props.className} dropdown-button-main`}
           key="dropdown-button-main"
         />
@@ -59,7 +59,7 @@ export default class DropdownButton extends React.Component<DropdownButtonProps,
       </ul>
     );
   }
-  toggle() {
-    this.setState({ isOpen: !this.state.isOpen });
+  toggle(newValue: boolean) {
+    this.setState({ isOpen: newValue });
   }
 }
