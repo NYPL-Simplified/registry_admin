@@ -46,6 +46,10 @@
   }
 
   .list-view {
+    .buttons {
+      display: flex;
+      align-items: center;
+    }
     .copy-confirmation {
       background: $green-tint;
       margin: 8px 8px 8px 0;
@@ -120,9 +124,16 @@
       }
     }
   }
-  .btn {
+  button.btn {
     width: 100%;
     margin: 0;
+    &:hover, &:active, &:focus {
+      color: $white;
+      background: $gray-brown;
+      .svgIcon {
+        fill: $white;
+      }
+    }
     .svgIcon {
       margin-top: 0;
       margin-bottom: 0;
@@ -138,9 +149,6 @@
     &.dropdown-button-main {
       display: flex;
       align-items: center;
-      &:hover, &:active {
-        color: $white;
-      }
     }
   }
 }

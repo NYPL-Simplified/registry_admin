@@ -39,6 +39,8 @@ export default class AggregateList extends React.Component<AggregateListProps, A
 
   render(): JSX.Element {
     let className = "inline squared inverted left-align";
+    let showOrHideAll: string = `${this.STAGES.every(x => this.state[x.toLowerCase()]) ? "Hide" : "Show"} All`;
+    let showOrHideStage = (stage) => `${this.state[stage.toLowerCase()] ? "Hide" : "Show"} ${stage}`;
     let buttons = [
       <Button
         key="format"
@@ -50,11 +52,10 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         mainContent="Library Name Display"
         callback={(e) => { this.toggleExpanded(e); }}
         menuContent={
-          [`${this.STAGES.every(x => this.state[x.toLowerCase()]) ? "Hide" : "Show"} All`].concat(
-            this.STAGES.map(x => (this.state[x.toLowerCase()] ? "Hide " : "Show ") + x)
-          )
+          [showOrHideAll].concat(this.STAGES.map(x => showOrHideStage(x)))
         }
         className={className}
+        key="dropdown"
       />,
       <Button
         key="copy"
@@ -107,8 +108,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     let newValue = verb === "show";
     if (category === "all") {
       this.STAGES.map(x => newState[x.toLowerCase()] = newValue);
-    }
-    else {
+    } else {
       newState[category] = newValue;
     }
     this.setState({...this.state, ...newState});

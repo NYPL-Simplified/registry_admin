@@ -14,6 +14,7 @@ export interface DropdownButtonState {
 }
 
 export default class DropdownButton extends React.Component<DropdownButtonProps, DropdownButtonState> {
+
   constructor(props: DropdownButtonProps) {
     super(props);
     this.state = { isOpen: false };
@@ -23,13 +24,14 @@ export default class DropdownButton extends React.Component<DropdownButtonProps,
 
   render() {
     return (
-      <div className={`btn dropdown-button-container ${this.props.className}`}>
+      <div className={`btn dropdown-button-container ${this.props.className}`} onMouseEnter={this.toggle} onMouseLeave={this.toggle}>
         <Button
-          content={[this.props.mainContent, <GenericWedgeIcon className={`${this.state.isOpen ? "up" : "down"}-icon`}/>]}
+          content={[this.props.mainContent, <GenericWedgeIcon key="icon" className={`${this.state.isOpen ? "up" : "down"}-icon`}/>]}
           callback={this.toggle}
-          className={this.props.className + " dropdown-button-main"}
+          className={`${this.props.className} dropdown-button-main`}
+          key="dropdown-button-main"
         />
-        { this.state.isOpen && this.renderMenu() }
+        { this.renderMenu() }
       </div>
     );
   }
@@ -45,10 +47,10 @@ export default class DropdownButton extends React.Component<DropdownButtonProps,
       );
     });
     return (
-      <ul className="dropdown-button-menu">
-        { (this.props.menuContent as any).map(item => {
+      <ul className={`dropdown-button-menu ${this.state.isOpen ? "" : "hidden"}`} key="dropdown-button-menu">
+        { (this.props.menuContent as Array<string | JSX.Element>).map((item, idx) => {
             return (
-              <li key={item}>
+              <li key={idx}>
                 {makeButton(item)}
               </li>
             );
@@ -57,7 +59,6 @@ export default class DropdownButton extends React.Component<DropdownButtonProps,
       </ul>
     );
   }
-
   toggle() {
     this.setState({ isOpen: !this.state.isOpen });
   }

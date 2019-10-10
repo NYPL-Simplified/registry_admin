@@ -25,7 +25,6 @@ export default class Stats extends React.Component<StatsProps, {}> {
       <Panel
         id="stats"
         headerText={"Aggregate Data"}
-        openByDefault={true}
         content={
           <div className="stats-panel">
             <Tabs items={tabItems} uniqueId="stats-tabs"/>

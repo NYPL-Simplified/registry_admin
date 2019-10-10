@@ -33,7 +33,7 @@ describe("AggregateList", () => {
         ` (${(getNumber(name, data) / 4 * 100)}%)`
       );
     });
-    });
+  });
   it("rounds percentages to integers", () => {
     let newData = {...data, ...{"cancelled": []}};
     wrapper.setProps({ data: newData });
@@ -59,13 +59,50 @@ describe("AggregateList", () => {
     expect(nameLists.at(2).text()).to.contain("Test Library 2");
   });
   it("has a button to toggle the list of library names", () => {
-    ["production", "testing", "cancelled"].forEach(x => expect(wrapper.state()[x]).to.be.false);
+    let stages = ["Production", "Testing", "Cancelled"];
+    let nameLists = wrapper.find(".inner-stats-list");
+    expect(nameLists.length).to.equal(0);
+    stages.forEach(x => expect(wrapper.state()[x.toLowerCase()]).to.be.false);
     expect(wrapper.find(".inner-stats-list").length).to.equal(0);
     let spyToggleExpanded = Sinon.spy(wrapper.instance(), "toggleExpanded");
     wrapper.setProps({ toggleExpanded: spyToggleExpanded });
     expect(spyToggleExpanded.callCount).to.equal(0);
 
-    // To be revisited.  Can't get the dropdown menu to actually open, even though its toggle function is definitely being called.
+    let dropdown = wrapper.find(DropdownButton);
+    let mainButton = dropdown.find("button").at(0);
+    expect(mainButton.text()).to.contain("Library Name Display");
+    let menuOptions = dropdown.find(".dropdown-button-menu").find("li");
+    expect(menuOptions.length).to.equal(4);
+    menuOptions.forEach((x, idx) => expect(x.text()).to.equal(`Show ${["All"].concat(stages)[idx]}`));
+
+    menuOptions.at(0).find("button").simulate("click");
+    expect(spyToggleExpanded.callCount).to.equal(1);
+    nameLists = wrapper.find(".inner-stats-list");
+    expect(nameLists.length).to.equal(3);
+    stages.forEach(x => expect(wrapper.state()[x.toLowerCase()]).to.be.true);
+    menuOptions.forEach((x, idx) => expect(x.text()).to.equal(`Hide ${["All"].concat(stages)[idx]}`));
+
+    menuOptions.at(1).find("button").simulate("click");
+    expect(spyToggleExpanded.callCount).to.equal(2);
+    nameLists = wrapper.find(".inner-stats-list");
+    expect(nameLists.length).to.equal(2);
+    expect(wrapper.state()["production"]).to.be.false;
+    expect(menuOptions.at(1).text()).to.equal("Show Production");
+    expect(menuOptions.at(0).text()).to.equal("Show All");
+
+    menuOptions.at(2).find("button").simulate("click");
+    expect(spyToggleExpanded.callCount).to.equal(3);
+    nameLists = wrapper.find(".inner-stats-list");
+    expect(nameLists.length).to.equal(1);
+    expect(wrapper.state()["testing"]).to.be.false;
+    expect(menuOptions.at(2).text()).to.equal("Show Testing");
+
+    menuOptions.at(3).find("button").simulate("click");
+    expect(spyToggleExpanded.callCount).to.equal(4);
+    nameLists = wrapper.find(".inner-stats-list");
+    expect(nameLists.length).to.equal(0);
+    expect(wrapper.state()["production"]).to.be.false;
+    expect(menuOptions.at(3).text()).to.equal("Show Cancelled");
 
     spyToggleExpanded.restore();
   });
