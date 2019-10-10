@@ -9,12 +9,12 @@ import { LibrariesPage } from "../LibrariesPage";
 import LibrariesList from "../LibrariesList";
 import Toggle from "../reusables/Toggle";
 import SearchForm from "../SearchForm";
+import Stats from "../Stats";
 import { Form } from "library-simplified-reusable-components";
 
 describe("LibrariesPage", () => {
   let libraries;
   let qaLib = modifyLibrary(testLibrary1, { "name": "QA Library", "uuid": "UUID3"});
-  let fetchData;
   let fetchQA;
   let search;
   let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;
@@ -25,14 +25,12 @@ describe("LibrariesPage", () => {
       modifyLibrary(testLibrary1, {registry_stage: "production"}),
       modifyLibrary(testLibrary2, {registry_stage: "production"})
     ];
-    fetchData = Sinon.stub();
     fetchQA = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
     store = buildStore();
     wrapper = Enzyme.mount(
       <LibrariesPage
         store={store}
-        fetchData={fetchData}
         fetchQA={fetchQA}
         search={search}
         libraries={{libraries}}
@@ -41,8 +39,8 @@ describe("LibrariesPage", () => {
     );
   });
 
-  it("should call fetchData on load", () => {
-    expect(fetchData.callCount).to.equal(1);
+  it("should call fetchQA on load", () => {
+    expect(fetchQA.callCount).to.equal(1);
   });
 
   it("should display a toggle", () => {
@@ -59,38 +57,34 @@ describe("LibrariesPage", () => {
   });
 
   it("should toggle", async () => {
-    expect(fetchData.callCount).to.equal(1);
-    expect(fetchQA.callCount).to.equal(0);
+    expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.false;
     expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.false;
 
     await wrapper.instance().toggleQA(true);
     wrapper.update();
 
-    expect(fetchData.callCount).to.equal(1);
+    // We already have all the data; no need for another server call.
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.true;
     expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.true;
 
     wrapper.setProps({ libraries: { libraries: libraries.concat(qaLib) }});
 
-    // We already have the production list once, so we don't need another server call.
     await wrapper.instance().toggleQA(false);
     wrapper.update();
 
-    expect(fetchData.callCount).to.equal(1);
+    // Still just filtering the existing data.
     expect(fetchQA.callCount).to.equal(1);
     expect(wrapper.state()["qa"]).to.be.false;
     expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.false;
+  });
 
-    // We've already loaded the QA list once, so we don't have to get it from the server again.
-    await wrapper.instance().toggleQA(true);
-    wrapper.update();
-
-    expect(fetchData.callCount).to.equal(1);
-    expect(fetchQA.callCount).to.equal(1);
-    expect(wrapper.state()["qa"]).to.be.true;
-    expect(wrapper.find(Toggle).first().prop("initialOn")).to.be.true;
+  it("should display a stats panel", () => {
+    let stats = wrapper.find(Stats);
+    expect(stats.length).to.equal(1);
+    expect(stats.find(".panel-title").text()).to.equal("Aggregate Data");
+    expect(stats.prop("libraries")).to.equal(wrapper.prop("libraries").libraries);
   });
 
   it("should display a search form", () => {

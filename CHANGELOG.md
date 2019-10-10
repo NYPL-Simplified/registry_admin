@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.7
+#### Added
+- Created an Aggregate Data panel to display how many libraries are in production, testing, and cancelled.
+
 ### v1.3.6
 #### Updated
 - Imported the reusable Input component and updated the SearchForm, LogInForm, and PlsIDForm components to comply with accessibility standards.

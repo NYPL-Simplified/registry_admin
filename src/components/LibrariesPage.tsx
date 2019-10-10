@@ -7,6 +7,7 @@ import ActionCreator from "../actions";
 import LibrariesList from "./LibrariesList";
 import SearchForm from "./SearchForm";
 import Filter from "./Filter";
+import Stats from "./Stats";
 import Toggle from "./reusables/Toggle";
 
 export interface LibrariesPageStateProps {
@@ -21,7 +22,6 @@ export interface LibrariesPageOwnProps {
 }
 
 export interface LibrariesPageDispatchProps {
-  fetchData: () => Promise<LibrariesData>;
   search: (data: FormData) => Promise<LibrariesData>;
   fetchQA: () => Promise<LibrariesData>;
 }
@@ -75,6 +75,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     return (
       <div className="libraries-page">
         { toggle }
+        <Stats libraries={this.props.libraries && this.props.libraries.libraries} />
         { searchForm }
         { filter }
         <LibrariesList
@@ -87,7 +88,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
   }
 
   componentWillMount() {
-    this.props.fetchData();
+    this.props.fetchQA();
   }
 
   updateLibraryList(libraryList) {
@@ -189,11 +190,6 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 
   async toggleQA(showQA: boolean) {
     this.setState({ "qa": showQA });
-    let hasAlreadyLoadedQA: boolean = this.props.libraries.libraries && !(this.props.libraries.libraries.every(l => l.stages.registry_stage === "production"));
-
-    if (!hasAlreadyLoadedQA) {
-      await this.props.fetchQA();
-    }
     if (showQA && this.state.searchTerm && !this.props.results) {
       // The user searched for a QA library, but didn't switch to QA mode until after submitting the search.
       let searchTerm = new (window as any).FormData;
@@ -209,8 +205,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 
   async clear() {
     this.setState({ showAll: true, searchTerm: "" });
-    let fetch = this.state.qa ? this.props.fetchQA : this.props.fetchData;
-    await fetch();
+    await this.props.fetchQA();
   }
 }
 
@@ -226,7 +221,6 @@ function mapStateToProps(state: State, ownProps: LibrariesPageOwnProps) {
 function mapDispatchToProps(dispatch: Function, ownProps: LibrariesPageOwnProps) {
   let actions = new ActionCreator(null);
   return {
-    fetchData: () => dispatch(actions.fetchLibraries()),
     fetchQA: () => dispatch(actions.fetchLibraries("/qa")),
     search: (data: FormData) => dispatch(actions.search(data))
   };
