@@ -30,9 +30,9 @@ export default class Stats extends React.Component<StatsProps, {}> {
   render(): JSX.Element {
     let sorted = this.sortLibraries();
     let tabItems = {
-      "Adobe Data": <AdobeTab store={this.context.store} />,
       "List": <AggregateList data={sorted} />,
-      "Charts": <Charts data={sorted} />
+      "Charts": <Charts data={sorted} />,
+      "Adobe Data": <AdobeTab store={this.context.store} />
     };
 
     return (

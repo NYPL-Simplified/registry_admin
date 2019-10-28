@@ -5,7 +5,7 @@ import * as React from "react";
 import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 import AggregateList from "../AggregateList";
 import DropdownButton from "../DropdownButton";
-import Button from "library-simplified-reusable-components";
+import CopyButton from "../CopyButton";
 
 describe("AggregateList", () => {
   let wrapper;
@@ -135,35 +135,8 @@ describe("AggregateList", () => {
     });
     spyToggleFormatting.restore();
   });
-  it("has a button to copy the data to the clipboard", () => {
-    let copy = Sinon.stub(wrapper.instance(), "copy");
-    wrapper.setProps({ copy });
-    expect(wrapper.state()["copied"]).to.be.false;
-    expect(copy.callCount).to.equal(0);
-    let button = wrapper.find(".list-view").find("button").last();
-    expect(button.text()).to.equal("Copy Data");
-    button.simulate("click");
-    expect(copy.callCount).to.equal(1);
-    wrapper.setState({ copied: true });
-    button = wrapper.find(".list-view").find("button").last();
-    expect(button.text()).to.equal("Copy Data Again");
-    copy.restore();
-  });
-  it("confirms that the data has been copied to the clipboard", () => {
-    expect(wrapper.state()["showConfirm"]).to.be.false;
-    let copyConfirm = wrapper.find(".copy-confirmation");
-    expect(copyConfirm.length).to.equal(1);
-    expect(copyConfirm.hasClass("visible")).to.be.false;
-    wrapper.setState({ showConfirm: true });
-    copyConfirm = wrapper.find(".copy-confirmation");
-    expect(copyConfirm.length).to.equal(1);
-    expect(copyConfirm.hasClass("visible")).to.be.true;
-    expect(copyConfirm.text()).to.equal("Copied to clipboard");
-    wrapper.instance().hideConfirm();
-    wrapper.update();
-    expect(wrapper.state()["showConfirm"]).to.be.false;
-    copyConfirm = wrapper.find(".copy-confirmation");
-    expect(copyConfirm.length).to.equal(1);
-    expect(copyConfirm.hasClass("visible")).to.be.false;
+  it("has a button to copy the data", () => {
+    let copyButton = wrapper.find(CopyButton);
+    expect(copyButton.length).to.equal(1);
   });
 });

@@ -2,15 +2,14 @@ import * as React from "react";
 import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
 import DropdownButton from "./DropdownButton";
+import CopyButton from "./CopyButton";
 
 export interface AggregateListProps {
   data: {[key: string]: LibraryData[]};
 }
 
 export interface AggregateListState {
-  copied: boolean;
   styled: boolean;
-  showConfirm: boolean;
   production: boolean;
   testing: boolean;
   cancelled: boolean;
@@ -23,17 +22,13 @@ export default class AggregateList extends React.Component<AggregateListProps, A
   constructor(props: AggregateListProps) {
     super(props);
     this.state = {
-      copied: false,
       styled: true,
-      showConfirm: false,
       production: false,
       testing: false,
       cancelled: false
     };
-    this.copy = this.copy.bind(this);
     this.toggleFormatting = this.toggleFormatting.bind(this);
     this.toggleExpanded = this.toggleExpanded.bind(this);
-    this.hideConfirm = this.hideConfirm.bind(this);
     this.makeLi = this.makeLi.bind(this);
   }
 
@@ -57,20 +52,12 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         className={className}
         key="dropdown"
       />,
-      <Button
-        key="copy"
-        callback={this.copy}
-        content={this.state.copied ? "Copy Data Again" : "Copy Data"}
-        className={className}
-      />
+      <CopyButton key="copy-button" element={this.statsRef.current} />
     ];
     return (
       <div className="list-view">
         <div className="buttons">
           { buttons }
-          <span
-            className={`copy-confirmation ${this.state.showConfirm ? "visible" : ""}`}
-          >Copied to clipboard</span>
         </div>
         <ul
           className="stats-list"
@@ -82,24 +69,6 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         </ul>
       </div>
     );
-  }
-
-  copy() {
-    let copyArea = this.statsRef.current;
-    copyArea.focus();
-    document.execCommand("selectAll");
-    let copy = document.execCommand("copy");
-    if (copy) {
-      document.execCommand("copy");
-      window.getSelection().removeAllRanges();
-      copyArea.blur();
-      this.setState({ copied: true, showConfirm: true });
-      setTimeout(this.hideConfirm, 5000);
-    }
-  }
-
-  hideConfirm() {
-    this.setState({ showConfirm: false });
   }
 
   toggleExpanded(e) {

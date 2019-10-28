@@ -31,7 +31,7 @@ export class AdobeTab extends React.Component<AdobeTabProps, {}> {
                   <span>{libraryName}</span>
                   <span>{this.props.data[libraryName]} ({this.getPercentage(this.props.data[libraryName])}%)</span>
                 </li>
-              )
+              );
             })
           }
         </ul>
