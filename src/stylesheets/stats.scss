@@ -104,6 +104,23 @@
       }
     }
   }
+  .adobe-data {
+    ul {
+      margin: 0;
+      padding: 10px 0;
+      list-style: none;
+      width: 60%;
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: $blue-tint;
+        border: 1px solid $blue-dark;
+        margin-bottom: 5px;
+      }
+    }
+  }
 }
 
 .dropdown-button-container {

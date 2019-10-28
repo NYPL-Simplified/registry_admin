@@ -20,6 +20,8 @@ export default class ActionCreator extends BaseActionCreator {
 
   static readonly LOG_IN = "LOG_IN";
 
+  static readonly ADOBE_DATA = "ADOBE_DATA";
+
   constructor(fetcher?: DataFetcher) {
     fetcher = fetcher || new DataFetcher();
     super(fetcher);
@@ -173,6 +175,11 @@ export default class ActionCreator extends BaseActionCreator {
   logIn(data: FormData) {
     let url = "/admin/log_in";
     return this.postForm(ActionCreator.LOG_IN, url, data).bind(this);
+  }
+
+  fetchAdobeData() {
+    let url = "/admin/libraries/adobe_data";
+    return this.fetchJSON<any>(ActionCreator.ADOBE_DATA, url).bind(this);
   }
 
 }

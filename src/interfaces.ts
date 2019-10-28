@@ -39,3 +39,7 @@ export interface AdminData {
 export interface ValidationData {
   error?: FetchErrorData;
 }
+
+export interface AdobeData {
+  data: {[key: string]: number};
+}
