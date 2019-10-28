@@ -45,7 +45,7 @@
     }
   }
 
-  .list-view {
+  .list-view, .adobe-data {
     .buttons {
       display: flex;
       align-items: center;
@@ -99,7 +99,7 @@
       padding: 10px 0;
       list-style: none;
       width: 60%;
-      li {
+      .adobe-data-li {
         display: flex;
         justify-content: space-between;
         align-items: center;

@@ -1,5 +1,6 @@
 import * as React from "react";
 import CopyButton from "./CopyButton";
+import { Button } from "library-simplified-reusable-components";
 import { LibraryData, LibrariesData, AdobeData } from "../interfaces";
 import { Store } from "redux";
 import { State } from "../reducers/index";
@@ -18,14 +19,37 @@ export interface AdobeTabStateProps {
   data: AdobeData;
 }
 
+export interface AdobeTabState {
+  styled: boolean;
+}
+
 export interface AdobeTabProps extends AdobeTabOwnProps, AdobeTabDispatchProps, AdobeTabStateProps {};
 
-export class AdobeTab extends React.Component<AdobeTabProps, {}> {
+export class AdobeTab extends React.Component<AdobeTabProps, AdobeTabState> {
   private dataRef = React.createRef<HTMLUListElement>();
+  constructor(props: AdobeTabProps) {
+    super(props);
+    this.state = { styled: true };
+    this.toggleFormatting = this.toggleFormatting.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.fetchAdobeData();
+  }
+
   render(): JSX.Element {
+    let hasStyles = this.state.styled;
     return (
       <div className="adobe-data">
-        <CopyButton element={this.dataRef.current} />
+        <div className="buttons">
+          <Button
+            key="format"
+            callback={this.toggleFormatting}
+            content={`${this.state.styled ? "Remove" : "Restore"} Formatting`}
+            className="inline squared inverted left-align"
+          />
+          <CopyButton element={this.dataRef.current} />
+        </div>
         <ul
           ref={this.dataRef}
           contentEditable
@@ -33,9 +57,9 @@ export class AdobeTab extends React.Component<AdobeTabProps, {}> {
         >
           { this.props.data && Object.keys(this.props.data).map((libraryName) => {
               return (
-                <li key={libraryName}>
-                  <span>{libraryName}</span>
-                  <span>{this.props.data[libraryName]} ({this.getPercentage(this.props.data[libraryName])}%)</span>
+                <li key={libraryName} className={hasStyles ? "adobe-data-li" : ""}>
+                  <span>{libraryName}: {this.props.data[libraryName]} </span>
+                  <span>({this.getPercentage(this.props.data[libraryName])}%)</span>
                 </li>
               );
             })
@@ -51,8 +75,8 @@ export class AdobeTab extends React.Component<AdobeTabProps, {}> {
     return percentage;
   }
 
-  componentWillMount() {
-    this.props.fetchAdobeData();
+  toggleFormatting() {
+    this.setState({ styled: !this.state.styled });
   }
 }
 
