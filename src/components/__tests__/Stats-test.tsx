@@ -8,18 +8,13 @@ import Stats from "../Stats";
 import AggregateList from "../AggregateList";
 import Charts from "../Charts";
 import AdobeTab from "../AdobeTab";
-import buildStore from "../../store";
 
 describe("Stats", () => {
   let wrapper;
-  let context;
-  let store;
   let productionLibrary1 = modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" });
   let productionLibrary2 = modifyLibrary(productionLibrary1, { "name": "Production Library 2" });
   beforeEach(() => {
-    store = buildStore();
-    context = { store };
-    wrapper = Enzyme.mount(<Stats libraries={[testLibrary1, testLibrary2, productionLibrary1, productionLibrary2]}/>, { context });
+    wrapper = Enzyme.mount(<Stats libraries={[testLibrary1, testLibrary2, productionLibrary1, productionLibrary2]}/>);
   });
 
   it("renders a panel with a header and tabs", () => {
