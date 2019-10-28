@@ -7,6 +7,7 @@ import { Panel, Tabs } from "library-simplified-reusable-components";
 import Stats from "../Stats";
 import AggregateList from "../AggregateList";
 import Charts from "../Charts";
+import AdobeTab from "../AdobeTab";
 import buildStore from "../../store";
 
 describe("Stats", () => {
@@ -30,6 +31,7 @@ describe("Stats", () => {
     expect(tabs.length).to.equal(1);
     expect(tabs.find(".tab-nav").at(0).text()).to.equal("List");
     expect(tabs.find(".tab-nav").at(1).text()).to.equal("Charts");
+    expect(tabs.find(".tab-nav").at(2).text()).to.equal("Adobe Data");
   });
 
   it("sorts a list of libraries by their status", () => {
@@ -49,5 +51,10 @@ describe("Stats", () => {
     let charts = wrapper.find(Charts);
     expect(charts.length).to.equal(1);
     expect(charts.prop("data")).to.eql(wrapper.instance().sortLibraries());
+  });
+
+  it("renders an AdobeTab component", () => {
+    let adobeTab = wrapper.find(AdobeTab);
+    expect(adobeTab.length).to.equal(1);
   });
 });

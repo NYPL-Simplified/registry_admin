@@ -16,6 +16,7 @@ describe("LibrariesPage", () => {
   let libraries;
   let qaLib = modifyLibrary(testLibrary1, { "name": "QA Library", "uuid": "UUID3"});
   let fetchQA;
+  let fetchAdobeData;
   let search;
   let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;
   let store;
@@ -26,12 +27,14 @@ describe("LibrariesPage", () => {
       modifyLibrary(testLibrary2, {registry_stage: "production"})
     ];
     fetchQA = Sinon.stub();
+    fetchAdobeData = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
     store = buildStore();
     wrapper = Enzyme.mount(
       <LibrariesPage
         store={store}
         fetchQA={fetchQA}
+        fetchAdobeData={fetchAdobeData}
         search={search}
         libraries={{libraries}}
         isLoaded={true}

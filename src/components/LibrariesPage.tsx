@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Store, Reducer } from "redux";
 import { State } from "../reducers/index";
-import { LibrariesData, LibraryData } from "../interfaces";
+import { LibrariesData, LibraryData, AdobeData } from "../interfaces";
 import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import LibrariesList from "./LibrariesList";
@@ -15,6 +15,7 @@ export interface LibrariesPageStateProps {
   results?: LibrariesData;
   updatedLibrary?: LibraryData;
   isLoaded?: boolean;
+  adobeData?: AdobeData;
 }
 
 export interface LibrariesPageOwnProps {
@@ -24,6 +25,7 @@ export interface LibrariesPageOwnProps {
 export interface LibrariesPageDispatchProps {
   search: (data: FormData) => Promise<LibrariesData>;
   fetchQA: () => Promise<LibrariesData>;
+  fetchAdobeData: () => Promise<AdobeData>;
 }
 
 export interface LibrariesPageState {
@@ -75,7 +77,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     return (
       <div className="libraries-page">
         { toggle }
-        <Stats libraries={this.props.libraries && this.props.libraries.libraries} />
+        <Stats libraries={this.props.libraries && this.props.libraries.libraries} adobeData={this.props.adobeData} />
         { searchForm }
         { filter }
         <LibrariesList
@@ -89,6 +91,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
 
   componentWillMount() {
     this.props.fetchQA();
+    this.props.fetchAdobeData();
   }
 
   updateLibraryList(libraryList) {
@@ -214,7 +217,8 @@ function mapStateToProps(state: State, ownProps: LibrariesPageOwnProps) {
     libraries: state.libraries && state.libraries.data,
     updatedLibrary: state.library && state.library.data,
     results: state.results && state.results.data,
-    isLoaded: state.libraries && state.libraries.isLoaded
+    isLoaded: state.libraries && state.libraries.isLoaded,
+    adobeData: state.adobeData && state.adobeData.data
   };
 }
 
@@ -222,6 +226,7 @@ function mapDispatchToProps(dispatch: Function, ownProps: LibrariesPageOwnProps)
   let actions = new ActionCreator(null);
   return {
     fetchQA: () => dispatch(actions.fetchLibraries("/qa")),
+    fetchAdobeData: () => dispatch(actions.fetchAdobeData()),
     search: (data: FormData) => dispatch(actions.search(data))
   };
 }

@@ -1,27 +1,16 @@
 import * as React from "react";
 import { Panel, Tabs } from "library-simplified-reusable-components";
-import { LibraryData } from "../interfaces";
+import { LibraryData, AdobeData } from "../interfaces";
 import AggregateList from "./AggregateList";
 import Charts from "./Charts";
 import AdobeTab from "./AdobeTab";
-import { Store } from "redux";
-import { State } from "../reducers/index";
-import * as PropTypes from "prop-types";
 
 export interface StatsProps {
   libraries?: LibraryData[];
-}
-
-export interface StatsContext {
-  store: Store<State>;
+  adobeData?: AdobeData;
 }
 
 export default class Stats extends React.Component<StatsProps, {}> {
-  context: StatsContext;
-  static contextTypes: React.ValidationMap<StatsContext> = {
-    store: PropTypes.object.isRequired
-  };
-
   constructor(props: StatsProps) {
     super(props);
     this.sortLibraries = this.sortLibraries.bind(this);
@@ -30,11 +19,10 @@ export default class Stats extends React.Component<StatsProps, {}> {
   render(): JSX.Element {
     let sorted = this.sortLibraries();
     let tabItems = {
-      "Adobe Data": <AdobeTab store={this.context.store} />,
       "List": <AggregateList data={sorted} />,
-      "Charts": <Charts data={sorted} />
+      "Charts": <Charts data={sorted} />,
+      "Adobe Data": <AdobeTab data={this.props.adobeData} />
     };
-
     return (
       <Panel
         id="stats"
