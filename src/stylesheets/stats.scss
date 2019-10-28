@@ -50,18 +50,6 @@
       display: flex;
       align-items: center;
     }
-    .copy-confirmation {
-      background: $green-tint;
-      margin: 8px 8px 8px 0;
-      padding: 6px 12px;
-      color: $green-dark;
-      border: 1px solid $green-dark;
-      opacity: 0;
-      transition: opacity 1s linear;
-      &.visible {
-        opacity: 1;
-      }
-    }
     .stats-list {
       pointer-events: none;
       margin: 0;
@@ -106,6 +94,7 @@
   }
   .adobe-data {
     ul {
+      pointer-events: none;
       margin: 0;
       padding: 10px 0;
       list-style: none;
@@ -167,5 +156,20 @@
       display: flex;
       align-items: center;
     }
+  }
+}
+
+.copy-confirmation {
+  display: inline-block;
+  vertical-align: middle;
+  background: $green-tint;
+  margin: 8px 8px 8px 0;
+  padding: 6px 12px;
+  color: $green-dark;
+  border: 1px solid $green-dark;
+  opacity: 0;
+  transition: opacity 1s linear;
+  &.visible {
+    opacity: 1;
   }
 }

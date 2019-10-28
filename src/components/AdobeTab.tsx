@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "library-simplified-reusable-components";
+import CopyButton from "./CopyButton";
 import { LibraryData, LibrariesData, AdobeData } from "../interfaces";
 import { Store } from "redux";
 import { State } from "../reducers/index";
@@ -21,10 +21,16 @@ export interface AdobeTabStateProps {
 export interface AdobeTabProps extends AdobeTabOwnProps, AdobeTabDispatchProps, AdobeTabStateProps {};
 
 export class AdobeTab extends React.Component<AdobeTabProps, {}> {
+  private dataRef = React.createRef<HTMLUListElement>();
   render(): JSX.Element {
     return (
       <div className="adobe-data">
-        <ul>
+        <CopyButton element={this.dataRef.current} />
+        <ul
+          ref={this.dataRef}
+          contentEditable
+          suppressContentEditableWarning
+        >
           { this.props.data && Object.keys(this.props.data).map((libraryName) => {
               return (
                 <li key={libraryName}>
