@@ -44,12 +44,14 @@ describe("LibraryDetailPage", () => {
 
     expect(basicInfoCall.args[0]).to.equal(library.basic_info);
     expect(basicInfoCall.returnValue.type).to.equal("ul");
-    expect(basicInfoCall.returnValue.props.children.length).to.equal(2);
-    let [name, short_name] = basicInfoCall.returnValue.props.children;
+    expect(basicInfoCall.returnValue.props.children.length).to.equal(3);
+    let [name, short_name, number_of_patrons] = basicInfoCall.returnValue.props.children;
     expect(name.props.label).to.equal("name");
     expect(name.props.value).to.equal("Test Library 1");
     expect(short_name.props.label).to.equal("short_name");
     expect(short_name.props.value).to.equal("lib1");
+    expect(number_of_patrons.props.label).to.equal("number_of_patrons");
+    expect(number_of_patrons.props.value).to.equal("3");
 
     expect(urlsContactCall.args[0]).to.equal(library.urls_and_contact);
     expect(urlsContactCall.returnValue.type).to.equal("ul");
@@ -79,7 +81,7 @@ describe("LibraryDetailPage", () => {
     expect(list.length).to.equal(3);
 
     let basicInfoItems = list.at(0).find("li");
-    expect(basicInfoItems.length).to.equal(2);
+    expect(basicInfoItems.length).to.equal(3);
 
     let contactUrlItems = list.at(1).find("li");
     expect(contactUrlItems.length).to.equal(4);

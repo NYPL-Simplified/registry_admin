@@ -1,13 +1,12 @@
 import * as React from "react";
 import { Panel, Tabs } from "library-simplified-reusable-components";
-import { LibraryData, AdobeData } from "../interfaces";
+import { LibraryData } from "../interfaces";
 import AggregateList from "./AggregateList";
 import Charts from "./Charts";
 import AdobeTab from "./AdobeTab";
 
 export interface StatsProps {
   libraries?: LibraryData[];
-  adobeData?: AdobeData;
 }
 
 export default class Stats extends React.Component<StatsProps, {}> {
@@ -21,7 +20,7 @@ export default class Stats extends React.Component<StatsProps, {}> {
     let tabItems = {
       "List": <AggregateList data={sorted} />,
       "Charts": <Charts data={sorted} />,
-      "Adobe Data": <AdobeTab data={this.props.adobeData} />
+      "Adobe Data": <AdobeTab data={sorted.production} />
     };
     return (
       <Panel

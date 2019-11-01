@@ -2,18 +2,22 @@
   .reusable-tabs {
     margin: 0;
     .tab-nav button {
-      width: 120px;
+      min-width: 120px;
     }
     .tab-content {
       min-height: 452px;
       padding: 10px;
     }
   }
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
   .recharts-bar-rectangles {
     height: 100%;
     width: 100%;
   }
-  .chart-view {
+  .chart-view, .adobe-charts {
     display: flex;
   }
   .recharts-responsive-container {
@@ -23,16 +27,20 @@
   .recharts-surface, .recharts-bar, .recharts-bar-rectangles {
     height: 100%;
     width: 100%;
-    .recharts-pie-sector:first-child .recharts-sector, .recharts-bar-rectangle:first-child .recharts-rectangle {
-      fill: tint($green-dark, 30%);
-    }
-    .recharts-pie-sector:nth-child(2) .recharts-sector, .recharts-bar-rectangle:nth-child(2) .recharts-rectangle {
-      fill: tint($orange, 30%);
-    }
-    .recharts-pie-sector:nth-child(3) .recharts-sector, .recharts-bar-rectangle:nth-child(3) .recharts-rectangle  {
-      fill: lighten($red, 10);
-    }
   }
+  .chart-view .recharts-pie-sector:first-child .recharts-sector, .chart-view .recharts-bar-rectangle:first-child .recharts-rectangle {
+    fill: tint($green-dark, 30%);
+  }
+  .chart-view .recharts-pie-sector:nth-child(2) .recharts-sector, .chart-view .recharts-bar-rectangle:nth-child(2) .recharts-rectangle {
+    fill: tint($orange, 30%);
+  }
+  .chart-view .recharts-pie-sector:nth-child(3) .recharts-sector, .chart-view .recharts-bar-rectangle:nth-child(3) .recharts-rectangle  {
+    fill: lighten($red, 10);
+  }
+  .adobe-charts .recharts-sector, .adobe-charts .recharts-rectangle {
+    fill: $blue-dark;
+  }
+
   .recharts-default-legend {
     li.recharts-legend-item {
       width: 100%;
@@ -45,11 +53,7 @@
     }
   }
 
-  .list-view, .adobe-data {
-    .buttons {
-      display: flex;
-      align-items: center;
-    }
+  .list-view {
     .stats-list {
       pointer-events: none;
       margin: 0;
@@ -108,6 +112,11 @@
         border: 1px solid $blue-dark;
         margin-bottom: 5px;
       }
+    }
+  }
+  .adobe-charts {
+    svg.recharts-surface {
+      min-width: 100%;
     }
   }
 }

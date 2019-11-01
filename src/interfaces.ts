@@ -9,7 +9,8 @@ export interface LibraryData {
     name: string,
     short_name: string,
     timestamp?: string,
-    pls_id?: string
+    pls_id?: string,
+    number_of_patrons?: string
   };
   urls_and_contact: {
     authentication_url: string,
@@ -38,8 +39,4 @@ export interface AdminData {
 
 export interface ValidationData {
   error?: FetchErrorData;
-}
-
-export interface AdobeData {
-  data: {[key: string]: number};
 }

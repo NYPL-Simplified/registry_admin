@@ -4,22 +4,23 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import AdobeTab from "../AdobeTab";
 import CopyButton from "../CopyButton";
+import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 
 describe("AdobeTab", () => {
   let wrapper;
   let data;
 
   beforeEach(() => {
-    data = { "Library 1": 3, "Library 2": 1, "Library 3": 2 };
+    data = [testLibrary1, testLibrary2, modifyLibrary(testLibrary1, { name: "Test Library 3", number_of_patrons: "2" })];
     wrapper = Enzyme.mount(<AdobeTab data={data} />);
   });
 
   it("renders the data", () => {
     let listItems = wrapper.find("li");
     expect(listItems.length).to.equal(3);
-    expect(listItems.at(0).text()).to.equal("Library 1: 3 (50%)");
-    expect(listItems.at(1).text()).to.equal("Library 2: 1 (17%)");
-    expect(listItems.at(2).text()).to.equal("Library 3: 2 (33%)");
+    expect(listItems.at(0).text()).to.equal("Test Library 1: 3 (50%)");
+    expect(listItems.at(1).text()).to.equal("Test Library 2: 1 (17%)");
+    expect(listItems.at(2).text()).to.equal("Test Library 3: 2 (33%)");
   });
 
   it("renders a CopyButton", () => {
