@@ -2,6 +2,7 @@ import * as React from "react";
 import CopyButton from "./CopyButton";
 import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
+import { getPercentage } from "../utils/sharedFunctions";
 
 export interface AdobeTabProps {
   data: LibraryData[];
@@ -43,7 +44,7 @@ export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabSta
               return (
                 <li key={name} className={hasStyles ? "adobe-data-li" : ""}>
                   <span>{name}: {numberOfPatrons} </span>
-                  <span>({this.getPercentage(numberOfPatrons)}%)</span>
+                  <span>({getPercentage(numberOfPatrons, this.props.data.map(l => l.basic_info.number_of_patrons), true)})</span>
                 </li>
               );
             })
@@ -51,12 +52,6 @@ export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabSta
         </ul>
       </div>
     );
-  }
-
-  getPercentage(x: number): number {
-    let total = this.props.data.map(l => parseInt(l.basic_info.number_of_patrons)).reduce((x, y) => x + y);
-    let percentage = Math.round((x / total) * 100);
-    return percentage;
   }
 
   toggleFormatting() {

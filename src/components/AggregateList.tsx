@@ -3,6 +3,7 @@ import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
 import DropdownButton from "./DropdownButton";
 import CopyButton from "./CopyButton";
+import { getPercentage } from "../utils/sharedFunctions";
 
 export interface AggregateListProps {
   data: {[key: string]: LibraryData[]};
@@ -88,13 +89,11 @@ export default class AggregateList extends React.Component<AggregateListProps, A
   }
 
   makeCategoryBar(category: string): JSX.Element[] {
-    let total = Object.values(this.props.data).map(x => (x as any).length).reduce((x, y) =>  x + y);
-    let getPercentage = x => Math.round((x / total) * 100);
     let name = category.replace(category[0], category[0].toUpperCase());
     let length = this.props.data[category].length;
     return [
       <span key={name}>{name}: {length}</span>,
-      <span key={`${name}-${length}`}> ({getPercentage(length)}%)</span>
+      <span key={`${name}-${length}`}> ({getPercentage(length, Object.values(this.props.data), true)})</span>
     ];
   }
 
