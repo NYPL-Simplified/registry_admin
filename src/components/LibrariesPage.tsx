@@ -214,7 +214,7 @@ function mapStateToProps(state: State, ownProps: LibrariesPageOwnProps) {
     libraries: state.libraries && state.libraries.data,
     updatedLibrary: state.library && state.library.data,
     results: state.results && state.results.data,
-    isLoaded: state.libraries && state.libraries.isLoaded,
+    isLoaded: state.libraries && state.libraries.isLoaded
   };
 }
 
