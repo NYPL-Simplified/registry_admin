@@ -91,9 +91,10 @@ export default class AggregateList extends React.Component<AggregateListProps, A
   makeCategoryBar(category: string): JSX.Element[] {
     let name = category.replace(category[0], category[0].toUpperCase());
     let length = this.props.data[category].length;
+    let allLengths = Object.values(this.props.data).map(x => x.length);
     return [
       <span key={name}>{name}: {length}</span>,
-      <span key={`${name}-${length}`}> ({getPercentage(length, Object.values(this.props.data), true)})</span>
+      <span key={`${name}-${length}`}> ({getPercentage(length, allLengths, true)})</span>
     ];
   }
 

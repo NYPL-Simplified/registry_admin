@@ -23,6 +23,16 @@ describe("AdobeTab", () => {
     expect(listItems.at(2).text()).to.equal("Test Library 3: 2 (33%)");
   });
 
+  it("handles the case in which there are no patrons", () => {
+    data = data.map(x => modifyLibrary(x, {number_of_patrons: "0"}));
+    wrapper.setProps({ data });
+    let listItems = wrapper.find("li");
+    expect(listItems.length).to.equal(3);
+    listItems.map((item, idx) => {
+      expect(item.text()).to.equal(`Test Library ${idx + 1}: 0 (0%)`);
+    });
+  });
+
   it("renders a CopyButton", () => {
     let copyButton = wrapper.find(CopyButton);
     expect(copyButton.length).to.equal(1);
