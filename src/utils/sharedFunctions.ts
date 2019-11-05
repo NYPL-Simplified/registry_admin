@@ -5,7 +5,7 @@
 export function getPercentage(x: number, outOf: number | string | Array<string | number>, asString: boolean = false) {
   let total;
   if (Array.isArray(outOf)) {
-    total = outOf.map((el) => { return parseInt(el as string); }).reduce((accum, next) => accum + next);
+    total = outOf.map(el => parseInt(el as string)).reduce((accum, next) => accum + next);
   } else {
     total = parseInt(outOf as string);
   }
