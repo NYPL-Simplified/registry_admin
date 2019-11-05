@@ -2,18 +2,22 @@
   .reusable-tabs {
     margin: 0;
     .tab-nav button {
-      width: 120px;
+      min-width: 120px;
     }
     .tab-content {
       min-height: 452px;
       padding: 10px;
     }
   }
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
   .recharts-bar-rectangles {
     height: 100%;
     width: 100%;
   }
-  .chart-view {
+  .chart-view, .adobe-charts {
     display: flex;
   }
   .recharts-responsive-container {
@@ -23,16 +27,20 @@
   .recharts-surface, .recharts-bar, .recharts-bar-rectangles {
     height: 100%;
     width: 100%;
-    .recharts-pie-sector:first-child .recharts-sector, .recharts-bar-rectangle:first-child .recharts-rectangle {
-      fill: tint($green-dark, 30%);
-    }
-    .recharts-pie-sector:nth-child(2) .recharts-sector, .recharts-bar-rectangle:nth-child(2) .recharts-rectangle {
-      fill: tint($orange, 30%);
-    }
-    .recharts-pie-sector:nth-child(3) .recharts-sector, .recharts-bar-rectangle:nth-child(3) .recharts-rectangle  {
-      fill: lighten($red, 10);
-    }
   }
+  .chart-view .recharts-pie-sector:first-child .recharts-sector, .chart-view .recharts-bar-rectangle:first-child .recharts-rectangle {
+    fill: tint($green-dark, 30%);
+  }
+  .chart-view .recharts-pie-sector:nth-child(2) .recharts-sector, .chart-view .recharts-bar-rectangle:nth-child(2) .recharts-rectangle {
+    fill: tint($orange, 30%);
+  }
+  .chart-view .recharts-pie-sector:nth-child(3) .recharts-sector, .chart-view .recharts-bar-rectangle:nth-child(3) .recharts-rectangle  {
+    fill: lighten($red, 10);
+  }
+  .adobe-charts .recharts-sector, .adobe-charts .recharts-rectangle {
+    fill: $blue-dark;
+  }
+
   .recharts-default-legend {
     li.recharts-legend-item {
       width: 100%;
@@ -46,22 +54,6 @@
   }
 
   .list-view {
-    .buttons {
-      display: flex;
-      align-items: center;
-    }
-    .copy-confirmation {
-      background: $green-tint;
-      margin: 8px 8px 8px 0;
-      padding: 6px 12px;
-      color: $green-dark;
-      border: 1px solid $green-dark;
-      opacity: 0;
-      transition: opacity 1s linear;
-      &.visible {
-        opacity: 1;
-      }
-    }
     .stats-list {
       pointer-events: none;
       margin: 0;
@@ -102,6 +94,29 @@
       ul:not(.inner-stats-list) {
         list-style: none;
       }
+    }
+  }
+  .adobe-data {
+    ul {
+      pointer-events: none;
+      margin: 0;
+      padding: 10px 0;
+      list-style: none;
+      width: 60%;
+      .adobe-data-li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: $blue-tint;
+        border: 1px solid $blue-dark;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .adobe-charts {
+    svg.recharts-surface {
+      min-width: 100%;
     }
   }
 }
@@ -150,5 +165,20 @@
       display: flex;
       align-items: center;
     }
+  }
+}
+
+.copy-confirmation {
+  display: inline-block;
+  vertical-align: middle;
+  background: $green-tint;
+  margin: 8px 8px 8px 0;
+  padding: 6px 12px;
+  color: $green-dark;
+  border: 1px solid $green-dark;
+  opacity: 0;
+  transition: opacity 1s linear;
+  &.visible {
+    opacity: 1;
   }
 }

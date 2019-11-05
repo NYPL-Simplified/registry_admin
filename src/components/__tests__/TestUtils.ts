@@ -8,7 +8,8 @@ export const testLibrary1: LibraryData = {
   basic_info: {
     "name": "Test Library 1",
     "short_name": "lib1",
-    "description": undefined
+    "description": undefined,
+    "number_of_patrons": "3"
   },
   urls_and_contact: {
     "authentication_url": "auth1",
@@ -31,6 +32,7 @@ export const testLibrary2: LibraryData = {
   basic_info: {
     "name": "Test Library 2",
     "short_name": "lib2",
+    "number_of_patrons": "1"
   },
   urls_and_contact: {
     "authentication_url": "auth2",

@@ -40,8 +40,8 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     this.renderItems = this.renderItems.bind(this);
     this.renderStages = this.renderStages.bind(this);
     this.state = {
-      libraryStage: this.props.library.stages.library_stage,
-      registryStage: this.props.library.stages.registry_stage,
+      libraryStage: this.props.library && this.props.library.stages.library_stage,
+      registryStage: this.props.library && this.props.library.stages.registry_stage
     };
   }
 

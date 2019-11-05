@@ -174,5 +174,4 @@ export default class ActionCreator extends BaseActionCreator {
     let url = "/admin/log_in";
     return this.postForm(ActionCreator.LOG_IN, url, data).bind(this);
   }
-
 }

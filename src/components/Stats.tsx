@@ -3,6 +3,7 @@ import { Panel, Tabs } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
 import AggregateList from "./AggregateList";
 import Charts from "./Charts";
+import AdobeTab from "./AdobeTab";
 
 export interface StatsProps {
   libraries?: LibraryData[];
@@ -18,9 +19,9 @@ export default class Stats extends React.Component<StatsProps, {}> {
     let sorted = this.sortLibraries();
     let tabItems = {
       "List": <AggregateList data={sorted} />,
-      "Charts": <Charts data={sorted} />
+      "Charts": <Charts data={sorted} />,
+      "Adobe Data": <AdobeTab data={sorted.production} />
     };
-
     return (
       <Panel
         id="stats"
