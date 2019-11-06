@@ -1,5 +1,9 @@
 ## Changelog
 
+###v1.3.9
+#### Updated
+- Upgraded to v1.3.17 of library-simplified-reusable-components.
+
 ###v1.3.8
 #### Added
 - Added a third tab to the Aggregate Data panel and a new item to the library detail component, displaying information about how many Adobe Account IDs are associated with each production library.
