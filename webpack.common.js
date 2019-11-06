@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -20,7 +19,12 @@ var config = {
   plugins: [
     new CleanWebpackPlugin(),
     // Extract separate css file.
-    new MiniCssExtractPlugin({ filename: "registry-admin.css" })
+    new MiniCssExtractPlugin({ filename: "registry-admin.css" }),
+    // Set a local global variable in the app that will be used only
+    // for testing AXE in development mode.
+    new webpack.DefinePlugin({
+      "process.env.TEST_AXE": JSON.stringify(process.env.TEST_AXE)
+    })
   ],
   optimization: {
     minimizer: [new TerserPlugin({
