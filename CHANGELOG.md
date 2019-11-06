@@ -3,6 +3,7 @@
 ### v1.3.9
 #### Added
 - Added `react-axe` to test for accessibility.
+- Updated the `opds-web-client` package to version 0.2.10.
 
 ### v1.3.8
 #### Added
