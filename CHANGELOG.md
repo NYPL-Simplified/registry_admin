@@ -1,9 +1,13 @@
 ## Changelog
 
-### v1.3.9
+### v1.3.10
 #### Added
 - Added `react-axe` to test for accessibility.
 - Updated the `opds-web-client` package to version 0.2.10.
+
+### v1.3.9
+#### Updated
+- Upgraded to v1.3.17 of library-simplified-reusable-components.
 
 ### v1.3.8
 #### Added
