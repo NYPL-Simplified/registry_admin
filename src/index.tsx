@@ -17,6 +17,14 @@ class RegistryAdmin {
     div.id = "landing-page";
     document.getElementsByTagName("body")[0].appendChild(div);
 
+    // `react-axe` should only run in development and testing mode.
+    // Running this is resource intensive and should only be used to test
+    // for accessibility and not while active development.
+    if (process.env.TEST_AXE === 'true') {
+      let axe = require('react-axe');
+      axe(React, ReactDOM, 1000);
+    }
+
     ReactDOM.render(
       <ContextProvider {...config}>
         <BrowserRouter>

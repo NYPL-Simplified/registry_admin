@@ -1,6 +1,10 @@
 ## Changelog
 
-###v1.3.8
+### v1.3.9
+#### Added
+- `react-axe` to test for accessibility.
+
+### v1.3.8
 #### Added
 - Added a third tab to the Aggregate Data panel and a new item to the library detail component, displaying information about how many Adobe Account IDs are associated with each production library.
 
