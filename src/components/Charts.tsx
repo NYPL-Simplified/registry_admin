@@ -4,22 +4,30 @@ import { LibraryData } from "../interfaces";
 
 export interface ChartsProps {
   data: {[key: string]: LibraryData[]};
+  width?: string | number;
+  height?: string | number;
 }
 
 export default class Charts extends React.Component<ChartsProps, {}> {
+  static defaultProps = {
+    width: "50%",
+    height: 400
+  };
+
   render() {
     const colors = {
       "production": "#809F69",
       "testing": "#FFCD61",
       "cancelled": "#DA5D62"
     };
+    const { width, height } = this.props;
     let chartData = Object.keys(this.props.data).map((category) => {
       return { "name": category, "value": this.props.data[category].length };
     });
 
     return (
         <div className="chart-view">
-          <ResponsiveContainer width={400} height={400}>
+          <ResponsiveContainer width={width} height={height}>
             <PieChart ref="pie-chart-svg">
               <Legend
                 payload={ chartData.map(
@@ -40,7 +48,7 @@ export default class Charts extends React.Component<ChartsProps, {}> {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-          <ResponsiveContainer width={400} height={400}>
+          <ResponsiveContainer width={width} height={height}>
             <BarChart ref="bar-chart-svg" width={400} height={400} data={chartData}>
               <CartesianGrid strokeDasharray="5 5" />
               <XAxis dataKey="name" interval={0} />

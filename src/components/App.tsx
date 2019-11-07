@@ -38,14 +38,16 @@ export default class App extends React.Component<AppProps, {}> {
           logOut="/admin/log_out"
           loggedIn={!!username}
         />
-        <Route
-          path="/admin"
-          render={() => (
-            username ?
-              <LibrariesListContainer /> :
-              <LogInForm store={store} />
-          )}
-        />
+        <main>
+          <Route
+            path="/admin"
+            render={() => (
+              username ?
+                <LibrariesListContainer /> :
+                <LogInForm store={store} />
+            )}
+          />
+        </main>
       </div>
     );
   }

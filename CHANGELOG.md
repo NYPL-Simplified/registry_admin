@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.11
+#### Fixed
+- Fixed accessibility issues found by `react-axe`.
+
 ### v1.3.10
 #### Added
 - Added `react-axe` to test for accessibility.

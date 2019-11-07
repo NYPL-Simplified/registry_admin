@@ -16,7 +16,7 @@ describe("Charts", () => {
       "testing": [testLibrary1],
       "cancelled": [testLibrary2]
     };
-    wrapper = Enzyme.mount(<Charts data={data} />);
+    wrapper = Enzyme.mount(<Charts data={data} width={400} />);
   });
   it("renders a pie chart", () => {
     let pieChart = wrapper.find(".chart-view").children().at(0).find(".recharts-wrapper");
