@@ -40,6 +40,11 @@ describe("LibraryStageItem", () => {
     expect(options.at(1).html()).to.contain("Production");
     expect(options.at(2).html()).to.contain("Cancelled");
   });
+  it("should have an aria-label", () => {
+    let select = wrapper.find("select");
+
+    expect(select.prop("aria-label")).to.equal(`Select ${label}`);
+  });
   it("should update when the value prop changes", () => {
     wrapper.setProps({ value: "production" });
 
