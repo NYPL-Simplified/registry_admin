@@ -1,5 +1,9 @@
 ## Changelog
 
+###v1.3.11
+#### Fixed
+- Made it possible to change the UUID attribute within the modifyLibrary function.
+
 ### v1.3.10
 #### Added
 - Added `react-axe` to test for accessibility.
