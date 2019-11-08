@@ -126,7 +126,6 @@ describe("TestUtils", () => {
     let baseLibrary = testLibrary1;
     expect(baseLibrary.uuid).to.equal("UUID1");
     let updatedLibrary = modifyLibrary(baseLibrary, {uuid: "UUID2"});
-    console.log(updatedLibrary);
     expect(updatedLibrary.uuid).to.equal("UUID2");
   });
 });
