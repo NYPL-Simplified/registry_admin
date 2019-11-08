@@ -3,6 +3,7 @@
 ### v1.3.11
 #### Fixed
 - Fixed accessibility issues found by `react-axe`.
+- Made it possible to change the UUID attribute within the modifyLibrary function.
 
 ### v1.3.10
 #### Added

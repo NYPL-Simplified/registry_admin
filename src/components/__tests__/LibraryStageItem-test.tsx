@@ -42,7 +42,6 @@ describe("LibraryStageItem", () => {
   });
   it("should have an aria-label", () => {
     let select = wrapper.find("select");
-
     expect(select.prop("aria-label")).to.equal(`Select ${label}`);
   });
   it("should update when the value prop changes", () => {
