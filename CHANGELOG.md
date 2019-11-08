@@ -1,5 +1,9 @@
 ## Changelog
 
+###v1.3.10
+#### Fixed
+- Made it possible to change the UUID attribute within the modifyLibrary function.
+
 ###v1.3.9
 #### Updated
 - Upgraded to v1.3.17 of library-simplified-reusable-components.

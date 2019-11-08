@@ -66,6 +66,9 @@ export const modifyLibrary = (baseLibrary: LibraryData, newData: {[key: string]:
     let categoryToUpdate = category || null;
     let newValue = {};
     let [key, value] = pair;
+    if (Object.keys(baseLibrary).includes(key)) {
+      updatedLibrary[key] = value;
+    }
     if (!categoryToUpdate) {
       categoryToUpdate = allCategories.find((cat) => Object.keys(baseLibrary[cat]).includes(key));
     }
@@ -116,5 +119,12 @@ describe("TestUtils", () => {
     expect(baseLibrary.urls_and_contact.validated).to.be.undefined;
     let updatedLibrary = modifyLibrary(baseLibrary, {validated: "VALIDATED!"}, "urls_and_contact");
     expect(updatedLibrary.urls_and_contact.validated).to.equal("VALIDATED!");
+  });
+
+  it("modifies the UUID", () => {
+    let baseLibrary = testLibrary1;
+    expect(baseLibrary.uuid).to.equal("UUID1");
+    let updatedLibrary = modifyLibrary(baseLibrary, {uuid: "UUID2"});
+    expect(updatedLibrary.uuid).to.equal("UUID2");
   });
 });
