@@ -66,7 +66,6 @@ describe("Toggle", () => {
 
   it("should have an aria-label", () => {
     let slider = wrapper.find("button");
-
     expect(slider.prop("aria-label")).to.equal("Toggle button");
   });
 });
