@@ -1,5 +1,9 @@
 ## Changelog
 
+###v1.3.12
+#### Fixed
+- Grouped cancelled libraries with testing libraries, rather than displaying them in the production list.
+
 ###v1.3.11
 #### Fixed
 - Made it possible to change the UUID attribute within the modifyLibrary function.

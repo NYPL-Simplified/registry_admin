@@ -71,7 +71,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       title="Only show libraries which"
     />;
 
-    let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="QA Mode" />;
+    let toggle: JSX.Element = <Toggle onToggle={this.toggleQA} initialOn={this.state.qa} label="Show All" />;
     return (
       <div className="libraries-page">
         { toggle }
@@ -99,7 +99,8 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
   }
 
   filter(libraries) {
-    return libraries.filter(l => l.stages.registry_stage === "production");
+    let inProduction = (l) => Object.values(l.stages).every(s => s === "production");
+    return libraries.filter(l => inProduction(l));
   }
 
   /**
