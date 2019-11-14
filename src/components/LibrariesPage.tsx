@@ -41,7 +41,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     this.search = this.search.bind(this);
     this.clear = this.clear.bind(this);
     this.toggleQA = this.toggleQA.bind(this);
-    this.filter = this.filter.bind(this);
+    this.filterProduction = this.filterProduction.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.filterByAttribute = this.filterByAttribute.bind(this);
     this.flipFilter = this.flipFilter.bind(this);
@@ -98,7 +98,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
     return libraryList;
   }
 
-  filter(libraries) {
+  filterProduction(libraries) {
     let inProduction = (l) => Object.values(l.stages).every(s => s === "production");
     return libraries.filter(l => inProduction(l));
   }
@@ -158,7 +158,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       allLibraries = this.updateLibraryList(allLibraries);
     }
     // There might be QA libraries available, but the user only wants to see the production ones:
-    let filteredLibraries = !this.state.qa && allLibraries && this.filter(allLibraries);
+    let filteredLibraries = !this.state.qa && allLibraries && this.filterProduction(allLibraries);
     // The user has submitted a search, and there are results:
     let allResults = !this.state.showAll && this.props.results && this.props.results.libraries;
     // The user edited a search result:
@@ -166,7 +166,7 @@ export class LibrariesPage extends React.Component<LibrariesPageProps, Libraries
       allResults = this.updateLibraryList(allResults);
     }
     // The user has submitted a search, but only wants to see results for production libraries:
-    let filteredResults = !this.state.qa && allResults && this.filter(allResults);
+    let filteredResults = !this.state.qa && allResults && this.filterProduction(allResults);
     // The user has submitted a search, but there are no results:
     let noResults = !this.state.showAll && !this.props.results && [];
 
