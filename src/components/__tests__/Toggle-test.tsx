@@ -63,4 +63,9 @@ describe("Toggle", () => {
     expect(onToggle.args[1][0]).to.be.false;
     isOn(false);
   });
+
+  it("should have an aria-label", () => {
+    let slider = wrapper.find("button");
+    expect(slider.prop("aria-label")).to.equal("Toggle button");
+  });
 });

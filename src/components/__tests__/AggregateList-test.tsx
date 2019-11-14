@@ -11,7 +11,8 @@ describe("AggregateList", () => {
   let wrapper;
   let data;
   let productionLibrary1 = modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" });
-  let productionLibrary2 = modifyLibrary(productionLibrary1, { "name": "Production Library 2" });
+  let productionLibrary2 = modifyLibrary(productionLibrary1, { "uuid": "UUID2", "name": "Production Library 2" });
+
   beforeEach(() => {
     data = {
       "production": [productionLibrary1, productionLibrary2],
