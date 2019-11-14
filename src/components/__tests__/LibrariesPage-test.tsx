@@ -22,8 +22,8 @@ describe("LibrariesPage", () => {
 
   beforeEach(() => {
     libraries = [
-      modifyLibrary(testLibrary1, {registry_stage: "production"}),
-      modifyLibrary(testLibrary2, {registry_stage: "production"})
+      modifyLibrary(testLibrary1, {registry_stage: "production", library_stage: "production"}),
+      modifyLibrary(testLibrary2, {registry_stage: "production", library_stage: "production"})
     ];
     fetchQA = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
@@ -46,14 +46,14 @@ describe("LibrariesPage", () => {
   it("should display a toggle", () => {
     expect(wrapper.state()["qa"]).to.be.false;
     let toggle = wrapper.find(Toggle).first();
-    expect(toggle.text()).to.equal("QA Mode: Off");
+    expect(toggle.text()).to.equal("Show All: Off");
     expect(toggle.prop("initialOn")).to.be.false;
 
     wrapper.setState({ "qa": true });
 
     toggle = wrapper.find(Toggle).first();
     expect(toggle.prop("initialOn")).to.be.true;
-    expect(toggle.text()).to.equal("QA Mode: On");
+    expect(toggle.text()).to.equal("Show All: On");
   });
 
   it("should toggle", async () => {
@@ -209,17 +209,17 @@ describe("LibrariesPage", () => {
   });
 
   it("should filter", () => {
-    let libraryWithPLS = modifyLibrary(libraries[0], {"pls_id": "12345"}, "basic_info");
-    wrapper.setProps({ libraries: { libraries: [libraryWithPLS, libraries[1]] } });
+    let libraryWithPLS = modifyLibrary(libraries[0], {"name": "PLS", "pls_id": "12345"}, "basic_info");
+    wrapper.setProps({ libraries: { libraries: [libraries[0], libraryWithPLS] } });
     expect(wrapper.find(".list .panel").length).to.equal(2);
     wrapper.instance().setFilter("pls_id");
     wrapper.update();
     expect(wrapper.find(".list .panel").length).to.equal(1);
-    expect(wrapper.find(".list .panel-title").text()).to.equal("Test Library 1");
+    expect(wrapper.find(".list .panel-title").text()).to.equal("PLS");
     wrapper.instance().flipFilter();
     wrapper.update();
     expect(wrapper.find(".list .panel").length).to.equal(1);
-    expect(wrapper.find(".list .panel-title").text()).to.equal("Test Library 2");
+    expect(wrapper.find(".list .panel-title").text()).to.equal("Test Library 1");
     wrapper.instance().setFilter("pls_id");
     wrapper.update();
     expect(wrapper.find(".list .panel").length).to.equal(2);
