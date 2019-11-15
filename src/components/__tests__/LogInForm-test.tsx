@@ -57,8 +57,21 @@ describe("LogInForm", () => {
     expect(password.props().type).to.equal("password");
   });
   it("should optionally display extra fields", () => {
-    let extraText = <input type="text" key="extraText" name="extraText"/>;
-    let extraCheckbox = <input type="checkbox" key="extraCheckbox" name="extraCheckbox" aria-checked={false} />;
+    let extraText = (
+      <input
+        type="text"
+        key="extraText"
+        name="extraText"
+        placeholder="some text"
+      />);
+    let extraCheckbox = (
+      <input
+        type="checkbox"
+        key="extraCheckbox"
+        name="extraCheckbox"
+        aria-checked={false}
+        placeholder="some text"
+      />);
     wrapper.setProps({ extraFields: [extraText, extraCheckbox] });
     let inputs = wrapper.find("input");
     expect(inputs.length).to.equal(4);
