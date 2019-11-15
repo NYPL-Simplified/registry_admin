@@ -14,6 +14,7 @@ export interface AggregateListState {
   production: boolean;
   testing: boolean;
   cancelled: boolean;
+  geographicInfo: boolean;
 }
 
 export default class AggregateList extends React.Component<AggregateListProps, AggregateListState> {
@@ -26,10 +27,12 @@ export default class AggregateList extends React.Component<AggregateListProps, A
       styled: true,
       production: false,
       testing: false,
-      cancelled: false
+      cancelled: false,
+      geographicInfo: false
     };
     this.toggleFormatting = this.toggleFormatting.bind(this);
     this.toggleExpanded = this.toggleExpanded.bind(this);
+    this.toggleGeographicInfo = this.toggleGeographicInfo.bind(this);
     this.makeLi = this.makeLi.bind(this);
   }
 
@@ -52,6 +55,13 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         }
         className={className}
         key="dropdown"
+      />,
+      <Button
+        key="geographicInfo"
+        callback={this.toggleGeographicInfo}
+        content={`${this.state.geographicInfo ? "Hide" : "Show"} Geographic Info`}
+        className={className}
+        disabled={!(this.state.production || this.state.testing || this.state.cancelled)}
       />,
       <CopyButton key="copy-button" element={this.statsRef.current} />
     ];
@@ -88,6 +98,10 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     this.setState({ styled: !this.state.styled });
   }
 
+  toggleGeographicInfo() {
+    this.setState({ geographicInfo: !this.state.geographicInfo });
+  }
+
   makeCategoryBar(category: string): JSX.Element[] {
     let name = category.replace(category[0], category[0].toUpperCase());
     let length = this.props.data[category].length;
@@ -100,7 +114,24 @@ export default class AggregateList extends React.Component<AggregateListProps, A
 
   makeLibraryNameList(category: string): JSX.Element[] {
     let libraries = this.props.data[category];
-    return libraries.map(l => <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}</p></li>);
+    return libraries.map((l) => {
+      return (
+        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getGeographicInfo(l)}</p></li>
+      );
+    });
+  }
+
+  getGeographicInfo(library: LibraryData): string {
+    if (!this.state.geographicInfo) {
+      return "";
+    }
+    let areaString = "";
+    let areas = Object.values(library.areas).filter(a => a.length).map((a) => {
+      let regExp = /\(([^)]+)\)/;
+      let matches = regExp.exec(a.join(" "));
+      areaString += matches ? `${areaString.length ? ", " : ""}${matches[1]}` : "State unknown";
+    });
+    return (areaString.length && ` (${areaString})`) || null;
   }
 
   makeLi(category: string): JSX.Element {
