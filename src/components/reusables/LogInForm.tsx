@@ -22,7 +22,7 @@ export interface LogInFormDispatchProps {
   logIn: (data: FormData) => Promise<void>;
 }
 
-export interface LogInFormProps extends LogInFormStateProps, LogInFormOwnProps, LogInFormDispatchProps {};
+export interface LogInFormProps extends LogInFormStateProps, LogInFormOwnProps, LogInFormDispatchProps {}
 
 export class LogInForm extends React.Component<LogInFormProps, {}> {
   constructor(props: LogInFormProps) {
@@ -54,7 +54,7 @@ export class LogInForm extends React.Component<LogInFormProps, {}> {
         errorText={this.props.error && (this.props.error.response || "Invalid credentials")}
       />
     );
-  };
+  }
 }
 
 function mapStateToProps(state: State, ownProps: LogInFormOwnProps) {
