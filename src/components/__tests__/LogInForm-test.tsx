@@ -69,7 +69,7 @@ describe("LogInForm", () => {
         type="checkbox"
         key="extraCheckbox"
         name="extraCheckbox"
-        defaultChecked={false}
+        checked={false}
         aria-checked={false}
       />);
     wrapper.setProps({ extraFields: [extraText, extraCheckbox] });
