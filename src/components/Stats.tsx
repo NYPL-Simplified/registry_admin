@@ -13,7 +13,7 @@ export default class Stats extends React.Component<StatsProps, {}> {
   constructor(props: StatsProps) {
     super(props);
     this.sortLibraries = this.sortLibraries.bind(this);
-  };
+  }
 
   render(): JSX.Element {
     let sorted = this.sortLibraries();

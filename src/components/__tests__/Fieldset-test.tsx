@@ -6,8 +6,8 @@ import Fieldset from "../reusables/Fieldset";
 describe("Fieldset", () => {
   let wrapper: Enzyme.ShallowWrapper<any, {}>;
   let legend = "TEST_LEGEND";
-  let input1 = <input value="A" />;
-  let input2 = <input value="B" />;
+  let input1 = <input value="A" key="A" />;
+  let input2 = <input value="B" key="B" />;
   beforeEach(() => {
     wrapper = Enzyme.shallow(
       <Fieldset legend={legend} elements={[input1, input2]} />
