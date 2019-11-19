@@ -23,7 +23,7 @@ export default class App extends React.Component<AppProps, {}> {
 
   context: AppContext;
   static contextTypes: React.ValidationMap<AppContext> = {
-    store: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired as React.Validator<Store>,
     username: PropTypes.string
   };
 

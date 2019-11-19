@@ -11,7 +11,7 @@ export interface LibrariesListContainerContext {
 export default class LibrariesListContainer extends React.Component<{}, {}> {
   context: LibrariesListContainerContext;
   static contextTypes: React.ValidationMap<LibrariesListContainerContext> = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired as React.Validator<Store>,
   };
 
   render(): JSX.Element {

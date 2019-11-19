@@ -57,15 +57,27 @@ describe("LogInForm", () => {
     expect(password.props().type).to.equal("password");
   });
   it("should optionally display extra fields", () => {
-    let extraText = <input type="text" key="extraText" name="extraText"/>;
-    let extraCheckbox = <input type="checkbox" key="extraCheckbox" name="extraCheckbox" aria-checked={false} />;
-    wrapper.setProps({ extraFields: [extraText, extraCheckbox] });
+    let extraText = (
+      <input
+        type="text"
+        key="extraText"
+        name="extraText"
+        placeholder="some text"
+      />);
+    let extraText2 = (
+      <input
+        type="text"
+        key="extraText2"
+        name="extraText2"
+        placeholder="some text"
+      />);
+    wrapper.setProps({ extraFields: [extraText, extraText2] });
     let inputs = wrapper.find("input");
     expect(inputs.length).to.equal(4);
     expect(inputs.at(2).props().type).to.equal("text");
     expect(inputs.at(2).props().name).to.equal("extraText");
-    expect(inputs.at(3).props().type).to.equal("checkbox");
-    expect(inputs.at(3).props().name).to.equal("extraCheckbox");
+    expect(inputs.at(3).props().type).to.equal("text");
+    expect(inputs.at(3).props().name).to.equal("extraText2");
   });
   it("should display a button", () => {
     let button = wrapper.find("button");

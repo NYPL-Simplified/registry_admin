@@ -33,7 +33,7 @@ export interface LibrariesPageState {
   filters: { [key: string]: any };
 }
 
-export interface LibrariesPageProps extends LibrariesPageStateProps, LibrariesPageOwnProps, LibrariesPageDispatchProps {};
+export interface LibrariesPageProps extends LibrariesPageStateProps, LibrariesPageOwnProps, LibrariesPageDispatchProps {}
 
 export class LibrariesPage extends React.Component<LibrariesPageProps, LibrariesPageState> {
   constructor(props: LibrariesPageProps) {

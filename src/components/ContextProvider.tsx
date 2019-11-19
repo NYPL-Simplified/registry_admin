@@ -34,5 +34,5 @@ export default class ContextProvider extends React.Component<ContextProps, {}> {
 
   render() {
     return React.Children.only(this.props.children) as JSX.Element;
-  };
-};
+  }
+}

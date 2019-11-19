@@ -1,8 +1,13 @@
 ## Changelog
 
-### v1.3.14
+### v1.4.1
 #### Added
 - Implemented option for displaying geographical information alongside each library's name in the List tab of the Aggregate Data panel.
+
+### v1.4.0
+#### Updated
+- Updated the `opds-web-client` to version 0.3.0, Typescript to version 3.7.2, and other related packages to their latest version. Fixed minor code issues based on update.
+- Updated Travis to use Node 10 when building and running tests.
 
 ### v1.3.13
 #### Fixed
