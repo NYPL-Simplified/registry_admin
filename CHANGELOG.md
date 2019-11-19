@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.14
+#### Added
+- Implemented option for displaying geographical information alongside each library's name in the List tab of the Aggregate Data panel.
+
 ### v1.3.13
 #### Fixed
 - Fixed accessibility issues found by `react-axe`.
