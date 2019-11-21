@@ -141,19 +141,22 @@ describe("AggregateList", () => {
     expect(copyButton.length).to.equal(1);
   });
   it("has a button for toggling the display of geographic information", () => {
+    // If all the library names are hidden, the button is not rendered.
+    let buttons = wrapper.find("button");
+    expect(buttons.length).to.equal(7);
+    buttons.forEach(b => expect(b.text()).not.to.contain("Geographic Info"));
+    // Showing any of the library names makes the button appear.
+    wrapper.setState({ production: true });
+    buttons = wrapper.find("button");
+    expect(buttons.length).to.equal(8);
     let geographicInfoButton = wrapper.find("button").at(6);
     expect(geographicInfoButton.text()).to.equal("Show Geographic Info");
-    expect(geographicInfoButton.prop("disabled")).to.be.true;
-    wrapper.setState({ "production": true });
-    wrapper.update();
-    geographicInfoButton = wrapper.find("button").at(6);
-    expect(geographicInfoButton.prop("disabled")).not.to.be.true;
     wrapper.setState({ "geographicInfo": true });
     expect(geographicInfoButton.text()).to.equal("Hide Geographic Info");
     wrapper.setState({ "production": false });
-    wrapper.update();
-    geographicInfoButton = wrapper.find("button").at(6);
-    expect(geographicInfoButton.prop("disabled")).to.be.true;
+    buttons = wrapper.find("button");
+    expect(buttons.length).to.equal(7);
+    buttons.forEach(b => expect(b.text()).not.to.contain("Geographic Info"));
   });
   it("optionally shows geographic information", () => {
     wrapper.setState({ "production": true, "testing": true, "cancelled": true });

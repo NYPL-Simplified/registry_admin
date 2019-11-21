@@ -57,15 +57,19 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         className={className}
         key="dropdown"
       />,
+      <CopyButton key="copy-button" element={this.statsRef.current} />
+    ];
+    let geographicButton = (
       <Button
         key="geographicInfo"
         callback={this.toggleGeographicInfo}
         content={`${this.state.geographicInfo ? "Hide" : "Show"} Geographic Info`}
         className={className}
-        disabled={!(this.state.production || this.state.testing || this.state.cancelled)}
-      />,
-      <CopyButton key="copy-button" element={this.statsRef.current} />
-    ];
+      />
+    );
+    if (["production", "testing", "cancelled"].some(x => this.state[x])) {
+      buttons.splice(2, 0, geographicButton);
+    }
     return (
       <div className="list-view">
         <div className="buttons">
