@@ -132,7 +132,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     }
     let areaString: string = "";
     let allAreas: string[] = areas.focus.concat(areas.service);
-    allAreas.map((a: string) => {
+    allAreas.forEach((a: string) => {
       // Each string is in the format "Zip code/city, (state abbreviation)".  We're just interested in the state abbreviation
       // right now, so we get it by pulling out any two-letter sequence between parentheses.
       // (If there's something longer than two letters between parentheses, it's the server-generated string "unknown",
@@ -140,7 +140,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
       let regExp: RegExp = /\(([^)]{2})\)/;
       let match: string[] = regExp.exec(a);
       if (!match) {
-        return;
+        return "";
       }
       // If the library serves multiple towns/zip codes within the same state, and/or if the same state is listed in both the focus and the service areas,
        // we don't need to list the state more than once.
