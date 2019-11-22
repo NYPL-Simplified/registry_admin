@@ -14,6 +14,7 @@ export interface AggregateListState {
   production: boolean;
   testing: boolean;
   cancelled: boolean;
+  geographicInfo: boolean;
 }
 
 export default class AggregateList extends React.Component<AggregateListProps, AggregateListState> {
@@ -26,10 +27,13 @@ export default class AggregateList extends React.Component<AggregateListProps, A
       styled: true,
       production: false,
       testing: false,
-      cancelled: false
+      cancelled: false,
+      geographicInfo: false
     };
     this.toggleFormatting = this.toggleFormatting.bind(this);
     this.toggleExpanded = this.toggleExpanded.bind(this);
+    this.toggleGeographicInfo = this.toggleGeographicInfo.bind(this);
+    this.getGeographicInfo = this.getGeographicInfo.bind(this);
     this.makeLi = this.makeLi.bind(this);
   }
 
@@ -55,6 +59,17 @@ export default class AggregateList extends React.Component<AggregateListProps, A
       />,
       <CopyButton key="copy-button" element={this.statsRef.current} />
     ];
+    let geographicButton = (
+      <Button
+        key="geographicInfo"
+        callback={this.toggleGeographicInfo}
+        content={`${this.state.geographicInfo ? "Hide" : "Show"} Geographic Info`}
+        className={className}
+      />
+    );
+    if (["production", "testing", "cancelled"].some(x => this.state[x])) {
+      buttons.splice(2, 0, geographicButton);
+    }
     return (
       <div className="list-view">
         <div className="buttons">
@@ -88,6 +103,10 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     this.setState({ styled: !this.state.styled });
   }
 
+  toggleGeographicInfo() {
+    this.setState({ geographicInfo: !this.state.geographicInfo });
+  }
+
   makeCategoryBar(category: string): JSX.Element[] {
     let name = category.replace(category[0], category[0].toUpperCase());
     let length = this.props.data[category].length;
@@ -100,7 +119,38 @@ export default class AggregateList extends React.Component<AggregateListProps, A
 
   makeLibraryNameList(category: string): JSX.Element[] {
     let libraries = this.props.data[category];
-    return libraries.map(l => <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}</p></li>);
+    return libraries.map((l) => {
+      return (
+        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getGeographicInfo(l.areas)}</p></li>
+      );
+    });
+  }
+
+  getGeographicInfo(areas: { [key: string]: string[] }): string {
+    if (!this.state.geographicInfo) {
+      return "";
+    }
+    let areaString: string = "";
+    let allAreas: string[] = areas.focus.concat(areas.service);
+    allAreas.forEach((a: string) => {
+      // Each string is in the format "Zip code/city, (state abbreviation)".  We're just interested in the state abbreviation
+      // right now, so we get it by pulling out any two-letter sequence between parentheses.
+      // (If there's something longer than two letters between parentheses, it's the server-generated string "unknown",
+      // which we don't need to add individually to areaString; if everything was unknown, we'll handle it later.)
+      let regExp: RegExp = /\(([^)]{2})\)/;
+      let match: string[] = regExp.exec(a);
+      if (!match) {
+        return "";
+      }
+      // If the library serves multiple towns/zip codes within the same state, and/or if the same state is listed in both the focus and the service areas,
+       // we don't need to list the state more than once.
+      // If there's already something in the areaString--i.e. if this item is not going to be the first
+      // thing in it--then this should be separated by a comma and a space from whatever comes before it.
+      if (!areaString.includes(match[1])) {
+        areaString += `${areaString.length ? ", " : ""}${match[1]}`;
+      }
+    });
+    return (areaString.length && ` (${areaString})`) || " (state unknown)";
   }
 
   makeLi(category: string): JSX.Element {
