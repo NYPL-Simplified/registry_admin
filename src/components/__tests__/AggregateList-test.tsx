@@ -182,6 +182,9 @@ describe("AggregateList", () => {
     expect(nameLists.at(2).text()).not.to.contain("(state unknown)");
   });
   it("generates a string based on the library's areas", () => {
+    let info = (attr: {[index: string]: string[]}) =>
+      wrapper.instance().getGeographicInfo(modifyLibrary(testLibrary1, attr));
+
     wrapper.setState({ geographicInfo: true });
     let empty = { focus: [], service: [] };
     let oneFocusArea = { focus: ["11104 (NY)"], service: [] };
@@ -194,8 +197,6 @@ describe("AggregateList", () => {
     let oneUnknown = { focus: ["(unknown)"], service: ["11104 (NY)"] };
     let allUnknown = { focus: ["unknown"], service: ["unknown"] };
 
-    let info = wrapper.instance().getGeographicInfo;
-
     expect(info(empty)).to.equal(" (state unknown)");
     expect(info(oneFocusArea)).to.equal(" (NY)");
     expect(info(multipleFocusAreas)).to.equal(" (NY, NJ, CT)");
@@ -206,5 +207,9 @@ describe("AggregateList", () => {
     expect(info(withDuplicates)).to.equal(" (CT)");
     expect(info(oneUnknown)).to.equal(" (NY)");
     expect(info(allUnknown)).to.equal(" (state unknown)");
+
+    expect(wrapper.instance().getGeographicInfo(
+      modifyLibrary(testLibrary2, { pls_id: "NY0778" }, "basic_info")
+    )).to.equal(" (NY)");
   });
 });

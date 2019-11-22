@@ -121,17 +121,17 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     let libraries = this.props.data[category];
     return libraries.map((l) => {
       return (
-        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getGeographicInfo(l.areas)}</p></li>
+        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getGeographicInfo(l)}</p></li>
       );
     });
   }
 
-  getGeographicInfo(areas: { [key: string]: string[] }): string {
+  getGeographicInfo(library: LibraryData): string {
     if (!this.state.geographicInfo) {
       return "";
     }
     let areaString: string = "";
-    let allAreas: string[] = areas.focus.concat(areas.service);
+    let allAreas: string[] = library.areas.focus.concat(library.areas.service);
     allAreas.forEach((a: string) => {
       // Each string is in the format "Zip code/city, (state abbreviation)".  We're just interested in the state abbreviation
       // right now, so we get it by pulling out any two-letter sequence between parentheses.
@@ -150,6 +150,11 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         areaString += `${areaString.length ? ", " : ""}${match[1]}`;
       }
     });
+    // If we couldn't get any information from the areas, we see whether we know the library's PLS ID;
+    // the first two characters of the PLS ID are the state abbreviation.
+    if (!areaString.length && library.basic_info.pls_id) {
+      areaString += library.basic_info.pls_id && library.basic_info.pls_id.slice(0, 2);
+    }
     return (areaString.length && ` (${areaString})`) || " (state unknown)";
   }
 
