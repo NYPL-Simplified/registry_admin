@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.2
+#### Updated
+- Enabled the Aggregate Data panel to pull geographical information from PLS IDs when necessary. 
+
 ### v1.4.1
 #### Added
 - Implemented option for displaying geographical information alongside each library's name in the List tab of the Aggregate Data panel.
