@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Header } from "library-simplified-reusable-components";
-import LibrariesListContainer from "./LibrariesListContainer";
+import LibrariesPage from "./LibrariesPage";
 import { Route } from "react-router-dom";
 import LogInForm from "./reusables/LogInForm";
 import { Store } from "redux";
@@ -43,7 +43,7 @@ export default class App extends React.Component<AppProps, {}> {
             path="/admin"
             render={() => (
               username ?
-                <LibrariesListContainer /> :
+                <LibrariesPage store={this.context.store} /> :
                 <LogInForm store={store} />
             )}
           />

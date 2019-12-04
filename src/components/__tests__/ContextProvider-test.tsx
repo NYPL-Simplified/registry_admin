@@ -6,11 +6,12 @@ import ContextProvider from "../ContextProvider";
 class FakeChild extends React.Component<any, any> {}
 
 describe("ContextProvider", () => {
+  const username = "some username";
   let wrapper: Enzyme.ShallowWrapper<any, {}>;
 
   beforeEach(() => {
     wrapper = Enzyme.shallow(
-      <ContextProvider>
+      <ContextProvider username={username}>
         <FakeChild />
       </ContextProvider>
     );
@@ -21,7 +22,7 @@ describe("ContextProvider", () => {
     let context = instance.getChildContext();
     expect(context.store.getState().libraries).to.be.ok;
     expect(context.store.getState().library).to.be.ok;
-    expect(context.pathFor).to.equal(instance.pathFor);
+    expect(context.username).to.equal(username);
   });
 
   it("renders child", () => {

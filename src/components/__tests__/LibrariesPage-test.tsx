@@ -10,7 +10,6 @@ import LibrariesList from "../LibrariesList";
 import Toggle from "../reusables/Toggle";
 import SearchForm from "../SearchForm";
 import Stats from "../Stats";
-import { Form } from "library-simplified-reusable-components";
 
 describe("LibrariesPage", () => {
   let libraries;
@@ -100,18 +99,12 @@ describe("LibrariesPage", () => {
     expect(searchForm.find(".btn").length).to.equal(2);
   });
 
-  it("should search", async() => {
-    let form = wrapper.find(Form).at(0);
-    const libraryPageSearch = () => {
-      wrapper.setState({ showAll: false });
-      search();
-    };
-    let formSubmit = Sinon.stub(form.instance(), "submit").callsFake(libraryPageSearch);
-    let spyClear = Sinon.spy(wrapper.instance(), "clear");
-
+  it("should search", async () => {
     expect(wrapper.state()["showAll"]).to.be.true;
     wrapper.find(".panel-info").find("input").simulate("change", {target: {value: "test_search_term"}});
     wrapper.find(".panel-info form .btn").simulate("click");
+
+    expect(wrapper.state()["showAll"]).to.be.false;
   });
 
   it("shouldn't display QA search results unless in QA mode", async () => {
@@ -209,7 +202,9 @@ describe("LibrariesPage", () => {
   });
 
   it("should filter", () => {
-    let libraryWithPLS = modifyLibrary(libraries[0], {"name": "PLS", "pls_id": "12345"}, "basic_info");
+    let libraryWithPLS = modifyLibrary(
+      libraries[0], {"name": "PLS", "pls_id": "12345", "uuid": "UUID4"}, "basic_info"
+    );
     wrapper.setProps({ libraries: { libraries: [libraries[0], libraryWithPLS] } });
     expect(wrapper.find(".list .panel").length).to.equal(2);
     wrapper.instance().setFilter("pls_id");
