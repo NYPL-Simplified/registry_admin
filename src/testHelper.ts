@@ -15,7 +15,6 @@ const { window } = jsdom;
 
 global["document"] = window.document;
 global["window"] = window;
-global["navigation"] = window.navigation;
 
 Object.keys(window).forEach((key) => {
   if (!(key in global)) {
