@@ -1,8 +1,12 @@
 ## Changelog
 
+### v1.4.3
+#### Updated
+- Updated the `opds-web-client` to version 0.3.2 and removing LibrariesListContainer.
+
 ### v1.4.2
 #### Updated
-- Enabled the Aggregate Data panel to pull geographical information from PLS IDs when necessary. 
+- Enabled the Aggregate Data panel to pull geographical information from PLS IDs when necessary.
 
 ### v1.4.1
 #### Added

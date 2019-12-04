@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import * as Sinon from "sinon";
-import buildStore from "../../store";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import { LogInForm } from "../reusables/LogInForm";
@@ -8,10 +7,9 @@ import { Form } from "library-simplified-reusable-components";
 
 describe("LogInForm", () => {
   let wrapper;
-  let store;
   let logIn: Sinon.SinonStub;
+
   beforeEach(() => {
-    store = buildStore();
     logIn = Sinon.stub();
     wrapper = Enzyme.mount(
       <LogInForm logIn={logIn} />

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Store, Reducer } from "redux";
+import { Store } from "redux";
 import { State } from "../reducers/index";
 import { LibrariesData, LibraryData } from "../interfaces";
 import { connect } from "react-redux";

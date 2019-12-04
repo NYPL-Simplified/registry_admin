@@ -1,12 +1,10 @@
 import { expect } from "chai";
-import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 
 import LibrariesList from "../LibrariesList";
-import LibrariesListItem from "../LibrariesListItem";
 import LoadingIndicator from "opds-web-client/lib/components/LoadingIndicator";
 
 describe("LibrariesList", () => {

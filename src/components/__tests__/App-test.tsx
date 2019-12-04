@@ -5,7 +5,7 @@ import * as Enzyme from "enzyme";
 import App from "../App";
 import { Header } from "library-simplified-reusable-components";
 import LogInFrom from "../reusables/LogInForm";
-import LibrariesListContainer from "../LibrariesListContainer";
+import LibrariesPage from "../LibrariesPage";
 import { MemoryRouter } from "react-router-dom";
 import buildStore from "../../store";
 import ContextProvider from "../ContextProvider";
@@ -35,13 +35,13 @@ describe("App", () => {
   });
 
   it("should render the login form", () => {
-    let librariesListContainer = wrapper.find(LibrariesListContainer);
+    let librariesPage = wrapper.find(LibrariesPage);
     let logInForm = wrapper.find(LogInFrom);
     expect(logInForm.length).to.equal(1);
-    expect(librariesListContainer.length).to.equal(0);
+    expect(librariesPage.length).to.equal(0);
   });
 
-  it("should render the libraries list container", () => {
+  it("should render the libraries page component", () => {
     context = { store, username: "Admin" };
     wrapper = Enzyme.mount(
       <ContextProvider {...context}>
@@ -50,9 +50,9 @@ describe("App", () => {
         </MemoryRouter>
       </ContextProvider>,
     );
-    let librariesListContainer = wrapper.find(LibrariesListContainer);
+    let librariesPage = wrapper.find(LibrariesPage);
     let logInForm = wrapper.find(LogInFrom);
     expect(logInForm.length).to.equal(0);
-    expect(librariesListContainer.length).to.equal(1);
+    expect(librariesPage.length).to.equal(1);
   });
 });
