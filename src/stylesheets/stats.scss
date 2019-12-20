@@ -96,14 +96,14 @@
       }
     }
   }
-  .adobe-data {
+  .adobe-data, .yearly-data {
     ul {
       pointer-events: none;
       margin: 0;
       padding: 10px 0;
       list-style: none;
       width: 60%;
-      .adobe-data-li {
+      .adobe-data-li, .year-li {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -112,7 +112,51 @@
         border: 1px solid $blue-dark;
         margin-bottom: 5px;
       }
+      .year-li {
+        display: block;
+        width: 100%;
+        padding: 0;
+        > p {
+          border-bottom: 1px solid $blue-dark;
+          margin: 0;
+          padding: 10px 20px;
+        }
+        > ul {
+          display: block;
+          background: $white;
+          width: 100%;
+          padding: 20px;
+          > li {
+            margin: 8px 0;
+            border: 1px solid $dark-gray;
+            p {
+              padding: 10px 20px;
+              font-size: 1em;
+              border-bottom: 1px solid $dark-gray;
+            }
+            &:first-child > p {
+              background: darken($green-tint, 10);
+            }
+            &:nth-child(2) > p {
+              background: $yellow-tint;
+            }
+            &:last-child > p {
+              background: $red-error;
+            }
+            ul {
+              list-style: circle;
+              padding: 10px 10px 10px 25px;
+            }
+          }
+        }
+      }
     }
+  }
+  .yearly-data {
+    width: 85%;
+  }
+  .yearly-data > ul {
+    width: 100%;
   }
   .adobe-charts {
     svg.recharts-surface {
