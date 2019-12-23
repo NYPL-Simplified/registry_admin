@@ -9,7 +9,8 @@ export const testLibrary1: LibraryData = {
     "name": "Test Library 1",
     "short_name": "lib1",
     "description": undefined,
-    "number_of_patrons": "3"
+    "number_of_patrons": "3",
+    "timestamp": "Fri, 01 Nov 2019 15:05:34 GMT"
   },
   urls_and_contact: {
     "authentication_url": "auth1",
@@ -32,7 +33,8 @@ export const testLibrary2: LibraryData = {
   basic_info: {
     "name": "Test Library 2",
     "short_name": "lib2",
-    "number_of_patrons": "1"
+    "number_of_patrons": "1",
+    "timestamp": "Fri, 01 Nov 2018 15:05:34 GMT"
   },
   urls_and_contact: {
     "authentication_url": "auth2",

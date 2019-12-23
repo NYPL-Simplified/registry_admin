@@ -40,12 +40,11 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
     this.setState({ styled: !this.state.styled });
   }
   render(): JSX.Element {
-    let hasStyles = this.state.styled;
-    let categories = (year) => <ul>{Object.keys(year).map(c => <li><p>{c.substr(0, 1).toUpperCase() + c.substr(1)}</p>{names(year[c])}</li>)}</ul>;
+    let categories = (year) => <ul>{Object.keys(year).map(c => <li className={this.state.styled ? "stats-category" : ""}><p className="stats-category-name">{c.substr(0, 1).toUpperCase() + c.substr(1)}</p>{names(year[c])}</li>)}</ul>;
     let names = (category) => <ul className="yearly-library-list">{category.map(l => <li>{l}</li>)}</ul>;
     let sortedByYear = this.sortByYear(this.props.data);
     let years = Object.keys(sortedByYear).map(y =>
-      <li key={y} className={hasStyles ? "year-li" : ""}><p>{y}</p>{categories(sortedByYear[y])}</li>
+      <li key={y} className={this.state.styled ? "year-li" : ""}><p>{y}</p>{categories(sortedByYear[y])}</li>
     );
     return (
       <div className="yearly-data">
