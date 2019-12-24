@@ -4,6 +4,7 @@ import { LibraryData } from "../interfaces";
 import AggregateList from "./AggregateList";
 import Charts from "./Charts";
 import AdobeTab from "./AdobeTab";
+import YearlyDataTab from "./YearlyDataTab";
 
 export interface StatsProps {
   libraries?: LibraryData[];
@@ -20,7 +21,8 @@ export default class Stats extends React.Component<StatsProps, {}> {
     let tabItems = {
       "List": <AggregateList data={sorted} />,
       "Charts": <Charts data={sorted} />,
-      "Adobe Data": <AdobeTab data={sorted.production} />
+      "Adobe Data": <AdobeTab data={sorted.production} />,
+      "Yearly Data": <YearlyDataTab data={sorted} />
     };
     return (
       <Panel

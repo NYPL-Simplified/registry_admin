@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.4
+#### Added
+- Added a Yearly Data tab to the Stats panel, displaying a list of the libraries sorted by what year they were added.
+
 ### v1.4.3
 #### Updated
 - Updated the `opds-web-client` to version 0.3.2 and removing LibrariesListContainer.
