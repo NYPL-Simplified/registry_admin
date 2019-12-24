@@ -149,9 +149,9 @@
   }
   .yearly-data {
     width: 85%;
-  }
-  .yearly-data > ul {
-    width: 100%;
+    > ul {
+      width: 100%;
+    }
   }
   .adobe-charts {
     svg.recharts-surface {

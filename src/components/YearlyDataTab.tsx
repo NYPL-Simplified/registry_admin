@@ -20,16 +20,16 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
   }
   sortByYear(data) {
     let sortedByYear = {};
-    Object.keys(data).map((name: string) => {
-      let category = data[name];
+    Object.keys(data).forEach((catName: string) => {
+      let category = data[catName];
       category.forEach((library) => {
         let year = library.basic_info.timestamp && library.basic_info.timestamp.match(/20\d+/)[0];
         if (year) {
           if (sortedByYear[year]) {
-            sortedByYear[year][name].push(library.basic_info.name);
+            sortedByYear[year][catName].push(library.basic_info.name);
           } else {
             sortedByYear[year] = {"production": [], "testing": [], "cancelled": []};
-            sortedByYear[year][name].push(library.basic_info.name);
+            sortedByYear[year][catName].push(library.basic_info.name);
           }
         }
       });
@@ -40,7 +40,7 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
     this.setState({ styled: !this.state.styled });
   }
   render(): JSX.Element {
-    let categories = (year) => <ul>{Object.keys(year).map(c => <li className={this.state.styled ? "stats-category" : ""}><p className="stats-category-name">{c.substr(0, 1).toUpperCase() + c.substr(1)}</p>{names(year[c])}</li>)}</ul>;
+    let categories = (year) => <ul>{Object.keys(year).map(category => <li className={this.state.styled ? "stats-category" : ""}><p className="stats-category-name">{category.substr(0, 1).toUpperCase() + category.substr(1)}</p>{names(year[category])}</li>)}</ul>;
     let names = (category) => <ul className="yearly-library-list">{category.map(l => <li>{l}</li>)}</ul>;
     let sortedByYear = this.sortByYear(this.props.data);
     let years = Object.keys(sortedByYear).map(y =>
