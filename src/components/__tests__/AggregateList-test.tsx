@@ -49,10 +49,10 @@ describe("AggregateList", () => {
   });
   it("optionally shows a list of library names under each category", () => {
     ["production", "testing", "cancelled"].forEach(x => expect(wrapper.state()[x]).to.be.false);
-    let nameLists = wrapper.find(".inner-stats-list");
+    let nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.length).to.equal(0);
     wrapper.setState({ production: true, testing: true, cancelled: true });
-    nameLists = wrapper.find(".inner-stats-list");
+    nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.length).to.equal(3);
     expect(nameLists.at(0).text()).to.contain("Production Library 1");
     expect(nameLists.at(0).text()).to.contain("Production Library 2");
@@ -61,10 +61,10 @@ describe("AggregateList", () => {
   });
   it("has a button to toggle the list of library names", () => {
     let stages = ["Production", "Testing", "Cancelled"];
-    let nameLists = wrapper.find(".inner-stats-list");
+    let nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.length).to.equal(0);
     stages.forEach(x => expect(wrapper.state()[x.toLowerCase()]).to.be.false);
-    expect(wrapper.find(".inner-stats-list").length).to.equal(0);
+    expect(wrapper.find(".stats-category-list").length).to.equal(0);
     let spyToggleExpanded = Sinon.spy(wrapper.instance(), "toggleExpanded");
     wrapper.setProps({ toggleExpanded: spyToggleExpanded });
     expect(spyToggleExpanded.callCount).to.equal(0);
@@ -78,14 +78,14 @@ describe("AggregateList", () => {
 
     menuOptions.at(0).find("button").simulate("click");
     expect(spyToggleExpanded.callCount).to.equal(1);
-    nameLists = wrapper.find(".inner-stats-list");
+    nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.length).to.equal(3);
     stages.forEach(x => expect(wrapper.state()[x.toLowerCase()]).to.be.true);
     menuOptions.forEach((x, idx) => expect(x.text()).to.equal(`Hide ${["All"].concat(stages)[idx]}`));
 
     menuOptions.at(1).find("button").simulate("click");
     expect(spyToggleExpanded.callCount).to.equal(2);
-    nameLists = wrapper.find(".inner-stats-list");
+    nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.length).to.equal(2);
     expect(wrapper.state()["production"]).to.be.false;
     expect(menuOptions.at(1).text()).to.equal("Show Production");
@@ -93,14 +93,14 @@ describe("AggregateList", () => {
 
     menuOptions.at(2).find("button").simulate("click");
     expect(spyToggleExpanded.callCount).to.equal(3);
-    nameLists = wrapper.find(".inner-stats-list");
+    nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.length).to.equal(1);
     expect(wrapper.state()["testing"]).to.be.false;
     expect(menuOptions.at(2).text()).to.equal("Show Testing");
 
     menuOptions.at(3).find("button").simulate("click");
     expect(spyToggleExpanded.callCount).to.equal(4);
-    nameLists = wrapper.find(".inner-stats-list");
+    nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.length).to.equal(0);
     expect(wrapper.state()["production"]).to.be.false;
     expect(menuOptions.at(3).text()).to.equal("Show Cancelled");
@@ -118,7 +118,7 @@ describe("AggregateList", () => {
     categoryListItems.forEach((item) => {
       expect(item.hasClass("stats-category")).to.be.true;
       expect(item.find("section").hasClass("stats-category-name")).to.be.true;
-      expect(item.find("ul").hasClass("inner-stats-list")).to.be.true;
+      expect(item.find("ul").hasClass("stats-category-list")).to.be.true;
     });
     let button = wrapper.find(".list-view").find("button").at(0);
     expect(button.text()).to.equal("Remove Formatting");
@@ -132,7 +132,7 @@ describe("AggregateList", () => {
     categoryListItems.forEach((item) => {
       expect(item.hasClass("stats-category")).to.be.false;
       expect(item.find("section").hasClass("stats-category-name")).to.be.false;
-      expect(item.find("ul").hasClass("inner-stats-list")).to.be.false;
+      expect(item.find("ul").hasClass("stats-category-list")).to.be.false;
     });
     spyToggleFormatting.restore();
   });
@@ -160,7 +160,7 @@ describe("AggregateList", () => {
   });
   it("optionally shows geographic information", () => {
     wrapper.setState({ "production": true, "testing": true, "cancelled": true });
-    let nameLists = wrapper.find(".inner-stats-list");
+    let nameLists = wrapper.find(".stats-category-list");
     expect(wrapper.state()["geographicInfo"]).to.be.false;
     expect(nameLists.at(0).text()).not.to.contain("(NY, ON, FL)");
     expect(nameLists.at(1).text()).not.to.contain("(NY, ON, FL)");

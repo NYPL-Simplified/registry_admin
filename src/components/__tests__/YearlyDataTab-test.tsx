@@ -25,44 +25,47 @@ describe("YearlyDataTab", () => {
     expect(years.length).to.equal(3);
 
     let hasCategories = (year) => {
-      expect(year.find(".stats-category-name").map(n => n.text())).to.eql(["Production", "Testing", "Cancelled"]);
+      let stages = ["Production", "Testing", "Cancelled"];
+      year.find(".stats-category-name").forEach((name, idx) => {
+        expect(name.text()).to.contain(stages[idx]);
+      });
     };
 
     let y2017 = years.at(0);
     expect(y2017.find("p").at(0).text()).to.equal("2017");
     let categories = y2017.find(".stats-category");
     let production = categories.at(0);
-    expect(production.find(".yearly-library-list").find("li").length).to.equal(0);
+    expect(production.find(".stats-category-list").find("li").length).to.equal(0);
     let testing = categories.at(1);
-    expect(testing.find(".yearly-library-list").find("li").length).to.equal(1);
-    expect(testing.find(".yearly-library-list").find("li").text()).to.equal("Test Library 2");
+    expect(testing.find(".stats-category-list").find("li").length).to.equal(1);
+    expect(testing.find(".stats-category-list").find("li").text()).to.equal("Test Library 2");
     let cancelled = categories.at(2);
-    expect(production.find(".yearly-library-list").find("li").length).to.equal(0);
+    expect(production.find(".stats-category-list").find("li").length).to.equal(0);
 
     let y2018 = years.at(1);
     expect(y2018.find("p").at(0).text()).to.equal("2018");
     categories = y2018.find(".stats-category");
     hasCategories(y2018);
     production = categories.at(0);
-    expect(production.find(".yearly-library-list").find("li").length).to.equal(1);
-    expect(production.find(".yearly-library-list").find("li").text()).to.equal("Production Library 2");
+    expect(production.find(".stats-category-list").find("li").length).to.equal(1);
+    expect(production.find(".stats-category-list").find("li").text()).to.equal("Production Library 2");
     testing = categories.at(1);
-    expect(testing.find(".yearly-library-list").find("li").length).to.equal(0);
+    expect(testing.find(".stats-category-list").find("li").length).to.equal(0);
     cancelled = categories.at(2);
-    expect(cancelled.find(".yearly-library-list").find("li").length).to.equal(0);
+    expect(cancelled.find(".stats-category-list").find("li").length).to.equal(0);
 
     let y2019 = years.at(2);
     expect(y2019.find("p").at(0).text()).to.equal("2019");
     categories = y2019.find(".stats-category");
     hasCategories(y2019);
     production = categories.at(0);
-    expect(production.find(".yearly-library-list").find("li").length).to.equal(1);
-    expect(production.find(".yearly-library-list").find("li").text()).to.equal("Production Library 1");
+    expect(production.find(".stats-category-list").find("li").length).to.equal(1);
+    expect(production.find(".stats-category-list").find("li").text()).to.equal("Production Library 1");
     testing = categories.at(1);
-    expect(testing.find(".yearly-library-list").find("li").length).to.equal(1);
-    expect(testing.find(".yearly-library-list").find("li").text()).to.equal("Test Library 1");
+    expect(testing.find(".stats-category-list").find("li").length).to.equal(1);
+    expect(testing.find(".stats-category-list").find("li").text()).to.equal("Test Library 1");
     cancelled = categories.at(2);
-    expect(cancelled.find(".yearly-library-list").find("li").length).to.equal(0);
+    expect(cancelled.find(".stats-category-list").find("li").length).to.equal(0);
   });
 
   it("renders a CopyButton", () => {

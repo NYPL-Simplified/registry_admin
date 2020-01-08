@@ -167,7 +167,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         </section>
         {
           this.state[category] &&
-          <ul className={`${hasStyles ? "inner-stats-list " : ""}`}>
+          <ul className={`${hasStyles ? "stats-category-list " : ""}`}>
             {this.makeLibraryNameList(category)}
           </ul>
         }

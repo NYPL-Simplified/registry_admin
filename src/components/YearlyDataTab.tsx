@@ -2,6 +2,7 @@ import * as React from "react";
 import CopyButton from "./CopyButton";
 import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
+import StatsInnerList from "./StatsInnerList";
 
 export interface YearlyDataTabProps {
   data: {[key: string]: LibraryData[]};
@@ -26,25 +27,26 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
         let year = library.basic_info.timestamp && library.basic_info.timestamp.match(/20\d+/)[0];
         if (year) {
           if (sortedByYear[year]) {
-            sortedByYear[year][catName].push(library.basic_info.name);
+            sortedByYear[year][catName].push(library);
           } else {
             sortedByYear[year] = {"production": [], "testing": [], "cancelled": []};
-            sortedByYear[year][catName].push(library.basic_info.name);
+            sortedByYear[year][catName].push(library);
           }
         }
       });
     });
-    return(sortedByYear);
+    return sortedByYear;
   }
   toggleFormatting() {
     this.setState({ styled: !this.state.styled });
   }
   render(): JSX.Element {
-    let categories = (year) => <ul>{Object.keys(year).map(category => <li className={this.state.styled ? "stats-category" : ""}><p className="stats-category-name">{category.substr(0, 1).toUpperCase() + category.substr(1)}</p>{names(year[category])}</li>)}</ul>;
-    let names = (category) => <ul className="yearly-library-list">{category.map(l => <li>{l}</li>)}</ul>;
     let sortedByYear = this.sortByYear(this.props.data);
     let years = Object.keys(sortedByYear).map(y =>
-      <li key={y} className={this.state.styled ? "year-li" : ""}><p>{y}</p>{categories(sortedByYear[y])}</li>
+      <li key={y} className={this.state.styled ? "year-li" : ""}>
+        <p>{y}</p>
+        { <StatsInnerList data={sortedByYear[y]} styled={this.state.styled} /> }
+      </li>
     );
     return (
       <div className="yearly-data">
@@ -62,7 +64,7 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
           contentEditable
           suppressContentEditableWarning
         >
-          {years}
+          { years }
         </ul>
       </div>
     );
