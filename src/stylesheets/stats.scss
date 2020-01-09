@@ -59,6 +59,7 @@
       width: 66%;
     }
   }
+
   .adobe-data, .yearly-data {
     > ul {
       pointer-events: none;
@@ -66,27 +67,21 @@
       padding: 10px 0;
       list-style: none;
       width: 60%;
-      .adobe-data-li, .year-li {
+      .header-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 20px;
-        > p {
-          background: $blue-tint;
-          border-bottom: 1px solid $blue-dark;
-        }
+        background: $blue-tint;
+        border-bottom: 1px solid $blue-dark;
         border: 1px solid $blue-dark;
-        margin-bottom: 5px;
+        margin-top: 5px;
       }
-      .year-li {
-        display: block;
-        width: 100%;
-        padding: 0;
-        > p {
-          border-bottom: 1px solid $blue-dark;
-          margin: 0;
-          padding: 10px 20px;
-        }
+      .list-holder {
+        border-left: 1px solid $blue-dark;
+        border-right: 1px solid $blue-dark;
+        border-bottom: 1px solid $blue-dark;
+        padding: 10px 20px;
       }
     }
   }
@@ -105,10 +100,9 @@
 
 .stats-inner-list {
   padding: 0;
-  background: white;
   list-style: none;
   .stats-category {
-    padding: 5px 10px 0 0;
+    padding: 5px 0 0 0;
     &:first-child > .stats-category-name {
       background: darken($green-tint, 10);
     }

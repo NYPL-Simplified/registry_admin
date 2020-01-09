@@ -40,13 +40,13 @@ describe("AdobeTab", () => {
 
   it("removes and restores the formatting", () => {
     let listItems = wrapper.find("li");
-    listItems.map(l => expect(l.hasClass("adobe-data-li")).to.be.true);
+    listItems.map(l => expect(l.find("section").hasClass("header-bar")).to.be.true);
     expect(wrapper.state()["styled"]).to.be.true;
     let formattingButton = wrapper.find("button").at(0);
     expect(formattingButton.text()).to.equal("Remove Formatting");
     formattingButton.simulate("click");
     listItems = wrapper.find("li");
-    listItems.map(l => expect(l.hasClass("adobe-data-li")).to.be.false);
+    listItems.map(l => expect(l.find("section").hasClass("header-bar")).to.be.false);
     expect(wrapper.state()["styled"]).to.be.false;
     expect(formattingButton.text()).to.equal("Restore Formatting");
   });

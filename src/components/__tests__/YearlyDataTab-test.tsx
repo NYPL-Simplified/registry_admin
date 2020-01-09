@@ -32,7 +32,7 @@ describe("YearlyDataTab", () => {
     };
 
     let y2017 = years.at(0);
-    expect(y2017.find("p").at(0).text()).to.equal("2017");
+    expect(y2017.find(".header-bar").text()).to.equal("2017");
     let categories = y2017.find(".stats-category");
     let production = categories.at(0);
     expect(production.find(".stats-category-list").find("li").length).to.equal(0);
@@ -42,7 +42,7 @@ describe("YearlyDataTab", () => {
     let cancelled = categories.at(2);
     expect(production.find(".stats-category-list").find("li").length).to.equal(0);
     let y2018 = years.at(1);
-    expect(y2018.find("p").at(0).text()).to.equal("2018");
+    expect(y2018.find(".header-bar").text()).to.equal("2018");
     categories = y2018.find(".stats-category");
     hasCategories(y2018);
     production = categories.at(0);
@@ -54,7 +54,7 @@ describe("YearlyDataTab", () => {
     expect(cancelled.find(".stats-category-list").find("li").length).to.equal(0);
 
     let y2019 = years.at(2);
-    expect(y2019.find("p").at(0).text()).to.equal("2019");
+    expect(y2019.find(".header-bar").text()).to.equal("2019");
     categories = y2019.find(".stats-category");
     hasCategories(y2019);
     production = categories.at(0);
@@ -73,16 +73,23 @@ describe("YearlyDataTab", () => {
   });
 
   it("removes and restores the formatting", () => {
-    let listItems = wrapper.find("ul").at(0).children("li");
+    let listItems = wrapper.find(".year-li");
     expect(listItems.length).to.equal(3);
-    listItems.map(l => expect(l.hasClass("year-li")).to.be.true);
+    listItems.forEach((l) => {
+      expect(l.find("section").at(0).hasClass("header-bar")).to.be.true;
+      expect(l.find("section").at(1).hasClass("list-holder")).to.be.true;
+    });
     expect(wrapper.state()["styled"]).to.be.true;
     let formattingButton = wrapper.find("button").at(0);
     expect(formattingButton.text()).to.equal("Remove Formatting");
     expect(formattingButton.text()).to.equal("Remove Formatting");
     formattingButton.simulate("click");
-    listItems = wrapper.find("ul").at(0).children("li");
-    listItems.map(l => expect(l.hasClass("year-li")).to.be.false);
+    listItems = wrapper.find(".year-li");
+    expect(listItems.length).to.equal(3);
+    listItems.forEach((l) => {
+      expect(l.find("section").at(0).hasClass("header-bar")).to.be.false;
+      expect(l.find("section").at(1).hasClass("list-holder")).to.be.false;
+    });
     expect(wrapper.state()["styled"]).to.be.false;
     expect(formattingButton.text()).to.equal("Restore Formatting");
   });

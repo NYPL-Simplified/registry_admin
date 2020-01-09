@@ -43,9 +43,13 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
   render(): JSX.Element {
     let sortedByYear = this.sortByYear(this.props.data);
     let years = Object.keys(sortedByYear).map(y =>
-      <li key={y} className={this.state.styled ? "year-li" : ""}>
-        <p>{y}</p>
-        { <StatsInnerList data={sortedByYear[y]} styled={this.state.styled} /> }
+      <li key={y} className="year-li">
+        <section className={this.state.styled ? "header-bar" : ""}>
+          <span>{y}</span>
+        </section>
+        <section className={this.state.styled ? "list-holder" : ""}>
+          { <StatsInnerList data={sortedByYear[y]} styled={this.state.styled} /> }
+        </section>
       </li>
     );
     return (
