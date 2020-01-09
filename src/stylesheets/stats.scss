@@ -55,14 +55,8 @@
 
   .list-view {
     .stats-list {
-      pointer-events: none;
-      margin: 0;
-      padding: 10px 0;
-      list-style: none;
-      width: 60%;
-      ul:not(.stats-category-list) {
-        list-style: none;
-      }
+      // pointer-events: none;
+      width: 66%;
     }
   }
   .adobe-data, .yearly-data {
@@ -77,7 +71,10 @@
         justify-content: space-between;
         align-items: center;
         padding: 10px 20px;
-        background: $blue-tint;
+        > p {
+          background: $blue-tint;
+          border-bottom: 1px solid $blue-dark;
+        }
         border: 1px solid $blue-dark;
         margin-bottom: 5px;
       }
@@ -107,7 +104,7 @@
 }
 
 .stats-inner-list {
-  padding: 20px;
+  padding: 0;
   background: white;
   list-style: none;
   .stats-category {

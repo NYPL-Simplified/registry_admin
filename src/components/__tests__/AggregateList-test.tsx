@@ -113,7 +113,7 @@ describe("AggregateList", () => {
     let spyToggleFormatting = Sinon.spy(wrapper.instance(), "toggleFormatting");
     wrapper.setProps({ toggleFormatting: spyToggleFormatting });
     expect(spyToggleFormatting.callCount).to.equal(0);
-    let categoryListItems = wrapper.find(".stats-list").children();
+    let categoryListItems = wrapper.find(".stats-inner-list").children();
     expect(categoryListItems.length).to.equal(3);
     categoryListItems.forEach((item) => {
       expect(item.hasClass("stats-category")).to.be.true;
@@ -127,7 +127,7 @@ describe("AggregateList", () => {
     expect(wrapper.state()["styled"]).to.be.false;
     button = wrapper.find(".list-view").find("button").at(0);
     expect(button.text()).to.equal("Restore Formatting");
-    categoryListItems = wrapper.find(".stats-list").children();
+    categoryListItems = wrapper.find(".stats-inner-list").children();
     expect(categoryListItems.length).to.equal(3);
     categoryListItems.forEach((item) => {
       expect(item.hasClass("stats-category")).to.be.false;
@@ -181,35 +181,35 @@ describe("AggregateList", () => {
     expect(nameLists.at(1).text()).not.to.contain("(NY, ON, FL)");
     expect(nameLists.at(2).text()).not.to.contain("(state unknown)");
   });
-  it("generates a string based on the library's areas", () => {
-    let info = (attr: {[index: string]: string[]}) =>
-      wrapper.instance().getGeographicInfo(modifyLibrary(testLibrary1, attr));
-
-    wrapper.setState({ geographicInfo: true });
-    let empty = { focus: [], service: [] };
-    let oneFocusArea = { focus: ["11104 (NY)"], service: [] };
-    let multipleFocusAreas = { focus: ["11104 (NY)", "07670 (NJ)", "06750 (CT)"], service: [] };
-    let oneServiceArea = { focus: [], service: ["11104 (NY)"] };
-    let multipleServiceAreas = { focus: [], service: ["11104 (NY)", "07670 (NJ)", "06750 (CT)"] };
-    let oneEach = { focus: ["11104 (NY)"], service: ["07670 (NJ)"] };
-    let multiplesEach = { focus: ["11104 (NY)", "07670 (NJ)"], service: ["06750 (CT)", "02445 (MA)"] };
-    let withDuplicates = { focus: ["06750 (CT)"], service: ["06039 (CT)"] };
-    let oneUnknown = { focus: ["(unknown)"], service: ["11104 (NY)"] };
-    let allUnknown = { focus: ["unknown"], service: ["unknown"] };
-
-    expect(info(empty)).to.equal(" (state unknown)");
-    expect(info(oneFocusArea)).to.equal(" (NY)");
-    expect(info(multipleFocusAreas)).to.equal(" (NY, NJ, CT)");
-    expect(info(oneServiceArea)).to.equal(" (NY)");
-    expect(info(multipleServiceAreas)).to.equal(" (NY, NJ, CT)");
-    expect(info(oneEach)).to.equal(" (NY, NJ)");
-    expect(info(multiplesEach)).to.equal(" (NY, NJ, CT, MA)");
-    expect(info(withDuplicates)).to.equal(" (CT)");
-    expect(info(oneUnknown)).to.equal(" (NY)");
-    expect(info(allUnknown)).to.equal(" (state unknown)");
-
-    expect(wrapper.instance().getGeographicInfo(
-      modifyLibrary(testLibrary2, { pls_id: "NY0778" }, "basic_info")
-    )).to.equal(" (NY)");
-  });
+  // it("generates a string based on the library's areas", () => {
+  //   let info = (attr: {[index: string]: string[]}) =>
+  //     wrapper.instance().getGeographicInfo(modifyLibrary(testLibrary1, attr));
+  //
+  //   wrapper.setState({ geographicInfo: true });
+  //   let empty = { focus: [], service: [] };
+  //   let oneFocusArea = { focus: ["11104 (NY)"], service: [] };
+  //   let multipleFocusAreas = { focus: ["11104 (NY)", "07670 (NJ)", "06750 (CT)"], service: [] };
+  //   let oneServiceArea = { focus: [], service: ["11104 (NY)"] };
+  //   let multipleServiceAreas = { focus: [], service: ["11104 (NY)", "07670 (NJ)", "06750 (CT)"] };
+  //   let oneEach = { focus: ["11104 (NY)"], service: ["07670 (NJ)"] };
+  //   let multiplesEach = { focus: ["11104 (NY)", "07670 (NJ)"], service: ["06750 (CT)", "02445 (MA)"] };
+  //   let withDuplicates = { focus: ["06750 (CT)"], service: ["06039 (CT)"] };
+  //   let oneUnknown = { focus: ["(unknown)"], service: ["11104 (NY)"] };
+  //   let allUnknown = { focus: ["unknown"], service: ["unknown"] };
+  //
+  //   expect(info(empty)).to.equal(" (state unknown)");
+  //   expect(info(oneFocusArea)).to.equal(" (NY)");
+  //   expect(info(multipleFocusAreas)).to.equal(" (NY, NJ, CT)");
+  //   expect(info(oneServiceArea)).to.equal(" (NY)");
+  //   expect(info(multipleServiceAreas)).to.equal(" (NY, NJ, CT)");
+  //   expect(info(oneEach)).to.equal(" (NY, NJ)");
+  //   expect(info(multiplesEach)).to.equal(" (NY, NJ, CT, MA)");
+  //   expect(info(withDuplicates)).to.equal(" (CT)");
+  //   expect(info(oneUnknown)).to.equal(" (NY)");
+  //   expect(info(allUnknown)).to.equal(" (state unknown)");
+  //
+  //   expect(wrapper.instance().getGeographicInfo(
+  //     modifyLibrary(testLibrary2, { pls_id: "NY0778" }, "basic_info")
+  //   )).to.equal(" (NY)");
+  // });
 });

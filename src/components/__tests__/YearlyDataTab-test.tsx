@@ -41,7 +41,6 @@ describe("YearlyDataTab", () => {
     expect(testing.find(".stats-category-list").find("li").text()).to.equal("Test Library 2");
     let cancelled = categories.at(2);
     expect(production.find(".stats-category-list").find("li").length).to.equal(0);
-
     let y2018 = years.at(1);
     expect(y2018.find("p").at(0).text()).to.equal("2018");
     categories = y2018.find(".stats-category");
