@@ -17,7 +17,7 @@
     height: 100%;
     width: 100%;
   }
-  .chart-view, .adobe-charts {
+  .chart-view {
     display: flex;
   }
   .recharts-responsive-container {
@@ -36,9 +36,6 @@
   }
   .chart-view .recharts-pie-sector:nth-child(3) .recharts-sector, .chart-view .recharts-bar-rectangle:nth-child(3) .recharts-rectangle  {
     fill: lighten($red, 10);
-  }
-  .adobe-charts .recharts-sector, .adobe-charts .recharts-rectangle {
-    fill: $blue-dark;
   }
 
   .recharts-default-legend {
@@ -89,11 +86,6 @@
     width: 85%;
     > ul {
       width: 100%;
-    }
-  }
-  .adobe-charts {
-    svg.recharts-surface {
-      min-width: 100%;
     }
   }
 }

@@ -44,6 +44,7 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
       </li>
     );
   }
+
   render() {
     let list = this.props.data && Object.keys(this.props.data).map(category => {
       return this.makeLi(category);

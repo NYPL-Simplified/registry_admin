@@ -4,6 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import YearlyDataTab from "../YearlyDataTab";
 import CopyButton from "../CopyButton";
+import StatsInnerList from "../StatsInnerList";
 import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
 
 describe("YearlyDataTab", () => {
@@ -33,7 +34,7 @@ describe("YearlyDataTab", () => {
 
     let y2017 = years.at(0);
     expect(y2017.find(".header-bar").text()).to.equal("2017");
-    let categories = y2017.find(".stats-category");
+    let categories = y2017.find(StatsInnerList).find("ul").at(0).children("li");
     let production = categories.at(0);
     expect(production.find(".stats-category-list").find("li").length).to.equal(0);
     let testing = categories.at(1);
@@ -43,7 +44,7 @@ describe("YearlyDataTab", () => {
     expect(production.find(".stats-category-list").find("li").length).to.equal(0);
     let y2018 = years.at(1);
     expect(y2018.find(".header-bar").text()).to.equal("2018");
-    categories = y2018.find(".stats-category");
+    categories = y2018.find(StatsInnerList).find("ul").at(0).children("li");
     hasCategories(y2018);
     production = categories.at(0);
     expect(production.find(".stats-category-list").find("li").length).to.equal(1);
@@ -55,7 +56,7 @@ describe("YearlyDataTab", () => {
 
     let y2019 = years.at(2);
     expect(y2019.find(".header-bar").text()).to.equal("2019");
-    categories = y2019.find(".stats-category");
+    categories = y2019.find(StatsInnerList).find("ul").at(0).children("li");
     hasCategories(y2019);
     production = categories.at(0);
     expect(production.find(".stats-category-list").find("li").length).to.equal(1);
@@ -73,22 +74,34 @@ describe("YearlyDataTab", () => {
   });
 
   it("removes and restores the formatting", () => {
-    let listItems = wrapper.find(".year-li");
-    expect(listItems.length).to.equal(3);
-    listItems.forEach((l) => {
-      expect(l.find("section").at(0).hasClass("header-bar")).to.be.true;
-      expect(l.find("section").at(1).hasClass("list-holder")).to.be.true;
+    let years = wrapper.find(".year-li");
+    expect(years.length).to.equal(3);
+    years.forEach((year) => {
+      expect(year.find("section").at(0).hasClass("header-bar")).to.be.true;
+      expect(year.find("section").at(1).hasClass("list-holder")).to.be.true;
+      expect(year.find(StatsInnerList).prop("styled")).to.be.true;
+      year.find(StatsInnerList).find("ul").at(0).children("li").map((l) => {
+        expect(l.hasClass("stats-category")).to.be.true;
+        expect(l.find("section").hasClass("stats-category-name")).to.be.true;
+        expect(l.find("ul").hasClass("stats-category-list")).to.be.true;
+      });
     });
     expect(wrapper.state()["styled"]).to.be.true;
     let formattingButton = wrapper.find("button").at(0);
     expect(formattingButton.text()).to.equal("Remove Formatting");
     expect(formattingButton.text()).to.equal("Remove Formatting");
     formattingButton.simulate("click");
-    listItems = wrapper.find(".year-li");
-    expect(listItems.length).to.equal(3);
-    listItems.forEach((l) => {
-      expect(l.find("section").at(0).hasClass("header-bar")).to.be.false;
-      expect(l.find("section").at(1).hasClass("list-holder")).to.be.false;
+    years = wrapper.find(".year-li");
+    expect(years.length).to.equal(3);
+    years.forEach((year) => {
+      expect(year.find("section").at(0).hasClass("header-bar")).to.be.false;
+      expect(year.find("section").at(1).hasClass("list-holder")).to.be.false;
+      expect(year.find(StatsInnerList).prop("styled")).to.be.false;
+      year.find(StatsInnerList).find("ul").at(0).children("li").map((l) => {
+        expect(l.hasClass("stats-category")).to.be.false;
+        expect(l.find("section").hasClass("stats-category-name")).to.be.false;
+        expect(l.find("ul").hasClass("stats-category-list")).to.be.false;
+      });
     });
     expect(wrapper.state()["styled"]).to.be.false;
     expect(formattingButton.text()).to.equal("Restore Formatting");
