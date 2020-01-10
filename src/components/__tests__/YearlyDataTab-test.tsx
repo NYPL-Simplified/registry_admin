@@ -21,7 +21,7 @@ describe("YearlyDataTab", () => {
     };
     wrapper = Enzyme.mount(<YearlyDataTab data={data} />);
   });
-  it("renders the data", () => {
+  it.only("renders the data", () => {
     let years = wrapper.find(".year-li");
     expect(years.length).to.equal(3);
 
@@ -33,7 +33,8 @@ describe("YearlyDataTab", () => {
     };
 
     let y2017 = years.at(0);
-    expect(y2017.find(".header-bar").text()).to.equal("2017");
+    expect(y2017.find(".header-bar").find("span").at(0).text()).to.equal("2017: 1");
+    expect(y2017.find(".header-bar").find("span").at(1).text()).to.equal("25%");
     let categories = y2017.find(StatsInnerList).find("ul").at(0).children("li");
     let production = categories.at(0);
     expect(production.find(".stats-category-list").find("li").length).to.equal(0);
@@ -42,8 +43,10 @@ describe("YearlyDataTab", () => {
     expect(testing.find(".stats-category-list").find("li").text()).to.equal("Test Library 2");
     let cancelled = categories.at(2);
     expect(production.find(".stats-category-list").find("li").length).to.equal(0);
+
     let y2018 = years.at(1);
-    expect(y2018.find(".header-bar").text()).to.equal("2018");
+    expect(y2018.find(".header-bar").find("span").at(0).text()).to.equal("2018: 1");
+    expect(y2018.find(".header-bar").find("span").at(1).text()).to.equal("25%");
     categories = y2018.find(StatsInnerList).find("ul").at(0).children("li");
     hasCategories(y2018);
     production = categories.at(0);
@@ -55,7 +58,8 @@ describe("YearlyDataTab", () => {
     expect(cancelled.find(".stats-category-list").find("li").length).to.equal(0);
 
     let y2019 = years.at(2);
-    expect(y2019.find(".header-bar").text()).to.equal("2019");
+    expect(y2019.find(".header-bar").find("span").at(0).text()).to.equal("2019: 2");
+    expect(y2019.find(".header-bar").find("span").at(1).text()).to.equal("50%");
     categories = y2019.find(StatsInnerList).find("ul").at(0).children("li");
     hasCategories(y2019);
     production = categories.at(0);

@@ -3,6 +3,7 @@ import CopyButton from "./CopyButton";
 import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
 import StatsInnerList from "./StatsInnerList";
+import { getPercentage } from "../utils/sharedFunctions";
 
 export interface YearlyDataTabProps {
   data: {[key: string]: LibraryData[]};
@@ -40,18 +41,26 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
   toggleFormatting() {
     this.setState({ styled: !this.state.styled });
   }
+  getYearlyTotal(data: {[key: string]: LibraryData[]}) {
+    return Object.values(data).map(v => v.length).reduce((accum, next) => accum + next);
+  }
   render(): JSX.Element {
     let sortedByYear = this.sortByYear(this.props.data);
-    let years = Object.keys(sortedByYear).map(y =>
-      <li key={y} className="year-li">
-        <section className={this.state.styled ? "header-bar" : ""}>
-          <span>{y}</span>
-        </section>
-        <section className={this.state.styled ? "list-holder" : ""}>
-          { <StatsInnerList data={sortedByYear[y]} styled={this.state.styled} /> }
-        </section>
-      </li>
-    );
+    let total = Object.keys(sortedByYear).map(y => this.getYearlyTotal(sortedByYear[y]));
+    let years = Object.keys(sortedByYear).map((y) => {
+      let yearlyTotal = this.getYearlyTotal(sortedByYear[y]);
+      return (
+        <li key={y} className="year-li">
+          <section className={this.state.styled ? "header-bar" : ""}>
+            <span>{y}: {yearlyTotal}</span>
+            <span>{getPercentage(yearlyTotal, total, true)}</span>
+          </section>
+          <section className={this.state.styled ? "list-holder" : ""}>
+            { <StatsInnerList data={sortedByYear[y]} styled={this.state.styled} /> }
+          </section>
+        </li>
+      );
+    });
     return (
       <div className="yearly-data">
         <div className="buttons">
