@@ -61,6 +61,7 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
       Object.keys(this.state.yearsToShow).forEach(year => yearsToShow[year] = newValue);
     } else {
       yearsToShow[year] = newValue;
+      yearsToShow = { ...this.state.yearsToShow, ...yearsToShow };
     }
     this.setState({...this.state, ...{ yearsToShow }});
   }

@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.5
+#### Updated
+- Refactored and added additional features to the Yearly Data tab.
+
 ### v1.4.4
 #### Added
 - Added a Yearly Data tab to the Stats panel, displaying a list of the libraries sorted by what year they were added.
