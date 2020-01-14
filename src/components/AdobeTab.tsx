@@ -18,6 +18,15 @@ export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabSta
     super(props);
     this.state = { styled: true };
     this.toggleFormatting = this.toggleFormatting.bind(this);
+    this.total = this.total.bind(this);
+  }
+
+  total() {
+    let idCounts = this.props.data.map(l => parseInt(l.basic_info.number_of_patrons));
+    if (idCounts.length > 0) {
+      return idCounts.reduce((accum, next) => accum + next);
+    }
+    return 0;
   }
 
   render(): JSX.Element {
@@ -38,6 +47,7 @@ export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabSta
           contentEditable
           suppressContentEditableWarning
         >
+          <p className={this.state.styled && "adobe-total"}>Total Adobe IDs: {this.total()}</p>
           { this.props.data && this.props.data.map((library) => {
             let name = library.basic_info.name;
             let numberOfPatrons = parseInt(library.basic_info.number_of_patrons);

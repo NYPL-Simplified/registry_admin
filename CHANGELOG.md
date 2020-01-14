@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.5
+#### Updated
+- Displayed the total number of Adobe IDs in the Adobe Data tab.
+
 ### v1.4.4
 #### Added
 - Added a Yearly Data tab to the Stats panel, displaying a list of the libraries sorted by what year they were added.
