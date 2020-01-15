@@ -1,8 +1,12 @@
 ## Changelog
 
-### v1.4.5
+### v1.4.6
 #### Updated
 - Refactored and added additional features to the Yearly Data tab.
+
+### v1.4.5
+#### Updated
+- Displayed the total number of Adobe IDs in the Adobe Data tab.
 
 ### v1.4.4
 #### Added

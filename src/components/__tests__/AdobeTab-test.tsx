@@ -16,6 +16,9 @@ describe("AdobeTab", () => {
   });
 
   it("renders the data", () => {
+    let total = wrapper.find("p");
+    expect(total.length).to.equal(1);
+    expect(total.text()).to.equal("Total Adobe IDs: 6");
     let listItems = wrapper.find("li");
     expect(listItems.length).to.equal(3);
     expect(listItems.at(0).text()).to.equal("Test Library 1: 3 (50%)");
@@ -39,12 +42,16 @@ describe("AdobeTab", () => {
   });
 
   it("removes and restores the formatting", () => {
+    let total = wrapper.find("p");
+    expect(total.hasClass("adobe-total")).to.be.true;
     let listItems = wrapper.find("li");
     listItems.map(l => expect(l.find("section").hasClass("header-bar")).to.be.true);
     expect(wrapper.state()["styled"]).to.be.true;
     let formattingButton = wrapper.find("button").at(0);
     expect(formattingButton.text()).to.equal("Remove Formatting");
     formattingButton.simulate("click");
+    total = wrapper.find("p");
+    expect(total.hasClass("adobe-total")).to.be.false;
     listItems = wrapper.find("li");
     listItems.map(l => expect(l.find("section").hasClass("header-bar")).to.be.false);
     expect(wrapper.state()["styled"]).to.be.false;

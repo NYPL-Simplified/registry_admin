@@ -176,7 +176,7 @@
   }
 }
 
-.copy-confirmation {
+.copy-confirmation, .adobe-total {
   display: inline-block;
   vertical-align: middle;
   background: $green-tint;
@@ -189,4 +189,13 @@
   &.visible {
     opacity: 1;
   }
+}
+
+.adobe-total {
+  opacity: 1;
+  background: $blue-dark;
+  border-color: $blue-dark;
+  color: $white;
+  width: 100%;
+  text-align: center;
 }
