@@ -49,7 +49,7 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
     let list = this.props.data && Object.keys(this.props.data).map(category => {
       return this.makeLi(category, allLengths);
     });
-    return <ul className="stats-inner-list">{list}</ul> || "null";
+    return <ul className="stats-inner-list">{list}</ul>;
   }
 
   getGeographicInfo(library: LibraryData): string {
