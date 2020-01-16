@@ -10,10 +10,9 @@ export interface StatsInnerListProps {
 }
 
 export default class StatsInnerList extends React.Component<StatsInnerListProps, {}> {
-  makeCategoryBar(category: string): JSX.Element[] {
+  makeCategoryBar(category: string, allLengths: number[]): JSX.Element[] {
     let catName = category.replace(category[0], category[0].toUpperCase());
     let length = this.props.data[category].length;
-    let allLengths = Object.values(this.props.data).map(x => (x as any).length);
     return [
       <span key={catName}>{catName}: {length}</span>,
       <span key={`${catName}-${length}`}> ({getPercentage(length, allLengths, true)})</span>
@@ -29,12 +28,12 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
     });
   }
 
-  makeLi(category: string): JSX.Element {
+  makeLi(category: string, allLengths: number[]): JSX.Element {
     let hasStyles = this.props.styled;
     return (
       <li key={category} className={hasStyles ? "stats-category" : ""}>
         <section className={hasStyles ? "stats-category-name" : ""}>
-          { this.makeCategoryBar(category) }
+          { this.makeCategoryBar(category, allLengths) }
         </section>
         { (!this.props.stagesToShow || this.props.stagesToShow[category]) &&
           <ul className={`${hasStyles ? "stats-category-list " : ""}`}>
@@ -46,8 +45,9 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
   }
 
   render() {
+    let allLengths = Object.values(this.props.data).map(x => (x as any).length);
     let list = this.props.data && Object.keys(this.props.data).map(category => {
-      return this.makeLi(category);
+      return this.makeLi(category, allLengths);
     });
     return <ul className="stats-inner-list">{list}</ul> || "null";
   }

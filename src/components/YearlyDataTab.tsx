@@ -65,18 +65,19 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
     }
     this.setState({...this.state, ...{ yearsToShow }});
   }
+
   render(): JSX.Element {
     let sortedByYear = this.sortByYear(this.props.data);
     let showOrHideAll: string = `${Object.keys(sortedByYear).every(year => this.state.yearsToShow[year]) ? "Hide" : "Show"} All`;
     let showOrHideYear = (year) => `${this.state.yearsToShow[year] ? "Hide" : "Show"} ${year}`;
     let total = Object.keys(sortedByYear).map(y => this.getYearlyTotal(sortedByYear[y]));
-    let years = Object.keys(sortedByYear).map((y) => {
-      let yearlyTotal = this.getYearlyTotal(sortedByYear[y]);
+    let years = Object.keys(sortedByYear).map((y, idx) => {
+      let yearlyTotal = total[idx];
       return (
         <li key={y} className="year-li">
           <section className={this.state.styled ? "header-bar" : ""}>
-            <span>{y}: {yearlyTotal}</span>
-            <span>{getPercentage(yearlyTotal, total, true)}</span>
+            <span>{y}: {yearlyTotal} librar{yearlyTotal !== 1 ? "ies" : "y"} added</span>
+            <span>({getPercentage(yearlyTotal, total, true)})</span>
           </section>
           {
             this.state.yearsToShow[y] &&

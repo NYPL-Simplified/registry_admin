@@ -27,16 +27,16 @@ describe("YearlyDataTab", () => {
     expect(years.length).to.equal(3);
 
     let y2017 = years.at(0);
-    expect(y2017.find(".header-bar").find("span").at(0).text()).to.equal("2017: 1");
-    expect(y2017.find(".header-bar").find("span").at(1).text()).to.equal("25%");
+    expect(y2017.find(".header-bar").find("span").at(0).text()).to.equal("2017: 1 library added");
+    expect(y2017.find(".header-bar").find("span").at(1).text()).to.equal("(25%)");
 
     let y2018 = years.at(1);
-    expect(y2018.find(".header-bar").find("span").at(0).text()).to.equal("2018: 1");
-    expect(y2018.find(".header-bar").find("span").at(1).text()).to.equal("25%");
+    expect(y2018.find(".header-bar").find("span").at(0).text()).to.equal("2018: 1 library added");
+    expect(y2018.find(".header-bar").find("span").at(1).text()).to.equal("(25%)");
 
     let y2019 = years.at(2);
-    expect(y2019.find(".header-bar").find("span").at(0).text()).to.equal("2019: 2");
-    expect(y2019.find(".header-bar").find("span").at(1).text()).to.equal("50%");
+    expect(y2019.find(".header-bar").find("span").at(0).text()).to.equal("2019: 2 libraries added");
+    expect(y2019.find(".header-bar").find("span").at(1).text()).to.equal("(50%)");
   });
   it("optionally renders a StatsInnerList for each year", async () => {
     let yearNames = ["2017", "2018", "2019"];
