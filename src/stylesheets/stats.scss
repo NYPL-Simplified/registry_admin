@@ -17,7 +17,7 @@
     height: 100%;
     width: 100%;
   }
-  .chart-view, .adobe-charts {
+  .chart-view {
     display: flex;
   }
   .recharts-responsive-container {
@@ -37,9 +37,6 @@
   .chart-view .recharts-pie-sector:nth-child(3) .recharts-sector, .chart-view .recharts-bar-rectangle:nth-child(3) .recharts-rectangle  {
     fill: lighten($red, 10);
   }
-  .adobe-charts .recharts-sector, .adobe-charts .recharts-rectangle {
-    fill: $blue-dark;
-  }
 
   .recharts-default-legend {
     li.recharts-legend-item {
@@ -52,8 +49,52 @@
       }
     }
   }
+
+  .list-view {
+    .stats-list {
+      // pointer-events: none;
+      width: 66%;
+    }
+  }
+
+  .adobe-data, .yearly-data {
+    > ul {
+      pointer-events: none;
+      margin: 0;
+      padding: 10px 0;
+      list-style: none;
+      width: 60%;
+      .header-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: $blue-tint;
+        border-bottom: 1px solid $blue-dark;
+        border: 1px solid $blue-dark;
+        margin-top: 5px;
+      }
+      .list-holder {
+        border-left: 1px solid $blue-dark;
+        border-right: 1px solid $blue-dark;
+        border-bottom: 1px solid $blue-dark;
+        padding: 10px 20px;
+      }
+    }
+  }
+  .yearly-data {
+    width: 85%;
+    > ul {
+      width: 100%;
+    }
+  }
+}
+
+.stats-inner-list {
+  padding: 0;
+  list-style: none;
   .stats-category {
-    padding: 5px 10px 0 0;
+    padding: 5px 0 0 0;
     &:first-child > .stats-category-name {
       background: darken($green-tint, 10);
     }
@@ -75,87 +116,15 @@
         margin: 0;
       }
     }
-    .inner-stats-list {
+    .stats-category-list {
+      background: white;
       padding: 10px 10px 10px 25px;
       border-radius: 0;
       border-left: 1px solid $dark-gray;
       border-right: 1px solid $dark-gray;
       border-bottom: 1px solid $dark-gray;
-    }
-  }
-
-  .yearly-data .stats-category {
-    padding: 0;
-    .stats-category-name {
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
-    }
-  }
-
-  .list-view {
-    .stats-list {
-      pointer-events: none;
-      margin: 0;
-      padding: 10px 0;
-      list-style: none;
-      width: 60%;
-      ul:not(.inner-stats-list) {
-        list-style: none;
-      }
-    }
-  }
-  .adobe-data, .yearly-data {
-    ul {
-      pointer-events: none;
-      margin: 0;
-      padding: 10px 0;
-      list-style: none;
-      width: 60%;
-      .adobe-data-li, .year-li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background: $blue-tint;
-        border: 1px solid $blue-dark;
-        margin-bottom: 5px;
-      }
-      .year-li {
-        display: block;
-        width: 100%;
-        padding: 0;
-        > p {
-          border-bottom: 1px solid $blue-dark;
-          margin: 0;
-          padding: 10px 20px;
-        }
-        > ul {
-          display: block;
-          background: $white;
-          width: 100%;
-          padding: 20px;
-          > li {
-            margin: 8px 0;
-            border: 1px solid $dark-gray;
-            ul {
-              list-style: circle;
-              padding: 10px 10px 10px 25px;
-            }
-          }
-        }
-      }
-    }
-  }
-  .yearly-data {
-    width: 85%;
-    > ul {
       width: 100%;
-    }
-  }
-  .adobe-charts {
-    svg.recharts-surface {
-      min-width: 100%;
+      list-style: circle;
     }
   }
 }

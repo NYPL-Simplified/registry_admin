@@ -2,6 +2,9 @@ import * as React from "react";
 import CopyButton from "./CopyButton";
 import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
+import StatsInnerList from "./StatsInnerList";
+import DropdownButton from "./DropdownButton";
+import { getPercentage } from "../utils/sharedFunctions";
 
 export interface YearlyDataTabProps {
   data: {[key: string]: LibraryData[]};
@@ -9,14 +12,22 @@ export interface YearlyDataTabProps {
 
 export interface YearlyDataTabState {
   styled: boolean;
+  yearsToShow: {[key: number]: boolean};
 }
 
 export default class YearlyDataTab extends React.Component<YearlyDataTabProps, YearlyDataTabState> {
   private dataRef = React.createRef<HTMLUListElement>();
   constructor(props: YearlyDataTabProps) {
     super(props);
-    this.state = { styled: true };
+    this.state = { styled: true, yearsToShow: {} };
     this.toggleFormatting = this.toggleFormatting.bind(this);
+  }
+  async componentWillReceiveProps() {
+    await Object.values(this.props.data).some(x => x.length > 0);
+    let years = Object.keys(this.sortByYear(this.props.data));
+    let yearsToShow = {};
+    years.forEach(y => yearsToShow[y] = false);
+    this.setState({...this.state, ...{ yearsToShow }});
   }
   sortByYear(data) {
     let sortedByYear = {};
@@ -26,26 +37,57 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
         let year = library.basic_info.timestamp && library.basic_info.timestamp.match(/20\d+/)[0];
         if (year) {
           if (sortedByYear[year]) {
-            sortedByYear[year][catName].push(library.basic_info.name);
+            sortedByYear[year][catName].push(library);
           } else {
             sortedByYear[year] = {"production": [], "testing": [], "cancelled": []};
-            sortedByYear[year][catName].push(library.basic_info.name);
+            sortedByYear[year][catName].push(library);
           }
         }
       });
     });
-    return(sortedByYear);
+    return sortedByYear;
   }
   toggleFormatting() {
     this.setState({ styled: !this.state.styled });
   }
+  getYearlyTotal(data: {[key: string]: LibraryData[]}) {
+    return Object.values(data).map(v => v.length).reduce((accum, next) => accum + next);
+  }
+  toggleExpanded(e) {
+    let [verb, year] = e.target.textContent.toLowerCase().split(" ");
+    let yearsToShow = {};
+    let newValue = verb === "show";
+    if (year === "all") {
+      Object.keys(this.state.yearsToShow).forEach(year => yearsToShow[year] = newValue);
+    } else {
+      yearsToShow[year] = newValue;
+      yearsToShow = { ...this.state.yearsToShow, ...yearsToShow };
+    }
+    this.setState({...this.state, ...{ yearsToShow }});
+  }
+
   render(): JSX.Element {
-    let categories = (year) => <ul>{Object.keys(year).map(category => <li className={this.state.styled ? "stats-category" : ""}><p className="stats-category-name">{category.substr(0, 1).toUpperCase() + category.substr(1)}</p>{names(year[category])}</li>)}</ul>;
-    let names = (category) => <ul className="yearly-library-list">{category.map(l => <li>{l}</li>)}</ul>;
     let sortedByYear = this.sortByYear(this.props.data);
-    let years = Object.keys(sortedByYear).map(y =>
-      <li key={y} className={this.state.styled ? "year-li" : ""}><p>{y}</p>{categories(sortedByYear[y])}</li>
-    );
+    let showOrHideAll: string = `${Object.keys(sortedByYear).every(year => this.state.yearsToShow[year]) ? "Hide" : "Show"} All`;
+    let showOrHideYear = (year) => `${this.state.yearsToShow[year] ? "Hide" : "Show"} ${year}`;
+    let total = Object.keys(sortedByYear).map(y => this.getYearlyTotal(sortedByYear[y]));
+    let years = Object.keys(sortedByYear).map((y, idx) => {
+      let yearlyTotal = total[idx];
+      return (
+        <li key={y} className="year-li">
+          <section className={this.state.styled ? "header-bar" : ""}>
+            <span>{y}: {yearlyTotal} librar{yearlyTotal !== 1 ? "ies" : "y"} added</span>
+            <span>({getPercentage(yearlyTotal, total, true)})</span>
+          </section>
+          {
+            this.state.yearsToShow[y] &&
+            <section className={this.state.styled ? "list-holder" : ""}>
+            { <StatsInnerList data={sortedByYear[y]} styled={this.state.styled} /> }
+            </section>
+          }
+        </li>
+      );
+    });
     return (
       <div className="yearly-data">
         <div className="buttons">
@@ -55,6 +97,15 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
             content={`${this.state.styled ? "Remove" : "Restore"} Formatting`}
             className="inline squared inverted left-align"
           />
+          <DropdownButton
+            mainContent="Year Display"
+            callback={(e) => { this.toggleExpanded(e); }}
+            menuContent={
+              [showOrHideAll].concat(Object.keys(sortedByYear).map(x => showOrHideYear(x)))
+            }
+            className="inline squared inverted left-align"
+            key="dropdown"
+          />
           <CopyButton element={this.dataRef.current} />
         </div>
         <ul
@@ -62,7 +113,7 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
           contentEditable
           suppressContentEditableWarning
         >
-          {years}
+          { years }
         </ul>
       </div>
     );

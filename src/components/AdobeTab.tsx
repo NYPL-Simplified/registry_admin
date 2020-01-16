@@ -52,9 +52,11 @@ export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabSta
             let name = library.basic_info.name;
             let numberOfPatrons = parseInt(library.basic_info.number_of_patrons);
               return (
-                <li key={name} className={hasStyles ? "adobe-data-li" : ""}>
-                  <span>{name}: {numberOfPatrons} </span>
-                  <span>({getPercentage(numberOfPatrons, this.props.data.map(l => l.basic_info.number_of_patrons), true)})</span>
+                <li key={name} className={hasStyles ? "adobe-li" : ""}>
+                  <section className={hasStyles ? "header-bar" : ""}>
+                    <span>{name}: {numberOfPatrons} patron{numberOfPatrons !== 1 && "s"}</span>
+                    <span>({getPercentage(numberOfPatrons, this.props.data.map(l => l.basic_info.number_of_patrons), true)})</span>
+                  </section>
                 </li>
               );
             })

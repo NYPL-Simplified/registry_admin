@@ -21,9 +21,12 @@ describe("AdobeTab", () => {
     expect(total.text()).to.equal("Total Adobe IDs: 6");
     let listItems = wrapper.find("li");
     expect(listItems.length).to.equal(3);
-    expect(listItems.at(0).text()).to.equal("Test Library 1: 3 (50%)");
-    expect(listItems.at(1).text()).to.equal("Test Library 2: 1 (17%)");
-    expect(listItems.at(2).text()).to.equal("Test Library 3: 2 (33%)");
+    expect(listItems.at(0).find("span").at(0).text()).to.equal("Test Library 1: 3 patrons");
+    expect(listItems.at(0).find("span").at(1).text()).to.equal("(50%)");
+    expect(listItems.at(1).find("span").at(0).text()).to.equal("Test Library 2: 1 patron");
+    expect(listItems.at(1).find("span").at(1).text()).to.equal("(17%)");
+    expect(listItems.at(2).find("span").at(0).text()).to.equal("Test Library 3: 2 patrons");
+    expect(listItems.at(2).find("span").at(1).text()).to.equal("(33%)");
   });
 
   it("handles the case in which there are no patrons", () => {
@@ -32,7 +35,8 @@ describe("AdobeTab", () => {
     let listItems = wrapper.find("li");
     expect(listItems.length).to.equal(3);
     listItems.map((item, idx) => {
-      expect(item.text()).to.equal(`Test Library ${idx + 1}: 0 (0%)`);
+      expect(item.find("span").at(0).text()).to.equal(`Test Library ${idx + 1}: 0 patrons`);
+      expect(item.find("span").at(1).text()).to.equal("(0%)");
     });
   });
 
@@ -45,7 +49,7 @@ describe("AdobeTab", () => {
     let total = wrapper.find("p");
     expect(total.hasClass("adobe-total")).to.be.true;
     let listItems = wrapper.find("li");
-    listItems.map(l => expect(l.hasClass("adobe-data-li")).to.be.true);
+    listItems.map(l => expect(l.find("section").hasClass("header-bar")).to.be.true);
     expect(wrapper.state()["styled"]).to.be.true;
     let formattingButton = wrapper.find("button").at(0);
     expect(formattingButton.text()).to.equal("Remove Formatting");
@@ -53,7 +57,7 @@ describe("AdobeTab", () => {
     total = wrapper.find("p");
     expect(total.hasClass("adobe-total")).to.be.false;
     listItems = wrapper.find("li");
-    listItems.map(l => expect(l.hasClass("adobe-data-li")).to.be.false);
+    listItems.map(l => expect(l.find("section").hasClass("header-bar")).to.be.false);
     expect(wrapper.state()["styled"]).to.be.false;
     expect(formattingButton.text()).to.equal("Restore Formatting");
   });
