@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.7
+#### Added
+- Added an option for displaying the month each library was added, in the Yearly Data tab.
+
 ### v1.4.6
 #### Updated
 - Refactored and added additional features to the Yearly Data tab.
