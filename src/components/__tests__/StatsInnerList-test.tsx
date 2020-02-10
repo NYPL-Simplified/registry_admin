@@ -92,6 +92,17 @@ describe("StatsInnerList", () => {
       expect(c.find("ul").hasClass("stats-category-list")).to.be.false;
     });
   });
+  it("optionally shows what month each library was added", () => {
+    wrapper.setProps({ stagesToShow: {"production": true, "testing": true, "cancelled": true }});
+    wrapper.setProps({ showMonths: true });
+    wrapper.find(".inner-stats-item").forEach(l => {
+      expect(new RegExp(/(November)/).test(l.text())).to.be.true;
+    });
+    wrapper.setProps({ showMonths: false });
+    wrapper.find(".inner-stats-item").forEach(l => {
+      expect(new RegExp(/(November)/).test(l.text())).to.be.false;
+    });
+  });
   it("optionally shows geographic information", () => {
     let nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.at(0).text()).not.to.contain("(NY, ON, FL)");

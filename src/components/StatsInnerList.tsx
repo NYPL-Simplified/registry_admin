@@ -7,6 +7,7 @@ export interface StatsInnerListProps {
   styled: boolean;
   stagesToShow?: {[ key: string ]: boolean};
   showGeographicInfo?: boolean;
+  showMonths?: boolean;
 }
 
 export default class StatsInnerList extends React.Component<StatsInnerListProps, {}> {
@@ -23,7 +24,7 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
     let libraries = this.props.data[category];
     return libraries.map((l) => {
       return (
-        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getGeographicInfo(l)}</p></li>
+        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getMonth(l)}{this.getGeographicInfo(l)}</p></li>
       );
     });
   }
@@ -50,6 +51,14 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
       return this.makeLi(category, allLengths);
     });
     return <ul className="stats-inner-list">{list}</ul>;
+  }
+
+  getMonth(library: LibraryData): string {
+    if (!this.props.showMonths) {
+      return "";
+    }
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return ` (${months[new Date(library.basic_info.timestamp).getMonth()]})`;
   }
 
   getGeographicInfo(library: LibraryData): string {

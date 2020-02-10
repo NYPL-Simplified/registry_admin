@@ -178,4 +178,35 @@ describe("YearlyDataTab", () => {
     expect(wrapper.state()["styled"]).to.be.false;
     expect(formattingButton.text()).to.equal("Restore Formatting");
   });
+
+  it("optionally displays the month each library was added", () => {
+    expect(wrapper.state().months).to.be.false;
+    expect(wrapper.find("button").length).to.equal(7);
+    wrapper.setState({ yearsToShow: {...wrapper.state().yearsToShow, ...{2019: true}}});
+    expect(wrapper.find("button").length).to.equal(8);
+    let monthsButton = wrapper.find("button").at(6);
+    expect(monthsButton.text()).to.equal("Show Months");
+    expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.false;
+    expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1");
+
+    monthsButton.simulate("click");
+
+    expect(wrapper.state().months).to.be.true;
+    expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.true;
+    expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1 (November)");
+    monthsButton = wrapper.find("button").at(6);
+    expect(monthsButton.text()).to.equal("Hide Months");
+
+    monthsButton.simulate("click");
+
+    expect(wrapper.state().months).to.be.false;
+    expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.false;
+    expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1");
+    monthsButton = wrapper.find("button").at(6);
+    expect(monthsButton.text()).to.equal("Show Months");
+
+    wrapper.setState({ yearsToShow: {...wrapper.state().yearsToShow, ...{2019: false}}});
+    expect(wrapper.find("button").length).to.equal(7);
+    expect(wrapper.find("button").at(6).text()).not.to.equal("Show Months");
+  });
 });
