@@ -185,7 +185,7 @@ describe("YearlyDataTab", () => {
     wrapper.setState({ yearsToShow: {...wrapper.state().yearsToShow, ...{2019: true}}});
     expect(wrapper.find("button").length).to.equal(8);
     let monthsButton = wrapper.find("button").at(6);
-    expect(monthsButton.text()).to.equal("Show Months");
+    expect(monthsButton.text()).to.equal("Show Month Added");
     expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.false;
     expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1");
 
@@ -195,7 +195,7 @@ describe("YearlyDataTab", () => {
     expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.true;
     expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1 (November)");
     monthsButton = wrapper.find("button").at(6);
-    expect(monthsButton.text()).to.equal("Hide Months");
+    expect(monthsButton.text()).to.equal("Hide Month Added");
 
     monthsButton.simulate("click");
 
@@ -203,10 +203,10 @@ describe("YearlyDataTab", () => {
     expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.false;
     expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1");
     monthsButton = wrapper.find("button").at(6);
-    expect(monthsButton.text()).to.equal("Show Months");
+    expect(monthsButton.text()).to.equal("Show Month Added");
 
     wrapper.setState({ yearsToShow: {...wrapper.state().yearsToShow, ...{2019: false}}});
     expect(wrapper.find("button").length).to.equal(7);
-    expect(wrapper.find("button").at(6).text()).not.to.equal("Show Months");
+    expect(wrapper.find("button").at(6).text()).not.to.equal("Show Month Added");
   });
 });

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { LibraryData } from "../interfaces";
-import { getPercentage } from "../utils/sharedFunctions";
+import { getPercentage, getMonth } from "../utils/sharedFunctions";
 
 export interface StatsInnerListProps {
   data: any;
@@ -58,7 +58,7 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
       return "";
     }
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    return ` (${months[new Date(library.basic_info.timestamp).getMonth()]})`;
+    return ` (${getMonth(library.basic_info.timestamp)})`;
   }
 
   getGeographicInfo(library: LibraryData): string {
