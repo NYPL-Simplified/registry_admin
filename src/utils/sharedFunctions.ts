@@ -16,3 +16,12 @@ export function getPercentage(x: number, outOf: number | string | Array<string |
   }
   return percentage;
 }
+
+export function getMonth(timestamp: string): string {
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  return `${months[new Date(timestamp).getMonth()]}`;
+}
+
+export function toggleState(attr: string, state) {
+  return {...state, ...{[attr]: !state[attr]}};
+}

@@ -1,12 +1,13 @@
 import * as React from "react";
 import { LibraryData } from "../interfaces";
-import { getPercentage } from "../utils/sharedFunctions";
+import { getPercentage, getMonth } from "../utils/sharedFunctions";
 
 export interface StatsInnerListProps {
   data: any;
   styled: boolean;
   stagesToShow?: {[ key: string ]: boolean};
   showGeographicInfo?: boolean;
+  showMonths?: boolean;
 }
 
 export default class StatsInnerList extends React.Component<StatsInnerListProps, {}> {
@@ -23,7 +24,7 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
     let libraries = this.props.data[category];
     return libraries.map((l) => {
       return (
-        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getGeographicInfo(l)}</p></li>
+        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getMonth(l)}{this.getGeographicInfo(l)}</p></li>
       );
     });
   }
@@ -50,6 +51,13 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
       return this.makeLi(category, allLengths);
     });
     return <ul className="stats-inner-list">{list}</ul>;
+  }
+
+  getMonth(library: LibraryData): string {
+    if (!this.props.showMonths) {
+      return "";
+    }
+    return ` (${getMonth(library.basic_info.timestamp)})`;
   }
 
   getGeographicInfo(library: LibraryData): string {
