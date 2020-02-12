@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.8
+#### Added
+- Updated the `opds-web-client` package to 0.3.4.
+
 ### v1.4.7
 #### Added
 - Added an option for displaying the month each library was added, in the Yearly Data tab.
