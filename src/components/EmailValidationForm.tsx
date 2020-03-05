@@ -1,71 +1,88 @@
 import * as React from "react";
-import { Form } from "library-simplified-reusable-components";
+import { Form, Button } from "library-simplified-reusable-components";
 import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import { FetchErrorData } from "opds-web-client/lib/interfaces";
 import { Store } from "redux";
 import { State } from "../reducers/index";
 import { LibraryData } from "../interfaces";
-import { CheckSoloIcon } from "@nypl/dgx-svg-icons";
+import { CheckSoloIcon, XIcon } from "@nypl/dgx-svg-icons";
 
 export interface EmailValidationFormState {
-  sent: boolean;
+  validated: boolean;
 }
 
 export interface EmailValidationFormOwnProps {
-  library: LibraryData;
+  email: string;
+  libraryInfo: {};
+  uuid: string;
   store: Store<State>;
-  fetchLibrary: (uuid: string) => LibraryData;
-}
-
-export interface EmailValidationFormDispatchProps {
-  validateEmail: (data: FormData) => Promise<void>;
 }
 
 export interface EmailValidationFormStateProps {
   error?: FetchErrorData;
 }
 
+export interface EmailValidationFormDispatchProps {
+  validateEmail: (data: FormData) => Promise<void>;
+}
+
 export interface EmailValidationFormProps extends EmailValidationFormOwnProps, EmailValidationFormDispatchProps, EmailValidationFormStateProps {}
 
 export class EmailValidationForm extends React.Component<EmailValidationFormProps, EmailValidationFormState> {
-
   constructor(props) {
     super(props);
-    this.sendEmail = this.sendEmail.bind(this);
-    this.state = { sent: false };
+    this.validate = this.validate.bind(this);
+    this.renderInfoText = this.renderInfoText.bind(this);
+    this.state = { validated: false };
   }
 
-  async sendEmail(data: FormData): Promise<void> {
+  convert(email: string): string {
+    return (email.includes("_") ? email.replace("_", " ") : email.replace(" ", "_"));
+  }
+
+  renderTitle(emailString: string, emailAddress: string, alreadyValidated: boolean): JSX.Element[] {
+    let titleString = `${emailString}${emailAddress ? ": " + emailAddress : ""}`;
+    let icon = ((alreadyValidated || this.state.validated) && !this.props.error) ? <CheckSoloIcon /> : <XIcon />;
+    return [<span>{titleString}</span>, icon];
+  }
+
+  async validate(email: string, data: FormData): Promise<void> {
+    data.append("email", email);
     await this.props.validateEmail(data);
-    await this.props.fetchLibrary(this.props.library.uuid);
-    this.setState({ sent: !this.props.error });
+    this.setState({ validated: true });
+  }
+
+  renderInfoText(emailString: string, emailAddress: string, validated: string, alreadyValidated: boolean): string {
+    if (!emailAddress) {
+      return `No ${emailString} configured`;
+    } else if (!alreadyValidated) {
+      return "Not validated";
+    } else if (!this.state.validated && !this.props.error) {
+      return `Validated: ${validated}`;
+    }
   }
 
   render(): JSX.Element {
-    let icon = this.state.sent ? <CheckSoloIcon /> : null;
-    let alreadyValidated = this.props.library.urls_and_contact.validated !== "Not validated";
-    let hasEmail = !!this.props.library.urls_and_contact.contact_email;
-
-    let buttonText = hasEmail ? "Validate email address" : "No email address configured";
-    let buttonContent = <span>{buttonText}{icon}</span>;
-    let infoText = (alreadyValidated && !this.state.sent && !this.props.error) ? "Already validated" : null;
-    let successText = `Successfully validated ${this.props.library.urls_and_contact.contact_email}`;
-
+    let emailString = this.convert(this.props.email);
+    let emailAddress = this.props.libraryInfo[this.props.email];
+    let validated = this.props.libraryInfo[`${this.props.email.split("_")[0]}_validated`];
+    let alreadyValidated = validated && (validated !== "Not validated");
+    let successText = `Successfully validated ${emailAddress}`;
     return (
-        <Form
-          className="validation border"
-          hiddenName="uuid"
-          hiddenValue={this.props.library.uuid}
-          title="Validation"
-          onSubmit={this.sendEmail}
-          buttonContent={buttonContent}
-          buttonClass={`left-align top-align ${this.state.sent && "success"}`}
-          disableButton={!hasEmail}
-          infoText={infoText}
-          errorText={this.props.error ? this.props.error.response : null}
-          successText={this.state.sent ? successText : null}
-        />
+      <Form
+        className="validation"
+        hiddenName="uuid"
+        hiddenValue={this.props.uuid}
+        title={this.renderTitle(emailString, emailAddress, alreadyValidated)}
+        onSubmit={(e) => this.validate(this.props.email, e)}
+        buttonContent={`Validate ${emailString}${alreadyValidated ? " again" : ""}`}
+        buttonClass={`left-align top-align ${this.state.validated && "success"}`}
+        disableButton={!emailAddress}
+        infoText={this.renderInfoText(emailString, emailAddress, validated, alreadyValidated)}
+        errorText={this.props.error ? this.props.error.response : null}
+        successText={this.state.validated ? successText : null}
+      />
     );
   }
 }

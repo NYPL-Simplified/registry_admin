@@ -14,7 +14,9 @@ export const testLibrary1: LibraryData = {
   },
   urls_and_contact: {
     "authentication_url": "auth1",
-    "contact_email": "email1",
+    "contact_email": "contact_email1",
+    "help_email": "help_email1",
+    "copyright_email": "copyright_email1",
     "opds_url": "opds1",
     "web_url": "web1"
   },
@@ -38,7 +40,9 @@ export const testLibrary2: LibraryData = {
   },
   urls_and_contact: {
     "authentication_url": "auth2",
-    "contact_email": "email2",
+    "contact_email": "contact_email2",
+    "help_email": "help_email2",
+    "copyright_email": "copyright_email2",
     "opds_url": "opds2",
     "web_url": "web2"
   },
@@ -119,9 +123,9 @@ describe("TestUtils", () => {
 
   it("takes an optional category argument", () => {
     let baseLibrary = testLibrary1;
-    expect(baseLibrary.urls_and_contact.validated).to.be.undefined;
-    let updatedLibrary = modifyLibrary(baseLibrary, {validated: "VALIDATED!"}, "urls_and_contact");
-    expect(updatedLibrary.urls_and_contact.validated).to.equal("VALIDATED!");
+    expect(baseLibrary.urls_and_contact.contact_validated).to.be.undefined;
+    let updatedLibrary = modifyLibrary(baseLibrary, {contact_validated: "VALIDATED!"}, "urls_and_contact");
+    expect(updatedLibrary.urls_and_contact.contact_validated).to.equal("VALIDATED!");
   });
 
   it("modifies the UUID", () => {

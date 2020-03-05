@@ -57,12 +57,14 @@ describe("LibraryDetailPage", () => {
 
     expect(urlsContactCall.args[0]).to.equal(library.urls_and_contact);
     expect(urlsContactCall.returnValue.type).to.equal("ul");
-    expect(urlsContactCall.returnValue.props.children.length).to.equal(4);
-    let [authentication_url, contact_email, opds_url, web_url] = urlsContactCall.returnValue.props.children;
+    expect(urlsContactCall.returnValue.props.children.length).to.equal(6);
+    let [authentication_url, contact_email, help_email, copyright_email, opds_url, web_url] = urlsContactCall.returnValue.props.children;
     expect(authentication_url.props.label).to.equal("authentication_url");
     expect(authentication_url.props.value).to.equal("auth1");
     expect(contact_email.props.label).to.equal("contact_email");
-    expect(contact_email.props.value).to.equal("email1");
+    expect(contact_email.props.value).to.equal("contact_email1");
+    expect(help_email.props.label).to.equal("help_email");
+    expect(help_email.props.value).to.equal("help_email1");
     expect(opds_url.props.label).to.equal("opds_url");
     expect(opds_url.props.value).to.equal("opds1");
     expect(web_url.props.label).to.equal("web_url");
@@ -86,7 +88,7 @@ describe("LibraryDetailPage", () => {
     expect(basicInfoItems.length).to.equal(4);
 
     let contactUrlItems = list.at(1).find("li");
-    expect(contactUrlItems.length).to.equal(4);
+    expect(contactUrlItems.length).to.equal(6);
 
     let allItems = Object.assign(basicInfoItems, contactUrlItems);
     let libraryData = Object.assign(library.basic_info, library.urls_and_contact);
@@ -170,13 +172,15 @@ describe("LibraryDetailPage", () => {
     expect(updateColor.args[0][0][1]).to.equal("production");
   });
 
-  it("should display the validation form", () => {
-    let validationForm = wrapper.find("form").at(1);
-    expect(validationForm.find(".form-title").text()).to.equal("Validation");
+  it("should display the validation forms", () => {
+    let validationSection = wrapper.find(".validations");
+    expect(validationSection.length).to.equal(1);
+    let validationForms = validationSection.find("form");
+    expect(validationForms.length).to.equal(3);
   });
 
   it("should display the PLS ID form", () => {
-    let plsIDForm = wrapper.find("form").at(2);
+    let plsIDForm = wrapper.find("form").at(4);
     expect(plsIDForm.find(".form-title").text()).to.equal("Public Libraries Survey ID");
   });
 

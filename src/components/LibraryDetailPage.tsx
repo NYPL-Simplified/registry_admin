@@ -7,7 +7,7 @@ import { State } from "../reducers/index";
 import LibraryDetailItem from "./LibraryDetailItem";
 import LibraryStageItem from "./LibraryStageItem";
 import { Form, Tabs } from "library-simplified-reusable-components";
-import EmailValidationForm from "./EmailValidationForm";
+import EmailValidationSection from "./EmailValidationSection";
 import PlsIDForm from "./PlsIDForm";
 
 export interface LibraryDetailPageDispatchProps {
@@ -114,10 +114,9 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
       <div>
         { this.renderStages() }
         <hr />
-        <EmailValidationForm
+        <EmailValidationSection
           store={this.props.store}
           library={library}
-          fetchLibrary={this.props.fetchLibrary}
         />
         <hr />
         <PlsIDForm
