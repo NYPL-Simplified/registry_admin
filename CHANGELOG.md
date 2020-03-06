@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.8
+#### Added
+- Added display for and ability to validate the help email and copyright email, along with the contact email.
+
 ### v1.4.7
 #### Added
 - Added an option for displaying the month each library was added, in the Yearly Data tab.
