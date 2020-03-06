@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Form, Button } from "library-simplified-reusable-components";
+import { Form } from "library-simplified-reusable-components";
 import { connect } from "react-redux";
 import ActionCreator from "../actions";
 import { FetchErrorData } from "opds-web-client/lib/interfaces";
 import { Store } from "redux";
 import { State } from "../reducers/index";
-import { LibraryData } from "../interfaces";
 import { CheckSoloIcon, XIcon } from "@nypl/dgx-svg-icons";
 
 export interface EmailValidationFormState {
@@ -37,7 +36,7 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
     this.state = { validated: false };
   }
 
-  convert(email: string): string {
+  convertEmailTitle(email: string): string {
     return (email.includes("_") ? email.replace("_", " ") : email.replace(" ", "_"));
   }
 
@@ -64,8 +63,9 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
   }
 
   render(): JSX.Element {
-    let emailString = this.convert(this.props.email);
+    let emailString = this.convertEmailTitle(this.props.email);
     let emailAddress = this.props.libraryInfo[this.props.email];
+    // libraryInfo has "contact_validated", "help_validated", and "copyright_validated" properties.
     let validated = this.props.libraryInfo[`${this.props.email.split("_")[0]}_validated`];
     let alreadyValidated = validated && (validated !== "Not validated");
     let successText = `Successfully validated ${emailAddress}`;
