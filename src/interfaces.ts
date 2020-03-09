@@ -17,7 +17,11 @@ export interface LibraryData {
     contact_email: string,
     opds_url: string,
     web_url: string,
-    validated?: string
+    contact_validated?: string,
+    help_email: string,
+    help_validated?: string,
+    copyright_email?: string,
+    copyright_validated?: string
   };
   areas: {
     focus: string[],
