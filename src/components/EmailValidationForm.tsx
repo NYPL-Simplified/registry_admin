@@ -79,7 +79,7 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
         buttonContent={`Validate ${emailString}${alreadyValidated ? " again" : ""}`}
         buttonClass={`left-align top-align ${this.state.validated && "success"}`}
         disableButton={!emailAddress}
-        infoText={this.renderInfoText(emailString, emailAddress, validated, alreadyValidated)}
+        infoText={!this.state.validated &&  this.renderInfoText(emailString, emailAddress, validated, alreadyValidated)}
         errorText={this.props.error ? this.props.error.response : null}
         successText={this.state.validated ? successText : null}
       />
