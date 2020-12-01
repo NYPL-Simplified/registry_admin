@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.10
+#### Updated
+- 
+
 ### v1.4.9
 #### Added
 - Added display for and ability to validate the help email and copyright email, along with the contact email.

@@ -105,6 +105,14 @@ describe("StatsInnerList", () => {
       expect(new RegExp(/(November)/).test(l.text())).to.be.false;
     });
   });
+  it("estimates the year based on the timestamp, if the contact email has not been validated", () => {
+    wrapper.setProps({ hasYear: false });
+    let estYears = wrapper.find(".inner-stats-item");
+    expect(new RegExp(/(No later than 2019)/).test(estYears.at(0).text())).to.be.true;
+    expect(new RegExp(/(No later than 2019)/).test(estYears.at(1).text())).to.be.true;
+    expect(new RegExp(/(No later than 2019)/).test(estYears.at(2).text())).to.be.true;
+    expect(new RegExp(/(No later than 2018)/).test(estYears.at(3).text())).to.be.true;
+  });
   it("optionally shows geographic information", () => {
     let nameLists = wrapper.find(".stats-category-list");
     expect(nameLists.at(0).text()).not.to.contain("(NY, ON, FL)");

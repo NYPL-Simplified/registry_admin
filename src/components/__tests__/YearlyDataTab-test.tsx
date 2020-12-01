@@ -11,10 +11,10 @@ import { testLibrary1, testLibrary2, modifyLibrary, validate } from "./TestUtils
 describe("YearlyDataTab", () => {
   let data;
   let wrapper;
+  let productionLibrary1 = validate(modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" }));
+  let productionLibrary2 = validate(modifyLibrary(productionLibrary1, { "name": "Production Library 2", "timestamp": "Fri, 01 Nov 2018 15:05:34 GMT" }));
+  let testLibrary2 = validate(modifyLibrary(testLibrary1, { "name": "Test Library 2", "timestamp": "Fri, 01 Nov 2017 15:05:34 GMT"}));
   beforeEach(() => {
-    let productionLibrary1 = validate(modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" }));
-    let productionLibrary2 = validate(modifyLibrary(productionLibrary1, { "name": "Production Library 2", "timestamp": "Fri, 01 Nov 2018 15:05:34 GMT" }));
-    let testLibrary2 = validate(modifyLibrary(testLibrary1, { "name": "Test Library 2", "timestamp": "Fri, 01 Nov 2017 15:05:34 GMT"}));
     data = {
       "production": [productionLibrary1, productionLibrary2],
       "testing": [validate(testLibrary1), testLibrary2],
@@ -137,6 +137,18 @@ describe("YearlyDataTab", () => {
     expect(menuOptions.at(0).text()).to.equal("Show All");
 
     spyToggleExpanded.restore();
+  });
+
+  it("optionally renders a StatsInnerList for items with no known year", () => {
+    wrapper = Enzyme.mount(<YearlyDataTab data={{ production: [testLibrary1] }} />);
+    wrapper.setState({ yearsToShow: {"Unknown": true}});
+    let unknownHeaderBar = wrapper.find(".header-bar");
+    expect(unknownHeaderBar.length).to.equal(1);
+    expect(unknownHeaderBar.text()).to.equal("Unknown: 1 library validated(100%)");
+    let unknownStatsList = wrapper.find(StatsInnerList);
+    expect(unknownStatsList.length).to.equal(1);
+    let libraryWithUnknownYear = unknownStatsList.find(".inner-stats-item").at(0);
+    expect(libraryWithUnknownYear.text()).to.equal("Test Library 1 (No later than 2019)");
   });
 
   it("renders a CopyButton", () => {
