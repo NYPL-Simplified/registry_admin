@@ -2,22 +2,24 @@ import { expect } from "chai";
 import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
+import { testLibrary1, testLibrary2, modifyLibrary, validate } from "./TestUtils";
 import StatsInnerList from "../StatsInnerList";
 
 describe("StatsInnerList", () => {
   let wrapper;
   let data;
   let productionLibrary1 = modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" });
+  productionLibrary1 = validate(productionLibrary1, productionLibrary1.basic_info.timestamp);
   let productionLibrary2 = modifyLibrary(productionLibrary1, { "uuid": "UUID2", "name": "Production Library 2" });
+  productionLibrary2 = validate(productionLibrary2, productionLibrary2.basic_info.timestamp);
 
   beforeEach(() => {
     data = {
       "production": [productionLibrary1, productionLibrary2],
-      "testing": [testLibrary1],
-      "cancelled": [testLibrary2]
+      "testing": [validate(testLibrary1, testLibrary1.basic_info.timestamp)],
+      "cancelled": [validate(testLibrary2, testLibrary2.basic_info.timestamp)]
     };
-    wrapper = Enzyme.mount(<StatsInnerList data={data} styled={true} />);
+    wrapper = Enzyme.mount(<StatsInnerList data={data} styled={true} hasYear={true} />);
   });
   let getNumber = (name, dataset) => {
     return dataset[name.toLowerCase()].length;

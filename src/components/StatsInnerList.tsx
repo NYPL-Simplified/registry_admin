@@ -8,6 +8,7 @@ export interface StatsInnerListProps {
   stagesToShow?: {[ key: string ]: boolean};
   showGeographicInfo?: boolean;
   showMonths?: boolean;
+  hasYear?: boolean;
 }
 
 export default class StatsInnerList extends React.Component<StatsInnerListProps, {}> {
@@ -24,7 +25,13 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
     let libraries = this.props.data[category];
     return libraries.map((l) => {
       return (
-        <li className="inner-stats-item" key={l.uuid}><p>{l.basic_info.name}{this.getMonth(l)}{this.getGeographicInfo(l)}</p></li>
+        <li className="inner-stats-item" key={l.uuid}>
+          <p>
+            {l.basic_info.name}
+            {this.props.hasYear ? this.getMonth(l) : this.guessYear(l)}
+            {this.getGeographicInfo(l)}
+          </p>
+        </li>
       );
     });
   }
@@ -53,11 +60,18 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
     return <ul className="stats-inner-list">{list}</ul>;
   }
 
+  guessYear(library: LibraryData): string {
+    let year = library.basic_info.timestamp && library.basic_info.timestamp.match(/20\d+/)[0];
+    return (year ? ` (No later than ${year})` : " (No information available)");
+  }
+
   getMonth(library: LibraryData): string {
     if (!this.props.showMonths) {
       return "";
     }
-    return ` (${getMonth(library.basic_info.timestamp)})`;
+    let validated = library.urls_and_contact.contact_validated;
+    let date = validated === "Not validated" ? "Month unknown" : getMonth(validated);
+    return ` (${date})`;
   }
 
   getGeographicInfo(library: LibraryData): string {

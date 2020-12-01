@@ -13,16 +13,23 @@ import Stats from "../Stats";
 
 describe("LibrariesPage", () => {
   let libraries;
-  let qaLib = modifyLibrary(testLibrary1, { "name": "QA Library", "uuid": "UUID3"});
+  let qaLib = modifyLibrary(testLibrary1, {
+    "name": "QA Library",
+    "uuid": "UUID3",
+  });
+  modifyLibrary(qaLib, {"contact_validated": "Fri, 12 May 2020 17:07:40 GMT"}, "urls_and_contact");
+
   let fetchQA;
   let search;
   let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;
   let store;
 
   beforeEach(() => {
+    let lib1 = modifyLibrary(testLibrary1, {registry_stage: "production", library_stage: "production" });
+    let lib2 = modifyLibrary(testLibrary2, {registry_stage: "production", library_stage: "production" });
     libraries = [
-      modifyLibrary(testLibrary1, {registry_stage: "production", library_stage: "production"}),
-      modifyLibrary(testLibrary2, {registry_stage: "production", library_stage: "production"})
+      modifyLibrary(lib1, {"contact_validated": "Fri, 12 May 2019 17:07:40 GMT"}, "urls_and_contact"),
+      modifyLibrary(lib2, {"contact_validated": "Fri, 12 May 2018 17:07:40 GMT"}, "urls_and_contact")
     ];
     fetchQA = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
