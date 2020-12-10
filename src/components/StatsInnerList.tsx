@@ -1,6 +1,6 @@
 import * as React from "react";
 import { LibraryData } from "../interfaces";
-import { getPercentage, getMonth } from "../utils/sharedFunctions";
+import { getPercentage, getMonth, findYear } from "../utils/sharedFunctions";
 
 export interface StatsInnerListProps {
   data: any;
@@ -61,8 +61,9 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
   }
 
   guessYear(library: LibraryData): string {
-    let year = library.basic_info.timestamp && library.basic_info.timestamp.match(/20\d+/)[0];
-    return (year ? ` (No later than ${year})` : " (No information available)");
+    const [year, formattedYear] = findYear(library.basic_info.timestamp, "No later than ", " No information available");
+    return formattedYear;
+    // return (year ? ` (No later than ${year})` : " (No information available)");
   }
 
   getMonth(library: LibraryData): string {

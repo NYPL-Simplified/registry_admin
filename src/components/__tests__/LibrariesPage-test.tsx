@@ -4,7 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 
-import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
+import { testLibrary1, testLibrary2, modifyLibrary, validate } from "./TestUtils";
 import { LibrariesPage } from "../LibrariesPage";
 import LibrariesList from "../LibrariesList";
 import Toggle from "../reusables/Toggle";
@@ -25,12 +25,9 @@ describe("LibrariesPage", () => {
   let store;
 
   beforeEach(() => {
-    let lib1 = modifyLibrary(testLibrary1, {registry_stage: "production", library_stage: "production" });
-    let lib2 = modifyLibrary(testLibrary2, {registry_stage: "production", library_stage: "production" });
-    libraries = [
-      modifyLibrary(lib1, {"contact_validated": "Fri, 12 May 2019 17:07:40 GMT"}, "urls_and_contact"),
-      modifyLibrary(lib2, {"contact_validated": "Fri, 12 May 2018 17:07:40 GMT"}, "urls_and_contact")
-    ];
+    let lib1 = validate(modifyLibrary(testLibrary1, {registry_stage: "production", library_stage: "production" }));
+    let lib2 = validate(modifyLibrary(testLibrary2, {registry_stage: "production", library_stage: "production" }));
+    libraries = [lib1, lib2];
     fetchQA = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
     store = buildStore();

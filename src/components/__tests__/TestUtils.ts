@@ -86,12 +86,21 @@ export const modifyLibrary = (baseLibrary: LibraryData, newData: {[key: string]:
   return updatedLibrary;
 };
 
+/**
+* validate()
+* Assigns a value to the library's contact_validated property--the basis for displaying
+* date-related data--for testing purposes.
+* @param {LibraryData} baseLibrary - the library to be modified
+* @param {string} [validatedAt] - the new value for the contact_validated property.
+* If validatedAt is not provided, contact_validated will be set to the same value as the library's
+* timestamp property instead.
+*/
 export const validate = (baseLibrary: LibraryData, validatedAt?: string): LibraryData => {
   let updatedLibrary = {...baseLibrary};
   if (!validatedAt) {
     validatedAt = baseLibrary.basic_info.timestamp || "Not validated";
   }
-  let updatedContact = {...baseLibrary.urls_and_contact, ...{contact_validated: validatedAt}};
+  let updatedContact = {...baseLibrary.urls_and_contact, contact_validated: validatedAt};
   updatedLibrary.urls_and_contact = updatedContact;
   return updatedLibrary;
 };
@@ -152,8 +161,8 @@ describe("TestUtils", () => {
     expect(baseLibrary.urls_and_contact.contact_validated).to.equal(baseLibrary.basic_info.timestamp);
     baseLibrary = validate(baseLibrary, "Fri, 12 May 2018 15:05:34 GMT");
     expect(baseLibrary.urls_and_contact.contact_validated).to.equal("Fri, 12 May 2018 15:05:34 GMT");
-    let noTimestamp = {...baseLibrary.basic_info, ...{timestamp: undefined}};
-    baseLibrary = {...baseLibrary, ...{basic_info: noTimestamp}};
+    let noTimestamp = {...baseLibrary.basic_info, timestamp: undefined};
+    baseLibrary = {...baseLibrary, basic_info: noTimestamp};
     expect(validate(baseLibrary).urls_and_contact.contact_validated).to.equal("Not validated");
   });
 });

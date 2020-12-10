@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { getPercentage, getMonth, toggleState } from "../utils/sharedFunctions";
+import { getPercentage, getMonth, findYear, toggleState } from "../utils/sharedFunctions";
 
 describe("getPercentage", () => {
   let outOf;
@@ -32,6 +32,21 @@ describe("getMonth", () => {
     expect(getMonth("Fri, 01 Nov 2019 15:05:34 GMT")).to.equal("November");
     expect(getMonth("Mon, 19 Aug 2019 15:05:34 GMT")).to.equal("August");
     expect(getMonth("Fri, 12 Apr 2019 15:05:34 GMT")).to.equal("April");
+  });
+});
+
+describe("findYear", () => {
+  it("handles the case when there is no date given", () => {
+    expect(findYear("Not validated")).to.eql(["Unknown", "(Unknown)"]);
+  });
+  it("finds the year in the date string", () => {
+    expect(findYear("Fri, 12 Apr 2019 15:05:34 GMT")).to.eql(["2019", " (2019)"]);
+  });
+  it("optionally concatenates the year with the resultText string", () => {
+    expect(findYear("Fri, 12 Apr 2019 15:05:34 GMT", "The year is: ", "No year found")).to.eql(["2019", " (The year is: 2019)"]);
+  });
+  it("optionally returns backup text if no year is found", () => {
+    expect(findYear("Fri, 12 Apr 15:05:34 GMT", "The year is: ", "No year found")).to.eql([null, " (No year found)"]);
   });
 });
 

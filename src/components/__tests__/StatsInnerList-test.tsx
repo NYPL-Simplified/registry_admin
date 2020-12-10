@@ -8,10 +8,8 @@ import StatsInnerList from "../StatsInnerList";
 describe("StatsInnerList", () => {
   let wrapper;
   let data;
-  let productionLibrary1 = modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" });
-  productionLibrary1 = validate(productionLibrary1, productionLibrary1.basic_info.timestamp);
-  let productionLibrary2 = modifyLibrary(productionLibrary1, { "uuid": "UUID2", "name": "Production Library 2" });
-  productionLibrary2 = validate(productionLibrary2, productionLibrary2.basic_info.timestamp);
+  let productionLibrary1 = validate(modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" }));
+  let productionLibrary2 = validate(modifyLibrary(productionLibrary1, { "uuid": "UUID2", "name": "Production Library 2" }));
 
   beforeEach(() => {
     data = {

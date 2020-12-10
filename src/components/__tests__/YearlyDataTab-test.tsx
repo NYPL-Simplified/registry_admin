@@ -20,12 +20,12 @@ describe("YearlyDataTab", () => {
       "testing": [validate(testLibrary1), testLibrary2],
       "cancelled": []
     };
+    // console.log("HIT", data.production);
     wrapper = Enzyme.mount(<YearlyDataTab data={data} />);
   });
   it("renders a list of years", () => {
     let years = wrapper.find(".year-li");
     expect(years.length).to.equal(3);
-
     let y2017 = years.at(0);
     expect(y2017.find(".header-bar").find("span").at(0).text()).to.equal("2017: 1 library validated");
     expect(y2017.find(".header-bar").find("span").at(1).text()).to.equal("(25%)");

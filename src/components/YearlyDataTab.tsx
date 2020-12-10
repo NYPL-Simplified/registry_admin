@@ -4,7 +4,7 @@ import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
 import StatsInnerList from "./StatsInnerList";
 import DropdownButton from "./DropdownButton";
-import { getPercentage, toggleState } from "../utils/sharedFunctions";
+import { getPercentage, toggleState, findYear } from "../utils/sharedFunctions";
 
 export interface YearlyDataTabProps {
   data: {[key: string]: LibraryData[]};
@@ -35,7 +35,8 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
       let category = data[catName];
       category.forEach((library) => {
         let validated = library.urls_and_contact.contact_validated;
-        let year = validated === "Not validated" ? "Unknown" : validated?.match(/20\d+/)[0] || "Unknown";
+        let [year, formattedYear] = findYear(validated, null, "Unknown");
+        year = year || "Unknown";
         if (year) {
           if (sortedByYear[year]) {
             sortedByYear[year][catName].push(library);
@@ -52,7 +53,11 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
   }
   sortByMonth(category: LibraryData[]): LibraryData[] {
     let sorted = (category as LibraryData[]).sort(function (x, y) {
-      return new Date(x.basic_info.timestamp).getMonth() - new Date(y.basic_info.timestamp).getMonth();
+      return new Date(
+        x.urls_and_contact.contact_validated || x.basic_info.timestamp
+      ).getMonth() - new Date(
+        y.urls_and_contact.contact_validated || y.basic_info.timestamp
+      ).getMonth();
     });
     return sorted;
   }

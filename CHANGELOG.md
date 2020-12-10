@@ -2,7 +2,7 @@
 
 ### v1.4.10
 #### Updated
-- 
+- Modified the date display features to use the date when the library's contact email address was validated, rather than the timestamp property (which is the date when the library was last modified).
 
 ### v1.4.9
 #### Added
