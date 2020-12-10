@@ -20,7 +20,6 @@ describe("YearlyDataTab", () => {
       "testing": [validate(testLibrary1), testLibrary2],
       "cancelled": []
     };
-    // console.log("HIT", data.production);
     wrapper = Enzyme.mount(<YearlyDataTab data={data} />);
   });
   it("renders a list of years", () => {
