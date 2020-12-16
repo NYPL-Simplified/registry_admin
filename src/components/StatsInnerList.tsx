@@ -63,7 +63,6 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
   guessYear(library: LibraryData): string {
     const [year, formattedYear] = findYear(library.basic_info.timestamp, "No later than ", " No information available");
     return formattedYear;
-    // return (year ? ` (No later than ${year})` : " (No information available)");
   }
 
   getMonth(library: LibraryData): string {
