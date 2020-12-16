@@ -2,22 +2,22 @@ import { expect } from "chai";
 import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
 import * as React from "react";
-import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
+import { testLibrary1, testLibrary2, modifyLibrary, validate } from "./TestUtils";
 import StatsInnerList from "../StatsInnerList";
 
 describe("StatsInnerList", () => {
   let wrapper;
   let data;
-  let productionLibrary1 = modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" });
-  let productionLibrary2 = modifyLibrary(productionLibrary1, { "uuid": "UUID2", "name": "Production Library 2" });
+  let productionLibrary1 = validate(modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" }));
+  let productionLibrary2 = validate(modifyLibrary(productionLibrary1, { "uuid": "UUID2", "name": "Production Library 2" }));
 
   beforeEach(() => {
     data = {
       "production": [productionLibrary1, productionLibrary2],
-      "testing": [testLibrary1],
-      "cancelled": [testLibrary2]
+      "testing": [validate(testLibrary1, testLibrary1.basic_info.timestamp)],
+      "cancelled": [validate(testLibrary2, testLibrary2.basic_info.timestamp)]
     };
-    wrapper = Enzyme.mount(<StatsInnerList data={data} styled={true} />);
+    wrapper = Enzyme.mount(<StatsInnerList data={data} styled={true} hasYear={true} />);
   });
   let getNumber = (name, dataset) => {
     return dataset[name.toLowerCase()].length;
@@ -102,6 +102,14 @@ describe("StatsInnerList", () => {
     wrapper.find(".inner-stats-item").forEach(l => {
       expect(new RegExp(/(November)/).test(l.text())).to.be.false;
     });
+  });
+  it("estimates the year based on the timestamp, if the contact email has not been validated", () => {
+    wrapper.setProps({ hasYear: false });
+    let estYears = wrapper.find(".inner-stats-item");
+    expect(new RegExp(/(No later than 2019)/).test(estYears.at(0).text())).to.be.true;
+    expect(new RegExp(/(No later than 2019)/).test(estYears.at(1).text())).to.be.true;
+    expect(new RegExp(/(No later than 2019)/).test(estYears.at(2).text())).to.be.true;
+    expect(new RegExp(/(No later than 2018)/).test(estYears.at(3).text())).to.be.true;
   });
   it("optionally shows geographic information", () => {
     let nameLists = wrapper.find(".stats-category-list");

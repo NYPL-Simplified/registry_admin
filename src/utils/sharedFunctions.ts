@@ -25,3 +25,12 @@ export function getMonth(timestamp: string): string {
 export function toggleState(attr: string, state) {
   return {...state, ...{[attr]: !state[attr]}};
 }
+
+export function findYear(date: string, resultText?: string, backupText?: string): string[] {
+  if (date === "Not validated") {
+    return ["Unknown", "(Unknown)"];
+  }
+  let year = date?.match(/20\d+/) && date.match(/20\d+/)[0];
+  let formattedYear = ` (${year ? (resultText || "") + year : backupText})`;
+  return [year, formattedYear];
+}

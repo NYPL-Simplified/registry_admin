@@ -4,7 +4,7 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 import buildStore from "../../store";
 
-import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
+import { testLibrary1, testLibrary2, modifyLibrary, validate } from "./TestUtils";
 import { LibrariesPage } from "../LibrariesPage";
 import LibrariesList from "../LibrariesList";
 import Toggle from "../reusables/Toggle";
@@ -13,17 +13,21 @@ import Stats from "../Stats";
 
 describe("LibrariesPage", () => {
   let libraries;
-  let qaLib = modifyLibrary(testLibrary1, { "name": "QA Library", "uuid": "UUID3"});
+  let qaLib = modifyLibrary(testLibrary1, {
+    "name": "QA Library",
+    "uuid": "UUID3",
+  });
+  modifyLibrary(qaLib, {"contact_validated": "Fri, 12 May 2020 17:07:40 GMT"}, "urls_and_contact");
+
   let fetchQA;
   let search;
   let wrapper: Enzyme.CommonWrapper<{}, {}, {}>;
   let store;
 
   beforeEach(() => {
-    libraries = [
-      modifyLibrary(testLibrary1, {registry_stage: "production", library_stage: "production"}),
-      modifyLibrary(testLibrary2, {registry_stage: "production", library_stage: "production"})
-    ];
+    let lib1 = validate(modifyLibrary(testLibrary1, {registry_stage: "production", library_stage: "production" }));
+    let lib2 = validate(modifyLibrary(testLibrary2, {registry_stage: "production", library_stage: "production" }));
+    libraries = [lib1, lib2];
     fetchQA = Sinon.stub();
     search = Sinon.stub().returns(libraries[1]);
     store = buildStore();

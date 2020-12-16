@@ -6,18 +6,18 @@ import YearlyDataTab from "../YearlyDataTab";
 import CopyButton from "../CopyButton";
 import StatsInnerList from "../StatsInnerList";
 import DropdownButton from "../DropdownButton";
-import { testLibrary1, testLibrary2, modifyLibrary } from "./TestUtils";
+import { testLibrary1, testLibrary2, modifyLibrary, validate } from "./TestUtils";
 
 describe("YearlyDataTab", () => {
   let data;
   let wrapper;
+  let productionLibrary1 = validate(modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" }));
+  let productionLibrary2 = validate(modifyLibrary(productionLibrary1, { "name": "Production Library 2", "timestamp": "Fri, 01 Nov 2018 15:05:34 GMT" }));
+  let testLibrary2 = validate(modifyLibrary(testLibrary1, { "name": "Test Library 2", "timestamp": "Fri, 01 Nov 2017 15:05:34 GMT"}));
   beforeEach(() => {
-    let productionLibrary1 = modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" });
-    let productionLibrary2 = modifyLibrary(productionLibrary1, { "name": "Production Library 2", "timestamp": "Fri, 01 Nov 2018 15:05:34 GMT" });
-    let testLibrary2 = modifyLibrary(testLibrary1, { "name": "Test Library 2", "timestamp": "Fri, 01 Nov 2017 15:05:34 GMT"});
     data = {
       "production": [productionLibrary1, productionLibrary2],
-      "testing": [testLibrary1, testLibrary2],
+      "testing": [validate(testLibrary1), testLibrary2],
       "cancelled": []
     };
     wrapper = Enzyme.mount(<YearlyDataTab data={data} />);
@@ -25,17 +25,16 @@ describe("YearlyDataTab", () => {
   it("renders a list of years", () => {
     let years = wrapper.find(".year-li");
     expect(years.length).to.equal(3);
-
     let y2017 = years.at(0);
-    expect(y2017.find(".header-bar").find("span").at(0).text()).to.equal("2017: 1 library added");
+    expect(y2017.find(".header-bar").find("span").at(0).text()).to.equal("2017: 1 library validated");
     expect(y2017.find(".header-bar").find("span").at(1).text()).to.equal("(25%)");
 
     let y2018 = years.at(1);
-    expect(y2018.find(".header-bar").find("span").at(0).text()).to.equal("2018: 1 library added");
+    expect(y2018.find(".header-bar").find("span").at(0).text()).to.equal("2018: 1 library validated");
     expect(y2018.find(".header-bar").find("span").at(1).text()).to.equal("(25%)");
 
     let y2019 = years.at(2);
-    expect(y2019.find(".header-bar").find("span").at(0).text()).to.equal("2019: 2 libraries added");
+    expect(y2019.find(".header-bar").find("span").at(0).text()).to.equal("2019: 2 libraries validated");
     expect(y2019.find(".header-bar").find("span").at(1).text()).to.equal("(50%)");
   });
   it("optionally renders a StatsInnerList for each year", async () => {
@@ -139,6 +138,18 @@ describe("YearlyDataTab", () => {
     spyToggleExpanded.restore();
   });
 
+  it("optionally renders a StatsInnerList for items with no known year", () => {
+    wrapper = Enzyme.mount(<YearlyDataTab data={{ production: [testLibrary1] }} />);
+    wrapper.setState({ yearsToShow: {"Unknown": true}});
+    let unknownHeaderBar = wrapper.find(".header-bar");
+    expect(unknownHeaderBar.length).to.equal(1);
+    expect(unknownHeaderBar.text()).to.equal("Unknown: 1 library validated(100%)");
+    let unknownStatsList = wrapper.find(StatsInnerList);
+    expect(unknownStatsList.length).to.equal(1);
+    let libraryWithUnknownYear = unknownStatsList.find(".inner-stats-item").at(0);
+    expect(libraryWithUnknownYear.text()).to.equal("Test Library 1 (No later than 2019)");
+  });
+
   it("renders a CopyButton", () => {
     let copyButton = wrapper.find(CopyButton);
     expect(copyButton.length).to.equal(1);
@@ -185,7 +196,7 @@ describe("YearlyDataTab", () => {
     wrapper.setState({ yearsToShow: {...wrapper.state().yearsToShow, ...{2019: true}}});
     expect(wrapper.find("button").length).to.equal(8);
     let monthsButton = wrapper.find("button").at(6);
-    expect(monthsButton.text()).to.equal("Show Month Added");
+    expect(monthsButton.text()).to.equal("Show Month Validated");
     expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.false;
     expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1");
 
@@ -195,7 +206,7 @@ describe("YearlyDataTab", () => {
     expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.true;
     expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1 (November)");
     monthsButton = wrapper.find("button").at(6);
-    expect(monthsButton.text()).to.equal("Hide Month Added");
+    expect(monthsButton.text()).to.equal("Hide Month Validated");
 
     monthsButton.simulate("click");
 
@@ -203,10 +214,10 @@ describe("YearlyDataTab", () => {
     expect(wrapper.find(StatsInnerList).prop("showMonths")).to.be.false;
     expect(wrapper.find(".inner-stats-item").at(0).text()).to.equal("Production Library 1");
     monthsButton = wrapper.find("button").at(6);
-    expect(monthsButton.text()).to.equal("Show Month Added");
+    expect(monthsButton.text()).to.equal("Show Month Validated");
 
     wrapper.setState({ yearsToShow: {...wrapper.state().yearsToShow, ...{2019: false}}});
     expect(wrapper.find("button").length).to.equal(7);
-    expect(wrapper.find("button").at(6).text()).not.to.equal("Show Month Added");
+    expect(wrapper.find("button").at(6).text()).not.to.equal("Show Month Validated");
   });
 });

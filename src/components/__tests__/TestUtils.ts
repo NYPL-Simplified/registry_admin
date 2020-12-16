@@ -18,7 +18,7 @@ export const testLibrary1: LibraryData = {
     "help_email": "help_email1",
     "copyright_email": "copyright_email1",
     "opds_url": "opds1",
-    "web_url": "web1"
+    "web_url": "web1",
   },
   stages: {
     "library_stage": "production",
@@ -86,6 +86,25 @@ export const modifyLibrary = (baseLibrary: LibraryData, newData: {[key: string]:
   return updatedLibrary;
 };
 
+/**
+* validate()
+* Assigns a value to the library's contact_validated property--the basis for displaying
+* date-related data--for testing purposes.
+* @param {LibraryData} baseLibrary - the library to be modified
+* @param {string} [validatedAt] - the new value for the contact_validated property.
+* If validatedAt is not provided, contact_validated will be set to the same value as the library's
+* timestamp property instead.
+*/
+export const validate = (baseLibrary: LibraryData, validatedAt?: string): LibraryData => {
+  let updatedLibrary = {...baseLibrary};
+  if (!validatedAt) {
+    validatedAt = baseLibrary.basic_info.timestamp || "Not validated";
+  }
+  let updatedContact = {...baseLibrary.urls_and_contact, contact_validated: validatedAt};
+  updatedLibrary.urls_and_contact = updatedContact;
+  return updatedLibrary;
+};
+
 describe("TestUtils", () => {
   it("updates a library with one new value", () => {
     let baseLibrary = testLibrary1;
@@ -133,5 +152,17 @@ describe("TestUtils", () => {
     expect(baseLibrary.uuid).to.equal("UUID1");
     let updatedLibrary = modifyLibrary(baseLibrary, {uuid: "UUID2"});
     expect(updatedLibrary.uuid).to.equal("UUID2");
+  });
+
+  it("validates the contact email", () => {
+    let baseLibrary = testLibrary1;
+    expect(baseLibrary.urls_and_contact.contact_validated).to.be.undefined;
+    baseLibrary = validate(baseLibrary);
+    expect(baseLibrary.urls_and_contact.contact_validated).to.equal(baseLibrary.basic_info.timestamp);
+    baseLibrary = validate(baseLibrary, "Fri, 12 May 2018 15:05:34 GMT");
+    expect(baseLibrary.urls_and_contact.contact_validated).to.equal("Fri, 12 May 2018 15:05:34 GMT");
+    let noTimestamp = {...baseLibrary.basic_info, timestamp: undefined};
+    baseLibrary = {...baseLibrary, basic_info: noTimestamp};
+    expect(validate(baseLibrary).urls_and_contact.contact_validated).to.equal("Not validated");
   });
 });
