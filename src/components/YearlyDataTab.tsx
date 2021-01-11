@@ -4,7 +4,7 @@ import { Button } from "library-simplified-reusable-components";
 import { LibraryData } from "../interfaces";
 import StatsInnerList from "./StatsInnerList";
 import DropdownButton from "./DropdownButton";
-import { getPercentage, toggleState, findYear } from "../utils/sharedFunctions";
+import { hasLibraries, getPercentage, toggleState, findYear } from "../utils/sharedFunctions";
 
 export interface YearlyDataTabProps {
   data: {[key: string]: LibraryData[]};
@@ -23,7 +23,7 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
     this.state = { styled: true, yearsToShow: {}, months: false };
   }
   async componentWillReceiveProps() {
-    await Object.values(this.props.data).some(x => x.length > 0);
+    await hasLibraries(this.props.data);
     let years = Object.keys(this.sortByYear(this.props.data));
     let yearsToShow = {};
     years.forEach(y => yearsToShow[y] = false);

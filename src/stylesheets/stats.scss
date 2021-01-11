@@ -52,34 +52,34 @@
 
   .list-view {
     .stats-list {
-      // pointer-events: none;
+      pointer-events: none;
       width: 66%;
     }
   }
 
-  .adobe-data, .yearly-data {
-    > ul {
+  .adobe-data, .yearly-data, .monthly-data {
+    > ul, .disable-events {
       pointer-events: none;
       margin: 0;
       padding: 10px 0;
       list-style: none;
       width: 60%;
-      .header-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background: $blue-tint;
-        border-bottom: 1px solid $blue-dark;
-        border: 1px solid $blue-dark;
-        margin-top: 5px;
-      }
-      .list-holder {
-        border-left: 1px solid $blue-dark;
-        border-right: 1px solid $blue-dark;
-        border-bottom: 1px solid $blue-dark;
-        padding: 10px 20px;
-      }
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: $blue-tint;
+      border-bottom: 1px solid $blue-dark;
+      border: 1px solid $blue-dark;
+      margin-top: 5px;
+    }
+    .list-holder {
+      border-left: 1px solid $blue-dark;
+      border-right: 1px solid $blue-dark;
+      border-bottom: 1px solid $blue-dark;
+      padding: 10px 20px;
     }
   }
   .yearly-data {
@@ -95,15 +95,6 @@
   list-style: none;
   .stats-category {
     padding: 5px 0 0 0;
-    &:first-child > .stats-category-name {
-      background: darken($green-tint, 10);
-    }
-    &:nth-child(2) > .stats-category-name {
-      background: $yellow-tint;
-    }
-    &:last-child > .stats-category-name {
-      background: $red-error;
-    }
     > .stats-category-name {
       display: flex;
       justify-content: space-between;
@@ -112,6 +103,15 @@
       margin-bottom: 0;
       padding: 10px 20px;
       font-size: 1em;
+      &.production {
+        background: darken($green-tint, 10);
+      }
+      &.testing {
+        background: $yellow-tint;
+      }
+      &.cancelled {
+        background: $red-error;
+      }
       > span {
         margin: 0;
       }
@@ -142,9 +142,10 @@
     li {
       width: 100%;
       .btn {
-        border-top: none;
         text-align: left;
+        border-top: none;
       }
+
     }
   }
   button.btn {
@@ -172,6 +173,8 @@
     &.dropdown-button-main {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      min-width: 120px;
     }
   }
 }
