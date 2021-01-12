@@ -43,10 +43,9 @@ export default class MonthlyDataTab extends React.Component<MonthlyDataTabProps,
     let updatedTimes = {[key]: e.currentTarget.textContent, [valueToKeep]: this.state[valueToKeep]};
     let dataToShow = this.filter(updatedTimes.month, updatedTimes.year);
     this.setState({
-      ...updatedTimes, ...{
+      ...updatedTimes,
         dataToShow,
         styled: this.state.styled
-      }
     });
   }
 
