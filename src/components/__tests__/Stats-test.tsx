@@ -9,6 +9,7 @@ import AggregateList from "../AggregateList";
 import Charts from "../Charts";
 import AdobeTab from "../AdobeTab";
 import YearlyDataTab from "../YearlyDataTab";
+import MonthlyDataTab from "../MonthlyDataTab";
 
 describe("Stats", () => {
   let wrapper;
@@ -29,6 +30,7 @@ describe("Stats", () => {
     expect(tabs.find(".tab-nav").at(1).text()).to.equal("Charts");
     expect(tabs.find(".tab-nav").at(2).text()).to.equal("Adobe Data");
     expect(tabs.find(".tab-nav").at(3).text()).to.equal("Yearly Data");
+    expect(tabs.find(".tab-nav").at(4).text()).to.equal("Monthly Data");
   });
 
   it("sorts a list of libraries by their status", () => {
@@ -58,5 +60,10 @@ describe("Stats", () => {
   it("renders a YearlyDataTab component", () => {
     let yearlyDataTab = wrapper.find(YearlyDataTab);
     expect(yearlyDataTab.length).to.equal(1);
+  });
+
+  it("renders a MonthlyDataTab component", () => {
+    let monthlyDataTab = wrapper.find(MonthlyDataTab);
+    expect(monthlyDataTab.length).to.equal(1);
   });
 });

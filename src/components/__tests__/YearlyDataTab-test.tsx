@@ -69,8 +69,7 @@ describe("YearlyDataTab", () => {
     expect(innerLists.length).to.equal(3);
     menuOptions.forEach((x, idx) => expect(x.text()).to.equal(`Hide ${["All"].concat(yearNames)[idx]}`));
 
-    let hasCategories = (year) => {
-      let stages = ["Production", "Testing", "Cancelled"];
+    let hasCategories = (year, stages) => {
       year.find(".stats-category-name").forEach((name, idx) => {
         expect(name.text()).to.contain(stages[idx]);
       });
@@ -79,37 +78,28 @@ describe("YearlyDataTab", () => {
     years = wrapper.find(".year-li");
     let y2017 = years.at(0);
     let categories = y2017.find(StatsInnerList).find("ul").at(0).children("li");
-    hasCategories(y2017);
-    let production = categories.at(0);
-    expect(production.find(".stats-category-list").find("li").length).to.equal(0);
-    let testing = categories.at(1);
+    expect(categories.length).to.equal(1);
+    hasCategories(y2017, ["Testing"]);
+    let testing = categories.at(0);
     expect(testing.find(".stats-category-list").find("li").length).to.equal(1);
     expect(testing.find(".stats-category-list").find("li").text()).to.equal("Test Library 2");
-    let cancelled = categories.at(2);
-    expect(production.find(".stats-category-list").find("li").length).to.equal(0);
 
     let y2018 = years.at(1);
     categories = y2018.find(StatsInnerList).find("ul").at(0).children("li");
-    hasCategories(y2018);
-    production = categories.at(0);
+    hasCategories(y2018, ["Production"]);
+    let production = categories.at(0);
     expect(production.find(".stats-category-list").find("li").length).to.equal(1);
     expect(production.find(".stats-category-list").find("li").text()).to.equal("Production Library 2");
-    testing = categories.at(1);
-    expect(testing.find(".stats-category-list").find("li").length).to.equal(0);
-    cancelled = categories.at(2);
-    expect(cancelled.find(".stats-category-list").find("li").length).to.equal(0);
 
     let y2019 = years.at(2);
     categories = y2019.find(StatsInnerList).find("ul").at(0).children("li");
-    hasCategories(y2019);
+    hasCategories(y2019, ["Production", "Testing"]);
     production = categories.at(0);
     expect(production.find(".stats-category-list").find("li").length).to.equal(1);
     expect(production.find(".stats-category-list").find("li").text()).to.equal("Production Library 1");
     testing = categories.at(1);
     expect(testing.find(".stats-category-list").find("li").length).to.equal(1);
     expect(testing.find(".stats-category-list").find("li").text()).to.equal("Test Library 1");
-    cancelled = categories.at(2);
-    expect(cancelled.find(".stats-category-list").find("li").length).to.equal(0);
 
     menuOptions.at(1).find("button").simulate("click");
     expect(spyToggleExpanded.callCount).to.equal(2);

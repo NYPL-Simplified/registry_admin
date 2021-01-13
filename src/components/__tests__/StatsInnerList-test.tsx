@@ -37,7 +37,7 @@ describe("StatsInnerList", () => {
     let newData = {...data, ...{"cancelled": []}};
     wrapper.setProps({ data: newData });
     let categories = wrapper.find(".stats-category");
-    ["Production", "Testing", "Cancelled"].forEach((name, idx) => {
+    ["Production", "Testing"].forEach((name, idx) => {
       let infoBar = categories.at(idx).find(".stats-category-name");
       expect(infoBar.find("span").at(0).text()).to.equal(`${name}: ${getNumber(name, newData)}`);
       expect(infoBar.find("span").at(1).text()).to.equal(

@@ -1,3 +1,20 @@
+import { LibraryData } from "../interfaces";
+
+export const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+
 // Given a number x and a total number, calculate what percentage x is of the total.
 // The total can be passed directly in as a number or a string containing a number, or can
 // be derived by adding up 1) the values in an array of numbers, 2) the values in an array of strings containing numbers,
@@ -18,7 +35,6 @@ export function getPercentage(x: number, outOf: number | string | Array<string |
 }
 
 export function getMonth(timestamp: string): string {
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return `${months[new Date(timestamp).getMonth()]}`;
 }
 
@@ -33,4 +49,8 @@ export function findYear(date: string, resultText?: string, backupText?: string)
   let year = date?.match(/20\d+/) && date.match(/20\d+/)[0];
   let formattedYear = ` (${year ? (resultText || "") + year : backupText})`;
   return [year, formattedYear];
+}
+
+export function hasLibraries(data: {[key: string]: LibraryData[]}): boolean {
+  return Object.values(data).some(x => x?.length > 0);
 }

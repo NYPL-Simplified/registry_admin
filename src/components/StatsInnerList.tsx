@@ -40,7 +40,7 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
     let hasStyles = this.props.styled;
     return (
       <li key={category} className={hasStyles ? "stats-category" : ""}>
-        <section className={hasStyles ? "stats-category-name" : ""}>
+        <section className={hasStyles ? "stats-category-name " + category : ""}>
           { this.makeCategoryBar(category, allLengths) }
         </section>
         { (!this.props.stagesToShow || this.props.stagesToShow[category]) &&
@@ -55,7 +55,7 @@ export default class StatsInnerList extends React.Component<StatsInnerListProps,
   render() {
     let allLengths = Object.values(this.props.data).map(x => (x as any).length);
     let list = this.props.data && Object.keys(this.props.data).map(category => {
-      return this.makeLi(category, allLengths);
+      return this.props.data[category].length > 0 && this.makeLi(category, allLengths);
     });
     return <ul className="stats-inner-list">{list}</ul>;
   }
