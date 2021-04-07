@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.3.18
+#### Updated
+- Upgraded to v1.3.18 of the reusable components package.
+
 ### v1.4.11
 #### Added
 - Added a Monthly Data tab to display a list of the libraries validated during any given month.
