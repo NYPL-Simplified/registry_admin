@@ -1,6 +1,10 @@
 ## Changelog
 
-### v1.3.18
+### v1.4.13
+#### Fixed
+- Fixed failing MonthlyDataTab tests.
+
+### v1.4.12
 #### Updated
 - Upgraded to v1.3.18 of the reusable components package.
 
