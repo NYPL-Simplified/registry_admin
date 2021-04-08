@@ -41,7 +41,7 @@ describe("App", () => {
     expect(librariesPage.length).to.equal(0);
   });
 
-  it("should render the libraries page component", () => {
+  it.only("should render the libraries page component", () => {
     context = { store, username: "Admin" };
     wrapper = Enzyme.mount(
       <ContextProvider {...context}>
