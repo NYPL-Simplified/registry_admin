@@ -21,12 +21,10 @@ describe("MonthlyDataTab", () => {
   let productionLibrary2;
   let testLibrary2;
   beforeEach(() => {
-    // The actual feature sets the starting date to whatever today's date is, but the tests
-    // are hard-coding it instead.
-    today = Sinon.useFakeTimers(new Date(2021, 0, 12, 0, 0));
-    thisMonth = today.Date().toLocaleString("default", { month: "long" });
-    thisYear = today.Date().toString().match(/20\d+/)[0];
-    productionLibrary1 = validate(modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" }), today.Date().toString());
+    today = new Date() as any;
+    thisMonth = today.toLocaleString("default", { month: "long" });
+    thisYear = findYear(today.toDateString())[0];
+    productionLibrary1 = validate(modifyLibrary(testLibrary1, { "name": "Production Library 1", "registry_stage": "production" }), today.toString());
     productionLibrary2 = validate(modifyLibrary(productionLibrary1, { "name": "Production Library 2", "timestamp": "Fri, 01 Nov 2018 15:05:34 GMT" }));
     testLibrary2 = validate(modifyLibrary(testLibrary1, { "name": "Test Library 2", "timestamp": "Fri, 01 Nov 2017 15:05:34 GMT"}));
     data = {
@@ -49,6 +47,7 @@ describe("MonthlyDataTab", () => {
     expect(headerBar.text()).to.equal(`${thisMonth}, ${thisYear}`);
     let unvalidated = modifyLibrary(productionLibrary1, {"contact_validated": null});
     wrapper = Enzyme.mount(<MonthlyDataTab data={{"production": [unvalidated]}} />);
+    wrapper.setState({ month: thisMonth, year: thisYear, dataToShow: wrapper.instance().filter(thisMonth, thisYear) });
     headerBar = wrapper.find(".header-bar");
     expect(headerBar.text()).to.equal(`No libraries were validated during ${thisMonth} of ${thisYear}.`);
   });
@@ -103,10 +102,6 @@ describe("MonthlyDataTab", () => {
     expect(filteredLengths("November", "2018")).to.eql([1, 0]);
     expect(filteredLengths("November", "2019")).to.eql([0, 1]);
     expect(filteredLengths("November", "2021")).to.eql([0, 0]);
-    // expect(filteredLengths(thisMonth, thisYear)).to.eql([1, 0]);
-  });
-
-  afterEach(() => {
-    today.restore();
+    expect(filteredLengths(thisMonth, thisYear)).to.eql([1, 0]);
   });
 });
