@@ -15,6 +15,7 @@ export interface CopyButtonState {
 }
 
 export default class CopyButton extends React.Component<CopyButtonProps, CopyButtonState> {
+  // The "Copy Data" button that appears at the top of all the Aggregate Data tabs other than "Charts"
   constructor(props) {
     super(props);
     this.state = { copied: false, showConfirm: false };
@@ -23,6 +24,7 @@ export default class CopyButton extends React.Component<CopyButtonProps, CopyBut
   }
 
   render(): JSX.Element {
+    // When the user clicks the button, the "Copied to clipboard" confirmation message should appear, and the button text should switch to saying "Copy Data Again".
     return (
       <div className="copy-button">
         <Button
@@ -39,6 +41,7 @@ export default class CopyButton extends React.Component<CopyButtonProps, CopyBut
   }
 
   copy() {
+    // Other than the last two lines, this is just boilerplate.
     let copyArea = this.props.element;
     copyArea.focus();
     document.execCommand("selectAll");
@@ -53,6 +56,7 @@ export default class CopyButton extends React.Component<CopyButtonProps, CopyBut
   }
 
   hideConfirm() {
+    // The "Copied to clipboard" confirmation message disappears after 5 seconds.
     this.setState({ showConfirm: false });
   }
 

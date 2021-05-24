@@ -21,6 +21,7 @@ export interface MonthlyDataTabState {
 }
 
 export default class MonthlyDataTab extends React.Component<MonthlyDataTabProps, MonthlyDataTabState> {
+  // Displays a list of libraries added during any given month/year combination.
   private monthlyDataRef = React.createRef<HTMLElement>();
 
   constructor(props: MonthlyDataTabProps) {
@@ -39,6 +40,7 @@ export default class MonthlyDataTab extends React.Component<MonthlyDataTabProps,
   }
 
   updateTimeframe(e, key: string) {
+    // valueToKeep is whichever item--month or year--the user has not selected a new value for.
     let valueToKeep = ["month", "year"].find(x => x !== key);
     let updatedTimes = {[key]: e.currentTarget.textContent, [valueToKeep]: this.state[valueToKeep]};
     let dataToShow = this.filter(updatedTimes.month, updatedTimes.year);
@@ -50,6 +52,7 @@ export default class MonthlyDataTab extends React.Component<MonthlyDataTabProps,
   }
 
   renderMenu(key: string, array: string[]): JSX.Element {
+    // The array prop is a list of either all the months or all the years that should appear in the dropdown.
     let current = this.state[key];
     return (
       <DropdownButton
@@ -63,6 +66,7 @@ export default class MonthlyDataTab extends React.Component<MonthlyDataTabProps,
   }
 
   getAllYears() {
+    // A list of all the years in which a library has ever been added, i.e. the years that should appear in the dropdown.
     let years = [thisYear];
     Object.values(this.props.data).map((category) => {
       category.map((library) => {

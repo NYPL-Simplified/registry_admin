@@ -29,6 +29,7 @@ export default class App extends React.Component<AppProps, {}> {
 
   render(): JSX.Element {
     const { username, store } = this.context;
+    // The app renders either the LogInForm or the LibrariesPage, depending on whether the user is logged in.
     return (
       <div id="main-app-component">
         <Header

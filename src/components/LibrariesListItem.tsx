@@ -15,6 +15,7 @@ export interface LibrariesListItemState {
 }
 
 export default class LibrariesListItem extends React.Component<LibrariesListItemProps, LibrariesListItemState> {
+  // A color-coded panel displayed for each item in LibraryList, containing a LibraryDetailPage.
   constructor(props: LibrariesListItemProps) {
     super(props);
     const color = this.colorCode(Object.values(this.props.library.stages));
@@ -35,6 +36,8 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
   }
 
   updateColor(stages: Array<string>): void {
+      // Passed as a callback to the child LibraryDetailPage component, so that the LibrariesListItem
+      // background color will update to reflect changes to the library's stages.
       let color = this.colorCode(stages);
       this.setState({ color });
   }
