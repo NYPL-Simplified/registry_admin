@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.4.13
+#### Added
+- Put in comments for clarity.
+
 ### v1.4.12
 #### Fixed
 - Fixed failing MonthlyDataTab tests.
