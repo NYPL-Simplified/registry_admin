@@ -16,6 +16,7 @@ export interface SearchFormState {
   searchTerm: string;
 }
 
+/** The search box at the top of the list of libraries. */
 export default class SearchForm extends React.Component<SearchFormOwnProps, SearchFormState> {
   constructor(props: SearchFormOwnProps) {
     super(props);
@@ -83,6 +84,7 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
     (this.refs["form-component"] as any).formRef.current.reset();
   }
 
+  /** Compile success and error messages to be passed to the Form component. */
   message(): {} {
     let message = {};
     if (!this.props.term) {

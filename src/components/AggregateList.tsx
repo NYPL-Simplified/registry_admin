@@ -18,6 +18,7 @@ export interface AggregateListState {
   geographicInfo: boolean;
 }
 
+/** This is the "List" tab in the Aggregate Data panel. */
 export default class AggregateList extends React.Component<AggregateListProps, AggregateListState> {
   private statsRef = React.createRef<HTMLElement>();
   STAGES = ["Production", "Testing", "Cancelled"];
@@ -66,6 +67,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
         className={className}
       />
     );
+    // If any of the "Library Name Display" options have been selected, render the "Show Geographic Info" button.
     if (["production", "testing", "cancelled"].some(x => this.state[x])) {
       buttons.splice(2, 0, geographicButton);
     }
@@ -95,6 +97,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     );
   }
 
+  /** Determining whether the elements in the Library Name Display dropdown should say "Show" or "Hide" */
   toggleExpanded(e) {
     let [verb, category] = e.target.textContent.toLowerCase().split(" ");
     let newState = {};
@@ -107,6 +110,7 @@ export default class AggregateList extends React.Component<AggregateListProps, A
     this.setState({...this.state, ...newState});
   }
 
+  /** Status of the Remove/Restore Formatting button--determines whether CSS styles are applied to the data. */
   toggleFormatting() {
     this.setState({ styled: !this.state.styled });
   }

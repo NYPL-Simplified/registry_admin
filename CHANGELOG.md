@@ -1,5 +1,10 @@
 ## Changelog
 
+### v1.4.13
+#### Added
+- Put in comments for clarity.
+- Updated README for clearer startup instructions through Docker.
+
 ### v1.4.12
 #### Fixed
 - Fixed failing MonthlyDataTab tests.

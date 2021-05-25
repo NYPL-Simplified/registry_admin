@@ -10,10 +10,10 @@ export interface EmailValidationSectionProps {
 }
 
 export default class EmailValidationSection extends React.Component<EmailValidationSectionProps, {}> {
+  /** The library has contact_email, help_email, and copyright_email properties.  Each of these corresponds
+  * to an email address which will need to be validated--either by the email recipient or by the user of
+  this interface--before the library can be put into the production state. */
   render(): JSX.Element {
-    // The library has contact_email, help_email, and copyright_email properties.  Each of these corresponds
-    // to an email address which will need to be validated--either by the email recipient or by the user of
-    // this interface--before the library can be put into the production state.
     let emailForms = ["contact", "help", "copyright"].map((x) =>
       <li className="well">
         <EmailValidationForm

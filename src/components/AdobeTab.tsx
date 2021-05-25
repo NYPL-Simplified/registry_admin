@@ -12,6 +12,7 @@ export interface AdobeTabState {
   styled: boolean;
 }
 
+/** The AdobeTab lives in the Aggregate Data panel.  It shows how many Adobe IDs--an approximation of how many patrons--each library has. */
 export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabState> {
   private dataRef = React.createRef<HTMLUListElement>();
   constructor(props: AdobeTabProps) {
@@ -21,6 +22,9 @@ export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabSta
     this.total = this.total.bind(this);
   }
 
+  /**
+  * How many Adobe IDs are in the system in total--i.e. what is the sum of all the libraries' Adobe ID counts?
+  */
   total() {
     let idCounts = this.props.data.map(l => parseInt(l.basic_info.number_of_patrons));
     if (idCounts.length > 0) {
@@ -66,6 +70,9 @@ export default class AdobeTab extends React.Component<AdobeTabProps, AdobeTabSta
     );
   }
 
+  /**
+  * Status of the Remove/Restore Formatting button--determines whether CSS styles are applied to the data
+  */
   toggleFormatting() {
     this.setState({ styled: !this.state.styled });
   }

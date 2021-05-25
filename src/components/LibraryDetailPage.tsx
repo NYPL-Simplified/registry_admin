@@ -32,8 +32,8 @@ export interface LibraryDetailPageState {
 
 export interface LibraryDetailPageProps extends LibraryDetailPageStateProps, LibraryDetailPageDispatchProps, LibraryDetailPageOwnProps {}
 
+/** The expanded display of information about an individual LibrariesListItem. */
 export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, LibraryDetailPageState> {
-
   constructor(props: LibraryDetailPageProps) {
     super(props);
     this.submit = this.submit.bind(this);
@@ -63,6 +63,7 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     );
   }
 
+  /** The form for viewing/editing the library stage and registry stage. */
   renderStages(): JSX.Element {
     return (
       <Form
@@ -78,6 +79,7 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     );
   }
 
+  /** Edit the library stage and registry stage, and update the parent element's background color accordingly. */
   async submit(data: FormData): Promise<void> {
     await this.props.editStages(data);
     await this.props.fetchLibrary(this.props.library.uuid);
@@ -100,6 +102,7 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
       "Contact & URLs": "urls_and_contact",
       "Areas": "areas"
     };
+    // Sort the library information by category, and create a tab for each category.
     Object.entries(categories).forEach(([k, v]) => {
       let category = library[v];
       if (category) {

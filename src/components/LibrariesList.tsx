@@ -11,6 +11,7 @@ export interface LibrariesListOwnProps {
   isLoaded: boolean;
 }
 
+/** The list of libraries.  An animated loading indicator shows until the list has loaded. */
 export default class LibrariesList extends React.Component<LibrariesListOwnProps, {}> {
   render(): JSX.Element {
     return (

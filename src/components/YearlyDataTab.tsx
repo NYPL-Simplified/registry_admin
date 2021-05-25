@@ -16,6 +16,7 @@ export interface YearlyDataTabState {
   months: boolean;
 }
 
+/** Libraries sorted by what year they were added. */
 export default class YearlyDataTab extends React.Component<YearlyDataTabProps, YearlyDataTabState> {
   private dataRef = React.createRef<HTMLUListElement>();
   constructor(props: YearlyDataTabProps) {
@@ -61,9 +62,11 @@ export default class YearlyDataTab extends React.Component<YearlyDataTabProps, Y
     });
     return sorted;
   }
+  /** Total number of libraries added in each year. */
   getYearlyTotal(data: {[key: string]: LibraryData[]}) {
     return Object.values(data).map(v => v.length).reduce((accum, next) => accum + next);
   }
+  /** Hide/show the list of library names for each year. */
   toggleExpanded(e) {
     let [verb, year] = e.target.textContent.split(" ");
     let yearsToShow = {};

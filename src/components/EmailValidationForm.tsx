@@ -28,6 +28,7 @@ export interface EmailValidationFormDispatchProps {
 
 export interface EmailValidationFormProps extends EmailValidationFormOwnProps, EmailValidationFormDispatchProps, EmailValidationFormStateProps {}
 
+/** The email validation items that appear for each library. */
 export class EmailValidationForm extends React.Component<EmailValidationFormProps, EmailValidationFormState> {
   constructor(props) {
     super(props);
@@ -36,16 +37,20 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
     this.state = { validated: false };
   }
 
+  /** The server sends over the property names in snake case ("contact_email"); this is just removing the underscores to make them more readable ("contact email"). */
   convertEmailTitle(email: string): string {
     return (email.includes("_") ? email.replace("_", " ") : email.replace(" ", "_"));
   }
 
   renderTitle(emailString: string, emailAddress: string, alreadyValidated: boolean): JSX.Element[] {
+    // emailString is the return value of convertEmailTitle; something like "contact email".  If there is an email address for the library, display emailString and the actual email address, seperated by a colon.
     let titleString = `${emailString}${emailAddress ? ": " + emailAddress : ""}`;
+    // If the email address has already been validated, render a green check mark next to it; otherwise, render a red x icon.
     let icon = ((alreadyValidated || this.state.validated) && !this.props.error) ? <CheckSoloIcon /> : <XIcon />;
     return [<span>{titleString}</span>, icon];
   }
 
+  /** Clicking the button makes a server request. */
   async validate(email: string, data: FormData): Promise<void> {
     data.append("email", email);
     await this.props.validateEmail(data);

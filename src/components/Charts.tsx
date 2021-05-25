@@ -8,6 +8,7 @@ export interface ChartsProps {
   height?: string | number;
 }
 
+/** The "Charts" tab in the "Aggregate Data" panel.  Uses the external "recharts" package. */
 export default class Charts extends React.Component<ChartsProps, {}> {
   static defaultProps = {
     width: "50%",
