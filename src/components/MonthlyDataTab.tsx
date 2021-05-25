@@ -20,8 +20,8 @@ export interface MonthlyDataTabState {
   styled: boolean;
 }
 
+/** Displays a list of libraries added during any given month/year combination. */
 export default class MonthlyDataTab extends React.Component<MonthlyDataTabProps, MonthlyDataTabState> {
-  // Displays a list of libraries added during any given month/year combination.
   private monthlyDataRef = React.createRef<HTMLElement>();
 
   constructor(props: MonthlyDataTabProps) {
@@ -65,8 +65,8 @@ export default class MonthlyDataTab extends React.Component<MonthlyDataTabProps,
     );
   }
 
+  /** A list of all the years in which a library has ever been added, i.e. the years that should appear in the dropdown. */
   getAllYears() {
-    // A list of all the years in which a library has ever been added, i.e. the years that should appear in the dropdown.
     let years = [thisYear];
     Object.values(this.props.data).map((category) => {
       category.map((library) => {

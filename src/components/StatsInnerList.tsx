@@ -11,8 +11,8 @@ export interface StatsInnerListProps {
   hasYear?: boolean;
 }
 
+/** The element used inside various Aggregate Data panels: a color-coded bar saying "Production", "Testing", or "Cancelled" plus an optionally-displayed list of library names. */
 export default class StatsInnerList extends React.Component<StatsInnerListProps, {}> {
-  // The element used inside various Aggregate Data panels: a color-coded bar saying "Production", "Testing", or "Cancelled" plus an optionally-displayed list of library names.
   makeCategoryBar(category: string, allLengths: number[]): JSX.Element[] {
     let catName = category.replace(category[0], category[0].toUpperCase());
     let length = this.props.data[category].length;

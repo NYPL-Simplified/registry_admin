@@ -14,8 +14,8 @@ export interface LibrariesListItemState {
   color: string;
 }
 
+/** A color-coded panel displayed for each item in LibraryList, containing a LibraryDetailPage. */
 export default class LibrariesListItem extends React.Component<LibrariesListItemProps, LibrariesListItemState> {
-  // A color-coded panel displayed for each item in LibraryList, containing a LibraryDetailPage.
   constructor(props: LibrariesListItemProps) {
     super(props);
     const color = this.colorCode(Object.values(this.props.library.stages));
@@ -35,17 +35,21 @@ export default class LibrariesListItem extends React.Component<LibrariesListItem
     );
   }
 
+  /**
+  * Passed as a callback to the child LibraryDetailPage component, so that the LibrariesListItem
+  * background color will update to reflect changes to the library's stages.
+  */
   updateColor(stages: Array<string>): void {
-      // Passed as a callback to the child LibraryDetailPage component, so that the LibrariesListItem
-      // background color will update to reflect changes to the library's stages.
       let color = this.colorCode(stages);
       this.setState({ color });
   }
 
+  /**
+  *If both library_stage and registry_stage are in production, background is green;
+  * if at least one of them is cancelled, background is red;
+  * otherwise, background is yellow.
+  */
   colorCode(stages: Array<string>): string {
-    // If both library_stage and registry_stage are in production, background is green;
-    // if at least one of them is cancelled, background is red;
-    // otherwise, background is yellow.
     if (stages.every((stage) => stage === "production")) {
       return "success";
     } else if (stages.some((stage) => stage === "cancelled")) {

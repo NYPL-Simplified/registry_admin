@@ -11,8 +11,8 @@ export interface StatsProps {
   libraries?: LibraryData[];
 }
 
+/** The Aggregate Data panel. */
 export default class Stats extends React.Component<StatsProps, {}> {
-  // The Aggregate Data panel.
   constructor(props: StatsProps) {
     super(props);
     this.sortLibraries = this.sortLibraries.bind(this);

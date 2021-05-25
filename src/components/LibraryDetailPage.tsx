@@ -32,8 +32,8 @@ export interface LibraryDetailPageState {
 
 export interface LibraryDetailPageProps extends LibraryDetailPageStateProps, LibraryDetailPageDispatchProps, LibraryDetailPageOwnProps {}
 
+/** The expanded display of information about an individual LibrariesListItem. */
 export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, LibraryDetailPageState> {
-  // The expanded display of information about an individual LibrariesListItem.
   constructor(props: LibraryDetailPageProps) {
     super(props);
     this.submit = this.submit.bind(this);
@@ -63,8 +63,8 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     );
   }
 
+  /** The form for viewing/editing the library stage and registry stage. */
   renderStages(): JSX.Element {
-    // The form for viewing/editing the library stage and registry stage.
     return (
       <Form
         className="border"
@@ -79,8 +79,8 @@ export class LibraryDetailPage extends React.Component<LibraryDetailPageProps, L
     );
   }
 
+  /** Edit the library stage and registry stage, and update the parent element's background color accordingly. */
   async submit(data: FormData): Promise<void> {
-    // Edit the library stage and registry stage, and update the parent element's background color accordingly.
     await this.props.editStages(data);
     await this.props.fetchLibrary(this.props.library.uuid);
 

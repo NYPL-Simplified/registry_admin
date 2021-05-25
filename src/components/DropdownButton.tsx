@@ -13,8 +13,8 @@ export interface DropdownButtonState {
   isOpen: boolean;
 }
 
+/** This is the dropdown menu used by AggregateList, MonthlyDataTab, and YearlyDataTab. */
 export default class DropdownButton extends React.Component<DropdownButtonProps, DropdownButtonState> {
-  // This is the dropdown menu used by AggregateList, MonthlyDataTab, and YearlyDataTab.
 
   constructor(props: DropdownButtonProps) {
     super(props);
@@ -37,8 +37,8 @@ export default class DropdownButton extends React.Component<DropdownButtonProps,
     );
   }
 
+  /** Create the items in the dropdown by making a Button for each thing in the menuContent prop. */
   renderMenu() {
-    // Create the items in the dropdown by making a Button for each thing in the menuContent prop.
     let makeButton = (item => {
       return (
         <Button
@@ -61,8 +61,9 @@ export default class DropdownButton extends React.Component<DropdownButtonProps,
       </ul>
     );
   }
+
+  /** Show/hide the dropdown on hover. */
   toggle(newValue: boolean) {
-    // Show/hide the dropdown on hover.
     this.setState({ isOpen: newValue });
   }
 }

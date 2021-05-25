@@ -35,8 +35,8 @@ export interface LibrariesPageState {
 
 export interface LibrariesPageProps extends LibrariesPageStateProps, LibrariesPageOwnProps, LibrariesPageDispatchProps {}
 
+/** The main component containing both the Aggregate Data panel and the LibrariesList. */
 export class LibrariesPage extends React.Component<LibrariesPageProps, LibrariesPageState> {
-  // The main component containing both the Aggregate Data panel and the LibrariesList.
   constructor(props: LibrariesPageProps) {
     super(props);
     this.search = this.search.bind(this);

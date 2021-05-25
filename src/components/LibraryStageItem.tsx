@@ -5,9 +5,10 @@ export interface LibraryStageItemProps {
   label: string;
   value: string;
 }
+/** The fieldsets in the Library Stage and Registry Stage forms; contains a dropdown with the possible stages, and a color-coded badge indicating the current stage.
+* The label prop is "Library Stage" or "Registry Stage"; value prop is "production", "testing", or "cancelled".
+*/
 export default class LibraryStageItem extends React.Component<LibraryStageItemProps, {}> {
-  // The fieldsets in the Library Stage and Registry Stage forms; contains a dropdown with the possible stages, and a color-coded badge indicating the current stage.
-  // The label prop is "Library Stage" or "Registry Stage"; value prop is "production", "testing", or "cancelled".
   render(): JSX.Element {
     const colors = {
       "testing": "warning",

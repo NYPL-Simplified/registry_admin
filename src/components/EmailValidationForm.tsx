@@ -28,8 +28,8 @@ export interface EmailValidationFormDispatchProps {
 
 export interface EmailValidationFormProps extends EmailValidationFormOwnProps, EmailValidationFormDispatchProps, EmailValidationFormStateProps {}
 
+/** The email validation items that appear for each library. */
 export class EmailValidationForm extends React.Component<EmailValidationFormProps, EmailValidationFormState> {
-  // The email validation items that appear for each library.
   constructor(props) {
     super(props);
     this.validate = this.validate.bind(this);
@@ -37,8 +37,8 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
     this.state = { validated: false };
   }
 
+  /** The server sends over the property names in snake case ("contact_email"); this is just removing the underscores to make them more readable ("contact email"). */
   convertEmailTitle(email: string): string {
-    // The server sends over the property names in snake case ("contact_email"); this is just removing the underscores to make them more readable ("contact email").
     return (email.includes("_") ? email.replace("_", " ") : email.replace(" ", "_"));
   }
 
@@ -50,8 +50,8 @@ export class EmailValidationForm extends React.Component<EmailValidationFormProp
     return [<span>{titleString}</span>, icon];
   }
 
+  /** Clicking the button makes a server request. */
   async validate(email: string, data: FormData): Promise<void> {
-    // Clicking the button makes a server request.
     data.append("email", email);
     await this.props.validateEmail(data);
     this.setState({ validated: true });
