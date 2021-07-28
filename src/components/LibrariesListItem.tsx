@@ -1,18 +1,18 @@
-import * as React from 'react'
-import { Panel } from 'library-simplified-reusable-components'
-import { Store } from 'redux'
-import { State } from '../reducers/index'
-import { LibraryData } from '../interfaces'
-import LibraryDetailPage from './LibraryDetailPage'
+import * as React from "react";
+import { Panel } from "library-simplified-reusable-components";
+import { Store } from "redux";
+import { State } from "../reducers/index";
+import { LibraryData } from "../interfaces";
+import LibraryDetailPage from "./LibraryDetailPage";
 
 export interface LibrariesListItemProps {
-  library: LibraryData
-  store: Store<State>
+  library: LibraryData;
+  store: Store<State>;
 }
 
 export interface LibrariesListItemState {
-  color: string
-  panelOpen: boolean
+  color: string;
+  panelOpen: boolean;
 }
 
 /** A color-coded panel displayed for each item in LibraryList, containing a LibraryDetailPage. */
@@ -21,21 +21,20 @@ export default class LibrariesListItem extends React.Component<
   LibrariesListItemState
 > {
   constructor(props: LibrariesListItemProps) {
-    super(props)
-    const color = this.colorCode(Object.values(this.props.library.stages))
-    this.state = { color, panelOpen: false }
-    this.colorCode = this.colorCode.bind(this)
-    this.updateColor = this.updateColor.bind(this)
-    this.content = this.content.bind(this)
-    this.handlePanelClick = this.handlePanelClick.bind(this)
+    super(props);
+    const color = this.colorCode(Object.values(this.props.library.stages));
+    this.state = { color, panelOpen: false };
+    this.colorCode = this.colorCode.bind(this);
+    this.updateColor = this.updateColor.bind(this);
+    this.content = this.content.bind(this);
+    this.handleLibraryPanelClick = this.handleLibraryPanelClick.bind(this);
   }
 
-  handlePanelClick() {
-    console.log('in handlepanelclick')
+  handleLibraryPanelClick() {
     this.setState((prevState) => ({
       ...prevState,
       panelOpen: !prevState.panelOpen,
-    }))
+    }));
   }
 
   content() {
@@ -45,7 +44,7 @@ export default class LibrariesListItem extends React.Component<
         updateColor={this.updateColor}
         store={this.props.store}
       />
-    )
+    );
   }
 
   /**
@@ -53,8 +52,8 @@ export default class LibrariesListItem extends React.Component<
    * background color will update to reflect changes to the library's stages.
    */
   updateColor(stages: Array<string>): void {
-    let color = this.colorCode(stages)
-    this.setState({ color })
+    let color = this.colorCode(stages);
+    this.setState({ color });
   }
 
   /**
@@ -63,29 +62,27 @@ export default class LibrariesListItem extends React.Component<
    * otherwise, background is yellow.
    */
   colorCode(stages: Array<string>): string {
-    if (stages.every((stage) => stage === 'production')) {
-      return 'success'
-    } else if (stages.some((stage) => stage === 'cancelled')) {
-      return 'danger'
+    if (stages.every((stage) => stage === "production")) {
+      return "success";
+    } else if (stages.some((stage) => stage === "cancelled")) {
+      return "danger";
     }
-    return 'warning'
+    return "warning";
   }
 
   render(): JSX.Element {
-    console.log('this.state.panelOpen', this.state.panelOpen)
-    let style = this.state.color
-    let { name } = this.props.library.basic_info
+    let style = this.state.color;
+    let { name } = this.props.library.basic_info;
     return (
       <li>
-        <div onClick={this.handlePanelClick}>
-          <Panel
-            id={name.replace(/ /g, '-')}
-            style={style}
-            headerText={name}
-            content={this.state.panelOpen ? this.content() : ''}
-          />
-        </div>
+        <Panel
+          id={name.replace(/ /g, "-")}
+          style={style}
+          headerText={name}
+          content={this.state.panelOpen ? this.content() : null}
+          onClick={this.handleLibraryPanelClick}
+        />
       </li>
-    )
+    );
   }
 }
