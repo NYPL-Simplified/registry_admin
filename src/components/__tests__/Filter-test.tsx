@@ -51,7 +51,7 @@ describe("Filter", () => {
           flipFilter={flipFilter}
         />
       );
-      let panelToggle = wrapper.find("button.panel-heading");
+      const panelToggle = wrapper.find("button.panel-heading");
       panelToggle.simulate("click");
     });
 
@@ -121,6 +121,15 @@ describe("Filter", () => {
       flipButton.simulate("click");
       expect(flipFilter.callCount).to.equal(2);
       expect(wrapper.state("flip")).to.be.false;
+    });
+
+    it("removes content on close", () => {
+      const panelToggle = wrapper.find("button.panel-heading");
+      panelToggle.simulate("click");
+      const content = wrapper.find(".filters");
+      const toggles = wrapper.find(".filter-box");
+      expect(content.length).to.equal(0);
+      expect(toggles.length).to.equal(0);
     });
   });
 });

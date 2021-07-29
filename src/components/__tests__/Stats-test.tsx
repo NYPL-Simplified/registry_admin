@@ -108,5 +108,17 @@ describe("Stats", () => {
       let monthlyDataTab = wrapper.find(MonthlyDataTab);
       expect(monthlyDataTab.length).to.equal(1);
     });
+
+    it("removes content on close", () => {
+      const panelToggle = wrapper.find("button.panel-heading");
+      panelToggle.simulate("click");
+      const panel = wrapper.find(Panel);
+      const tabs = panel.find(Tabs);
+      const list = wrapper.find(AggregateList);
+      const charts = wrapper.find(Charts);
+      expect(tabs.length).to.equal(0);
+      expect(list.length).to.equal(0);
+      expect(charts.length).to.equal(0);
+    });
   });
 });
