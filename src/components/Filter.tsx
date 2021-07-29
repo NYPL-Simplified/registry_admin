@@ -50,9 +50,9 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     this.props.flipFilter();
   }
 
-  /*
-    This function sets the state of the Filter component to open or close, 
-    which in turn tells the Panel component whether to render its content or not.
+  /**
+   * This function sets the state of the Filter component to open or close,
+   * which in turn tells the Panel component whether to render its content or not.
    */
   handleFilterPanelClick() {
     this.setState((prevState) => ({

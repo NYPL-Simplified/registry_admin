@@ -37,9 +37,9 @@ describe("Stats", () => {
     expect(panel.prop("headerText")).to.equal("Aggregate Data");
   });
 
-  /*
-  By default, Panel components are set to closed, and their content does not render until clicked.
-  We need to manually trigger a click to open them and test the contents.
+  /**
+   * By default, Panel components are set to closed, and their content does not render until clicked.
+   * We need to manually trigger a click to open them and test the contents.
    */
   describe("Open", () => {
     let wrapper;

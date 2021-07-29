@@ -243,9 +243,9 @@ describe("LibrariesPage", () => {
     spyUpdateLibraryList.restore();
   });
 
-  /*
-  By default, Panel components are set to closed, and their content does not render until clicked.
-  We need to manually trigger a click to open them and test the contents.
+  /**
+   * By default, Panel components are set to closed, and their content does not render until clicked.
+   * We need to manually trigger a click to open them and test the contents.
    */
   it("should display a filter form", () => {
     let panelToggle = wrapper.find("#filters").find("button.panel-heading");
