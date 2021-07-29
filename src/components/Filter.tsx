@@ -29,7 +29,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     this.flip = this.flip.bind(this);
     this.state = { flip: this.props.initialFlip, panelOpen: false };
     this.applyFilter = this.applyFilter.bind(this);
-    this.handleFiltersPanelClick = this.handleFiltersPanelClick.bind(this);
+    this.handleFilterPanelClick = this.handleFilterPanelClick.bind(this);
   }
 
   /**
@@ -50,7 +50,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     this.props.flipFilter();
   }
 
-  handleFiltersPanelClick() {
+  handleFilterPanelClick() {
     this.setState((prevState) => ({
       ...prevState,
       panelOpen: !prevState.panelOpen,
@@ -97,7 +97,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
             </div>
           ) : null
         }
-        onClick={this.handleFiltersPanelClick}
+        onClick={this.handleFilterPanelClick}
       />
     );
   }
