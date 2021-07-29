@@ -30,6 +30,10 @@ export default class LibrariesListItem extends React.Component<
     this.handleLibraryPanelClick = this.handleLibraryPanelClick.bind(this);
   }
 
+  /*
+    This function sets the state of the LibrariesListItem component to open or close, 
+    which in turn tells the Panel component whether to render its content or not.
+   */
   handleLibraryPanelClick() {
     this.setState((prevState) => ({
       ...prevState,

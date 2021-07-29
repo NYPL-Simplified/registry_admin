@@ -5,6 +5,7 @@
 #### Updated
 
 - Changed all instances of the Panel component to render contents only on click.
+- Upgraded to v1.3.19 of the reusable components package.
 
 ### v1.4.13
 

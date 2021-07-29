@@ -31,6 +31,10 @@ describe("Filter", () => {
     expect(content.length).to.equal(0);
   });
 
+  /*
+  By default, Panel components are set to closed, and their content does not render until clicked.
+  We need to manually trigger a click to open them and test the contents.
+   */
   describe("Open", () => {
     let wrapper;
     let filterKeys = {

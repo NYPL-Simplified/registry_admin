@@ -23,6 +23,10 @@ export default class Stats extends React.Component<StatsProps, StatsState> {
     this.handleStatsPanelClick = this.handleStatsPanelClick.bind(this);
   }
 
+  /*
+    This function sets the state of the Stats component to open or close, 
+    which in turn tells the Panel component whether to render its content or not.
+   */
   handleStatsPanelClick() {
     this.setState((prevState) => ({
       ...prevState,
