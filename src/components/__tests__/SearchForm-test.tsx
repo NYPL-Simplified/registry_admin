@@ -23,7 +23,9 @@ describe("SearchForm", () => {
   it("should display a panel containing a form with an input box and a button", () => {
     let panel = wrapper.find(".panel-info");
     expect(panel.length).to.equal(1);
-    expect(panel.find(".panel-title").text()).to.equal("Here is a search form!");
+    expect(panel.find(".panel-title").text()).to.equal(
+      "Here is a search form!"
+    );
     let form = panel.find(Form);
     expect(form.length).to.equal(1);
     expect(form.prop("onSubmit")).to.equal(wrapper.prop("search"));
@@ -41,7 +43,7 @@ describe("SearchForm", () => {
     expect(spyUpdate.callCount).to.equal(0);
     expect(wrapper.state()["searchTerm"]).to.equal("");
     let input = wrapper.find("input");
-    input.simulate("change", {target: {value: "test_search_term"}});
+    input.simulate("change", { target: { value: "test_search_term" } });
     expect(spyUpdate.callCount).to.equal(1);
     expect(spyUpdate.args[0][0].target.value).to.equal("test_search_term");
     expect(wrapper.state()["searchTerm"]).to.equal("test_search_term");
@@ -81,26 +83,55 @@ describe("SearchForm", () => {
     expect(clear.callCount).to.equal(1);
   });
 
+  it("should show a loading message before displaying a results message", () => {
+    let loading = wrapper.find(".alert-loading");
+    expect(loading.length).to.equal(0);
+    wrapper.setProps({
+      term: "Test search term",
+      resultsCount: 0,
+      receivedSearchResults: false,
+    });
+    loading = wrapper.find(".alert-loading");
+    expect(loading.length).to.equal(1);
+    wrapper.setProps({
+      receivedSearchResults: true,
+    });
+    loading = wrapper.find(".alert-loading");
+    expect(loading.length).to.equal(0);
+  });
+
   it("should optionally show a success message", () => {
     let success = wrapper.find(".alert-success");
     expect(success.length).to.equal(0);
-    wrapper.setProps({ term: "Test search term", resultsCount: 1 });
+    wrapper.setProps({
+      term: "Test search term",
+      resultsCount: 1,
+      receivedSearchResults: true,
+    });
     success = wrapper.find(".alert-success");
     expect(success.length).to.equal(1);
-    expect(success.text()).to.equal("Displaying 1 result for Test search term:");
+    expect(success.text()).to.equal(
+      "Displaying 1 result for 'Test search term':"
+    );
     wrapper.setProps({ resultsCount: 2 });
     success = wrapper.find(".alert-success");
     expect(success.length).to.equal(1);
-    expect(success.text()).to.equal("Displaying 2 results for Test search term:");
+    expect(success.text()).to.equal(
+      "Displaying 2 results for 'Test search term':"
+    );
   });
 
   it("should optionally show an error message", () => {
     let error = wrapper.find(".alert-danger");
     expect(error.length).to.equal(0);
-    wrapper.setProps({ term: "Test search term", resultsCount: 0 });
+    wrapper.setProps({
+      term: "Test search term",
+      resultsCount: 0,
+      receivedSearchResults: true,
+    });
     error = wrapper.find(".alert-danger");
     expect(error.length).to.equal(1);
-    expect(error.text()).to.equal("No results found for Test search term.");
+    expect(error.text()).to.equal("No results found for 'Test search term'.");
   });
 
   it("should clear the input field when the clear button is clicked", () => {

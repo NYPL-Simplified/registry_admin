@@ -1,5 +1,13 @@
 ## Changelog
 
+### v1.4.15
+
+#### Updated
+
+- Updated SearchForm to display a loading message until results are returned.
+- Upgraded to v1.3.20 of the reusable components package.
+- Updated SearchForm tests to check for new behavior.
+
 ### v1.4.14
 
 #### Updated

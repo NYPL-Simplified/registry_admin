@@ -31,6 +31,7 @@ export interface LibrariesPageState {
   searchTerm: string;
   qa: boolean;
   filters: { [key: string]: any };
+  receivedSearchResults: boolean;
 }
 
 export interface LibrariesPageProps
@@ -57,6 +58,7 @@ export class LibrariesPage extends React.Component<
       searchTerm: "",
       qa: false,
       filters: { flipped: false, attributes: { "PLS ID": false } },
+      receivedSearchResults: false,
     };
   }
 
@@ -75,6 +77,7 @@ export class LibrariesPage extends React.Component<
         inputName="name"
         clear={!this.state.showAll ? this.clear : null}
         resultsCount={libraries && libraries.length}
+        receivedSearchResults={this.state.receivedSearchResults}
       />
     );
 
@@ -259,8 +262,14 @@ export class LibrariesPage extends React.Component<
       showAll: false,
       searchTerm: data.get("name") as string,
       filters: this.state.filters,
+      receivedSearchResults: false,
     });
-    await this.props.search(data);
+    try {
+      await this.props.search(data);
+    } catch (e) {
+      console.error(`No results found for '${this.state.searchTerm}'.`);
+    }
+    this.setState({ receivedSearchResults: true });
   }
 
   async clear() {
