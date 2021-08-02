@@ -119,16 +119,3 @@ export default class SearchForm extends React.Component<
     return message;
   }
 }
-
-// if (this.props.resultsCount) {
-//   let resultsNumber = `${this.props.resultsCount} ${
-//     this.props.resultsCount > 1 ? "results" : "result"
-//   }`;
-//   message[
-//     "success"
-//   ] = `Displaying ${resultsNumber} for "${this.props.term}":`;
-// } else if (!this.props.receivedSearchResults) {
-//   message["loading"] = "Loading...";
-// } else {
-//   message["error"] = `No results found for "${this.props.term}".`;
-// }
