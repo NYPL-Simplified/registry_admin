@@ -1,3 +1,4 @@
+/** eslint quotes "double", {"allowTemplateLiterals: true"} */
 import { expect } from "chai";
 import * as Sinon from "sinon";
 import * as Enzyme from "enzyme";
@@ -89,12 +90,12 @@ describe("SearchForm", () => {
     wrapper.setProps({
       term: "Test search term",
       resultsCount: 0,
-      receivedSearchResults: false,
+      searchCompleted: false,
     });
     loading = wrapper.find(".alert-loading");
     expect(loading.length).to.equal(1);
     wrapper.setProps({
-      receivedSearchResults: true,
+      searchCompleted: true,
     });
     loading = wrapper.find(".alert-loading");
     expect(loading.length).to.equal(0);
@@ -106,18 +107,18 @@ describe("SearchForm", () => {
     wrapper.setProps({
       term: "Test search term",
       resultsCount: 1,
-      receivedSearchResults: true,
+      searchCompleted: true,
     });
     success = wrapper.find(".alert-success");
     expect(success.length).to.equal(1);
     expect(success.text()).to.equal(
-      "Displaying 1 result for 'Test search term':"
+      `Displaying 1 result for "Test search term":`
     );
     wrapper.setProps({ resultsCount: 2 });
     success = wrapper.find(".alert-success");
     expect(success.length).to.equal(1);
     expect(success.text()).to.equal(
-      "Displaying 2 results for 'Test search term':"
+      `Displaying 2 results for "Test search term":`
     );
   });
 
@@ -127,11 +128,11 @@ describe("SearchForm", () => {
     wrapper.setProps({
       term: "Test search term",
       resultsCount: 0,
-      receivedSearchResults: true,
+      searchCompleted: true,
     });
     error = wrapper.find(".alert-danger");
     expect(error.length).to.equal(1);
-    expect(error.text()).to.equal("No results found for 'Test search term'.");
+    expect(error.text()).to.equal(`No results found for "Test search term".`);
   });
 
   it("should clear the input field when the clear button is clicked", () => {

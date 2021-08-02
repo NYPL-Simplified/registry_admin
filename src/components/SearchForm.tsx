@@ -11,7 +11,7 @@ export interface SearchFormOwnProps {
   search: (data: FormData) => void;
   text: string;
   inputName: string;
-  receivedSearchResults?: boolean;
+  searchCompleted?: boolean;
   clear?: () => any;
   term?: string;
   resultsCount?: number;
@@ -104,7 +104,7 @@ export default class SearchForm extends React.Component<
     if (!this.props.term) {
       return message;
     }
-    if (!this.props.receivedSearchResults) {
+    if (!this.props.searchCompleted) {
       message["loading"] = "Loading...";
     } else if (this.props.resultsCount) {
       let resultsNumber = `${this.props.resultsCount} ${
@@ -112,9 +112,9 @@ export default class SearchForm extends React.Component<
       }`;
       message[
         "success"
-      ] = `Displaying ${resultsNumber} for '${this.props.term}':`;
+      ] = `Displaying ${resultsNumber} for "${this.props.term}":`;
     } else {
-      message["error"] = `No results found for '${this.props.term}'.`;
+      message["error"] = `No results found for "${this.props.term}".`;
     }
     return message;
   }
