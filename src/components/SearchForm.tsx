@@ -1,12 +1,17 @@
 import * as React from "react";
-import { Panel, Button, Form, Input } from "library-simplified-reusable-components";
+import {
+  Panel,
+  Button,
+  Form,
+  Input,
+} from "library-simplified-reusable-components";
 import { SearchIcon } from "@nypl/dgx-svg-icons";
-
 
 export interface SearchFormOwnProps {
   search: (data: FormData) => void;
   text: string;
   inputName: string;
+  searchCompleted?: boolean;
   clear?: () => any;
   term?: string;
   resultsCount?: number;
@@ -17,7 +22,10 @@ export interface SearchFormState {
 }
 
 /** The search box at the top of the list of libraries. */
-export default class SearchForm extends React.Component<SearchFormOwnProps, SearchFormState> {
+export default class SearchForm extends React.Component<
+  SearchFormOwnProps,
+  SearchFormState
+> {
   constructor(props: SearchFormOwnProps) {
     super(props);
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
@@ -45,23 +53,29 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
         ref="form-component"
         onSubmit={this.props.search}
         content={input}
-        buttonContent={<span>Search <SearchIcon /></span>}
+        buttonContent={
+          <span>
+            Search <SearchIcon />
+          </span>
+        }
         className="search-form inline"
         disableButton={!this.state.searchTerm.length}
         successText={message["success"]}
         errorText={message["error"]}
+        loadingText={message["loading"]}
       />
     );
 
     let clearButton = null;
     if (this.props.clear) {
-      clearButton =
+      clearButton = (
         <Button
           key="form-button"
           className="left-align inverted"
           callback={this.clear}
           content="Clear search"
-        />;
+        />
+      );
     }
 
     return (
@@ -90,11 +104,17 @@ export default class SearchForm extends React.Component<SearchFormOwnProps, Sear
     if (!this.props.term) {
       return message;
     }
-    if (this.props.resultsCount) {
-      let resultsNumber = `${this.props.resultsCount} ${this.props.resultsCount > 1 ? "results" : "result"}`;
-      message["success"] = `Displaying ${resultsNumber} for ${this.props.term}:`;
+    if (!this.props.searchCompleted) {
+      message["loading"] = "Loading...";
+    } else if (this.props.resultsCount) {
+      let resultsNumber = `${this.props.resultsCount} ${
+        this.props.resultsCount > 1 ? "results" : "result"
+      }`;
+      message[
+        "success"
+      ] = `Displaying ${resultsNumber} for "${this.props.term}":`;
     } else {
-      message["error"] = `No results found for ${this.props.term}.`;
+      message["error"] = `No results found for "${this.props.term}".`;
     }
     return message;
   }
