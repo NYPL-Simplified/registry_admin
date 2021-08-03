@@ -267,7 +267,7 @@ export class LibrariesPage extends React.Component<
     try {
       await this.props.search(data);
     } catch (e) {
-      console.error("There was an error finding search results:", e);
+      console.warn("There was an error finding search results:", e);
     }
     this.setState({ searchCompleted: true });
   }
