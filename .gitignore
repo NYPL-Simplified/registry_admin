@@ -1,7 +1,9 @@
-lib/*
-dist/*
-node_modules/*
-typings/*
-*~
-npm-debug.log
-docs
+*.log
+dist
+node_modules
+coverage
+.DS_Store
+.cache
+.eslintcache
+.parcel-cache
+.env

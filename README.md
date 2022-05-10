@@ -1,4 +1,5 @@
 # Registry Admin
+
 Web front-end for the Library Registry administrative interface.
 
 <!-- [![npm version](https://badge.fury.io/js/simplified-circulation-web.svg)](https://badge.fury.io/js/simplified-circulation-web)
@@ -34,7 +35,7 @@ Having both repos in the same directory allows the Library Registry's Docker con
 
 ### Installation
 
-One the repo is cloned, change directory to `registry_admin` and then install the  dependencies.
+One the repo is cloned, change directory to `registry_admin` and then install the dependencies.
 
 ```sh
 cd registry_admin
