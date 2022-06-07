@@ -3,6 +3,7 @@
 ## UNRELEASED CHANGES
 
 - SIMPLY-4065: Convert application to a new parcel build
+- SIMPLY-4066: Install Reservoir (NYPL Design System) and use components to build UI.
 
 ## 1.4.15
 
