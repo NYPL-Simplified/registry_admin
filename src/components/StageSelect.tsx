@@ -1,11 +1,13 @@
 import React from 'react';
 import { Select } from '@nypl/design-system-react-components';
 
+import { LibraryStage } from './LibraryDetails';
+
 interface StageSelectProps {
-  handleChange: (stage: string) => void;
+  handleChange: (stage: LibraryStage) => void;
   stage: string;
   uuid: string;
-  value: string;
+  value: LibraryStage;
 }
 
 const StageSelect = ({
@@ -20,7 +22,9 @@ const StageSelect = ({
       labelText={stage === 'libraryStage' ? 'Library Stage' : 'Registry Stage'}
       name={stage}
       value={value}
-      onChange={(e) => handleChange((e.target as HTMLTextAreaElement).value)}
+      onChange={(e) =>
+        handleChange((e.target as HTMLTextAreaElement).value as LibraryStage)
+      }
     >
       <option value='testing'>Testing</option>
       <option value='production'>Production</option>

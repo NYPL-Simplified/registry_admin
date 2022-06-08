@@ -20,6 +20,8 @@ interface LibraryDetailsProps {
   library: LibrariesData;
 }
 
+export type LibraryStage = 'testing' | 'production' | 'canceled' | '';
+
 const LibraryDetails = ({ library }: LibraryDetailsProps) => {
   const {
     uuid,
@@ -28,8 +30,8 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     areas,
     stages,
   } = library;
-  const [libraryStage, setLibraryStage] = useState<string>('');
-  const [registryStage, setRegistryStage] = useState<string>('');
+  const [libraryStage, setLibraryStage] = useState<LibraryStage>('');
+  const [registryStage, setRegistryStage] = useState<LibraryStage>('');
 
   useEffect(() => {
     setLibraryStage(stages.library_stage);

@@ -19,8 +19,8 @@ export interface LibrariesData {
     focus: string[];
   };
   stages: {
-    library_stage: string;
-    registry_stage: string;
+    library_stage: 'testing' | 'production' | 'canceled';
+    registry_stage: 'testing' | 'production' | 'canceled';
   };
 }
 
@@ -168,7 +168,7 @@ const libraries: LibrariesData[] = [
     },
     stages: {
       library_stage: 'testing',
-      registry_stage: 'cancelled',
+      registry_stage: 'canceled',
     },
   },
   {
@@ -312,7 +312,7 @@ const libraries: LibrariesData[] = [
     },
     stages: {
       library_stage: 'testing',
-      registry_stage: 'cancelled',
+      registry_stage: 'canceled',
     },
   },
   {
@@ -360,7 +360,7 @@ const libraries: LibrariesData[] = [
     },
     stages: {
       library_stage: 'production',
-      registry_stage: 'cancelled',
+      registry_stage: 'canceled',
     },
   },
   {
@@ -383,8 +383,8 @@ const libraries: LibrariesData[] = [
       focus: ['Everywhere'],
     },
     stages: {
-      library_stage: 'cancelled',
-      registry_stage: 'cancelled',
+      library_stage: 'canceled',
+      registry_stage: 'canceled',
     },
   },
 ];
