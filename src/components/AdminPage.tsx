@@ -15,7 +15,7 @@ const AdminPage = () => {
   };
 
   return (
-    <div data-testid='library-registry'>
+    <div>
       <TemplateAppContainer
         renderSkipNavigation
         header={<Header />}
