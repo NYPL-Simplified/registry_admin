@@ -5,7 +5,7 @@ import { LibraryStage } from './LibraryDetails';
 
 interface StageSelectProps {
   handleChange: (stage: LibraryStage) => void;
-  stage: string;
+  stage: 'libraryStage' | 'registryStage';
   uuid: string;
   value: LibraryStage;
 }
