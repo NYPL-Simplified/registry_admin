@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
-<div
-  data-testid="library-registry"
->
+<div>
   <div
     className="css-1u8qly9"
   >
@@ -158,7 +156,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Acton Public Library-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Acton Public Library-item-0"
                   onClick={[Function]}
@@ -166,11 +164,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Acton Public Library
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -434,13 +432,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            actonlibrary@actonlibrary.org
+                            <span />
+                            <span>
+                              actonlibrary@actonlibrary.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -451,13 +455,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            actonlibrary@actonlibrary.org
+                            <span />
+                            <span>
+                              actonlibrary@actonlibrary.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -468,13 +478,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            actonlibrary@actonlibrary.org
+                            <span />
+                            <span>
+                              actonlibrary@actonlibrary.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -669,7 +685,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Ak-Chin Indian Community Library, AZ-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Ak-Chin Indian Community Library, AZ-item-0"
                   onClick={[Function]}
@@ -677,11 +693,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Ak-Chin Indian Community Library, AZ
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -945,13 +961,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -962,13 +984,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            library@ak-chin.nsn.us
+                            <span />
+                            <span>
+                              library@ak-chin.nsn.us
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -979,13 +1007,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            library@ak-chin.nsn.us
+                            <span />
+                            <span>
+                              library@ak-chin.nsn.us
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -1180,7 +1214,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Alameda County Library-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Alameda County Library-item-0"
                   onClick={[Function]}
@@ -1188,11 +1222,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Alameda County Library
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -1456,13 +1490,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            pmackinnon@califa.org
+                            <span />
+                            <span>
+                              pmackinnon@califa.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -1473,13 +1513,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@aclibrary.org
+                            <span />
+                            <span>
+                              simplye@aclibrary.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -1490,13 +1536,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@aclibrary.org
+                            <span />
+                            <span>
+                              simplye@aclibrary.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -1691,7 +1743,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Alicia Salinas City of Alice Public Library, TX-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Alicia Salinas City of Alice Public Library, TX-item-0"
                   onClick={[Function]}
@@ -1699,11 +1751,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Alicia Salinas City of Alice Public Library, TX
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -1967,13 +2019,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -1984,13 +2042,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            library@cityofalice.org
+                            <span />
+                            <span>
+                              library@cityofalice.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -2001,13 +2065,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            library@cityofalice.org
+                            <span />
+                            <span>
+                              library@cityofalice.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -2202,7 +2272,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Allan Shivers Library & Museum, TX-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-11hvvs4"
+                  className="chakra-accordion__button css-1lty5mh"
                   disabled={false}
                   id="accordion-button-Allan Shivers Library & Museum, TX-item-0"
                   onClick={[Function]}
@@ -2210,11 +2280,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Allan Shivers Library & Museum, TX
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -2478,13 +2548,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -2495,13 +2571,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            ashivers.library@yahoo.com
+                            <span />
+                            <span>
+                              ashivers.library@yahoo.com
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -2512,13 +2594,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            ashivers.library@yahoo.com
+                            <span />
+                            <span>
+                              ashivers.library@yahoo.com
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -2713,7 +2801,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Allegany County Library System-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-gne4sq"
+                  className="chakra-accordion__button css-1c8csqn"
                   disabled={false}
                   id="accordion-button-Allegany County Library System-item-0"
                   onClick={[Function]}
@@ -2721,11 +2809,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Allegany County Library System
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -2989,13 +3077,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            alleganycountylibrary@alleganycountylibrary.info
+                            <span />
+                            <span>
+                              alleganycountylibrary@alleganycountylibrary.info
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -3006,13 +3100,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            alleganycountylibrary@alleganycountylibrary.info
+                            <span />
+                            <span>
+                              alleganycountylibrary@alleganycountylibrary.info
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -3023,13 +3123,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            alleganycountylibrary@alleganycountylibrary.info
+                            <span />
+                            <span>
+                              alleganycountylibrary@alleganycountylibrary.info
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -3224,7 +3330,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Allen Memorial Public Library, TX-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Allen Memorial Public Library, TX-item-0"
                   onClick={[Function]}
@@ -3232,11 +3338,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Allen Memorial Public Library, TX
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -3500,13 +3606,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -3517,13 +3629,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            hawkins.library@yahoo.com
+                            <span />
+                            <span>
+                              hawkins.library@yahoo.com
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -3534,13 +3652,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            hawkins.library@yahoo.com
+                            <span />
+                            <span>
+                              hawkins.library@yahoo.com
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -3735,7 +3859,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Alpine Public Library, TX-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Alpine Public Library, TX-item-0"
                   onClick={[Function]}
@@ -3743,11 +3867,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Alpine Public Library, TX
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -4011,13 +4135,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            williams@amigos.org
+                            <span />
+                            <span>
+                              williams@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -4028,13 +4158,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            don@alpinepubliclibrary.org
+                            <span />
+                            <span>
+                              don@alpinepubliclibrary.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -4045,13 +4181,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            don@alpinepubliclibrary.org
+                            <span />
+                            <span>
+                              don@alpinepubliclibrary.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -4246,7 +4388,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Amarillo Public Library, TX-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Amarillo Public Library, TX-item-0"
                   onClick={[Function]}
@@ -4254,11 +4396,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Amarillo Public Library, TX
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -4522,13 +4664,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -4539,13 +4687,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            reference@amarillolibrary.org
+                            <span />
+                            <span>
+                              reference@amarillolibrary.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -4556,13 +4710,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            reference@amarillolibrary.org
+                            <span />
+                            <span>
+                              reference@amarillolibrary.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -4757,7 +4917,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Amigos Demo Library-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Amigos Demo Library-item-0"
                   onClick={[Function]}
@@ -4765,11 +4925,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Amigos Demo Library
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -5033,13 +5193,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -5050,13 +5216,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -5067,13 +5239,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -5268,7 +5446,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Amigos Test Library Two-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-11hvvs4"
+                  className="chakra-accordion__button css-1lty5mh"
                   disabled={false}
                   id="accordion-button-Amigos Test Library Two-item-0"
                   onClick={[Function]}
@@ -5276,11 +5454,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Amigos Test Library Two
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -5544,13 +5722,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            williams@amigos.org
+                            <span />
+                            <span>
+                              williams@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -5561,13 +5745,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            williams@amigos.org
+                            <span />
+                            <span>
+                              williams@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -5578,13 +5768,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -5779,7 +5975,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Anacortes Public Library-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-gne4sq"
+                  className="chakra-accordion__button css-1c8csqn"
                   disabled={false}
                   id="accordion-button-Anacortes Public Library-item-0"
                   onClick={[Function]}
@@ -5787,11 +5983,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Anacortes Public Library
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -6055,13 +6251,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            library@cityofanacortes.org
+                            <span />
+                            <span>
+                              library@cityofanacortes.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -6072,13 +6274,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            library@cityofanacortes.org
+                            <span />
+                            <span>
+                              library@cityofanacortes.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -6089,13 +6297,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            library@cityofanacortes.org
+                            <span />
+                            <span>
+                              library@cityofanacortes.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -6290,7 +6504,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Andrews County Library, TX-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-ilurlz"
+                  className="chakra-accordion__button css-1c6323r"
                   disabled={false}
                   id="accordion-button-Andrews County Library, TX-item-0"
                   onClick={[Function]}
@@ -6298,11 +6512,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Andrews County Library, TX
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -6566,13 +6780,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            simplye@amigos.org
+                            <span />
+                            <span>
+                              simplye@amigos.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -6583,13 +6803,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            dbonham@andrews.lib.tx.us
+                            <span />
+                            <span>
+                              dbonham@andrews.lib.tx.us
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -6600,13 +6826,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            dbonham@andrews.lib.tx.us
+                            <span />
+                            <span>
+                              dbonham@andrews.lib.tx.us
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -6801,7 +7033,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Anne Arundel Co. Public Library-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-gne4sq"
+                  className="chakra-accordion__button css-1c8csqn"
                   disabled={false}
                   id="accordion-button-Anne Arundel Co. Public Library-item-0"
                   onClick={[Function]}
@@ -6809,11 +7041,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Anne Arundel Co. Public Library
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -7077,13 +7309,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            askus@aacpl.libanswers.com
+                            <span />
+                            <span>
+                              askus@aacpl.libanswers.com
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -7094,13 +7332,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            askus@aacpl.libanswers.com
+                            <span />
+                            <span>
+                              askus@aacpl.libanswers.com
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -7111,13 +7355,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            askus@aacpl.libanswers.com
+                            <span />
+                            <span>
+                              askus@aacpl.libanswers.com
+                            </span>
                           </td>
                         </tr>
                       </tbody>
@@ -7312,7 +7562,7 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                 <button
                   aria-controls="accordion-panel-Ansonia Public Library-item-0"
                   aria-expanded={false}
-                  className="chakra-accordion__button css-gne4sq"
+                  className="chakra-accordion__button css-1c8csqn"
                   disabled={false}
                   id="accordion-button-Ansonia Public Library-item-0"
                   onClick={[Function]}
@@ -7320,11 +7570,11 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                   onKeyDown={[Function]}
                   type="button"
                 >
-                  <div
+                  <span
                     className="css-ox82o1"
                   >
                     Ansonia Public Library
-                  </div>
+                  </span>
                   <svg
                     aria-hidden={true}
                     className="chakra-icon css-1vgifmd"
@@ -7588,13 +7838,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            contact email
+                            <span />
+                            <span>
+                              contact email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            jonathan.green@lyrasis.org
+                            <span />
+                            <span>
+                              jonathan.green@lyrasis.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -7605,13 +7861,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            copyright email
+                            <span />
+                            <span>
+                              copyright email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            jonathan.green@lyrasis.org
+                            <span />
+                            <span>
+                              jonathan.green@lyrasis.org
+                            </span>
                           </td>
                         </tr>
                         <tr
@@ -7622,13 +7884,19 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                             className="css-0"
                             scope="row"
                           >
-                            help email
+                            <span />
+                            <span>
+                              help email
+                            </span>
                           </th>
                           <td
                             className="css-0"
                             role="gridcell"
                           >
-                            jonathan.green@lyrasis.org
+                            <span />
+                            <span>
+                              jonathan.green@lyrasis.org
+                            </span>
                           </td>
                         </tr>
                       </tbody>

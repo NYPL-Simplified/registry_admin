@@ -220,13 +220,19 @@ Array [
           className="css-0"
           scope="row"
         >
-          contact email
+          <span />
+          <span>
+            contact email
+          </span>
         </th>
         <td
           className="css-0"
           role="gridcell"
         >
-          actonlibrary@actonlibrary.org
+          <span />
+          <span>
+            actonlibrary@actonlibrary.org
+          </span>
         </td>
       </tr>
       <tr
@@ -237,13 +243,19 @@ Array [
           className="css-0"
           scope="row"
         >
-          copyright email
+          <span />
+          <span>
+            copyright email
+          </span>
         </th>
         <td
           className="css-0"
           role="gridcell"
         >
-          actonlibrary@actonlibrary.org
+          <span />
+          <span>
+            actonlibrary@actonlibrary.org
+          </span>
         </td>
       </tr>
       <tr
@@ -254,13 +266,19 @@ Array [
           className="css-0"
           scope="row"
         >
-          help email
+          <span />
+          <span>
+            help email
+          </span>
         </th>
         <td
           className="css-0"
           role="gridcell"
         >
-          actonlibrary@actonlibrary.org
+          <span />
+          <span>
+            actonlibrary@actonlibrary.org
+          </span>
         </td>
       </tr>
     </tbody>
