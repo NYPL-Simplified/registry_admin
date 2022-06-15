@@ -4,8 +4,8 @@ import {
   Toggle,
 } from '@nypl/design-system-react-components';
 
-import LibrariesList from './LibrariesList';
 import Header from './Header';
+import LibrariesList from './LibrariesList';
 
 const AdminPage = () => {
   const [isSimpleList, setIsSimpleList] = useState<boolean>(false);
