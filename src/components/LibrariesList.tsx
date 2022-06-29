@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, List } from '@nypl/design-system-react-components';
+import { Accordion, List, Table } from '@nypl/design-system-react-components';
 
 import libraries from '../../data/libraries';
 import LibraryDetails from './LibraryDetails';
@@ -8,36 +8,54 @@ interface LibrariesListProps {
   isSimpleList: boolean;
 }
 
-const LibrariesList = ({ isSimpleList }: LibrariesListProps) => (
-  <List noStyling type='ul'>
-    {libraries.map((library) => {
-      const { name } = library.basic_info;
-      const { registry_stage: registryStage } = library.stages;
-      if (isSimpleList) {
-        return <li key={name}>{name}</li>;
-      } else {
-        return (
-          <li key={name}>
-            <Accordion
-              accordionData={[
-                {
-                  accordionType:
-                    registryStage === 'production'
-                      ? 'default'
-                      : registryStage === 'testing'
-                      ? 'warning'
-                      : 'error',
-                  label: name,
-                  panel: <LibraryDetails library={library} />,
-                },
-              ]}
-              id={name}
-            />
-          </li>
-        );
-      }
-    })}
-  </List>
-);
+const LibrariesList = ({ isSimpleList }: LibrariesListProps) => {
+  const returnListData = () => {
+    const listData: string[][] = [];
+    libraries.map((library) => {
+      const { name, number_of_patrons } = library.basic_info;
+      const libraryNameandCount = [name, number_of_patrons];
+      listData.push(libraryNameandCount);
+    });
+    return listData;
+  };
+
+  return (
+    <List noStyling type='ul'>
+      {isSimpleList ? (
+        <Table
+          columnHeaders={['Library Name', 'Patron Count']}
+          columnHeadersBackgroundColor={
+            'var(--nypl-colors-section-blogs-primary)'
+          }
+          tableData={returnListData()}
+        />
+      ) : (
+        libraries.map((library) => {
+          const { name } = library.basic_info;
+          const { registry_stage: registryStage } = library.stages;
+          return (
+            <li key={name}>
+              <Accordion
+                accordionData={[
+                  {
+                    accordionType:
+                      registryStage === 'production'
+                        ? 'default'
+                        : registryStage === 'testing'
+                        ? 'warning'
+                        : 'error',
+                    label: name,
+                    panel: <LibraryDetails library={library} />,
+                  },
+                ]}
+                id={name}
+              />
+            </li>
+          );
+        })
+      )}
+    </List>
+  );
+};
 
 export default LibrariesList;

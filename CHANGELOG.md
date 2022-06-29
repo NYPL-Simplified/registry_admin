@@ -4,6 +4,7 @@
 
 - SIMPLY-4065: Convert application to a new parcel build
 - SIMPLY-4066: Install Reservoir (NYPL Design System) and use components to build UI.
+- SIMPLY-4125: Add patron counts to simple list view.
 
 ## 1.4.15
 
