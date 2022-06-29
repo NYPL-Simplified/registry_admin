@@ -5,6 +5,7 @@
 - SIMPLY-4065: Convert application to a new parcel build
 - SIMPLY-4066: Install Reservoir (NYPL Design System) and use components to build UI.
 - SIMPLY-4125: Add patron counts to simple list view.
+- SIMPLY-4126: Fixes bug where "Registry Stage" dropdown was showing "testing" when it should have shown "canceled."
 
 ## 1.4.15
 
