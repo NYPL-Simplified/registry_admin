@@ -28,7 +28,7 @@ const StageSelect = ({
     >
       <option value='testing'>Testing</option>
       <option value='production'>Production</option>
-      <option value='cancelled'>Cancelled</option>
+      <option value='canceled'>Canceled</option>
     </Select>
   );
 };

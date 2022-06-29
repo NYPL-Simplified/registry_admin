@@ -62,9 +62,9 @@ Array [
                     Production
                   </option>
                   <option
-                    value="cancelled"
+                    value="canceled"
                   >
-                    Cancelled
+                    Canceled
                   </option>
                 </select>
                 <div
@@ -147,9 +147,9 @@ Array [
                     Production
                   </option>
                   <option
-                    value="cancelled"
+                    value="canceled"
                   >
-                    Cancelled
+                    Canceled
                   </option>
                 </select>
                 <div
