@@ -1,4 +1,5 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { defaults } = require('jest-config');
 
 module.exports = {
@@ -8,4 +9,5 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'esbuild-jest',
   },
+  setupFilesAfterEnv: ['<rootDir>/testHelper/browser.ts'],
 };

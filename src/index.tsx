@@ -1,6 +1,13 @@
+import './styles.scss';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { App } from './components/App';
+import { DSProvider } from '@nypl/design-system-react-components';
 
-const app = document.getElementById('app');
-ReactDOM.render(<App />, app);
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(document.getElementById('app')!);
+root.render(
+  <DSProvider>
+    <App />
+  </DSProvider>
+);
