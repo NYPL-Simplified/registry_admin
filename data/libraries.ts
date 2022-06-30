@@ -4,6 +4,7 @@ export interface LibrariesData {
   uuid: string;
   basic_info: {
     name: string;
+    description: string;
     short_name: string;
     number_of_patrons: string;
   };
@@ -29,6 +30,7 @@ const libraries: LibrariesData[] = [
     uuid: '1',
     basic_info: {
       name: 'Acton Public Library',
+      description: 'Serving Old Saybrook, CT',
       short_name: 'CTACTN',
       number_of_patrons: '9',
     },
@@ -53,6 +55,7 @@ const libraries: LibrariesData[] = [
     uuid: '2',
     basic_info: {
       name: 'Ak-Chin Indian Community Library, AZ',
+      description: 'Serving the needs of library users in Arizona',
       short_name: 'LVYZVC',
       number_of_patrons: '5',
     },
@@ -78,6 +81,7 @@ const libraries: LibrariesData[] = [
     uuid: '3',
     basic_info: {
       name: 'Alameda County Library',
+      description: 'Infinite possibilities',
       short_name: 'CALMDA',
       number_of_patrons: '1839',
     },
@@ -102,6 +106,8 @@ const libraries: LibrariesData[] = [
     uuid: '4',
     basic_info: {
       name: 'Alicia Salinas City of Alice Public Library, TX',
+      description:
+        'Serving the needs of library users in Jim Wells County, Texas',
       short_name: 'JEVRCG',
       number_of_patrons: '2',
     },
@@ -127,6 +133,7 @@ const libraries: LibrariesData[] = [
     uuid: '5',
     basic_info: {
       name: 'Allan Shivers Library & Museum, TX',
+      description: 'Serving Woodville, TX',
       short_name: 'JEVRCG',
       number_of_patrons: '0',
     },
@@ -151,6 +158,7 @@ const libraries: LibrariesData[] = [
     uuid: '6',
     basic_info: {
       name: 'Allegany County Library System',
+      description: 'Serving patrons of Maryland',
       short_name: 'JGSVTQ',
       number_of_patrons: '0',
     },
@@ -175,6 +183,7 @@ const libraries: LibrariesData[] = [
     uuid: '7',
     basic_info: {
       name: 'Allen Memorial Public Library, TX',
+      description: 'Open a book, open a mind. Knowledge is power.',
       short_name: 'UOVOCB',
       number_of_patrons: '9',
     },
@@ -199,6 +208,8 @@ const libraries: LibrariesData[] = [
     uuid: '8',
     basic_info: {
       name: 'Alpine Public Library, TX',
+      description:
+        'Building community, encouraging literacy, and promoting lifelong learning',
       short_name: 'NQSJGC',
       number_of_patrons: '59',
     },
@@ -223,6 +234,7 @@ const libraries: LibrariesData[] = [
     uuid: '9',
     basic_info: {
       name: 'Amarillo Public Library, TX',
+      description: 'Serving the patrons of Amarillo, TX',
       short_name: 'DTENGN',
       number_of_patrons: '78',
     },
@@ -247,6 +259,7 @@ const libraries: LibrariesData[] = [
     uuid: '10',
     basic_info: {
       name: 'Amigos Demo Library',
+      description: 'Unite Libraries for Action and Strength',
       short_name: 'WBDOBX',
       number_of_patrons: '22',
     },
@@ -271,6 +284,7 @@ const libraries: LibrariesData[] = [
     uuid: '11',
     basic_info: {
       name: 'Amigos Test Library Two',
+      description: 'Unite Libraries for Action and Strength',
       short_name: 'ZKVRQT',
       number_of_patrons: '0',
     },
@@ -295,6 +309,7 @@ const libraries: LibrariesData[] = [
     uuid: '12',
     basic_info: {
       name: 'Anacortes Public Library',
+      description: 'Serving Anacortes, WA',
       short_name: 'DCJROE',
       number_of_patrons: '0',
     },
@@ -319,6 +334,7 @@ const libraries: LibrariesData[] = [
     uuid: '13',
     basic_info: {
       name: 'Andrews County Library, TX',
+      description: 'Explore the world of books.',
       short_name: 'IDKEWG',
       number_of_patrons: '1',
     },
@@ -343,6 +359,7 @@ const libraries: LibrariesData[] = [
     uuid: '14',
     basic_info: {
       name: 'Anne Arundel Co. Public Library',
+      description: 'Educate. Enrich. Inspire.',
       short_name: 'MDANNE',
       number_of_patrons: '0',
     },
@@ -367,6 +384,7 @@ const libraries: LibrariesData[] = [
     uuid: '15',
     basic_info: {
       name: 'Ansonia Public Library',
+      description: 'Serving Ansonia, CT',
       short_name: 'CTANSO',
       number_of_patrons: '0',
     },
