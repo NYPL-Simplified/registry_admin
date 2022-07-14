@@ -20,7 +20,7 @@ const LibrariesList = ({ isSimpleList }: LibrariesListProps) => {
   };
 
   return (
-    <List noStyling type='ul'>
+    <>
       {isSimpleList ? (
         <Table
           columnHeaders={['Library Name', 'Patron Count']}
@@ -30,31 +30,33 @@ const LibrariesList = ({ isSimpleList }: LibrariesListProps) => {
           tableData={returnListData()}
         />
       ) : (
-        libraries.map((library) => {
-          const { name } = library.basic_info;
-          const { registry_stage: registryStage } = library.stages;
-          return (
-            <li key={name}>
-              <Accordion
-                accordionData={[
-                  {
-                    accordionType:
-                      registryStage === 'production'
-                        ? 'default'
-                        : registryStage === 'testing'
-                        ? 'warning'
-                        : 'error',
-                    label: name,
-                    panel: <LibraryDetails library={library} />,
-                  },
-                ]}
-                id={name}
-              />
-            </li>
-          );
-        })
+        <List noStyling type='ul'>
+          {libraries.map((library) => {
+            const { name } = library.basic_info;
+            const { registry_stage: registryStage } = library.stages;
+            return (
+              <li key={name}>
+                <Accordion
+                  accordionData={[
+                    {
+                      accordionType:
+                        registryStage === 'production'
+                          ? 'default'
+                          : registryStage === 'testing'
+                          ? 'warning'
+                          : 'error',
+                      label: name,
+                      panel: <LibraryDetails library={library} />,
+                    },
+                  ]}
+                  id={name}
+                />
+              </li>
+            );
+          })}
+        </List>
       )}
-    </List>
+    </>
   );
 };
 

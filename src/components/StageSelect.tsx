@@ -4,14 +4,14 @@ import { Select } from '@nypl/design-system-react-components';
 import { LibraryStage } from './LibraryDetails';
 
 interface StageSelectProps {
-  handleChange: (stage: LibraryStage) => void;
+  setLibraryStage: React.Dispatch<React.SetStateAction<LibraryStage>>;
   stage: 'libraryStage' | 'registryStage';
   uuid: string;
   value: LibraryStage;
 }
 
 const StageSelect = ({
-  handleChange,
+  setLibraryStage,
   stage,
   uuid,
   value,
@@ -22,8 +22,8 @@ const StageSelect = ({
       labelText={stage === 'libraryStage' ? 'Library Stage' : 'Registry Stage'}
       name={stage}
       value={value}
-      onChange={(e) =>
-        handleChange((e.target as HTMLTextAreaElement).value as LibraryStage)
+      onChange={(e: React.FormEvent<Element>) =>
+        setLibraryStage((e.target as HTMLInputElement).value as LibraryStage)
       }
     >
       <option value='testing'>Testing</option>

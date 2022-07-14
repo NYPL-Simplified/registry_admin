@@ -64,7 +64,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
               uuid={uuid}
               stage='libraryStage'
               value={libraryStage}
-              handleChange={setLibraryStage}
+              setLibraryStage={setLibraryStage}
             />
           </FormField>
           <FormField>
@@ -72,7 +72,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
               uuid={uuid}
               stage='registryStage'
               value={registryStage}
-              handleChange={setRegistryStage}
+              setLibraryStage={setRegistryStage}
             />
           </FormField>
         </FormRow>

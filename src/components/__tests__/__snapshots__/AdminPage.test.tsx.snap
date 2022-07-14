@@ -636,6 +636,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Acton Public Library
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving Old Saybrook, CT
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -1163,6 +1169,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                 </dt>
                                 <dd>
                                   Ak-Chin Indian Community Library, AZ
+                                </dd>
+                                <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving the needs of library users in Arizona
                                 </dd>
                                 <dt>
                                   short_name
@@ -1694,6 +1706,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Alameda County Library
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Infinite possibilities
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -2221,6 +2239,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                 </dt>
                                 <dd>
                                   Alicia Salinas City of Alice Public Library, TX
+                                </dd>
+                                <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving the needs of library users in Jim Wells County, Texas
                                 </dd>
                                 <dt>
                                   short_name
@@ -2752,6 +2776,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Allan Shivers Library & Museum, TX
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving Woodville, TX
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -3279,6 +3309,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                 </dt>
                                 <dd>
                                   Allegany County Library System
+                                </dd>
+                                <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving patrons of Maryland
                                 </dd>
                                 <dt>
                                   short_name
@@ -3810,6 +3846,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Allen Memorial Public Library, TX
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Open a book, open a mind. Knowledge is power.
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -4337,6 +4379,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                 </dt>
                                 <dd>
                                   Alpine Public Library, TX
+                                </dd>
+                                <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Building community, encouraging literacy, and promoting lifelong learning
                                 </dd>
                                 <dt>
                                   short_name
@@ -4868,6 +4916,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Amarillo Public Library, TX
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving the patrons of Amarillo, TX
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -5395,6 +5449,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                 </dt>
                                 <dd>
                                   Amigos Demo Library
+                                </dd>
+                                <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Unite Libraries for Action and Strength
                                 </dd>
                                 <dt>
                                   short_name
@@ -5926,6 +5986,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Amigos Test Library Two
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Unite Libraries for Action and Strength
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -6453,6 +6519,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                 </dt>
                                 <dd>
                                   Anacortes Public Library
+                                </dd>
+                                <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving Anacortes, WA
                                 </dd>
                                 <dt>
                                   short_name
@@ -6984,6 +7056,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Andrews County Library, TX
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Explore the world of books.
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -7513,6 +7591,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                   Anne Arundel Co. Public Library
                                 </dd>
                                 <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Educate. Enrich. Inspire.
+                                </dd>
+                                <dt>
                                   short_name
                                 </dt>
                                 <dd>
@@ -8040,6 +8124,12 @@ exports[`AdminPage Snapshot renders the UI snapshot correctly 1`] = `
                                 </dt>
                                 <dd>
                                   Ansonia Public Library
+                                </dd>
+                                <dt>
+                                  description
+                                </dt>
+                                <dd>
+                                  Serving Ansonia, CT
                                 </dd>
                                 <dt>
                                   short_name
