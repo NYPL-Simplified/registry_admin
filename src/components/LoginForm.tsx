@@ -40,7 +40,7 @@ const LoginForm = () => {
     body.append('username', username);
     body.append('password', password);
 
-    fetch('http://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt', {
+    fetch('https://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt', {
       method: 'POST',
       body,
     })

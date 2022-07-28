@@ -72,7 +72,7 @@ describe('LoginForm, succcessful API call', () => {
     fireEvent.click(submitButton);
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt',
+      'https://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt',
       { method: 'POST', body: mockFormData }
     );
 
@@ -103,7 +103,7 @@ describe('LoginForm, unsuccessful API call', () => {
     fireEvent.click(submitButton);
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt',
+      'https://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt',
       { method: 'POST', body: mockFormData }
     );
 
