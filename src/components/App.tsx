@@ -1,6 +1,15 @@
 import React from 'react';
-import AdminPage from './AdminPage';
+import { DSProvider } from '@nypl/design-system-react-components';
+
+import RegistryAdmin from './RegistryAdmin';
+import { TokenProvider } from '../context/tokenContext';
 
 export function App() {
-  return <AdminPage />;
+  return (
+    <DSProvider>
+      <TokenProvider>
+        <RegistryAdmin />
+      </TokenProvider>
+    </DSProvider>
+  );
 }
