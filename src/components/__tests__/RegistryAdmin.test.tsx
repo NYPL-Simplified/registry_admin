@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Cookies from 'js-cookie';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
 import RegistryAdmin from '../RegistryAdmin';

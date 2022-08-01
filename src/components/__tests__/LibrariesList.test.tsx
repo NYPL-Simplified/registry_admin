@@ -64,7 +64,7 @@ describe('LibrariesList, default view', () => {
   });
 });
 
-describe.only('LibrariesList, simple view', () => {
+describe('LibrariesList, simple view', () => {
   beforeEach(() => {
     render(<LibrariesList isSimpleList />);
   });

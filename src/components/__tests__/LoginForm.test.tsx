@@ -54,12 +54,13 @@ describe('LoginForm, succcessful API call', () => {
   it('makes a call to the appropriate endpoint when a user submits', async () => {
     (global as any).fetch = jest.fn().mockReturnValueOnce(
       Promise.resolve({
-        status: 200,
         json: () =>
           Promise.resolve({
             access_token: 'mockAccessToken',
             refresh_token: 'mockRefreshToken',
           }),
+        ok: true,
+        status: 200,
       })
     );
     renderLoginFormWithContext('');
@@ -88,6 +89,8 @@ describe('LoginForm, succcessful API call', () => {
 
 describe('LoginForm, unsuccessful API call', () => {
   it('shows the user an error if the they cannot be authenticated', async () => {
+    const log = jest.spyOn(console, 'log');
+
     (global as any).fetch = jest.fn().mockReturnValueOnce(
       Promise.resolve({
         status: 401,
@@ -107,11 +110,14 @@ describe('LoginForm, unsuccessful API call', () => {
       { method: 'POST', body: mockFormData }
     );
 
-    await waitFor(() =>
+    await waitFor(() => {
+      expect(log).toHaveBeenCalledWith(
+        'There was a problem authenticating this user in LoginForm.tsx.'
+      );
       expect(
         screen.getByText(/your username or password is incorrect/i)
-      ).toBeInTheDocument()
-    );
+      ).toBeInTheDocument();
+    });
 
     jest.clearAllMocks();
   });

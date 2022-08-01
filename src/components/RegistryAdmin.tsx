@@ -40,13 +40,10 @@ const RegistryAdmin = () => {
 
     // If a refreshToken exists, send it to the refresh endpoint.
     if (refreshToken) {
-      fetch(
-        'https://qa-libraryregistry.librarysimplified.org/admin/refresh_token',
-        {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${refreshToken}` },
-        }
-      )
+      fetch(process.env.QA_REFRESH as RequestInfo | URL, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${refreshToken}` },
+      })
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -64,7 +61,7 @@ const RegistryAdmin = () => {
           setAccessToken(data.access_token);
           setIsLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.message));
     } else {
       // If there is no refreshToken, setIsLoading to false.
       // This will render the LoginForm.

@@ -40,7 +40,7 @@ const LoginForm = () => {
     body.append('username', username);
     body.append('password', password);
 
-    fetch('https://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt', {
+    fetch(process.env.QA_LOGIN as RequestInfo | URL, {
       method: 'POST',
       body,
     })
@@ -51,14 +51,19 @@ const LoginForm = () => {
         if (response.status >= 400 && response.status < 502) {
           setShowLoginError(true);
         }
-        throw new Error('There was a problem authenticating this user.');
+        throw new Error(
+          'There was a problem authenticating this user in LoginForm.tsx.'
+        );
       })
       .then((data) => {
         setAccessToken(data.access_token);
-        Cookies.set('refreshToken', data.refresh_token, { secure: true });
+        Cookies.set('refreshToken', data.refresh_token, {
+          sameSite: 'lax',
+          secure: true,
+        });
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   };
 
