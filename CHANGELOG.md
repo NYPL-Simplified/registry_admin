@@ -7,6 +7,7 @@
 - SIMPLY-4126: Fix bug where "Registry Stage" dropdown was showing "testing" when it should have shown "canceled."
 - SIMPLY-4125: Add patron counts to simple list view.
 - SIMPLY-4172: Add library description to library details.
+- SIMPLY-4069: Create functional login page.
 
 ## 1.4.15
 

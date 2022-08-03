@@ -14,17 +14,21 @@ describe('LibraryRegistryPage', () => {
     const selects = screen.getAllByRole('combobox');
     const libraryStageSelect = selects[0];
     const registryStageSelect = selects[1];
-    const emailTable = screen.getByRole('table');
-    const emailsForValidation = within(emailTable).getAllByRole('row');
-    const tabButtons = screen.getAllByRole('tab');
-    let tabPanel = screen.getByRole('tabpanel');
 
     expect(selects.length).toEqual(2);
     expect(libraryStageSelect).toHaveValue('production');
     expect(registryStageSelect).toHaveValue('production');
+
+    const emailTable = screen.getByRole('table');
+    const emailsForValidation = within(emailTable).getAllByRole('row');
+
     expect(emailsForValidation[1]).toHaveTextContent(/contact email/i);
     expect(emailsForValidation[2]).toHaveTextContent(/copyright email/i);
     expect(emailsForValidation[3]).toHaveTextContent(/help email/i);
+
+    const tabButtons = screen.getAllByRole('tab');
+    let tabPanel = screen.getByRole('tabpanel');
+
     expect(tabButtons.length).toEqual(3);
     expect(tabPanel).toBeInTheDocument();
     expect(tabPanel).toHaveTextContent(/number_of_patrons/i);

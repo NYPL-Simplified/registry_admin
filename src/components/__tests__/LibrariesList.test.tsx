@@ -2,20 +2,14 @@ import * as React from 'react';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import AdminPage from '../AdminPage';
+import LibrariesList from '../LibrariesList';
 
-describe('LibraryRegistryPage', () => {
+describe('LibrariesList, default view', () => {
   beforeEach(() => {
-    render(<AdminPage />);
+    render(<LibrariesList isSimpleList={false} />);
   });
 
-  it('renders the header', () => {
-    const header = screen.getByRole('heading', { level: 1 });
-
-    expect(header).toHaveTextContent(/library registry interface/i);
-  });
-
-  it('renders all of the accordions correctly', () => {
+  it('renders a list of accordions', () => {
     const accordions = screen.getAllByRole('button');
     const plusIcons = screen.getAllByTitle('plus icon');
 
@@ -70,9 +64,40 @@ describe('LibraryRegistryPage', () => {
   });
 });
 
-describe('AdminPage Snapshot', () => {
+describe('LibrariesList, simple view', () => {
+  beforeEach(() => {
+    render(<LibrariesList isSimpleList />);
+  });
+
+  it('renders a table of libraries', () => {
+    const tableSections = screen.getAllByRole('rowgroup');
+
+    // tableSections[0] is the thead, tableSections[1] is the tbody
+    expect(tableSections.length).toEqual(2);
+
+    const tableHeader = tableSections[0];
+    const columnHeaders = within(tableHeader).getAllByRole('columnheader');
+
+    expect(columnHeaders[0]).toHaveTextContent(/library name/i);
+    expect(columnHeaders[1]).toHaveTextContent(/patron count/i);
+
+    const tableBodyRows = within(tableSections[1]).getAllByRole('row');
+
+    expect(tableBodyRows.length).toEqual(15);
+  });
+});
+
+describe('LibrariesList Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
-    const page = renderer.create(<AdminPage />).toJSON();
-    expect(page).toMatchSnapshot();
+    const defaultList = renderer
+      .create(<LibrariesList isSimpleList={false} />)
+      .toJSON();
+
+    const simpleList = renderer
+      .create(<LibrariesList isSimpleList={true} />)
+      .toJSON();
+
+    expect(defaultList).toMatchSnapshot();
+    expect(simpleList).toMatchSnapshot();
   });
 });

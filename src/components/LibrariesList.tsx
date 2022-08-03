@@ -9,6 +9,7 @@ interface LibrariesListProps {
 }
 
 const LibrariesList = ({ isSimpleList }: LibrariesListProps) => {
+  // Currently renders a list of mock library data.
   const returnListData = () => {
     const listData: string[][] = [];
     libraries.map((library) => {
@@ -24,9 +25,7 @@ const LibrariesList = ({ isSimpleList }: LibrariesListProps) => {
       {isSimpleList ? (
         <Table
           columnHeaders={['Library Name', 'Patron Count']}
-          columnHeadersBackgroundColor={
-            'var(--nypl-colors-section-blogs-primary)'
-          }
+          columnHeadersBackgroundColor='section.blogs.primary'
           tableData={returnListData()}
         />
       ) : (
