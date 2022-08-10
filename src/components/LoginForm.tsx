@@ -40,7 +40,7 @@ const LoginForm = () => {
     body.append('username', username);
     body.append('password', password);
 
-    fetch(process.env.QA_LOGIN as RequestInfo | URL, {
+    fetch(process.env.LOGIN as RequestInfo | URL, {
       method: 'POST',
       body,
     })
@@ -62,9 +62,7 @@ const LoginForm = () => {
           secure: true,
         });
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => console.log(err.message));
   };
 
   return (

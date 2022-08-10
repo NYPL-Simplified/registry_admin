@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Cookies from 'js-cookie';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
+import libraries from '../../../data/libraries';
 import RegistryAdmin from '../RegistryAdmin';
 import { TokenContext } from '../../context/tokenContext';
 
@@ -12,7 +13,7 @@ const renderRegistryAdminWithContext = (
   accessToken: string,
   setAccessToken = setAccessTokenMock
 ) => {
-  return render(
+  render(
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       <RegistryAdmin />
     </TokenContext.Provider>
@@ -65,8 +66,16 @@ describe('RegistryAdmin, with no access token', () => {
 });
 
 describe('RegistryAdmin, with access token', () => {
-  beforeEach(() => {
-    renderRegistryAdminWithContext('mockAccessToken');
+  beforeEach(async () => {
+    (global as any).fetch = jest.fn().mockReturnValueOnce(
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve({ libraries: libraries }),
+      })
+    );
+
+    await act(() => renderRegistryAdminWithContext('mockAccessToken'));
   });
 
   it('renders the header', () => {
@@ -88,26 +97,31 @@ describe('RegistryAdmin, with access token', () => {
 
     expect(libraryAccordions.length).toEqual(15);
   });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 });
 
 describe('RegistryAdmin, with no access token, but with refresh token', () => {
-  it('tries to refresh the accessToken', () => {
+  it('tries to refresh the accessToken', async () => {
     const realGet = Cookies.get;
 
     Cookies.get = jest.fn().mockImplementation(() => 'mockRefreshToken');
     (global as any).fetch = jest.fn().mockReturnValueOnce(
       Promise.resolve({
+        ok: true,
         status: 200,
         json: () => Promise.resolve({ access_token: 'mockAccessToken' }),
       })
     );
 
-    renderRegistryAdminWithContext('');
+    await act(() => renderRegistryAdminWithContext(''));
 
-    expect(fetch).toHaveBeenCalledWith(
-      'https://qa-libraryregistry.librarysimplified.org/admin/refresh_token',
-      { headers: { Authorization: 'Bearer mockRefreshToken' }, method: 'POST' }
-    );
+    expect(fetch).toHaveBeenCalledWith(process.env.REFRESH, {
+      headers: { Authorization: 'Bearer mockRefreshToken' },
+      method: 'POST',
+    });
 
     Cookies.get = realGet;
     jest.clearAllMocks();
@@ -115,13 +129,28 @@ describe('RegistryAdmin, with no access token, but with refresh token', () => {
 });
 
 describe('RegistryAdmin Snapshot', () => {
-  it('renders the UI snapshot correctly', () => {
-    const loginPage = renderer.create(renderRegistryForSnapshot('')).toJSON();
-    const adminPage = renderer
-      .create(renderRegistryForSnapshot('mockAccessToken'))
-      .toJSON();
+  it('renders the UI snapshot correctly', async () => {
+    (global as any).fetch = jest.fn().mockReturnValueOnce(
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve({ libraries: libraries }),
+      })
+    );
+    let loginPage;
+    let adminPage;
+    await act(() => {
+      loginPage = renderer.create(renderRegistryForSnapshot('')).toJSON();
+      expect(loginPage).toMatchSnapshot();
+    });
 
-    expect(loginPage).toMatchSnapshot();
-    expect(adminPage).toMatchSnapshot();
+    await act(() => {
+      adminPage = renderer
+        .create(renderRegistryForSnapshot('mockAccessToken'))
+        .toJSON();
+      expect(adminPage).toMatchSnapshot();
+    });
+
+    jest.clearAllMocks();
   });
 });

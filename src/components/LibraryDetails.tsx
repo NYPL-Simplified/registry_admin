@@ -4,20 +4,16 @@ import {
   Form,
   FormField,
   FormRow,
-  Tab,
   Table,
-  TabList,
-  TabPanel,
-  TabPanels,
   Tabs,
 } from '@nypl/design-system-react-components';
 
-import { LibrariesData } from '../../data/libraries';
 import LibraryDetailsGrid from './LibraryDetailsGrid';
 import StageSelect from './StageSelect';
+import { LibraryData } from './RegistryAdmin';
 
 interface LibraryDetailsProps {
-  library: LibrariesData;
+  library: LibraryData;
 }
 
 export type LibraryStage = 'testing' | 'production' | 'canceled' | '';
@@ -30,16 +26,20 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     areas,
     stages,
   } = library;
-  const [libraryStage, setLibraryStage] = useState<LibraryStage>('');
-  const [registryStage, setRegistryStage] = useState<LibraryStage>('');
+  const [libraryStage, setLibraryStage] = useState<LibraryStage>(
+    stages.library_stage
+  );
+  const [registryStage, setRegistryStage] = useState<LibraryStage>(
+    stages.registry_stage
+  );
 
-  useEffect(() => {
-    setLibraryStage(stages.library_stage);
-  }, [stages.library_stage]);
+  // useEffect(() => {
+  //   setLibraryStage(stages.library_stage);
+  // }, [stages.library_stage]);
 
-  useEffect(() => {
-    setRegistryStage(stages.registry_stage);
-  }, [stages.registry_stage]);
+  // useEffect(() => {
+  //   setRegistryStage(stages.registry_stage);
+  // }, [stages.registry_stage]);
 
   const getEmailData = () => {
     const emailData = [];
@@ -47,13 +47,29 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
       if (key.split('_')[1] === 'email') {
         emailData.push([
           key.split('_').join(' '),
-          urlsAndContact[key as keyof typeof urlsAndContact],
+          urlsAndContact[key as keyof typeof urlsAndContact] ||
+            'None available',
         ]);
       }
     }
 
     return emailData;
   };
+
+  const libraryTabsData = [
+    {
+      label: 'Basic Information',
+      content: <LibraryDetailsGrid content={basicInfo} />,
+    },
+    {
+      label: 'Contact & URLs',
+      content: <LibraryDetailsGrid content={urlsAndContact} />,
+    },
+    {
+      label: 'Areas',
+      content: <LibraryDetailsGrid content={areas} />,
+    },
+  ];
 
   return (
     <>
@@ -83,24 +99,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
         useRowHeaders
       />
       <Box paddingTop='m'>
-        <Tabs id={`tabs-${uuid}`}>
-          <TabList>
-            <Tab>Basic Information</Tab>
-            <Tab>Contact & URLs</Tab>
-            <Tab>Areas</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <LibraryDetailsGrid content={basicInfo} />
-            </TabPanel>
-            <TabPanel>
-              <LibraryDetailsGrid content={urlsAndContact} />
-            </TabPanel>
-            <TabPanel>
-              <LibraryDetailsGrid content={areas} />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <Tabs id={`tabs-${uuid}`} tabsData={libraryTabsData} />
       </Box>
     </>
   );

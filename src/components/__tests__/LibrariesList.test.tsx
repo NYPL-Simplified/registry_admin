@@ -2,11 +2,12 @@ import * as React from 'react';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
+import libraries from '../../../data/libraries';
 import LibrariesList from '../LibrariesList';
 
 describe('LibrariesList, default view', () => {
   beforeEach(() => {
-    render(<LibrariesList isSimpleList={false} />);
+    render(<LibrariesList isSimpleList={false} libraries={libraries} />);
   });
 
   it('renders a list of accordions', () => {
@@ -66,7 +67,7 @@ describe('LibrariesList, default view', () => {
 
 describe('LibrariesList, simple view', () => {
   beforeEach(() => {
-    render(<LibrariesList isSimpleList />);
+    render(<LibrariesList isSimpleList libraries={libraries} />);
   });
 
   it('renders a table of libraries', () => {
@@ -90,11 +91,11 @@ describe('LibrariesList, simple view', () => {
 describe('LibrariesList Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
     const defaultList = renderer
-      .create(<LibrariesList isSimpleList={false} />)
+      .create(<LibrariesList isSimpleList={false} libraries={libraries} />)
       .toJSON();
 
     const simpleList = renderer
-      .create(<LibrariesList isSimpleList={true} />)
+      .create(<LibrariesList isSimpleList={true} libraries={libraries} />)
       .toJSON();
 
     expect(defaultList).toMatchSnapshot();
