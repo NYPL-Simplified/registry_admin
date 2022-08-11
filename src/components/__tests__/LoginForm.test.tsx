@@ -72,18 +72,16 @@ describe('LoginForm, succcessful API call', () => {
     fireEvent.change(passwordInput, { target: { value: 'mockPassword' } });
     fireEvent.click(submitButton);
 
-    expect(fetch).toHaveBeenCalledWith(
-      'https://qa-libraryregistry.librarysimplified.org/admin/log_in/jwt',
-      { method: 'POST', body: mockFormData }
-    );
+    expect(fetch).toHaveBeenCalledWith(process.env.LOGIN, {
+      method: 'POST',
+      body: mockFormData,
+    });
 
     await waitFor(() =>
       expect(
         screen.queryByText(/your username or password is incorrect/i)
       ).not.toBeInTheDocument()
     );
-
-    jest.clearAllMocks();
   });
 });
 
@@ -118,8 +116,6 @@ describe('LoginForm, unsuccessful API call', () => {
         screen.getByText(/your username or password is incorrect/i)
       ).toBeInTheDocument();
     });
-
-    jest.clearAllMocks();
   });
 });
 

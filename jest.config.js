@@ -10,4 +10,5 @@ module.exports = {
     '^.+\\.tsx?$': 'esbuild-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/testHelper/browser.ts'],
+  clearMocks: true,
 };

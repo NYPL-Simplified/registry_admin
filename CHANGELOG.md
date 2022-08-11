@@ -8,6 +8,7 @@
 - SIMPLY-4125: Add patron counts to simple list view.
 - SIMPLY-4172: Add library description to library details.
 - SIMPLY-4069: Create functional login page.
+- SIMPLY-4067: Fetch real library data.
 
 ## 1.4.15
 

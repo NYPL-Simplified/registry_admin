@@ -1,409 +1,529 @@
 /* eslint-disable camelcase */
 
-export interface LibrariesData {
-  uuid: string;
-  basic_info: {
-    name: string;
-    description: string;
-    short_name: string;
-    number_of_patrons: string;
-  };
-  urls_and_contact: {
-    authentication_url: string;
-    contact_email: string;
-    copyright_email: string;
-    help_email: string;
-    opds_url: string;
-    web_url: string;
-  };
-  areas: {
-    focus: string[];
-  };
-  stages: {
-    library_stage: 'testing' | 'production' | 'canceled';
-    registry_stage: 'testing' | 'production' | 'canceled';
-  };
-}
+import { LibraryData } from '../src/components/RegistryAdmin';
 
-const libraries: LibrariesData[] = [
+const libraries: LibraryData[] = [
   {
-    uuid: '1',
+    areas: {
+      focus: ['06475'],
+      service: [],
+    },
     basic_info: {
-      name: 'Acton Public Library',
       description: 'Serving Old Saybrook, CT',
-      short_name: 'CTACTN',
+      internal_urn: '',
+      name: 'Acton Public Library',
       number_of_patrons: '9',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'CTACTN',
+      timestamp: '',
+    },
+    stages: {
+      library_stage: 'production',
+      registry_stage: 'production',
     },
     urls_and_contact: {
       authentication_url:
         'https://lion.lyrasistechnology.org/acton/authentication_document',
       contact_email: 'actonlibrary@actonlibrary.org',
+      contact_validated: '',
       copyright_email: 'actonlibrary@actonlibrary.org',
+      copyright_validated: '',
       help_email: 'actonlibrary@actonlibrary.org',
+      help_validated: '',
       opds_url: 'https://lion.lyrasistechnology.org/acton/',
       web_url: 'http://www.actonlibrary.org/',
     },
+    uuid: '1',
+  },
+  {
     areas: {
-      focus: ['06475'],
+      focus: ['Maricopa, AZ'],
+      service: [],
+    },
+    basic_info: {
+      description: 'Serving the needs of library users in Arizona',
+      internal_urn: '',
+      name: 'Ak-Chin Indian Community Library, AZ',
+      number_of_patrons: '5',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'LVYZVC',
+      timestamp: '',
     },
     stages: {
       library_stage: 'production',
       registry_stage: 'production',
-    },
-  },
-  {
-    uuid: '2',
-    basic_info: {
-      name: 'Ak-Chin Indian Community Library, AZ',
-      description: 'Serving the needs of library users in Arizona',
-      short_name: 'LVYZVC',
-      number_of_patrons: '5',
     },
     urls_and_contact: {
       authentication_url:
         'https://simplye.amigos.org/azakchinindiancommunity/authentication_document',
       contact_email: 'simplye@amigos.org',
+      contact_validated: '',
       copyright_email: 'library@ak-chin.nsn.us',
+      copyright_validated: '',
       help_email: 'library@ak-chin.nsn.us',
+      help_validated: '',
       opds_url: 'https://simplye.amigos.org/azakchinindiancommunity/',
       web_url:
         'https://ak-chin.nsn.us/index.php/departments/membership-services',
     },
+    uuid: '2',
+  },
+  {
     areas: {
-      focus: ['Maricopa, AZ'],
+      focus: [],
+      service: [],
+    },
+    basic_info: {
+      description: 'Infinite possibilities',
+      internal_urn: '',
+      name: 'Alameda County Library',
+      number_of_patrons: '1839',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'CALMDA',
+      timestamp: '',
     },
     stages: {
       library_stage: 'production',
       registry_stage: 'production',
-    },
-  },
-  {
-    uuid: '3',
-    basic_info: {
-      name: 'Alameda County Library',
-      description: 'Infinite possibilities',
-      short_name: 'CALMDA',
-      number_of_patrons: '1839',
     },
     urls_and_contact: {
       authentication_url:
         'http://acl.simplye-ca.org/CALMDA/authentication_document',
       contact_email: 'pmackinnon@califa.org',
+      contact_validated: '',
       copyright_email: 'simplye@aclibrary.org',
+      copyright_validated: '',
       help_email: 'simplye@aclibrary.org',
+      help_validated: '',
       opds_url: 'http://acl.simplye-ca.org/CALMDA/',
       web_url: 'http://aclibrary.org/',
     },
+    uuid: '3',
+  },
+  {
     areas: {
-      focus: [],
+      focus: ['Jim Wells County, TX', 'Alice, TX'],
+      service: [],
+    },
+
+    basic_info: {
+      description:
+        'Serving the needs of library users in Jim Wells County, Texas',
+      internal_urn: '',
+      name: 'Alicia Salinas City of Alice Public Library, TX',
+      number_of_patrons: '2',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'JEVRCG',
+      timestamp: '',
     },
     stages: {
       library_stage: 'production',
       registry_stage: 'production',
-    },
-  },
-  {
-    uuid: '4',
-    basic_info: {
-      name: 'Alicia Salinas City of Alice Public Library, TX',
-      description:
-        'Serving the needs of library users in Jim Wells County, Texas',
-      short_name: 'JEVRCG',
-      number_of_patrons: '2',
     },
     urls_and_contact: {
       authentication_url:
         'https://simplye-tsl1.amigos.org/txaliciasalinascityofalicepublic/authentication_document',
       contact_email: 'simplye@amigos.org',
+      contact_validated: '',
       copyright_email: 'library@cityofalice.org',
+      copyright_validated: '',
       help_email: 'library@cityofalice.org',
+      help_validated: '',
       opds_url:
         'https://simplye-tsl1.amigos.org/txaliciasalinascityofalicepublic/',
       web_url: 'http://www.cityofalice.org/179/Library',
     },
-    areas: {
-      focus: ['Jim Wells County, TX', 'Alice, TX'],
-    },
-    stages: {
-      library_stage: 'production',
-      registry_stage: 'production',
-    },
+
+    uuid: '4',
   },
   {
-    uuid: '5',
+    areas: {
+      focus: ['Jim Wells County, TX', 'Alice, TX'],
+      service: [],
+    },
+
     basic_info: {
-      name: 'Allan Shivers Library & Museum, TX',
       description: 'Serving Woodville, TX',
-      short_name: 'JEVRCG',
+      internal_urn: '',
+      name: 'Allan Shivers Library & Museum, TX',
       number_of_patrons: '0',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'JEVRCG',
+      timestamp: '',
+    },
+
+    stages: {
+      library_stage: 'testing',
+      registry_stage: 'testing',
     },
     urls_and_contact: {
       authentication_url:
         'https://simplye-tsl1.amigos.org/txallanshiverslibrarymuseum/authentication_document',
       contact_email: 'simplye@amigos.org',
+      contact_validated: '',
       copyright_email: 'ashivers.library@yahoo.com',
+      copyright_validated: '',
       help_email: 'ashivers.library@yahoo.com',
+      help_validated: '',
       opds_url: 'https://simplye-tsl1.amigos.org/txallanshiverslibrarymuseum/',
       web_url: 'https://www.allanshiverslibrary.com/',
     },
+
+    uuid: '5',
+  },
+  {
     areas: {
-      focus: ['Jim Wells County, TX', 'Alice, TX'],
+      focus: ['Everywhere'],
+      service: [],
+    },
+
+    basic_info: {
+      description: 'Serving patrons of Maryland',
+      internal_urn: '',
+      name: 'Allegany County Library System',
+      number_of_patrons: '0',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'JGSVTQ',
+      timestamp: '',
     },
     stages: {
       library_stage: 'testing',
-      registry_stage: 'testing',
-    },
-  },
-  {
-    uuid: '6',
-    basic_info: {
-      name: 'Allegany County Library System',
-      description: 'Serving patrons of Maryland',
-      short_name: 'JGSVTQ',
-      number_of_patrons: '0',
+      registry_stage: 'canceled',
     },
     urls_and_contact: {
       authentication_url:
         'https://allegany.simplye-md.org/MDALLEGANY/authentication_document',
       contact_email: 'alleganycountylibrary@alleganycountylibrary.info',
+      contact_validated: '',
       copyright_email: 'alleganycountylibrary@alleganycountylibrary.info',
+      copyright_validated: '',
       help_email: 'alleganycountylibrary@alleganycountylibrary.info',
+      help_validated: '',
       opds_url: 'https://allegany.simplye-md.org/MDALLEGANY/',
       web_url: 'http://www.alleganycountylibrary.info/',
     },
-    areas: {
-      focus: ['Everywhere'],
-    },
-    stages: {
-      library_stage: 'testing',
-      registry_stage: 'canceled',
-    },
+
+    uuid: '6',
   },
   {
-    uuid: '7',
+    areas: {
+      focus: ['Hawkins, TX'],
+      service: [],
+    },
+
     basic_info: {
-      name: 'Allen Memorial Public Library, TX',
       description: 'Open a book, open a mind. Knowledge is power.',
-      short_name: 'UOVOCB',
+      internal_urn: '',
+      name: 'Allen Memorial Public Library, TX',
       number_of_patrons: '9',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'UOVOCB',
+      timestamp: '',
+    },
+
+    stages: {
+      library_stage: 'production',
+      registry_stage: 'production',
     },
     urls_and_contact: {
       authentication_url:
         'https://simplye-tsl1.amigos.org/txallenmemorial/authentication_document',
       contact_email: 'simplye@amigos.org',
+      contact_validated: '',
       copyright_email: 'hawkins.library@yahoo.com',
+      copyright_validated: '',
       help_email: 'hawkins.library@yahoo.com',
+      help_validated: '',
       opds_url: 'https://simplye-tsl1.amigos.org/txallenmemorial/',
       web_url: 'https://www.hawkinslibrary.org/',
     },
+    uuid: '7',
+  },
+  {
     areas: {
-      focus: ['Hawkins, TX'],
+      focus: ['Alpine, TX'],
+      service: [],
+    },
+    basic_info: {
+      description:
+        'Building community, encouraging literacy, and promoting lifelong learning',
+      internal_urn: '',
+      name: 'Alpine Public Library, TX',
+      number_of_patrons: '59',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'NQSJGC',
+      timestamp: '',
     },
     stages: {
       library_stage: 'production',
       registry_stage: 'production',
-    },
-  },
-  {
-    uuid: '8',
-    basic_info: {
-      name: 'Alpine Public Library, TX',
-      description:
-        'Building community, encouraging literacy, and promoting lifelong learning',
-      short_name: 'NQSJGC',
-      number_of_patrons: '59',
     },
     urls_and_contact: {
       authentication_url:
         'https://simplye-tsl1.amigos.org/txalpine/authentication_document',
       contact_email: 'williams@amigos.org',
+      contact_validated: '',
       copyright_email: 'don@alpinepubliclibrary.org',
+      copyright_validated: '',
       help_email: 'don@alpinepubliclibrary.org',
+      help_validated: '',
       opds_url: 'https://simplye-tsl1.amigos.org/txalpine/',
       web_url: 'https://alpinepubliclibrary.org/',
     },
+
+    uuid: '8',
+  },
+  {
     areas: {
-      focus: ['Alpine, TX'],
+      focus: ['Amarillo, TX'],
+      service: [],
+    },
+
+    basic_info: {
+      description: 'Serving the patrons of Amarillo, TX',
+      internal_urn: '',
+      name: 'Amarillo Public Library, TX',
+      number_of_patrons: '78',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'DTENGN',
+      timestamp: '',
     },
     stages: {
       library_stage: 'production',
       registry_stage: 'production',
-    },
-  },
-  {
-    uuid: '9',
-    basic_info: {
-      name: 'Amarillo Public Library, TX',
-      description: 'Serving the patrons of Amarillo, TX',
-      short_name: 'DTENGN',
-      number_of_patrons: '78',
     },
     urls_and_contact: {
       authentication_url:
         'https://simplye-tsl1.amigos.org/txamarillopubliclibrary/authentication_document',
       contact_email: 'simplye@amigos.org',
+      contact_validated: '',
       copyright_email: 'reference@amarillolibrary.org',
+      copyright_validated: '',
       help_email: 'reference@amarillolibrary.org',
+      help_validated: '',
       opds_url: 'https://simplye-tsl1.amigos.org/txamarillopubliclibrary/',
       web_url: 'https://www.amarillolibrary.org/',
     },
+
+    uuid: '9',
+  },
+  {
     areas: {
-      focus: ['Amarillo, TX'],
+      focus: ['Dallas, TX'],
+      service: [],
+    },
+
+    basic_info: {
+      description: 'Unite Libraries for Action and Strength',
+      internal_urn: '',
+      name: 'Amigos Demo Library',
+      number_of_patrons: '22',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'WBDOBX',
+      timestamp: '',
     },
     stages: {
       library_stage: 'production',
       registry_stage: 'production',
-    },
-  },
-  {
-    uuid: '10',
-    basic_info: {
-      name: 'Amigos Demo Library',
-      description: 'Unite Libraries for Action and Strength',
-      short_name: 'WBDOBX',
-      number_of_patrons: '22',
     },
     urls_and_contact: {
       authentication_url:
         'https://circ05.simplye.amigos.org/txamigosls/authentication_document',
       contact_email: 'simplye@amigos.org',
+      contact_validated: '',
       copyright_email: 'simplye@amigos.org',
+      copyright_validated: '',
       help_email: 'simplye@amigos.org',
+      help_validated: '',
       opds_url: 'https://circ05.simplye.amigos.org/txamigosls/',
       web_url: 'https://www.amigos.org',
     },
-    areas: {
-      focus: ['Dallas, TX'],
-    },
-    stages: {
-      library_stage: 'production',
-      registry_stage: 'production',
-    },
+    uuid: '10',
   },
   {
-    uuid: '11',
-    basic_info: {
-      name: 'Amigos Test Library Two',
-      description: 'Unite Libraries for Action and Strength',
-      short_name: 'ZKVRQT',
-      number_of_patrons: '0',
-    },
-    urls_and_contact: {
-      authentication_url:
-        'https://circ06.dev.simplye.amigos.org/txamgtesttwo/authentication_document',
-      contact_email: 'williams@amigos.org',
-      copyright_email: 'williams@amigos.org',
-      help_email: 'simplye@amigos.org',
-      opds_url: 'https://circ06.dev.simplye.amigos.org/txamgtesttwo/',
-      web_url: 'https://www.amigos.org/simplye',
-    },
     areas: {
       focus: ['Dallas, TX'],
+      service: [],
+    },
+
+    basic_info: {
+      description: 'Unite Libraries for Action and Strength',
+      internal_urn: '',
+      name: 'Amigos Test Library Two',
+      number_of_patrons: '0',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'ZKVRQT',
+      timestamp: '',
     },
     stages: {
       library_stage: 'testing',
       registry_stage: 'testing',
     },
+    urls_and_contact: {
+      authentication_url:
+        'https://circ06.dev.simplye.amigos.org/txamgtesttwo/authentication_document',
+      contact_email: 'williams@amigos.org',
+      contact_validated: '',
+      copyright_email: 'williams@amigos.org',
+      copyright_validated: '',
+      help_email: 'simplye@amigos.org',
+      help_validated: '',
+      opds_url: 'https://circ06.dev.simplye.amigos.org/txamgtesttwo/',
+      web_url: 'https://www.amigos.org/simplye',
+    },
+
+    uuid: '11',
   },
   {
-    uuid: '12',
+    areas: {
+      focus: [],
+      service: [],
+    },
     basic_info: {
-      name: 'Anacortes Public Library',
       description: 'Serving Anacortes, WA',
-      short_name: 'DCJROE',
+      internal_urn: '',
+      name: 'Anacortes Public Library',
       number_of_patrons: '0',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'DCJROE',
+      timestamp: '',
+    },
+
+    stages: {
+      library_stage: 'testing',
+      registry_stage: 'canceled',
     },
     urls_and_contact: {
       authentication_url:
         'https://wa-shared.lyrasistechnology.org/WA0032/authentication_document',
       contact_email: 'library@cityofanacortes.org',
+      contact_validated: '',
       copyright_email: 'library@cityofanacortes.org',
+      copyright_validated: '',
       help_email: 'library@cityofanacortes.org',
+      help_validated: '',
       opds_url: 'https://wa-shared.lyrasistechnology.org/WA0032/',
       web_url: 'https://www.anacorteswa.gov/220/Library',
     },
-    areas: {
-      focus: [],
-    },
-    stages: {
-      library_stage: 'testing',
-      registry_stage: 'canceled',
-    },
+
+    uuid: '12',
   },
   {
-    uuid: '13',
+    areas: {
+      focus: ['Andrews, TX'],
+      service: [],
+    },
+
     basic_info: {
-      name: 'Andrews County Library, TX',
       description: 'Explore the world of books.',
-      short_name: 'IDKEWG',
+      internal_urn: '',
+      name: 'Andrews County Library, TX',
       number_of_patrons: '1',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'IDKEWG',
+      timestamp: '',
+    },
+
+    stages: {
+      library_stage: 'production',
+      registry_stage: 'production',
     },
     urls_and_contact: {
       authentication_url:
         'https://simplye-tsl1.amigos.org/txandrews/authentication_document',
       contact_email: 'simplye@amigos.org',
+      contact_validated: '',
       copyright_email: 'dbonham@andrews.lib.tx.us',
+      copyright_validated: '',
       help_email: 'dbonham@andrews.lib.tx.us',
+      help_validated: '',
       opds_url: 'https://simplye-tsl1.amigos.org/txandrews/',
       web_url: 'https://www.andrews.lib.tx.us/',
     },
+    uuid: '13',
+  },
+  {
     areas: {
-      focus: ['Andrews, TX'],
+      focus: ['Everywhere'],
+      service: [],
+    },
+
+    basic_info: {
+      description: 'Educate. Enrich. Inspire.',
+      internal_urn: '',
+      name: 'Anne Arundel Co. Public Library',
+      number_of_patrons: '0',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'MDANNE',
+      timestamp: '',
     },
     stages: {
       library_stage: 'production',
-      registry_stage: 'production',
-    },
-  },
-  {
-    uuid: '14',
-    basic_info: {
-      name: 'Anne Arundel Co. Public Library',
-      description: 'Educate. Enrich. Inspire.',
-      short_name: 'MDANNE',
-      number_of_patrons: '0',
+      registry_stage: 'canceled',
     },
     urls_and_contact: {
       authentication_url:
         'https://anne-arundel.simplye-md.org/ANNEARUNDEL/authentication_document',
       contact_email: 'askus@aacpl.libanswers.com',
+      contact_validated: '',
       copyright_email: 'askus@aacpl.libanswers.com',
+      copyright_validated: '',
       help_email: 'askus@aacpl.libanswers.com',
+      help_validated: '',
       opds_url: 'https://anne-arundel.simplye-md.org/ANNEARUNDEL/',
       web_url: 'web_urlhttp://www.aacpl.net',
     },
-    areas: {
-      focus: ['Everywhere'],
-    },
-    stages: {
-      library_stage: 'production',
-      registry_stage: 'canceled',
-    },
+
+    uuid: '14',
   },
   {
-    uuid: '15',
-    basic_info: {
-      name: 'Ansonia Public Library',
-      description: 'Serving Ansonia, CT',
-      short_name: 'CTANSO',
-      number_of_patrons: '0',
-    },
-    urls_and_contact: {
-      authentication_url:
-        'https://bibliomation.lyrasistechnology.org/ansonia/authentication_document',
-      contact_email: 'jonathan.green@lyrasis.org',
-      copyright_email: 'jonathan.green@lyrasis.org',
-      help_email: 'jonathan.green@lyrasis.org',
-      opds_url: 'https://bibliomation.lyrasistechnology.org/ansonia/',
-      web_url: 'http://www.ansonialibrary.org/',
-    },
     areas: {
       focus: ['Everywhere'],
+      service: [],
+    },
+
+    basic_info: {
+      description: 'Serving Ansonia, CT',
+      internal_urn: '',
+      name: 'Ansonia Public Library',
+      number_of_patrons: '0',
+      online_registration: '',
+      pls_id: '',
+      short_name: 'CTANSO',
+      timestamp: '',
     },
     stages: {
       library_stage: 'canceled',
       registry_stage: 'canceled',
     },
+    urls_and_contact: {
+      authentication_url:
+        'https://bibliomation.lyrasistechnology.org/ansonia/authentication_document',
+      contact_email: 'jonathan.green@lyrasis.org',
+      contact_validated: '',
+      copyright_email: 'jonathan.green@lyrasis.org',
+      copyright_validated: '',
+      help_email: 'jonathan.green@lyrasis.org',
+      help_validated: '',
+      opds_url: 'https://bibliomation.lyrasistechnology.org/ansonia/',
+      web_url: 'http://www.ansonialibrary.org/',
+    },
+
+    uuid: '15',
   },
 ];
 

@@ -20,7 +20,7 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build",
-    "test": "jest --watch",
+    "test": "jest --watchAll",
     "test:ci": "jest --ci --silent --coverage --maxWorkers=2",
     "check": "tsc --noEmit",
     "prettier": "prettier --write --ignore-path .eslintignore .",
