@@ -9,6 +9,7 @@ import ActionBar from './ActionBar';
 import Header from './Header';
 import LibrariesList from './LibrariesList';
 import LoginForm from './LoginForm';
+import { FETCH_LIBRARIES, REFRESH } from '../constants';
 import { TokenContext, TokenContextValues } from '../context/tokenContext';
 export interface LibraryData {
   areas: {
@@ -72,7 +73,7 @@ const RegistryAdmin = () => {
 
     // If a refreshToken exists, send it as a header to the refresh endpoint.
     if (refreshToken) {
-      fetch(process.env.REFRESH as RequestInfo | URL, {
+      fetch(REFRESH as RequestInfo | URL, {
         method: 'POST',
         headers: { Authorization: `Bearer ${refreshToken}` },
       })
@@ -104,7 +105,7 @@ const RegistryAdmin = () => {
 
   // Fetch the libraries with the accessToken.
   const fetchLibraries = () => {
-    fetch(process.env.FETCH_LIBRARIES as RequestInfo | URL, {
+    fetch(FETCH_LIBRARIES as RequestInfo | URL, {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
       .then((response) => {
@@ -123,7 +124,10 @@ const RegistryAdmin = () => {
         setLibraries(data.libraries);
         setIsLoading(false);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        console.log(err.message);
+        logout();
+      });
   };
 
   // If there is no accessToken, try using the refresh endpoint to get a new

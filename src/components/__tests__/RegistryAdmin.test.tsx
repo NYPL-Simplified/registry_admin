@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { act, render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import libraries from '../../../data/libraries';
+import libraries from '../../../data/mockData';
 import RegistryAdmin from '../RegistryAdmin';
 import { TokenContext } from '../../context/tokenContext';
 
@@ -97,10 +97,6 @@ describe('RegistryAdmin, with access token', () => {
 
     expect(libraryAccordions.length).toEqual(15);
   });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
 });
 
 describe('RegistryAdmin, with no access token, but with refresh token', () => {
@@ -124,7 +120,6 @@ describe('RegistryAdmin, with no access token, but with refresh token', () => {
     });
 
     Cookies.get = realGet;
-    jest.clearAllMocks();
   });
 });
 
@@ -150,7 +145,5 @@ describe('RegistryAdmin Snapshot', () => {
         .toJSON();
       expect(adminPage).toMatchSnapshot();
     });
-
-    jest.clearAllMocks();
   });
 });

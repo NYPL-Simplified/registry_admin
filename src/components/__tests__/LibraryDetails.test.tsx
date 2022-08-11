@@ -2,7 +2,7 @@ import * as React from 'react';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import libraries from '../../../data/libraries';
+import libraries from '../../../data/mockData';
 import LibraryDetails from '../LibraryDetails';
 
 describe('LibraryRegistryPage', () => {

@@ -18,7 +18,7 @@ const LibrariesList = ({ isSimpleList, libraries }: LibrariesListProps) => {
   // isLoading is a flag used to render the SkeletonLoader while the app tries to
   // refresh the accessToken.
   const [isLoadingLibraries, setIsLoadingLibraries] = useState<boolean>(true);
-  // Currently renders a list of mock library data.
+
   const returnListData = useCallback(() => {
     const listData: string[][] = [];
     libraries.map((library) => {

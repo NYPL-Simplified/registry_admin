@@ -33,14 +33,6 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     stages.registry_stage
   );
 
-  // useEffect(() => {
-  //   setLibraryStage(stages.library_stage);
-  // }, [stages.library_stage]);
-
-  // useEffect(() => {
-  //   setRegistryStage(stages.registry_stage);
-  // }, [stages.registry_stage]);
-
   const getEmailData = () => {
     const emailData = [];
     for (const key in urlsAndContact) {

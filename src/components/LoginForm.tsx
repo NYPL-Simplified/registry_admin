@@ -9,6 +9,8 @@ import {
   HelperErrorText,
   TextInput,
 } from '@nypl/design-system-react-components';
+
+import { LOGIN } from '../constants';
 import { TokenContext, TokenContextValues } from '../context/tokenContext';
 
 const backgroundStyles = {
@@ -40,7 +42,7 @@ const LoginForm = () => {
     body.append('username', username);
     body.append('password', password);
 
-    fetch(process.env.LOGIN as RequestInfo | URL, {
+    fetch(LOGIN as RequestInfo | URL, {
       method: 'POST',
       body,
     })

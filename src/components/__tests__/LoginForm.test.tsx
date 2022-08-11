@@ -82,8 +82,6 @@ describe('LoginForm, succcessful API call', () => {
         screen.queryByText(/your username or password is incorrect/i)
       ).not.toBeInTheDocument()
     );
-
-    jest.clearAllMocks();
   });
 });
 
@@ -118,8 +116,6 @@ describe('LoginForm, unsuccessful API call', () => {
         screen.getByText(/your username or password is incorrect/i)
       ).toBeInTheDocument();
     });
-
-    jest.clearAllMocks();
   });
 });
 
