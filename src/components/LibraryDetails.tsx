@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Box,
   Form,
@@ -11,6 +11,7 @@ import {
 import LibraryDetailsGrid from './LibraryDetailsGrid';
 import StageSelect from './StageSelect';
 import { LibraryData } from './RegistryAdmin';
+import { TokenContext, TokenContextValues } from '../context/tokenContext';
 
 interface LibraryDetailsProps {
   library: LibraryData;
@@ -32,6 +33,8 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
   const [registryStage, setRegistryStage] = useState<LibraryStage>(
     stages.registry_stage
   );
+
+  const { accessToken } = useContext(TokenContext) as TokenContextValues;
 
   const getEmailData = () => {
     const emailData = [];
@@ -63,6 +66,35 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     },
   ];
 
+  const handleStageChange = (stage: string, value: string) => {
+    const body = new FormData();
+    body.append('uuid', uuid);
+    body.append(
+      'Library Stage',
+      stage === 'libraryStage' ? value : libraryStage
+    );
+    body.append(
+      'RegistryStage',
+      stage === 'registryStage' ? value : registryStage
+    );
+
+    fetch(
+      'https://qa-libraryregistry.librarysimplified.org/admin/libraries/registration',
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+        method: 'POST',
+        body,
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          console.log('response ok');
+          return response.json();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Form id={`registry-form-${uuid}`}>
@@ -72,7 +104,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
               uuid={uuid}
               stage='libraryStage'
               value={libraryStage}
-              setLibraryStage={setLibraryStage}
+              handleStageChange={handleStageChange}
             />
           </FormField>
           <FormField>
@@ -80,7 +112,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
               uuid={uuid}
               stage='registryStage'
               value={registryStage}
-              setLibraryStage={setRegistryStage}
+              handleStageChange={handleStageChange}
             />
           </FormField>
         </FormRow>
