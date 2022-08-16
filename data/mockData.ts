@@ -194,7 +194,7 @@ const libraries: LibraryData[] = [
     },
     stages: {
       library_stage: 'testing',
-      registry_stage: 'canceled',
+      registry_stage: 'cancelled',
     },
     urls_and_contact: {
       authentication_url:
@@ -403,7 +403,7 @@ const libraries: LibraryData[] = [
 
     stages: {
       library_stage: 'testing',
-      registry_stage: 'canceled',
+      registry_stage: 'cancelled',
     },
     urls_and_contact: {
       authentication_url:
@@ -473,7 +473,7 @@ const libraries: LibraryData[] = [
     },
     stages: {
       library_stage: 'production',
-      registry_stage: 'canceled',
+      registry_stage: 'cancelled',
     },
     urls_and_contact: {
       authentication_url:
@@ -507,8 +507,8 @@ const libraries: LibraryData[] = [
       timestamp: '',
     },
     stages: {
-      library_stage: 'canceled',
-      registry_stage: 'canceled',
+      library_stage: 'cancelled',
+      registry_stage: 'cancelled',
     },
     urls_and_contact: {
       authentication_url:

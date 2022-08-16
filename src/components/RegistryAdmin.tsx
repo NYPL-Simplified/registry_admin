@@ -11,6 +11,10 @@ import LibrariesList from './LibrariesList';
 import LoginForm from './LoginForm';
 import { FETCH_LIBRARIES, REFRESH } from '../constants';
 import { TokenContext, TokenContextValues } from '../context/tokenContext';
+import {
+  LibrariesContext,
+  LibrariesContextValues,
+} from '../context/librariesContext';
 export interface LibraryData {
   areas: {
     focus: string[];
@@ -27,8 +31,8 @@ export interface LibraryData {
     timestamp: string;
   };
   stages: {
-    library_stage: 'testing' | 'production' | 'canceled';
-    registry_stage: 'testing' | 'production' | 'canceled';
+    library_stage: 'testing' | 'production' | 'cancelled';
+    registry_stage: 'testing' | 'production' | 'cancelled';
   };
   urls_and_contact: {
     authentication_url: string;
@@ -52,11 +56,12 @@ const RegistryAdmin = () => {
   // with full details, or as a table of names and patron counts.
   const [isSimpleList, setIsSimpleList] = useState<boolean>(false);
 
-  const [libraries, setLibraries] = useState<LibraryData[]>([]);
-
   const { accessToken, setAccessToken } = useContext(
     TokenContext
   ) as TokenContextValues;
+  const { setLibrariesInContext } = useContext(
+    LibrariesContext
+  ) as LibrariesContextValues;
 
   // The logout function resets the accessToken to an empty string and deletes
   // the refreshToken from cookie storage. This causes the LoginForm to be
@@ -121,7 +126,7 @@ const RegistryAdmin = () => {
         }
       })
       .then((data) => {
-        setLibraries(data.libraries);
+        setLibrariesInContext(data.libraries);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -149,19 +154,18 @@ const RegistryAdmin = () => {
           header={<Header />}
           contentTop={
             accessToken ? (
-              <ActionBar
-                logout={logout}
-                isSimpleList={isSimpleList}
-                setIsSimpleList={setIsSimpleList}
-              />
+              <>
+                <ActionBar
+                  logout={logout}
+                  isSimpleList={isSimpleList}
+                  setIsSimpleList={setIsSimpleList}
+                />
+              </>
             ) : undefined
           }
           contentPrimary={
             accessToken ? (
-              <LibrariesList
-                isSimpleList={isSimpleList}
-                libraries={libraries}
-              />
+              <LibrariesList isSimpleList={isSimpleList} />
             ) : (
               <LoginForm />
             )

@@ -3,11 +3,55 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
 import libraries from '../../../data/mockData';
+import { LibrariesContext } from '../../context/librariesContext';
 import LibrariesList from '../LibrariesList';
+import { TokenContext } from '../../context/tokenContext';
+
+const setAccessTokenMock = jest.fn();
+const setLibrariesInContextMock = jest.fn();
+const setUpdatedLibraryMock = jest.fn();
+
+const renderLibrariesListWithContext = (
+  accessToken: string,
+  isSimpleList = false,
+  librariesInContext = libraries,
+  setAccessToken = setAccessTokenMock,
+  setLibrariesInContext = setLibrariesInContextMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
+) => {
+  render(
+    <TokenContext.Provider value={{ accessToken, setAccessToken }}>
+      <LibrariesContext.Provider
+        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+      >
+        <LibrariesList isSimpleList={isSimpleList} />
+      </LibrariesContext.Provider>
+    </TokenContext.Provider>
+  );
+};
+
+const renderLibrariesListForSnapshot = (
+  accessToken: string,
+  isSimpleList = false,
+  librariesInContext = libraries,
+  setAccessToken = setAccessTokenMock,
+  setLibrariesInContext = setLibrariesInContextMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
+) => {
+  return (
+    <TokenContext.Provider value={{ accessToken, setAccessToken }}>
+      <LibrariesContext.Provider
+        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+      >
+        <LibrariesList isSimpleList={isSimpleList} />
+      </LibrariesContext.Provider>
+    </TokenContext.Provider>
+  );
+};
 
 describe('LibrariesList, default view', () => {
   beforeEach(() => {
-    render(<LibrariesList isSimpleList={false} libraries={libraries} />);
+    renderLibrariesListWithContext('mockAccessToken');
   });
 
   it('renders a list of accordions', () => {
@@ -67,7 +111,7 @@ describe('LibrariesList, default view', () => {
 
 describe('LibrariesList, simple view', () => {
   beforeEach(() => {
-    render(<LibrariesList isSimpleList libraries={libraries} />);
+    renderLibrariesListWithContext('mockAccessToken', true);
   });
 
   it('renders a table of libraries', () => {
@@ -91,11 +135,11 @@ describe('LibrariesList, simple view', () => {
 describe('LibrariesList Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
     const defaultList = renderer
-      .create(<LibrariesList isSimpleList={false} libraries={libraries} />)
+      .create(renderLibrariesListForSnapshot('mockAccessToken'))
       .toJSON();
 
     const simpleList = renderer
-      .create(<LibrariesList isSimpleList={true} libraries={libraries} />)
+      .create(renderLibrariesListForSnapshot('mockAccessToken', true))
       .toJSON();
 
     expect(defaultList).toMatchSnapshot();

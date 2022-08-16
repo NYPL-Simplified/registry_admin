@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Box,
   Form,
@@ -12,12 +12,17 @@ import LibraryDetailsGrid from './LibraryDetailsGrid';
 import StageSelect from './StageSelect';
 import { LibraryData } from './RegistryAdmin';
 import { TokenContext, TokenContextValues } from '../context/tokenContext';
+import { FETCH_LIBRARIES, UPDATE_LIBRARY_STAGE } from '../constants';
+import {
+  LibrariesContext,
+  LibrariesContextValues,
+} from '../context/librariesContext';
 
 interface LibraryDetailsProps {
   library: LibraryData;
 }
 
-export type LibraryStage = 'testing' | 'production' | 'canceled' | '';
+export type LibraryStage = 'testing' | 'production' | 'cancelled' | '';
 
 const LibraryDetails = ({ library }: LibraryDetailsProps) => {
   const {
@@ -27,14 +32,11 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     areas,
     stages,
   } = library;
-  const [libraryStage, setLibraryStage] = useState<LibraryStage>(
-    stages.library_stage
-  );
-  const [registryStage, setRegistryStage] = useState<LibraryStage>(
-    stages.registry_stage
-  );
 
   const { accessToken } = useContext(TokenContext) as TokenContextValues;
+  const { setUpdatedLibrary } = useContext(
+    LibrariesContext
+  ) as LibrariesContextValues;
 
   const getEmailData = () => {
     const emailData = [];
@@ -66,30 +68,51 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     },
   ];
 
+  const fetchUpdatedLibrary = () => {
+    fetch(`${process.env.REGISTRY_API_DOMAIN}/libraries/${uuid}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('There was an issue fetching the updated library.');
+        }
+      })
+      .then((response) => {
+        // Setting the updatedLibrary in LibrariesContext triggers a useEffect
+        // which updates the librariesInContext to include the updatedLibrary.
+        setUpdatedLibrary(response);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleStageChange = (stage: string, value: string) => {
+    // UPDATE_LIBRARY_STAGE endpoint expects the 'Library Stage' and the 'Registry
+    // Stage', even if only one value has been updated.
     const body = new FormData();
     body.append('uuid', uuid);
     body.append(
       'Library Stage',
-      stage === 'libraryStage' ? value : libraryStage
+      stage === 'libraryStage' ? value : stages.library_stage
     );
     body.append(
-      'RegistryStage',
-      stage === 'registryStage' ? value : registryStage
+      'Registry Stage',
+      stage === 'registryStage' ? value : stages.registry_stage
     );
 
-    fetch(
-      'https://qa-libraryregistry.librarysimplified.org/admin/libraries/registration',
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-        method: 'POST',
-        body,
-      }
-    )
+    fetch(UPDATE_LIBRARY_STAGE, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      method: 'POST',
+      body,
+    })
       .then((response) => {
         if (response.ok) {
-          console.log('response ok');
-          return response.json();
+          // If the POST request is successful, we'll follow it with a GET request
+          // to fetch the library that was just updated.
+          fetchUpdatedLibrary();
+        } else {
+          throw new Error('There was an issue updating this library.');
         }
       })
       .catch((err) => console.log(err));
@@ -103,7 +126,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
             <StageSelect
               uuid={uuid}
               stage='libraryStage'
-              value={libraryStage}
+              value={stages.library_stage}
               handleStageChange={handleStageChange}
             />
           </FormField>
@@ -111,7 +134,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
             <StageSelect
               uuid={uuid}
               stage='registryStage'
-              value={registryStage}
+              value={stages.registry_stage}
               handleStageChange={handleStageChange}
             />
           </FormField>

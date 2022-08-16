@@ -3,15 +3,15 @@ import { DSProvider } from '@nypl/design-system-react-components';
 
 import RegistryAdmin from './RegistryAdmin';
 import { TokenProvider } from '../context/tokenContext';
-import { RegistryStagesProvider } from '../context/registryStagesContext';
+import { LibrariesProvider } from '../context/librariesContext';
 
 export function App() {
   return (
     <DSProvider>
       <TokenProvider>
-        <RegistryStagesProvider>
+        <LibrariesProvider>
           <RegistryAdmin />
-        </RegistryStagesProvider>
+        </LibrariesProvider>
       </TokenProvider>
     </DSProvider>
   );
