@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
 import libraries from '../../../data/mockData';
@@ -98,7 +104,7 @@ describe('LibraryRegistryPage', () => {
     expect(tabPanel).toHaveTextContent(/focus/i);
   });
 
-  it('makes the appropriate requests if the user changes the values of Library or Registry Stage', () => {
+  it('makes the appropriate requests if the user changes the values of Library or Registry Stage', async () => {
     (global as any).fetch = jest
       .fn()
       .mockReturnValueOnce(
@@ -114,23 +120,28 @@ describe('LibraryRegistryPage', () => {
           status: 200,
         })
       );
+
     const selects = screen.getAllByRole('combobox');
     const libraryStageSelect = selects[0];
 
     fireEvent.change(libraryStageSelect, { target: { value: 'testing' } });
 
-    expect(fetch).toHaveBeenCalledWith(process.env.UPDATE_LIBRARY_STAGE, {
-      body: mockFormData,
-      headers: { Authorization: 'Bearer mockAccessToken' },
-      method: 'POST',
-    });
+    await waitFor(() =>
+      expect(fetch).toHaveBeenCalledWith(process.env.UPDATE_LIBRARY_STAGE, {
+        body: mockFormData,
+        headers: { Authorization: 'Bearer mockAccessToken' },
+        method: 'POST',
+      })
+    );
 
-    // expect(fetch).toHaveBeenCalledWith(
-    //   `${process.env.REGISTRY_API_DOMAIN}/libraries/1`,
-    //   {
-    //     method: 'GET',
-    //   }
-    // );
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledWith(
+        `${process.env.REGISTRY_API_DOMAIN}/libraries/1`,
+        {
+          headers: { Authorization: 'Bearer mockAccessToken' },
+        }
+      );
+    });
   });
 });
 

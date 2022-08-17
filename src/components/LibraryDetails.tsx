@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   Form,
@@ -12,7 +12,7 @@ import LibraryDetailsGrid from './LibraryDetailsGrid';
 import StageSelect from './StageSelect';
 import { LibraryData } from './RegistryAdmin';
 import { TokenContext, TokenContextValues } from '../context/tokenContext';
-import { FETCH_LIBRARIES, UPDATE_LIBRARY_STAGE } from '../constants';
+import { UPDATE_LIBRARY_STAGE } from '../constants';
 import {
   LibrariesContext,
   LibrariesContextValues,
