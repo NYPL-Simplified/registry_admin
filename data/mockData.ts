@@ -2,7 +2,7 @@
 
 import { LibraryData } from '../src/components/RegistryAdmin';
 
-const libraries: LibraryData[] = [
+const mockLibraries: LibraryData[] = [
   {
     areas: {
       focus: ['06475'],
@@ -527,4 +527,4 @@ const libraries: LibraryData[] = [
   },
 ];
 
-export default libraries;
+export default mockLibraries;

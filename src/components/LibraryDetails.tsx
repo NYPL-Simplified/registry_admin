@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Box,
   Form,
@@ -11,12 +11,9 @@ import {
 import LibraryDetailsGrid from './LibraryDetailsGrid';
 import StageSelect from './StageSelect';
 import { LibraryData } from './RegistryAdmin';
-import { TokenContext, TokenContextValues } from '../context/tokenContext';
+import useTokenContext from '../context/tokenContext';
 import { UPDATE_LIBRARY_STAGE } from '../constants';
-import {
-  LibrariesContext,
-  LibrariesContextValues,
-} from '../context/librariesContext';
+import useLibrariesContext from '../context/librariesContext';
 
 interface LibraryDetailsProps {
   library: LibraryData;
@@ -33,10 +30,8 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     stages,
   } = library;
 
-  const { accessToken } = useContext(TokenContext) as TokenContextValues;
-  const { setUpdatedLibrary } = useContext(
-    LibrariesContext
-  ) as LibrariesContextValues;
+  const { accessToken } = useTokenContext();
+  const { setUpdatedLibrary } = useLibrariesContext();
 
   const getEmailData = () => {
     const emailData = [];
@@ -81,7 +76,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
       })
       .then((response) => {
         // Setting the updatedLibrary in LibrariesContext triggers a useEffect
-        // which updates the librariesInContext to include the updatedLibrary.
+        // which updates the libraries in Context to include the updatedLibrary.
         setUpdatedLibrary(response);
       })
       .catch((err) => console.log(err));

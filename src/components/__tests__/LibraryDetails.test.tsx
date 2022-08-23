@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import libraries from '../../../data/mockData';
+import mockLibraries from '../../../data/mockData';
 import LibraryDetails from '../LibraryDetails';
 import { TokenContext } from '../../context/tokenContext';
 import { LibrariesContext } from '../../context/librariesContext';
@@ -19,20 +19,20 @@ mockFormData.append('Library Stage', 'testing');
 mockFormData.append('Registry Stage', 'production');
 
 const setAccessTokenMock = jest.fn();
-const setLibrariesInContextMock = jest.fn();
+const setLibrariesMock = jest.fn();
 const setUpdatedLibraryMock = jest.fn();
 
 const renderLibraryDetailsWithContext = (
   accessToken: string,
-  librariesInContext = libraries,
+  libraries = mockLibraries,
   setAccessToken = setAccessTokenMock,
-  setLibrariesInContext = setLibrariesInContextMock,
+  setLibraries = setLibrariesMock,
   setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   render(
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       <LibrariesContext.Provider
-        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
         <LibraryDetails library={libraries[0]} />
       </LibrariesContext.Provider>
@@ -42,15 +42,15 @@ const renderLibraryDetailsWithContext = (
 
 const renderLibraryDetailsForSnapshot = (
   accessToken: string,
-  librariesInContext = libraries,
+  libraries = mockLibraries,
   setAccessToken = setAccessTokenMock,
-  setLibrariesInContext = setLibrariesInContextMock,
+  setLibraries = setLibrariesMock,
   setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   return (
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       <LibrariesContext.Provider
-        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
         <LibraryDetails library={libraries[0]} />
       </LibrariesContext.Provider>
@@ -115,7 +115,7 @@ describe('LibraryRegistryPage', () => {
       )
       .mockReturnValueOnce(
         Promise.resolve({
-          json: () => Promise.resolve(libraries[0]),
+          json: () => Promise.resolve(mockLibraries[0]),
           ok: true,
           status: 200,
         })

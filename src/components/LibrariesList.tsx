@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Accordion,
   List,
@@ -8,10 +8,7 @@ import {
 
 import { LibraryData } from './RegistryAdmin';
 import LibraryDetails from './LibraryDetails';
-import {
-  LibrariesContext,
-  LibrariesContextValues,
-} from '../context/librariesContext';
+import useLibrariesContext from '../context/librariesContext';
 
 interface LibrariesListProps {
   isSimpleList: boolean;
@@ -22,27 +19,25 @@ const LibrariesList = ({ isSimpleList }: LibrariesListProps) => {
   // refresh the accessToken.
   const [isLoadingLibraries, setIsLoadingLibraries] = useState<boolean>(true);
 
-  const { librariesInContext } = useContext(
-    LibrariesContext
-  ) as LibrariesContextValues;
+  const { libraries } = useLibrariesContext();
 
   const returnListData = useCallback(() => {
     const listData: string[][] = [];
-    librariesInContext.map((library) => {
+    libraries.map((library) => {
       const { name, number_of_patrons } = library.basic_info;
       const libraryNameandCount = [name, number_of_patrons];
       listData.push(libraryNameandCount);
     });
     return listData;
-  }, [librariesInContext]);
+  }, [libraries]);
 
   useEffect(() => {
-    if (librariesInContext.length) {
+    if (libraries.length) {
       setIsLoadingLibraries(false);
     } else {
       setIsLoadingLibraries(true);
     }
-  }, [librariesInContext.length]);
+  }, [libraries.length]);
 
   return (
     <>
@@ -56,7 +51,7 @@ const LibrariesList = ({ isSimpleList }: LibrariesListProps) => {
         />
       ) : (
         <List noStyling type='ul'>
-          {librariesInContext.map((library: LibraryData) => {
+          {libraries.map((library: LibraryData) => {
             const { name } = library.basic_info;
             const { registry_stage: registryStage } = library.stages;
             return (

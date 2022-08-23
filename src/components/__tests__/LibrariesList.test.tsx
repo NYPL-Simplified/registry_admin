@@ -2,27 +2,27 @@ import * as React from 'react';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import libraries from '../../../data/mockData';
+import mockLibraries from '../../../data/mockData';
 import { LibrariesContext } from '../../context/librariesContext';
 import LibrariesList from '../LibrariesList';
 import { TokenContext } from '../../context/tokenContext';
 
 const setAccessTokenMock = jest.fn();
-const setLibrariesInContextMock = jest.fn();
+const setLibrariesMock = jest.fn();
 const setUpdatedLibraryMock = jest.fn();
 
 const renderLibrariesListWithContext = (
   accessToken: string,
   isSimpleList = false,
-  librariesInContext = libraries,
+  libraries = mockLibraries,
   setAccessToken = setAccessTokenMock,
-  setLibrariesInContext = setLibrariesInContextMock,
+  setLibraries = setLibrariesMock,
   setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   render(
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       <LibrariesContext.Provider
-        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
         <LibrariesList isSimpleList={isSimpleList} />
       </LibrariesContext.Provider>
@@ -33,15 +33,15 @@ const renderLibrariesListWithContext = (
 const renderLibrariesListForSnapshot = (
   accessToken: string,
   isSimpleList = false,
-  librariesInContext = libraries,
+  libraries = mockLibraries,
   setAccessToken = setAccessTokenMock,
-  setLibrariesInContext = setLibrariesInContextMock,
+  setLibraries = setLibrariesMock,
   setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   return (
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       <LibrariesContext.Provider
-        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
         <LibrariesList isSimpleList={isSimpleList} />
       </LibrariesContext.Provider>

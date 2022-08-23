@@ -9,20 +9,20 @@ import RegistryAdmin, { LibraryData } from '../RegistryAdmin';
 import { TokenContext } from '../../context/tokenContext';
 
 const setAccessTokenMock = jest.fn();
-const setLibrariesInContextMock = jest.fn();
+const setLibrariesMock = jest.fn();
 const setUpdatedLibraryMock = jest.fn();
 
 const renderRegistryAdminWithContext = (
   accessToken: string,
-  librariesInContext: LibraryData[],
+  libraries: LibraryData[],
   setAccessToken = setAccessTokenMock,
-  setLibrariesInContext = setLibrariesInContextMock,
+  setLibraries = setLibrariesMock,
   setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   render(
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       <LibrariesContext.Provider
-        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
         <RegistryAdmin />
       </LibrariesContext.Provider>
@@ -32,15 +32,15 @@ const renderRegistryAdminWithContext = (
 
 const renderRegistryAdminForSnapshot = (
   accessToken: string,
-  librariesInContext: LibraryData[],
+  libraries: LibraryData[],
   setAccessToken = setAccessTokenMock,
-  setLibrariesInContext = setLibrariesInContextMock,
+  setLibraries = setLibrariesMock,
   setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   return (
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
       <LibrariesContext.Provider
-        value={{ librariesInContext, setLibrariesInContext, setUpdatedLibrary }}
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
         <RegistryAdmin />
       </LibrariesContext.Provider>

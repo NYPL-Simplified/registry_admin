@@ -10,11 +10,8 @@ import Header from './Header';
 import LibrariesList from './LibrariesList';
 import LoginForm from './LoginForm';
 import { FETCH_LIBRARIES, REFRESH } from '../constants';
-import { TokenContext, TokenContextValues } from '../context/tokenContext';
-import {
-  LibrariesContext,
-  LibrariesContextValues,
-} from '../context/librariesContext';
+import useTokenContext from '../context/tokenContext';
+import useLibrariesContext from '../context/librariesContext';
 export interface LibraryData {
   areas: {
     focus: string[];
@@ -56,12 +53,8 @@ const RegistryAdmin = () => {
   // with full details, or as a table of names and patron counts.
   const [isSimpleList, setIsSimpleList] = useState<boolean>(false);
 
-  const { accessToken, setAccessToken } = useContext(
-    TokenContext
-  ) as TokenContextValues;
-  const { setLibrariesInContext } = useContext(
-    LibrariesContext
-  ) as LibrariesContextValues;
+  const { accessToken, setAccessToken } = useTokenContext();
+  const { setLibraries } = useLibrariesContext();
 
   // The logout function resets the accessToken to an empty string and deletes
   // the refreshToken from cookie storage. This causes the LoginForm to be
@@ -126,7 +119,7 @@ const RegistryAdmin = () => {
         }
       })
       .then((data) => {
-        setLibrariesInContext(data.libraries);
+        setLibraries(data.libraries);
         setIsLoading(false);
       })
       .catch((err) => {
