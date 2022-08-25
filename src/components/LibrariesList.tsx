@@ -4,17 +4,23 @@ import {
   List,
   SkeletonLoader,
   Table,
+  Text,
 } from '@nypl/design-system-react-components';
 
 import { LibraryData } from './RegistryAdmin';
 import LibraryDetails from './LibraryDetails';
 
 interface LibrariesListProps {
+  error: string;
   isSimpleList: boolean;
   libraries: LibraryData[];
 }
 
-const LibrariesList = ({ isSimpleList, libraries }: LibrariesListProps) => {
+const LibrariesList = ({
+  error,
+  isSimpleList,
+  libraries,
+}: LibrariesListProps) => {
   // isLoading is a flag used to render the SkeletonLoader while the app tries to
   // refresh the accessToken.
   const [isLoadingLibraries, setIsLoadingLibraries] = useState<boolean>(true);
@@ -31,6 +37,7 @@ const LibrariesList = ({ isSimpleList, libraries }: LibrariesListProps) => {
   }, [libraries]);
 
   useEffect(() => {
+    // Once we have libraries, the SkeletonLoader should no longer display.
     if (libraries.length) {
       setIsLoadingLibraries(false);
     } else {
@@ -38,9 +45,18 @@ const LibrariesList = ({ isSimpleList, libraries }: LibrariesListProps) => {
     }
   }, [libraries.length]);
 
+  // If there's an error, the SkeletonLoader should not be displayed.
+  useEffect(() => {
+    if (error) {
+      setIsLoadingLibraries(false);
+    }
+  }, [error]);
+
   return (
     <>
-      {isLoadingLibraries ? (
+      {error ? (
+        <Text __css={{ color: 'ui.error.primary' }}>{error}</Text>
+      ) : isLoadingLibraries ? (
         <SkeletonLoader headingSize={20} showImage={false} />
       ) : isSimpleList ? (
         <Table

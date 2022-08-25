@@ -7,7 +7,9 @@ import LibrariesList from '../LibrariesList';
 
 describe('LibrariesList, default view', () => {
   beforeEach(() => {
-    render(<LibrariesList isSimpleList={false} libraries={libraries} />);
+    render(
+      <LibrariesList error='' isSimpleList={false} libraries={libraries} />
+    );
   });
 
   it('renders a list of accordions', () => {
@@ -67,7 +69,7 @@ describe('LibrariesList, default view', () => {
 
 describe('LibrariesList, simple view', () => {
   beforeEach(() => {
-    render(<LibrariesList isSimpleList libraries={libraries} />);
+    render(<LibrariesList error='' isSimpleList libraries={libraries} />);
   });
 
   it('renders a table of libraries', () => {
@@ -88,14 +90,44 @@ describe('LibrariesList, simple view', () => {
   });
 });
 
+describe('LibrariesList, error', () => {
+  beforeEach(() => {
+    render(
+      <LibrariesList
+        error='There was a problem fetching the libraries. Try refreshing the page, or logging in again.'
+        isSimpleList={false}
+        libraries={[]}
+      />
+    );
+  });
+
+  it('displays the error to the user when present', () => {
+    const error = screen.getByText(
+      /there was a problem fetching the libraries/i
+    );
+
+    expect(error).toBeInTheDocument();
+  });
+
+  it('does not display the SkeletonLoader when error is present', () => {
+    const skeletonLoader = screen.queryByTestId('librariesSkeleton');
+
+    expect(skeletonLoader).not.toBeInTheDocument();
+  });
+});
+
 describe('LibrariesList Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
     const defaultList = renderer
-      .create(<LibrariesList isSimpleList={false} libraries={libraries} />)
+      .create(
+        <LibrariesList error='' isSimpleList={false} libraries={libraries} />
+      )
       .toJSON();
 
     const simpleList = renderer
-      .create(<LibrariesList isSimpleList={true} libraries={libraries} />)
+      .create(
+        <LibrariesList error='' isSimpleList={true} libraries={libraries} />
+      )
       .toJSON();
 
     expect(defaultList).toMatchSnapshot();
