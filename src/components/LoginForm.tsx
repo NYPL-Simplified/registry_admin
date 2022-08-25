@@ -11,7 +11,7 @@ import {
 } from '@nypl/design-system-react-components';
 
 import { LOGIN } from '../constants';
-import { TokenContext, TokenContextValues } from '../context/tokenContext';
+import useTokenContext from '../context/tokenContext';
 
 interface LoginFormProps {
   error: string;
@@ -37,7 +37,7 @@ const LoginForm = ({ error, setError }: LoginFormProps) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const { setAccessToken } = useContext(TokenContext) as TokenContextValues;
+  const { setAccessToken } = useTokenContext();
 
   const login = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

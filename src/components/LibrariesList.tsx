@@ -9,21 +9,19 @@ import {
 
 import { LibraryData } from './RegistryAdmin';
 import LibraryDetails from './LibraryDetails';
+import useLibrariesContext from '../context/librariesContext';
 
 interface LibrariesListProps {
   error: string;
   isSimpleList: boolean;
-  libraries: LibraryData[];
 }
 
-const LibrariesList = ({
-  error,
-  isSimpleList,
-  libraries,
-}: LibrariesListProps) => {
+const LibrariesList = ({ error, isSimpleList }: LibrariesListProps) => {
   // isLoading is a flag used to render the SkeletonLoader while the app tries to
   // refresh the accessToken.
   const [isLoadingLibraries, setIsLoadingLibraries] = useState<boolean>(true);
+
+  const { libraries } = useLibrariesContext();
 
   const returnListData = useCallback(() => {
     const listData: string[][] = [];
@@ -32,7 +30,6 @@ const LibrariesList = ({
       const libraryNameandCount = [name, number_of_patrons];
       listData.push(libraryNameandCount);
     });
-
     return listData;
   }, [libraries]);
 
@@ -70,7 +67,7 @@ const LibrariesList = ({
             const { name } = library.basic_info;
             const { registry_stage: registryStage } = library.stages;
             return (
-              <li key={name}>
+              <li key={library.uuid}>
                 <Accordion
                   accordionData={[
                     {

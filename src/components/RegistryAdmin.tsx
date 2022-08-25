@@ -10,7 +10,8 @@ import Header from './Header';
 import LibrariesList from './LibrariesList';
 import LoginForm from './LoginForm';
 import { FETCH_LIBRARIES, REFRESH } from '../constants';
-import { TokenContext, TokenContextValues } from '../context/tokenContext';
+import useTokenContext from '../context/tokenContext';
+import useLibrariesContext from '../context/librariesContext';
 export interface LibraryData {
   areas: {
     focus: string[];
@@ -27,8 +28,8 @@ export interface LibraryData {
     timestamp: string;
   };
   stages: {
-    library_stage: 'testing' | 'production' | 'canceled';
-    registry_stage: 'testing' | 'production' | 'canceled';
+    library_stage: 'testing' | 'production' | 'cancelled';
+    registry_stage: 'testing' | 'production' | 'cancelled';
   };
   urls_and_contact: {
     authentication_url: string;
@@ -54,11 +55,8 @@ const RegistryAdmin = () => {
   // with full details, or as a table of names and patron counts.
   const [isSimpleList, setIsSimpleList] = useState<boolean>(false);
 
-  const [libraries, setLibraries] = useState<LibraryData[]>([]);
-
-  const { accessToken, setAccessToken } = useContext(
-    TokenContext
-  ) as TokenContextValues;
+  const { accessToken, setAccessToken } = useTokenContext();
+  const { setLibraries } = useLibrariesContext();
 
   // The logout function resets the accessToken to an empty string and deletes
   // the refreshToken from cookie storage. This causes the LoginForm to be
@@ -157,32 +155,27 @@ const RegistryAdmin = () => {
       {isLoading ? (
         <SkeletonLoader data-testid='librariesSkeleton' />
       ) : (
-        <>
-          <SkeletonLoader />
-          <TemplateAppContainer
-            header={<Header />}
-            contentTop={
-              accessToken ? (
+        <TemplateAppContainer
+          header={<Header />}
+          contentTop={
+            accessToken ? (
+              <>
                 <ActionBar
                   logout={logout}
                   isSimpleList={isSimpleList}
                   setIsSimpleList={setIsSimpleList}
                 />
-              ) : undefined
-            }
-            contentPrimary={
-              accessToken ? (
-                <LibrariesList
-                  error={error}
-                  isSimpleList={isSimpleList}
-                  libraries={libraries}
-                />
-              ) : (
-                <LoginForm error={error} setError={setError} />
-              )
-            }
-          />
-        </>
+              </>
+            ) : undefined
+          }
+          contentPrimary={
+            accessToken ? (
+              <LibrariesList error={error} isSimpleList={isSimpleList} />
+            ) : (
+              <LoginForm error={error} setError={setError} />
+            )
+          }
+        />
       )}
     </>
   );

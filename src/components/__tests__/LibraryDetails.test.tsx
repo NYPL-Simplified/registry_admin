@@ -1,13 +1,66 @@
 import * as React from 'react';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import libraries from '../../../data/mockData';
+import mockLibraries from '../../../data/mockData';
 import LibraryDetails from '../LibraryDetails';
+import { TokenContext } from '../../context/tokenContext';
+import { LibrariesContext } from '../../context/librariesContext';
+
+const mockFormData = new FormData();
+mockFormData.append('uuid', '1');
+mockFormData.append('Library Stage', 'testing');
+mockFormData.append('Registry Stage', 'production');
+
+const setAccessTokenMock = jest.fn();
+const setLibrariesMock = jest.fn();
+const setUpdatedLibraryMock = jest.fn();
+
+const renderLibraryDetailsWithContext = (
+  accessToken: string,
+  libraries = mockLibraries,
+  setAccessToken = setAccessTokenMock,
+  setLibraries = setLibrariesMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
+) => {
+  render(
+    <TokenContext.Provider value={{ accessToken, setAccessToken }}>
+      <LibrariesContext.Provider
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
+      >
+        <LibraryDetails library={libraries[0]} />
+      </LibrariesContext.Provider>
+    </TokenContext.Provider>
+  );
+};
+
+const renderLibraryDetailsForSnapshot = (
+  accessToken: string,
+  libraries = mockLibraries,
+  setAccessToken = setAccessTokenMock,
+  setLibraries = setLibrariesMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
+) => {
+  return (
+    <TokenContext.Provider value={{ accessToken, setAccessToken }}>
+      <LibrariesContext.Provider
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
+      >
+        <LibraryDetails library={libraries[0]} />
+      </LibrariesContext.Provider>
+    </TokenContext.Provider>
+  );
+};
 
 describe('LibraryRegistryPage', () => {
   beforeEach(() => {
-    render(<LibraryDetails library={libraries[0]} />);
+    renderLibraryDetailsWithContext('mockAccessToken');
   });
 
   it('renders the library details correctly', () => {
@@ -50,12 +103,52 @@ describe('LibraryRegistryPage', () => {
     expect(tabPanel).toBeInTheDocument();
     expect(tabPanel).toHaveTextContent(/focus/i);
   });
+
+  it('makes the appropriate requests if the user changes the values of Library or Registry Stage', async () => {
+    (global as any).fetch = jest
+      .fn()
+      .mockReturnValueOnce(
+        Promise.resolve({
+          ok: true,
+          status: 200,
+        })
+      )
+      .mockReturnValueOnce(
+        Promise.resolve({
+          json: () => Promise.resolve(mockLibraries[0]),
+          ok: true,
+          status: 200,
+        })
+      );
+
+    const selects = screen.getAllByRole('combobox');
+    const libraryStageSelect = selects[0];
+
+    fireEvent.change(libraryStageSelect, { target: { value: 'testing' } });
+
+    await waitFor(() =>
+      expect(fetch).toHaveBeenCalledWith(process.env.UPDATE_LIBRARY_STAGE, {
+        body: mockFormData,
+        headers: { Authorization: 'Bearer mockAccessToken' },
+        method: 'POST',
+      })
+    );
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledWith(
+        `${process.env.REGISTRY_API_DOMAIN}/libraries/1`,
+        {
+          headers: { Authorization: 'Bearer mockAccessToken' },
+        }
+      );
+    });
+  });
 });
 
 describe('LibraryDetails Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
     const page = renderer
-      .create(<LibraryDetails library={libraries[0]} />)
+      .create(renderLibraryDetailsForSnapshot('mockAccessToken'))
       .toJSON();
     expect(page).toMatchSnapshot();
   });

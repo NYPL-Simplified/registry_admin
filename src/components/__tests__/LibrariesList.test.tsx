@@ -2,14 +2,60 @@ import * as React from 'react';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import libraries from '../../../data/mockData';
+import mockLibraries from '../../../data/mockData';
+import { LibrariesContext } from '../../context/librariesContext';
 import LibrariesList from '../LibrariesList';
+import { TokenContext } from '../../context/tokenContext';
+
+const setAccessTokenMock = jest.fn();
+const setLibrariesMock = jest.fn();
+const setUpdatedLibraryMock = jest.fn();
+const mockError =
+  'There was a problem fetching the libraries. Try refreshing the page, or logging in again.';
+
+const renderLibrariesListWithContext = (
+  accessToken: string,
+  error = '',
+  isSimpleList = false,
+  libraries = mockLibraries,
+  setAccessToken = setAccessTokenMock,
+  setLibraries = setLibrariesMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
+) => {
+  render(
+    <TokenContext.Provider value={{ accessToken, setAccessToken }}>
+      <LibrariesContext.Provider
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
+      >
+        <LibrariesList error={error} isSimpleList={isSimpleList} />
+      </LibrariesContext.Provider>
+    </TokenContext.Provider>
+  );
+};
+
+const renderLibrariesListForSnapshot = (
+  accessToken: string,
+  error = '',
+  isSimpleList = false,
+  libraries = mockLibraries,
+  setAccessToken = setAccessTokenMock,
+  setLibraries = setLibrariesMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
+) => {
+  return (
+    <TokenContext.Provider value={{ accessToken, setAccessToken }}>
+      <LibrariesContext.Provider
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
+      >
+        <LibrariesList error={error} isSimpleList={isSimpleList} />
+      </LibrariesContext.Provider>
+    </TokenContext.Provider>
+  );
+};
 
 describe('LibrariesList, default view', () => {
   beforeEach(() => {
-    render(
-      <LibrariesList error='' isSimpleList={false} libraries={libraries} />
-    );
+    renderLibrariesListWithContext('mockAccessToken');
   });
 
   it('renders a list of accordions', () => {
@@ -69,7 +115,7 @@ describe('LibrariesList, default view', () => {
 
 describe('LibrariesList, simple view', () => {
   beforeEach(() => {
-    render(<LibrariesList error='' isSimpleList libraries={libraries} />);
+    renderLibrariesListWithContext('mockAccessToken', undefined, true);
   });
 
   it('renders a table of libraries', () => {
@@ -92,13 +138,7 @@ describe('LibrariesList, simple view', () => {
 
 describe('LibrariesList, error', () => {
   beforeEach(() => {
-    render(
-      <LibrariesList
-        error='There was a problem fetching the libraries. Try refreshing the page, or logging in again.'
-        isSimpleList={false}
-        libraries={[]}
-      />
-    );
+    renderLibrariesListWithContext('mockAccessToken', mockError);
   });
 
   it('displays the error to the user when present', () => {
@@ -119,18 +159,19 @@ describe('LibrariesList, error', () => {
 describe('LibrariesList Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
     const defaultList = renderer
-      .create(
-        <LibrariesList error='' isSimpleList={false} libraries={libraries} />
-      )
+      .create(renderLibrariesListForSnapshot('mockAccessToken'))
       .toJSON();
 
     const simpleList = renderer
       .create(
-        <LibrariesList error='' isSimpleList={true} libraries={libraries} />
+        renderLibrariesListForSnapshot('mockAccessToken', undefined, true)
       )
       .toJSON();
-
+    const error = renderer
+      .create(renderLibrariesListForSnapshot('mockAccessToken', mockError))
+      .toJSON();
     expect(defaultList).toMatchSnapshot();
     expect(simpleList).toMatchSnapshot();
+    expect(error).toMatchSnapshot();
   });
 });
