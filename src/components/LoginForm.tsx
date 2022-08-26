@@ -53,7 +53,7 @@ const LoginForm = ({ error, setError }: LoginFormProps) => {
     })
       .then((response) => {
         if (response.ok) {
-          /// Reset setError to an empty string just in case it is set to an old
+          // Reset setError to an empty string just in case it is set to an old
           // error.
           setError('');
           return response.json();

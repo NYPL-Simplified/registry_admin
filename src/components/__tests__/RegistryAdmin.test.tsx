@@ -4,8 +4,8 @@ import { act, render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
 import libraries from '../../../data/mockData';
-import { LibrariesContext } from '../../context/librariesContext';
-import RegistryAdmin, { LibraryData } from '../RegistryAdmin';
+import { LibrariesContext, LibraryData } from '../../context/librariesContext';
+import RegistryAdmin from '../RegistryAdmin';
 import { TokenContext } from '../../context/tokenContext';
 
 const setAccessTokenMock = jest.fn();

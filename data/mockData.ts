@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
-
-import { LibraryData } from '../src/components/RegistryAdmin';
+import { LibraryData } from '../src/context/librariesContext';
 
 const mockLibraries: LibraryData[] = [
   {

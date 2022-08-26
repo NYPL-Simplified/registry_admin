@@ -11,52 +11,28 @@ import LibrariesList from './LibrariesList';
 import LoginForm from './LoginForm';
 import { FETCH_LIBRARIES, REFRESH } from '../constants';
 import useTokenContext from '../context/tokenContext';
-import useLibrariesContext from '../context/librariesContext';
-export interface LibraryData {
-  areas: {
-    focus: string[];
-    service: string[];
-  };
-  basic_info: {
-    description: string;
-    internal_urn: string;
-    name: string;
-    number_of_patrons: string;
-    online_registration: string;
-    pls_id: string;
-    short_name: string;
-    timestamp: string;
-  };
-  stages: {
-    library_stage: 'testing' | 'production' | 'cancelled';
-    registry_stage: 'testing' | 'production' | 'cancelled';
-  };
-  urls_and_contact: {
-    authentication_url: string;
-    contact_email: string | null;
-    contact_validated: string;
-    copyright_email: string | null;
-    copyright_validated: string;
-    help_email: string | null;
-    help_validated: string;
-    opds_url: string;
-    web_url: string;
-  };
-  uuid: string;
-}
+// import useLibrariesContext from '../context/librariesContext';
+import {
+  LibrariesContext,
+  LibrariesContextValues,
+} from '../context/librariesContext';
 
 const RegistryAdmin = () => {
   // Error feedback displayed to the user, if necessary.
   const [error, setError] = useState<string>('');
   // If isLoading is true, a SkeletonLoader is displayed. isLoading is set to
-  // false after fetching and/or accessToken refreshing is completed.
+  // false after fetch calls are completed.
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // isSimpleList determines whether the libraries will be rendered as accordions
-  // with full details, or as a table of names and patron counts.
+  // with full details (false), or as a table of names and patron counts (true).
   const [isSimpleList, setIsSimpleList] = useState<boolean>(false);
 
   const { accessToken, setAccessToken } = useTokenContext();
-  const { setLibraries } = useLibrariesContext();
+  // const { setLibraries } = useLibrariesContext();
+
+  const { setLibraries } = useContext(
+    LibrariesContext
+  ) as LibrariesContextValues;
 
   // The logout function resets the accessToken to an empty string and deletes
   // the refreshToken from cookie storage. This causes the LoginForm to be

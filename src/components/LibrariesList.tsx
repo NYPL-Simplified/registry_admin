@@ -7,9 +7,8 @@ import {
   Text,
 } from '@nypl/design-system-react-components';
 
-import { LibraryData } from './RegistryAdmin';
 import LibraryDetails from './LibraryDetails';
-import useLibrariesContext from '../context/librariesContext';
+import useLibrariesContext, { LibraryData } from '../context/librariesContext';
 
 interface LibrariesListProps {
   error: string;

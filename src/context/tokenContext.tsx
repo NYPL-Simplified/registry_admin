@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, useState } from 'react';
+import React, { createContext, Dispatch, useContext, useState } from 'react';
 
 type TokenContextValues = {
   accessToken: string;
@@ -24,7 +24,7 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
 };
 
 const useTokenContext = () => {
-  const context = React.useContext(TokenContext);
+  const context = useContext(TokenContext);
   if (typeof context === 'undefined') {
     throw new Error('useLibraries must be used within a LibraryProvider');
   }
