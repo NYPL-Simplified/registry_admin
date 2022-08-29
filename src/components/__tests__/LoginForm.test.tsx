@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer';
 import LoginForm from '../LoginForm';
 import { TokenContext } from '../../context/tokenContext';
 
+const setErrorMock = jest.fn();
 const setAccessTokenMock = jest.fn();
 const mockFormData = new FormData();
 mockFormData.append('username', 'mockUser');
@@ -12,22 +13,24 @@ mockFormData.append('password', 'mockPassword');
 
 const renderLoginFormWithContext = (
   accessToken: string,
+  error = '',
   setAccessToken = setAccessTokenMock
 ) => {
   return render(
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
-      <LoginForm />
+      <LoginForm error={error} setError={setErrorMock} />
     </TokenContext.Provider>
   );
 };
 
 const renderLoginForSnapshot = (
   accessToken: string,
+  error = '',
   setAccessToken = setAccessTokenMock
 ) => {
   return (
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
-      <LoginForm />
+      <LoginForm error={error} setError={setErrorMock} />
     </TokenContext.Provider>
   );
 };
@@ -86,15 +89,19 @@ describe('LoginForm, succcessful API call', () => {
 });
 
 describe('LoginForm, unsuccessful API call', () => {
-  it('shows the user an error if the they cannot be authenticated', async () => {
+  it('shows the user an error if they cannot be authenticated', async () => {
     const log = jest.spyOn(console, 'log');
 
     (global as any).fetch = jest.fn().mockReturnValueOnce(
       Promise.resolve({
+        ok: false,
         status: 401,
       })
     );
-    renderLoginFormWithContext('');
+    renderLoginFormWithContext(
+      '',
+      'Your username or password is incorrect. Please try again.'
+    );
     const usernameInput = screen.getByRole('textbox');
     const passwordInput = screen.getByLabelText(/password/i);
     const submitButton = screen.getByRole('button');
@@ -122,7 +129,15 @@ describe('LoginForm, unsuccessful API call', () => {
 describe('Login Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
     const loginPage = renderer.create(renderLoginForSnapshot('')).toJSON();
+    const loginPageWithError = renderer
+      .create(
+        renderLoginForSnapshot(
+          'Your username or password is incorrect. Please try again.'
+        )
+      )
+      .toJSON();
 
     expect(loginPage).toMatchSnapshot();
+    expect(loginPageWithError).toMatchSnapshot();
   });
 });

@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Cookies from 'js-cookie';
 import {
   Box,
@@ -76,9 +76,7 @@ const LoginForm = ({ error, setError }: LoginFormProps) => {
           secure: true,
         });
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => console.log(err.message));
   };
 
   return (

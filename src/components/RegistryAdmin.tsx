@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import {
   SkeletonLoader,
@@ -6,16 +6,12 @@ import {
 } from '@nypl/design-system-react-components';
 
 import ActionBar from './ActionBar';
+import { FETCH_LIBRARIES, REFRESH } from '../constants';
 import Header from './Header';
 import LibrariesList from './LibrariesList';
 import LoginForm from './LoginForm';
-import { FETCH_LIBRARIES, REFRESH } from '../constants';
 import useTokenContext from '../context/tokenContext';
-// import useLibrariesContext from '../context/librariesContext';
-import {
-  LibrariesContext,
-  LibrariesContextValues,
-} from '../context/librariesContext';
+import useLibrariesContext from '../context/librariesContext';
 
 const RegistryAdmin = () => {
   // Error feedback displayed to the user, if necessary.
@@ -28,11 +24,7 @@ const RegistryAdmin = () => {
   const [isSimpleList, setIsSimpleList] = useState<boolean>(false);
 
   const { accessToken, setAccessToken } = useTokenContext();
-  // const { setLibraries } = useLibrariesContext();
-
-  const { setLibraries } = useContext(
-    LibrariesContext
-  ) as LibrariesContextValues;
+  const { setLibraries } = useLibrariesContext();
 
   // The logout function resets the accessToken to an empty string and deletes
   // the refreshToken from cookie storage. This causes the LoginForm to be
@@ -129,7 +121,11 @@ const RegistryAdmin = () => {
   return (
     <>
       {isLoading ? (
-        <SkeletonLoader data-testid='librariesSkeleton' />
+        <SkeletonLoader
+          data-testid='librariesSkeleton'
+          showHeading={false}
+          showContent={false}
+        />
       ) : (
         <TemplateAppContainer
           header={<Header />}

@@ -58,7 +58,7 @@ const renderLibraryDetailsForSnapshot = (
   );
 };
 
-describe('LibraryRegistryPage', () => {
+describe('LibraryDetails', () => {
   beforeEach(() => {
     renderLibraryDetailsWithContext('mockAccessToken');
   });
@@ -126,13 +126,11 @@ describe('LibraryRegistryPage', () => {
 
     fireEvent.change(libraryStageSelect, { target: { value: 'testing' } });
 
-    await waitFor(() =>
-      expect(fetch).toHaveBeenCalledWith(process.env.UPDATE_LIBRARY_STAGE, {
-        body: mockFormData,
-        headers: { Authorization: 'Bearer mockAccessToken' },
-        method: 'POST',
-      })
-    );
+    expect(fetch).toHaveBeenCalledWith(process.env.UPDATE_LIBRARY_STAGE, {
+      body: mockFormData,
+      headers: { Authorization: 'Bearer mockAccessToken' },
+      method: 'POST',
+    });
 
     await waitFor(() => {
       expect(fetch).toHaveBeenCalledWith(
@@ -141,6 +139,71 @@ describe('LibraryRegistryPage', () => {
           headers: { Authorization: 'Bearer mockAccessToken' },
         }
       );
+    });
+  });
+
+  it('shows an error message if the the library update request fails', async () => {
+    const log = jest.spyOn(console, 'log');
+
+    (global as any).fetch = jest.fn().mockReturnValueOnce(
+      Promise.resolve({
+        ok: false,
+        status: 500,
+      })
+    );
+
+    const selects = screen.getAllByRole('combobox');
+    const libraryStageSelect = selects[0];
+
+    fireEvent.change(libraryStageSelect, { target: { value: 'production' } });
+
+    expect(fetch).toHaveBeenCalledWith(
+      process.env.UPDATE_LIBRARY_STAGE,
+      expect.objectContaining({
+        body: mockFormData,
+        headers: { Authorization: 'Bearer mockAccessToken' },
+        method: 'POST',
+      })
+    );
+
+    await waitFor(() => {
+      expect(log).toHaveBeenCalledWith(
+        'There was an issue updating this library.'
+      );
+      expect(screen.getByText(/library did not update/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows an error if there is an issue fetching the updated library', async () => {
+    const log = jest.spyOn(console, 'log');
+
+    (global as any).fetch = jest
+      .fn()
+      .mockReturnValueOnce(
+        Promise.resolve({
+          ok: true,
+          status: 200,
+        })
+      )
+      .mockReturnValueOnce(
+        Promise.resolve({
+          ok: false,
+          status: 500,
+        })
+      );
+
+    const selects = screen.getAllByRole('combobox');
+    const libraryStageSelect = selects[0];
+
+    fireEvent.change(libraryStageSelect, { target: { value: 'cancelled' } });
+
+    await waitFor(() => {
+      expect(log).toHaveBeenCalledWith(
+        'There was an issue fetching the recently updated library.'
+      );
+      expect(
+        screen.getByText(/We're having trouble displaying the updated stage/i)
+      ).toBeInTheDocument();
     });
   });
 });

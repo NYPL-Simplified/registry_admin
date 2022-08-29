@@ -92,5 +92,124 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
       </div>
     </div>
   </form>
+  <div
+    aria-atomic={false}
+    aria-live="off"
+    className="css-1oqrfgm"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "",
+      }
+    }
+    data-isinvalid={false}
+    id="loginError"
+  />
+</div>
+`;
+
+exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
+<div
+  className="css-jgblkz"
+>
+  <h2
+    className="chakra-heading css-1iatin6"
+  >
+    Log In
+  </h2>
+  <form
+    aria-label="form"
+    className="css-0"
+    id="login"
+    onSubmit={[Function]}
+  >
+    <div
+      className="css-fadkce"
+      id="login-parent"
+    >
+      <div
+        className="css-l5w1vc"
+        id="login-child0"
+      >
+        <div
+          className="css-5eatfv"
+          id="username-wrapper"
+        >
+          <label
+            className="css-1xdhyk6"
+            htmlFor="username"
+            id="username-label"
+          >
+            Username
+          </label>
+          <input
+            aria-required={true}
+            className="chakra-input css-0"
+            disabled={false}
+            id="username"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            step={null}
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="css-l5w1vc"
+        id="login-child1"
+      >
+        <div
+          className="css-5eatfv"
+          id="password-wrapper"
+        >
+          <label
+            className="css-1xdhyk6"
+            htmlFor="password"
+            id="password-label"
+          >
+            Password
+          </label>
+          <input
+            aria-required={true}
+            className="chakra-input css-0"
+            disabled={false}
+            id="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            step={null}
+            type="password"
+          />
+        </div>
+      </div>
+      <div
+        className="css-l5w1vc"
+        id="login-child2"
+      >
+        <button
+          className="chakra-button css-65jkji"
+          data-testid="button"
+          id="submit"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+  <div
+    aria-atomic={false}
+    aria-live="off"
+    className="css-1oqrfgm"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "",
+      }
+    }
+    data-isinvalid={false}
+    id="loginError"
+  />
 </div>
 `;

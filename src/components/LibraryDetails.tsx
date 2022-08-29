@@ -65,7 +65,10 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     },
   ];
 
-  const fetchUpdatedLibrary = () => {
+  const fetchUpdatedLibrary = (stage: string) => {
+    const errorMessage =
+      "We're having trouble displaying the updated stage. Try refreshing the page.";
+
     fetch(`${process.env.REGISTRY_API_DOMAIN}/libraries/${uuid}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
@@ -73,7 +76,12 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('There was an issue fetching the updated library.');
+          stage === 'libraryStage'
+            ? setLibraryStageError(errorMessage)
+            : setRegistryStageError(errorMessage);
+          throw new Error(
+            'There was an issue fetching the recently updated library.'
+          );
         }
       })
       .then((response) => {
@@ -81,7 +89,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
         // which updates the libraries in Context to include the updatedLibrary.
         setUpdatedLibrary(response);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   };
 
   const handleStageChange = (stage: string, value: string) => {
@@ -113,7 +121,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
           setRegistryStageError('');
           // If the POST request is successful, we'll follow it with a GET request
           // to fetch the library that was just updated.
-          fetchUpdatedLibrary();
+          fetchUpdatedLibrary(stage);
         } else {
           stage === 'libraryStage'
             ? setLibraryStageError(errorMessage)
@@ -121,7 +129,7 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
           throw new Error('There was an issue updating this library.');
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   };
 
   return (

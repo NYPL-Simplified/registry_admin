@@ -53,7 +53,11 @@ const LibrariesList = ({ error, isSimpleList }: LibrariesListProps) => {
       {error ? (
         <Text __css={{ color: 'ui.error.primary' }}>{error}</Text>
       ) : isLoadingLibraries ? (
-        <SkeletonLoader headingSize={20} showImage={false} />
+        <SkeletonLoader
+          headingSize={20}
+          showContent={false}
+          showImage={false}
+        />
       ) : isSimpleList ? (
         <Table
           columnHeaders={['Library Name', 'Patron Count']}

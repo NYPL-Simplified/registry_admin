@@ -38,7 +38,7 @@ export interface LibraryData {
   uuid: string;
 }
 
-export type LibrariesContextValues = {
+type LibrariesContextValues = {
   libraries: LibraryData[];
   setLibraries: Dispatch<React.SetStateAction<LibraryData[]>>;
   setUpdatedLibrary: Dispatch<React.SetStateAction<LibraryData | undefined>>;
@@ -53,7 +53,6 @@ export const LibrariesContext = createContext<
 >(undefined);
 
 export const LibrariesProvider = ({ children }: LibrariesProviderProps) => {
-  console.log('in libraries provider');
   const [updatedLibrary, setUpdatedLibrary] = useState<
     LibraryData | undefined
   >();
