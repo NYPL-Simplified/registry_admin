@@ -10,6 +10,7 @@
 - SIMPLY-4069: Create functional login page.
 - SIMPLY-4067: Fetch real library data.
 - SIMPLY-4162: Make POST requests when a user changes a library's stage.
+- SIMPLY-4184: Add QA testing checklist to README.
 
 ## 1.4.15
 
