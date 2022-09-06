@@ -10,9 +10,12 @@ import { TokenContext } from '../../context/tokenContext';
 const setAccessTokenMock = jest.fn();
 const setLibrariesMock = jest.fn();
 const setUpdatedLibraryMock = jest.fn();
+const mockError =
+  'There was a problem fetching the libraries. Try refreshing the page, or logging in again.';
 
 const renderLibrariesListWithContext = (
   accessToken: string,
+  error = '',
   isSimpleList = false,
   libraries = mockLibraries,
   setAccessToken = setAccessTokenMock,
@@ -24,7 +27,7 @@ const renderLibrariesListWithContext = (
       <LibrariesContext.Provider
         value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
-        <LibrariesList isSimpleList={isSimpleList} />
+        <LibrariesList error={error} isSimpleList={isSimpleList} />
       </LibrariesContext.Provider>
     </TokenContext.Provider>
   );
@@ -32,6 +35,7 @@ const renderLibrariesListWithContext = (
 
 const renderLibrariesListForSnapshot = (
   accessToken: string,
+  error = '',
   isSimpleList = false,
   libraries = mockLibraries,
   setAccessToken = setAccessTokenMock,
@@ -43,7 +47,7 @@ const renderLibrariesListForSnapshot = (
       <LibrariesContext.Provider
         value={{ libraries, setLibraries, setUpdatedLibrary }}
       >
-        <LibrariesList isSimpleList={isSimpleList} />
+        <LibrariesList error={error} isSimpleList={isSimpleList} />
       </LibrariesContext.Provider>
     </TokenContext.Provider>
   );
@@ -111,7 +115,7 @@ describe('LibrariesList, default view', () => {
 
 describe('LibrariesList, simple view', () => {
   beforeEach(() => {
-    renderLibrariesListWithContext('mockAccessToken', true);
+    renderLibrariesListWithContext('mockAccessToken', undefined, true);
   });
 
   it('renders a table of libraries', () => {
@@ -132,6 +136,26 @@ describe('LibrariesList, simple view', () => {
   });
 });
 
+describe('LibrariesList, error', () => {
+  beforeEach(() => {
+    renderLibrariesListWithContext('mockAccessToken', mockError);
+  });
+
+  it('displays the error to the user when present', () => {
+    const error = screen.getByText(
+      /there was a problem fetching the libraries/i
+    );
+
+    expect(error).toBeInTheDocument();
+  });
+
+  it('does not display the SkeletonLoader when error is present', () => {
+    const skeletonLoader = screen.queryByTestId('librariesSkeleton');
+
+    expect(skeletonLoader).not.toBeInTheDocument();
+  });
+});
+
 describe('LibrariesList Snapshot', () => {
   it('renders the UI snapshot correctly', () => {
     const defaultList = renderer
@@ -139,10 +163,15 @@ describe('LibrariesList Snapshot', () => {
       .toJSON();
 
     const simpleList = renderer
-      .create(renderLibrariesListForSnapshot('mockAccessToken', true))
+      .create(
+        renderLibrariesListForSnapshot('mockAccessToken', undefined, true)
+      )
       .toJSON();
-
+    const error = renderer
+      .create(renderLibrariesListForSnapshot('mockAccessToken', mockError))
+      .toJSON();
     expect(defaultList).toMatchSnapshot();
     expect(simpleList).toMatchSnapshot();
+    expect(error).toMatchSnapshot();
   });
 });
