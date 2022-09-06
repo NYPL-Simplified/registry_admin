@@ -70,6 +70,8 @@ To run the tests, perform `npm test`.
 
 We use Travis CI for continuous integration. Any pull requests submitted must have tests and those tests must pass on Travis CI.
 
+Manual tests and expectations for the Registry Admin's functionality can be found [here](https://docs.google.com/spreadsheets/d/1q9joHeNZpkTsZU-u1NwPBRUFYcxvRo23eP2vw79xPG4/edit#gid=0).
+
 ## License
 
 ```
