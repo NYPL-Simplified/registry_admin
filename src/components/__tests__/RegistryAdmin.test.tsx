@@ -4,36 +4,53 @@ import { act, render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
 import libraries from '../../../data/mockData';
-import RegistryAdmin from '../RegistryAdmin';
+import { LibrariesContext } from '../../context/librariesContext';
+import RegistryAdmin, { LibraryData } from '../RegistryAdmin';
 import { TokenContext } from '../../context/tokenContext';
 
 const setAccessTokenMock = jest.fn();
+const setLibrariesMock = jest.fn();
+const setUpdatedLibraryMock = jest.fn();
 
 const renderRegistryAdminWithContext = (
   accessToken: string,
-  setAccessToken = setAccessTokenMock
+  libraries: LibraryData[],
+  setAccessToken = setAccessTokenMock,
+  setLibraries = setLibrariesMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   render(
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
-      <RegistryAdmin />
+      <LibrariesContext.Provider
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
+      >
+        <RegistryAdmin />
+      </LibrariesContext.Provider>
     </TokenContext.Provider>
   );
 };
 
-const renderRegistryForSnapshot = (
+const renderRegistryAdminForSnapshot = (
   accessToken: string,
-  setAccessToken = setAccessTokenMock
+  libraries: LibraryData[],
+  setAccessToken = setAccessTokenMock,
+  setLibraries = setLibrariesMock,
+  setUpdatedLibrary = setUpdatedLibraryMock
 ) => {
   return (
     <TokenContext.Provider value={{ accessToken, setAccessToken }}>
-      <RegistryAdmin />
+      <LibrariesContext.Provider
+        value={{ libraries, setLibraries, setUpdatedLibrary }}
+      >
+        <RegistryAdmin />
+      </LibrariesContext.Provider>
     </TokenContext.Provider>
   );
 };
 
 describe('RegistryAdmin, with no access token', () => {
   beforeEach(() => {
-    renderRegistryAdminWithContext('');
+    renderRegistryAdminWithContext('', []);
   });
 
   it('renders the header', () => {
@@ -75,7 +92,9 @@ describe('RegistryAdmin, with access token', () => {
       })
     );
 
-    await act(() => renderRegistryAdminWithContext('mockAccessToken'));
+    await act(() =>
+      renderRegistryAdminWithContext('mockAccessToken', libraries)
+    );
   });
 
   it('renders the header', () => {
@@ -112,7 +131,7 @@ describe('RegistryAdmin, with no access token, but with refresh token', () => {
       })
     );
 
-    await act(() => renderRegistryAdminWithContext(''));
+    await act(() => renderRegistryAdminWithContext('', []));
 
     expect(fetch).toHaveBeenCalledWith(process.env.REFRESH, {
       headers: { Authorization: 'Bearer mockRefreshToken' },
@@ -135,13 +154,15 @@ describe('RegistryAdmin Snapshot', () => {
     let loginPage;
     let adminPage;
     await act(() => {
-      loginPage = renderer.create(renderRegistryForSnapshot('')).toJSON();
+      loginPage = renderer
+        .create(renderRegistryAdminForSnapshot('', []))
+        .toJSON();
       expect(loginPage).toMatchSnapshot();
     });
 
     await act(() => {
       adminPage = renderer
-        .create(renderRegistryForSnapshot('mockAccessToken'))
+        .create(renderRegistryAdminForSnapshot('mockAccessToken', libraries))
         .toJSON();
       expect(adminPage).toMatchSnapshot();
     });

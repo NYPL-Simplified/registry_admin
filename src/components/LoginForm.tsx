@@ -11,7 +11,7 @@ import {
 } from '@nypl/design-system-react-components';
 
 import { LOGIN } from '../constants';
-import { TokenContext, TokenContextValues } from '../context/tokenContext';
+import useTokenContext from '../context/tokenContext';
 
 const backgroundStyles = {
   background: 'section.blogs.primary',
@@ -33,7 +33,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState<string>('');
   const [showLoginError, setShowLoginError] = useState<boolean>(false);
 
-  const { setAccessToken } = useContext(TokenContext) as TokenContextValues;
+  const { setAccessToken } = useTokenContext();
 
   const login = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
