@@ -1,39 +1,14 @@
 # Registry Admin
 
-Web front-end for the Library Registry administrative interface.
-
-<!-- [![npm version](https://badge.fury.io/js/simplified-circulation-web.svg)](https://badge.fury.io/js/simplified-circulation-web)
-
-[![Build Status](https://travis-ci.org/NYPL-Simplified/circulation-web.svg?branch=master)](https://travis-ci.org/NYPL-Simplified/circulation-web) -->
+Web front-end for the [Library Registry](https://github.com/NYPL-Simplified/library_registry).
 
 ## Library Simplified Documentation
 
 To see screenshots, read in-depth documentation, and find out more about the project, check out the [Confluence](https://confluence.nypl.org/display/SIM/) site hosted by The New York Public Library.
 
-## Setup
+## Local Development & Installation
 
-This package is meant to be used with the Library Simplified [Library Registry](https://github.com/NYPL-Simplified/library_registry). The Library Registry is the main server app that runs and exposes endpoints that the Circulation Manager will use and also runs this front-end admin interface application.
-
-### Cloning this repository
-
-As written in the Library Registry [README](https://github.com/NYPL-Simplified/library_registry), you **must** install both repos in the _same_ directory.
-
-Let's say your working path is `~/projects/simplified/registry`, then change directory into the working path:
-
-```sh
-cd ~/projects/simplified/registry
-```
-
-and run:
-
-```sh
-git clone https://github.com/NYPL-Simplified/library_registry.git
-git clone https://github.com/NYPL-Simplified/registry_admin.git
-```
-
-Having both repos in the same directory allows the Library Registry's Docker configuration to read this app for local development.
-
-### Installation
+This project is a React app bundled with parcel.
 
 One the repo is cloned, change directory to `registry_admin` and then install the dependencies.
 
@@ -41,20 +16,6 @@ One the repo is cloned, change directory to `registry_admin` and then install th
 cd registry_admin
 npm install
 ```
-
-### Use Local Development Version
-
-If you're working on the administrative interface and want to test local changes, follow the [Library Registry's README](https://github.com/NYPL-Simplified/library_registry) to run the server through Docker. **You do not need to use `npm link` in this setup.** If both the Library Registry and the Registry Admin are in the same directory, when the server is started through the Docker cluster it'll pick up this repo automatically.
-
-Visit `localhost/admin/` to see the front-end admin interface.
-
-Now you can make front-end changes to this repo and the Docker cluster will pick up any changes that are made. The Docker cluster's local dev server will take care of compiling and updating any new changes made locally for development. Just refresh the page to see updates without having to restart either the `library_registry` or `registry_admin` servers.
-
-## Publishing
-
-This package is [published to npm](https://www.npmjs.com/package/simplified-circulation-web).
-
-To publish a new version, you need to create an npm account and be a collaborator on the package. Then you can run `npm publish` at the root of this repository to release a new version. Speak to an engineering at NYPL to be added as a collaborator in the npm NYPL organization.
 
 ## Accessibility
 
@@ -71,6 +32,22 @@ To run the tests, perform `npm test`.
 We use Travis CI for continuous integration. Any pull requests submitted must have tests and those tests must pass on Travis CI.
 
 Manual tests and expectations for the Registry Admin's functionality can be found [here](https://docs.google.com/spreadsheets/d/1q9joHeNZpkTsZU-u1NwPBRUFYcxvRo23eP2vw79xPG4/edit#gid=0).
+
+## Docker
+
+We build a docker image and push it to AWS for QA and production environments. Sometimes you'll need to build the image locally for testing or debugging.
+
+To build the docker image locally, run
+
+```
+docker build -t registryadmin --build-arg REGISTRY_API_DOMAIN=https://qa-libraryregistry.librarysimplified.org/admin .
+```
+
+To run the docker image, run
+
+```
+docker run -p 1234:1234 registryadmin:latest
+```
 
 ## License
 

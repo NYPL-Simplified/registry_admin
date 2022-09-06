@@ -11,6 +11,7 @@
 - SIMPLY-4067: Fetch real library data.
 - SIMPLY-4162: Make POST requests when a user changes a library's stage.
 - SIMPLY-4184: Add QA testing checklist to README.
+- SIMPLY-4166: Configure AWS deployments
 
 ## 1.4.15
 
