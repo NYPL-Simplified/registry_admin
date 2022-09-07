@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Cookies from 'js-cookie';
 import {
   Box,
@@ -12,6 +12,11 @@ import {
 
 import { LOGIN } from '../constants';
 import useTokenContext from '../context/tokenContext';
+
+interface LoginFormProps {
+  error: string;
+  setError: (error: string) => void;
+}
 
 const backgroundStyles = {
   background: 'section.blogs.primary',
@@ -28,16 +33,16 @@ const errorStyles = {
   textAlign: 'center',
 };
 
-const LoginForm = () => {
+const LoginForm = ({ error, setError }: LoginFormProps) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [showLoginError, setShowLoginError] = useState<boolean>(false);
 
   const { setAccessToken } = useTokenContext();
 
   const login = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    // Create a FormData object to store the username and password for sending
+    // with the login request.
     const body = new FormData();
     body.append('username', username);
     body.append('password', password);
@@ -48,16 +53,23 @@ const LoginForm = () => {
     })
       .then((response) => {
         if (response.ok) {
+          // Reset setError to an empty string just in case it is set to an old
+          // error.
+          setError('');
           return response.json();
         }
         if (response.status >= 400 && response.status < 502) {
-          setShowLoginError(true);
+          // This error will be displayed to the user.
+          setError('Your username or password is incorrect. Please try again.');
         }
         throw new Error(
           'There was a problem authenticating this user in LoginForm.tsx.'
         );
       })
       .then((data) => {
+        // After a successful request, store the two tokens received in their
+        // their appropriate places: the access token in context and the refresh
+        // token in cookies.
         setAccessToken(data.access_token);
         Cookies.set('refreshToken', data.refresh_token, {
           sameSite: 'lax',
@@ -101,15 +113,13 @@ const LoginForm = () => {
           </Button>
         </FormField>
       </Form>
-      {showLoginError && (
-        <HelperErrorText
-          ariaAtomic={false}
-          ariaLive='assertive'
-          id='loginError'
-          text='Your username or password is incorrect.'
-          __css={errorStyles}
-        />
-      )}
+      <HelperErrorText
+        ariaAtomic={false}
+        ariaLive='assertive'
+        id='loginError'
+        text={error && error}
+        __css={errorStyles}
+      />
     </Box>
   );
 };

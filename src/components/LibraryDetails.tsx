@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Form,
@@ -10,10 +10,9 @@ import {
 
 import LibraryDetailsGrid from './LibraryDetailsGrid';
 import StageSelect from './StageSelect';
-import { LibraryData } from './RegistryAdmin';
 import useTokenContext from '../context/tokenContext';
 import { UPDATE_LIBRARY_STAGE } from '../constants';
-import useLibrariesContext from '../context/librariesContext';
+import useLibrariesContext, { LibraryData } from '../context/librariesContext';
 
 interface LibraryDetailsProps {
   library: LibraryData;
@@ -29,6 +28,9 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     areas,
     stages,
   } = library;
+
+  const [libraryStageError, setLibraryStageError] = useState<string>('');
+  const [registryStageError, setRegistryStageError] = useState<string>('');
 
   const { accessToken } = useTokenContext();
   const { setUpdatedLibrary } = useLibrariesContext();
@@ -63,7 +65,10 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     },
   ];
 
-  const fetchUpdatedLibrary = () => {
+  const fetchUpdatedLibrary = (stage: string) => {
+    const errorMessage =
+      "We're having trouble displaying the updated stage. Try refreshing the page.";
+
     fetch(`${process.env.REGISTRY_API_DOMAIN}/libraries/${uuid}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
@@ -71,7 +76,12 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('There was an issue fetching the updated library.');
+          stage === 'libraryStage'
+            ? setLibraryStageError(errorMessage)
+            : setRegistryStageError(errorMessage);
+          throw new Error(
+            'There was an issue fetching the recently updated library.'
+          );
         }
       })
       .then((response) => {
@@ -79,12 +89,12 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
         // which updates the libraries in Context to include the updatedLibrary.
         setUpdatedLibrary(response);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   };
 
   const handleStageChange = (stage: string, value: string) => {
-    // UPDATE_LIBRARY_STAGE endpoint expects the 'Library Stage' and the 'Registry
-    // Stage', even if only one value has been updated.
+    // The UPDATE_LIBRARY_STAGE endpoint expects the 'Library Stage' and the
+    // 'Registry Stage' values, even if only one is being updated.
     const body = new FormData();
     body.append('uuid', uuid);
     body.append(
@@ -96,6 +106,8 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
       stage === 'registryStage' ? value : stages.registry_stage
     );
 
+    const errorMessage = 'Library did not update. Please try again.';
+
     fetch(UPDATE_LIBRARY_STAGE, {
       headers: { Authorization: `Bearer ${accessToken}` },
       method: 'POST',
@@ -103,14 +115,21 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
     })
       .then((response) => {
         if (response.ok) {
+          // Reset errors in state to empty strings just in case they are set
+          // to an old error.
+          setLibraryStageError('');
+          setRegistryStageError('');
           // If the POST request is successful, we'll follow it with a GET request
           // to fetch the library that was just updated.
-          fetchUpdatedLibrary();
+          fetchUpdatedLibrary(stage);
         } else {
+          stage === 'libraryStage'
+            ? setLibraryStageError(errorMessage)
+            : setRegistryStageError(errorMessage);
           throw new Error('There was an issue updating this library.');
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -119,18 +138,20 @@ const LibraryDetails = ({ library }: LibraryDetailsProps) => {
         <FormRow>
           <FormField>
             <StageSelect
-              uuid={uuid}
+              error={libraryStageError}
+              handleStageChange={handleStageChange}
               stage='libraryStage'
               value={stages.library_stage}
-              handleStageChange={handleStageChange}
+              uuid={uuid}
             />
           </FormField>
           <FormField>
             <StageSelect
-              uuid={uuid}
+              error={registryStageError}
+              handleStageChange={handleStageChange}
               stage='registryStage'
               value={stages.registry_stage}
-              handleStageChange={handleStageChange}
+              uuid={uuid}
             />
           </FormField>
         </FormRow>

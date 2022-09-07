@@ -256,46 +256,6 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
     </div>
-    <div
-      className="css-0"
-    >
-      <div
-        className="chakra-skeleton css-1akrz52"
-      >
-        <div
-          className="css-0"
-          style={
-            Object {
-              "marginBottom": undefined,
-            }
-          }
-        />
-      </div>
-      <div
-        className="chakra-skeleton css-1akrz52"
-      >
-        <div
-          className="css-0"
-          style={
-            Object {
-              "marginBottom": undefined,
-            }
-          }
-        />
-      </div>
-      <div
-        className="chakra-skeleton css-qaeww3"
-      >
-        <div
-          className="css-0"
-          style={
-            Object {
-              "marginBottom": "0",
-            }
-          }
-        />
-      </div>
-    </div>
   </div>
 </div>
 `;
@@ -586,4 +546,12 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 2`] = `
     </tr>
   </tbody>
 </table>
+`;
+
+exports[`LibrariesList Snapshot renders the UI snapshot correctly 3`] = `
+<p
+  className="chakra-text css-mcqbu9"
+>
+  There was a problem fetching the libraries. Try refreshing the page, or logging in again.
+</p>
 `;

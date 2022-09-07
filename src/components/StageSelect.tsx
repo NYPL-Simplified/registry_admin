@@ -4,6 +4,7 @@ import { Select } from '@nypl/design-system-react-components';
 import { LibraryStage } from './LibraryDetails';
 
 interface StageSelectProps {
+  error: string;
   handleStageChange: (stage: string, value: string) => void;
   stage: 'libraryStage' | 'registryStage';
   uuid: string;
@@ -11,6 +12,7 @@ interface StageSelectProps {
 }
 
 const StageSelect = ({
+  error,
   handleStageChange,
   stage,
   uuid,
@@ -19,12 +21,14 @@ const StageSelect = ({
   return (
     <Select
       id={`${stage}-${uuid}`}
+      invalidText={error}
+      isInvalid={error ? true : false}
       labelText={stage === 'libraryStage' ? 'Library Stage' : 'Registry Stage'}
       name={stage}
-      value={value}
       onChange={(e: React.FormEvent<Element>) =>
         handleStageChange(stage, (e.target as HTMLInputElement).value)
       }
+      value={value}
     >
       <option value='testing'>Testing</option>
       <option value='production'>Production</option>

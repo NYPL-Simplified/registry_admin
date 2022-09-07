@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Cookies from 'js-cookie';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
 import libraries from '../../../data/mockData';
-import { LibrariesContext } from '../../context/librariesContext';
-import RegistryAdmin, { LibraryData } from '../RegistryAdmin';
+import { LibrariesContext, LibraryData } from '../../context/librariesContext';
+import RegistryAdmin from '../RegistryAdmin';
 import { TokenContext } from '../../context/tokenContext';
 
 const setAccessTokenMock = jest.fn();
@@ -49,8 +49,8 @@ const renderRegistryAdminForSnapshot = (
 };
 
 describe('RegistryAdmin, with no access token', () => {
-  beforeEach(() => {
-    renderRegistryAdminWithContext('', []);
+  beforeEach(async () => {
+    await act(() => renderRegistryAdminWithContext('', []));
   });
 
   it('renders the header', () => {
@@ -118,11 +118,33 @@ describe('RegistryAdmin, with access token', () => {
   });
 });
 
-describe('RegistryAdmin, with no access token, but with refresh token', () => {
-  it('tries to refresh the accessToken', async () => {
-    const realGet = Cookies.get;
+describe('RegistryAdmin, fetch call is unsuccessful', () => {
+  const log = jest.spyOn(console, 'log');
+  beforeEach(async () => {
+    (global as any).fetch = jest.fn().mockReturnValueOnce(
+      Promise.resolve({
+        ok: false,
+        status: 500,
+      })
+    );
 
+    await act(async () =>
+      renderRegistryAdminWithContext('mockAccessToken', [])
+    );
+  });
+
+  it('logs an error if fetch call is unsuccessful', async () => {
+    expect(log).toHaveBeenCalledWith('There was a problem fetching libraries.');
+  });
+});
+
+describe('RegistryAdmin, with no access token, but with refresh token', () => {
+  const realGet = Cookies.get;
+  beforeEach(() => {
     Cookies.get = jest.fn().mockImplementation(() => 'mockRefreshToken');
+  });
+
+  it('tries to refresh the accessToken', async () => {
     (global as any).fetch = jest.fn().mockReturnValueOnce(
       Promise.resolve({
         ok: true,
@@ -130,14 +152,30 @@ describe('RegistryAdmin, with no access token, but with refresh token', () => {
         json: () => Promise.resolve({ access_token: 'mockAccessToken' }),
       })
     );
-
     await act(() => renderRegistryAdminWithContext('', []));
 
     expect(fetch).toHaveBeenCalledWith(process.env.REFRESH, {
       headers: { Authorization: 'Bearer mockRefreshToken' },
       method: 'POST',
     });
+  });
 
+  it('logs an error if refreshing is unsuccessful', async () => {
+    const log = jest.spyOn(console, 'log');
+    (global as any).fetch = jest.fn().mockReturnValueOnce(
+      Promise.resolve({
+        ok: false,
+        status: 500,
+      })
+    );
+    await act(() => renderRegistryAdminWithContext('', []));
+
+    expect(log).toHaveBeenCalledWith(
+      "There was a problem refreshing this user's access token."
+    );
+  });
+
+  afterAll(() => {
     Cookies.get = realGet;
   });
 });
