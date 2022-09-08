@@ -35,7 +35,7 @@ jobs:
 
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-          --build-arg REGISTRY_API_DOMAIN=https://qa-libraryregistry.librarysimplified.org/admin \
+          --build-arg REGISTRY_API_DOMAIN=https://qa-libraryregistry.librarysimplified.org/admin .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-qa-latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-qa-latest
 
