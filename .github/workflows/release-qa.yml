@@ -1,16 +1,16 @@
 # On merge to master, build a container and deploy to ECR
 name: Publish to QA environment
 
-on: push
-  # pull_request:
-  #   branches: [master]
-  #   types: [closed]
+on:
+  pull_request:
+    branches: [master]
+    types: [closed]
 
 jobs:
   publish_qa:
     name: Publish image to ECR
     # only run if PR is merged (not just closed)
-    # if: github.event.pull_request.merged
+    if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -39,6 +39,6 @@ jobs:
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-qa-latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-qa-latest
 
-      # - name: Force ECS Update
-      #   run: |
-      #     aws ecs update-service --cluster openebooks-nextjs-staging --service openebooks-nextjs-app-staging --force-new-deployment
+      - name: Force ECS Update
+        run: |
+          aws ecs update-service --cluster simplye-registry-admin-qa --service simplye-registry-admin-qa --force-new-deployment
