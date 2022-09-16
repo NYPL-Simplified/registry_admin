@@ -29,7 +29,7 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         env:
-          REGISTRY_API_DOMAIN: https://qa-libraryregistry.librarysimplified.org/admin 
+          REGISTRY_API_DOMAIN: https://qa-libraryregistry.librarysimplified.org/admin
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: nyplsimplye-registry
           IMAGE_TAG: ${{ github.sha }}
