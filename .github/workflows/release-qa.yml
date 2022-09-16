@@ -19,8 +19,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-access-key-id: ${{ secrets.NYPL_DEV_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.NYPL_DEV_AWS_SECRET_KEY }}
           aws-region: us-east-1
 
       - name: Login to Amazon ECR
@@ -29,13 +29,14 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         env:
+          REGISTRY_API_DOMAIN: https://qa-libraryregistry.librarysimplified.org/admin 
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: nyplsimplye-registry
           IMAGE_TAG: ${{ github.sha }}
 
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-          --build-arg REGISTRY_API_DOMAIN=https://qa-libraryregistry.librarysimplified.org/admin .
+          --build-arg REGISTRY_API_DOMAIN=$REGISTRY_API_DOMAIN .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-qa-latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-qa-latest
 
