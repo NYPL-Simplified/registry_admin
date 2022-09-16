@@ -1,16 +1,16 @@
 # On merge to production, build a container and deploy to ECR
 name: Publish to production environment
 
-on: push
-  # pull_request:
-  #   branches: [production]
-  #   types: [closed]
+on:
+  pull_request:
+    branches: [production]
+    types: [closed]
 
 jobs:
   publish_qa:
     name: Publish image to ECR
     # only run if PR is merged (not just closed)
-    # if: github.event.pull_request.merged
+    if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
       - name: checkout
