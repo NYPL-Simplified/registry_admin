@@ -9,14 +9,14 @@ import { LibrariesProvider } from '../context/librariesContext';
 
 export function App() {
   return (
-    <DSProvider>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <DSProvider>
         <TokenProvider>
           <LibrariesProvider>
             <RegistryAdmin />
           </LibrariesProvider>
         </TokenProvider>
-      </ErrorBoundary>
-    </DSProvider>
+      </DSProvider>
+    </ErrorBoundary>
   );
 }
