@@ -40,6 +40,6 @@ jobs:
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-prod-latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:registry-admin-prod-latest
 
-      # - name: Force ECS Update
-      #   run: |
-      #     aws ecs update-service --cluster simplye-registry-admin-prod --service simplye-registry-admin-prod --force-new-deployment
+      - name: Force ECS Update
+        run: |
+          aws ecs update-service --cluster simplye-registry-admin-prod --service simplye-registry-admin-prod --force-new-deployment
