@@ -50,3 +50,16 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  docker_build:
+    # Don't push anything to ECR, just build the docker image to make sure there are no build failures
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: |
+          docker build -t registryadmin \
+          --build-arg REGISTRY_API_DOMAIN=$REGISTRY_API_DOMAIN .

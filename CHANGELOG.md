@@ -12,6 +12,7 @@
 - SIMPLY-4162: Make POST requests when a user changes a library's stage.
 - SIMPLY-4184: Add QA testing checklist to README.
 - SIMPLY-4068: Add error handling for fetch requests.
+- SIMPLY-4166: Configure AWS deployments
 - SIMPLY-4194: Add a top-level error boundary.
 
 ## 1.4.15
