@@ -1,32 +1,98 @@
-import * as React from "react";
-import { Store } from "redux";
-import { State } from "../reducers/index";
-import { LibraryData } from "../interfaces";
-import LibrariesListItem from "./LibrariesListItem";
-import LoadingIndicator from "opds-web-client/lib/components/LoadingIndicator";
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  Accordion,
+  List,
+  SkeletonLoader,
+  Table,
+  Text,
+} from '@nypl/design-system-react-components';
 
-export interface LibrariesListOwnProps {
-  libraries?: LibraryData[];
-  store?: Store<State>;
-  isLoaded: boolean;
+import LibraryDetails from './LibraryDetails';
+import useLibrariesContext, { LibraryData } from '../context/librariesContext';
+
+interface LibrariesListProps {
+  error: string;
+  isSimpleList: boolean;
 }
 
-/** The list of libraries.  An animated loading indicator shows until the list has loaded. */
-export default class LibrariesList extends React.Component<LibrariesListOwnProps, {}> {
-  render(): JSX.Element {
-    return (
-      !this.props.isLoaded ?
-        <LoadingIndicator /> :
-        this.props.libraries ?
-          <ul className="list">
-            { this.props.libraries.map(library =>
-              <LibrariesListItem
-                key={library.uuid}
-                library={library}
-                store={this.props.store}
-              />) }
-          </ul> :
-          <span>There are no libraries in this registry yet.</span>
-    );
-  }
-}
+const LibrariesList = ({ error, isSimpleList }: LibrariesListProps) => {
+  // isLoading is a flag used to render the SkeletonLoader while the app tries to
+  // refresh the accessToken.
+  const [isLoadingLibraries, setIsLoadingLibraries] = useState<boolean>(true);
+
+  const { libraries } = useLibrariesContext();
+
+  const returnListData = useCallback(() => {
+    const listData: string[][] = [];
+    libraries.map((library) => {
+      const { name, number_of_patrons } = library.basic_info;
+      const libraryNameandCount = [name, number_of_patrons];
+      listData.push(libraryNameandCount);
+    });
+    return listData;
+  }, [libraries]);
+
+  useEffect(() => {
+    // Once we have libraries, the SkeletonLoader should no longer display.
+    if (libraries.length) {
+      setIsLoadingLibraries(false);
+    } else {
+      setIsLoadingLibraries(true);
+    }
+  }, [libraries.length]);
+
+  // If there's an error, the SkeletonLoader should not be displayed.
+  useEffect(() => {
+    if (error) {
+      setIsLoadingLibraries(false);
+    }
+  }, [error]);
+
+  return (
+    <>
+      {error ? (
+        <Text __css={{ color: 'ui.error.primary' }}>{error}</Text>
+      ) : isLoadingLibraries ? (
+        <SkeletonLoader
+          headingSize={20}
+          showContent={false}
+          showImage={false}
+        />
+      ) : isSimpleList ? (
+        <Table
+          columnHeaders={['Library Name', 'Patron Count']}
+          columnHeadersBackgroundColor='section.blogs.primary'
+          tableData={returnListData()}
+        />
+      ) : (
+        <List noStyling type='ul'>
+          {libraries.map((library: LibraryData) => {
+            const { name } = library.basic_info;
+            const { registry_stage: registryStage } = library.stages;
+            return (
+              <li key={library.uuid}>
+                <Accordion
+                  accordionData={[
+                    {
+                      accordionType:
+                        registryStage === 'production'
+                          ? 'default'
+                          : registryStage === 'testing'
+                          ? 'warning'
+                          : 'error',
+                      label: name,
+                      panel: <LibraryDetails library={library} />,
+                    },
+                  ]}
+                  id={name}
+                />
+              </li>
+            );
+          })}
+        </List>
+      )}
+    </>
+  );
+};
+
+export default LibrariesList;

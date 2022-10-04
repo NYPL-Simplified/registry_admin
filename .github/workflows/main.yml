@@ -1,0 +1,65 @@
+name: CI
+on:
+  # will run on all PRs that are opened or updated (synchronized)
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+jobs:
+  # changelog must be edited for every PR
+  changelog:
+    name: Updates Changelog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Changelog Enforcer
+        uses: dangoslen/changelog-enforcer@v3.0.0
+        with:
+          changeLogPath: 'CHANGELOG.md'
+          skipLabels: 'no-changelog'
+
+  build:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Use Node 14
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Use NPM 8.x
+        run: npm i -g npm@8
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Check Formatting
+        run: npm run prettier:check
+
+      - name: Test
+        run: npm run test:ci
+
+      - name: Build
+        run: npm run build
+
+  docker_build:
+    # Don't push anything to ECR, just build the docker image to make sure there are no build failures
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: |
+          docker build -t registryadmin \
+          --build-arg REGISTRY_API_DOMAIN=$REGISTRY_API_DOMAIN .

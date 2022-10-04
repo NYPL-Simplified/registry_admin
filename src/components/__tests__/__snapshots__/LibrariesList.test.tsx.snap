@@ -1,0 +1,557 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
+<div
+  className="css-1xdhyk6"
+  style={
+    Object {
+      "width": undefined,
+    }
+  }
+>
+  <div
+    className="column css-0"
+  >
+    <div
+      className="css-0"
+    >
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-1akrz52"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="chakra-skeleton css-tz3wol"
+      >
+        <div
+          className="css-0"
+          style={
+            Object {
+              "marginBottom": undefined,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LibrariesList Snapshot renders the UI snapshot correctly 2`] = `
+<table
+  className="chakra-table css-1xdhyk6"
+  role="table"
+>
+  <thead
+    className="css-0"
+  >
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <th
+        className="css-b91dz6"
+        scope="col"
+      >
+        Library Name
+      </th>
+      <th
+        className="css-b91dz6"
+        scope="col"
+      >
+        Patron Count
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    className="css-0"
+  >
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Acton Public Library
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        9
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Ak-Chin Indian Community Library, AZ
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        5
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Alameda County Library
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        1839
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Alicia Salinas City of Alice Public Library, TX
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        2
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Allan Shivers Library & Museum, TX
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        0
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Allegany County Library System
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        0
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Allen Memorial Public Library, TX
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        9
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Alpine Public Library, TX
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        59
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Amarillo Public Library, TX
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        78
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Amigos Demo Library
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        22
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Amigos Test Library Two
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        0
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Anacortes Public Library
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        0
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Andrews County Library, TX
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        1
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Anne Arundel Co. Public Library
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        0
+      </td>
+    </tr>
+    <tr
+      className="css-0"
+      role="row"
+    >
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        Ansonia Public Library
+      </td>
+      <td
+        className="css-0"
+        role="gridcell"
+      >
+        0
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`LibrariesList Snapshot renders the UI snapshot correctly 3`] = `
+<p
+  className="chakra-text css-mcqbu9"
+>
+  There was a problem fetching the libraries. Try refreshing the page, or logging in again.
+</p>
+`;

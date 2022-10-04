@@ -1,0 +1,491 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LibraryDetails Snapshot renders the UI snapshot correctly 1`] = `
+Array [
+  <form
+    aria-label="form"
+    className="css-0"
+    id="registry-form-1"
+  >
+    <div
+      className="css-fadkce"
+      id="registry-form-1-parent"
+    >
+      <div
+        className="css-5wru3y"
+        id="registry-form-1-child0"
+      >
+        <div
+          className="css-7ajbp2"
+          id="registry-form-1-child0-grandchild0"
+        >
+          <div
+            className="css-1u8qly9"
+            id="libraryStage-1-wrapper"
+          >
+            <div
+              className="css-0"
+            >
+              <div
+                className="css-0"
+              >
+                <label
+                  className="css-1xdhyk6"
+                  htmlFor="libraryStage-1"
+                  id="libraryStage-1-label"
+                >
+                  Library Stage
+                </label>
+              </div>
+              <div
+                className="chakra-select__wrapper css-42b2qy"
+              >
+                <select
+                  className="chakra-select css-1ik61og"
+                  disabled={false}
+                  id="libraryStage-1"
+                  name="libraryStage"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={false}
+                  value="production"
+                >
+                  <option
+                    value="testing"
+                  >
+                    Testing
+                  </option>
+                  <option
+                    value="production"
+                  >
+                    Production
+                  </option>
+                  <option
+                    value="cancelled"
+                  >
+                    Cancelled
+                  </option>
+                </select>
+                <div
+                  className="chakra-select__icon-wrapper css-162mkon"
+                >
+                  <svg
+                    aria-hidden={true}
+                    className="chakra-icon chakra-select__icon css-1vgifmd"
+                    focusable={false}
+                    id="libraryStage-1-icon"
+                    role="presentation"
+                    style={
+                      Object {
+                        "color": "currentColor",
+                        "height": "1em",
+                        "width": "1em",
+                      }
+                    }
+                    viewBox="0 0 24 14"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>
+                      arrow icon
+                    </title>
+                    <path
+                      clipRule="evenodd"
+                      d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="css-7ajbp2"
+          id="registry-form-1-child0-grandchild1"
+        >
+          <div
+            className="css-1u8qly9"
+            id="registryStage-1-wrapper"
+          >
+            <div
+              className="css-0"
+            >
+              <div
+                className="css-0"
+              >
+                <label
+                  className="css-1xdhyk6"
+                  htmlFor="registryStage-1"
+                  id="registryStage-1-label"
+                >
+                  Registry Stage
+                </label>
+              </div>
+              <div
+                className="chakra-select__wrapper css-42b2qy"
+              >
+                <select
+                  className="chakra-select css-1ik61og"
+                  disabled={false}
+                  id="registryStage-1"
+                  name="registryStage"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={false}
+                  value="production"
+                >
+                  <option
+                    value="testing"
+                  >
+                    Testing
+                  </option>
+                  <option
+                    value="production"
+                  >
+                    Production
+                  </option>
+                  <option
+                    value="cancelled"
+                  >
+                    Cancelled
+                  </option>
+                </select>
+                <div
+                  className="chakra-select__icon-wrapper css-162mkon"
+                >
+                  <svg
+                    aria-hidden={true}
+                    className="chakra-icon chakra-select__icon css-1vgifmd"
+                    focusable={false}
+                    id="registryStage-1-icon"
+                    role="presentation"
+                    style={
+                      Object {
+                        "color": "currentColor",
+                        "height": "1em",
+                        "width": "1em",
+                      }
+                    }
+                    viewBox="0 0 24 14"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>
+                      arrow icon
+                    </title>
+                    <path
+                      clipRule="evenodd"
+                      d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>,
+  <table
+    className="chakra-table css-1xdhyk6"
+    role="table"
+  >
+    <thead
+      className="css-0"
+    >
+      <tr
+        className="css-0"
+        role="row"
+      >
+        <th
+          className="css-0"
+          scope="col"
+        />
+        <th
+          className="css-0"
+          scope="col"
+        />
+      </tr>
+    </thead>
+    <tbody
+      className="css-0"
+    >
+      <tr
+        className="css-0"
+        role="row"
+      >
+        <th
+          className="css-0"
+          scope="row"
+        >
+          <span />
+          <span>
+            contact email
+          </span>
+        </th>
+        <td
+          className="css-0"
+          role="gridcell"
+        >
+          <span />
+          <span>
+            actonlibrary@actonlibrary.org
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="css-0"
+        role="row"
+      >
+        <th
+          className="css-0"
+          scope="row"
+        >
+          <span />
+          <span>
+            copyright email
+          </span>
+        </th>
+        <td
+          className="css-0"
+          role="gridcell"
+        >
+          <span />
+          <span>
+            actonlibrary@actonlibrary.org
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="css-0"
+        role="row"
+      >
+        <th
+          className="css-0"
+          scope="row"
+        >
+          <span />
+          <span>
+            help email
+          </span>
+        </th>
+        <td
+          className="css-0"
+          role="gridcell"
+        >
+          <span />
+          <span>
+            actonlibrary@actonlibrary.org
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <div
+    className="css-11z2e9m"
+  >
+    <div
+      className="chakra-tabs css-1xdhyk6"
+      id="tabs-1"
+    >
+      <div
+        className="css-l3f8vc"
+      >
+        <button
+          aria-label="Previous"
+          className="chakra-button css-1fhylxi"
+          data-testid="button"
+          id="tabs-previous-tabs-1"
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            aria-hidden={true}
+            className="chakra-icon css-1vgifmd"
+            focusable={false}
+            id="tabs-previous-icon-tabs-1"
+            role="img"
+            viewBox="0 0 24 14"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>
+              arrow icon
+            </title>
+            <path
+              clipRule="evenodd"
+              d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+              fillRule="evenodd"
+            />
+          </svg>
+        </button>
+        <div
+          className="css-0"
+        >
+          <div
+            className="css-tjdjds"
+          >
+            <div
+              aria-orientation="horizontal"
+              className="chakra-tabs__tablist css-k008qs"
+              onKeyDown={[Function]}
+              role="tablist"
+            >
+              <button
+                aria-controls="tabs-1--tabpanel--1"
+                aria-selected={false}
+                className="chakra-tabs__tab css-abpfcx"
+                id="tabs-1--tab--1"
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="tab"
+                tabIndex={-1}
+                type="button"
+              >
+                Basic Information
+              </button>
+              <button
+                aria-controls="tabs-1--tabpanel--1"
+                aria-selected={false}
+                className="chakra-tabs__tab css-abpfcx"
+                id="tabs-1--tab--1"
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="tab"
+                tabIndex={-1}
+                type="button"
+              >
+                Contact & URLs
+              </button>
+              <button
+                aria-controls="tabs-1--tabpanel--1"
+                aria-selected={false}
+                className="chakra-tabs__tab css-abpfcx"
+                id="tabs-1--tab--1"
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="tab"
+                tabIndex={-1}
+                type="button"
+              >
+                Areas
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-label="Next"
+          className="chakra-button css-12jygyh"
+          data-testid="button"
+          id="tabs-next-tabs-1"
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            aria-hidden={true}
+            className="chakra-icon css-1vgifmd"
+            focusable={false}
+            id="tabs-next-icon-tabs-1"
+            role="img"
+            viewBox="0 0 24 14"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>
+              arrow icon
+            </title>
+            <path
+              clipRule="evenodd"
+              d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+              fillRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        className="chakra-tabs__tab-panels css-8atqhb"
+      >
+        <div
+          aria-labelledby="tabs-1--tab-0"
+          className="chakra-tabs__tab-panel css-sjt5nk"
+          hidden={false}
+          id="tabs-1--tabpanel-0"
+          role="tabpanel"
+          tabIndex={0}
+        >
+          <section
+            className="css-1xdhyk6"
+          >
+            <dl>
+              <dt>
+                description
+              </dt>
+              <dd>
+                Serving Old Saybrook, CT
+              </dd>
+              <dt>
+                internal_urn
+              </dt>
+              <dd>
+                None available
+              </dd>
+              <dt>
+                name
+              </dt>
+              <dd>
+                Acton Public Library
+              </dd>
+              <dt>
+                number_of_patrons
+              </dt>
+              <dd>
+                9
+              </dd>
+              <dt>
+                online_registration
+              </dt>
+              <dd>
+                None available
+              </dd>
+              <dt>
+                pls_id
+              </dt>
+              <dd>
+                None available
+              </dd>
+              <dt>
+                short_name
+              </dt>
+              <dd>
+                CTACTN
+              </dd>
+              <dt>
+                timestamp
+              </dt>
+              <dd>
+                None available
+              </dd>
+            </dl>
+          </section>
+        </div>
+        <div
+          aria-labelledby="tabs-1--tab-1"
+          className="chakra-tabs__tab-panel css-sjt5nk"
+          hidden={true}
+          id="tabs-1--tabpanel-1"
+          role="tabpanel"
+          tabIndex={0}
+        />
+        <div
+          aria-labelledby="tabs-1--tab-2"
+          className="chakra-tabs__tab-panel css-sjt5nk"
+          hidden={true}
+          id="tabs-1--tabpanel-2"
+          role="tabpanel"
+          tabIndex={0}
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;
