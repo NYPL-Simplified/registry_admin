@@ -2,6 +2,10 @@
 
 ## UNRELEASED CHANGES
 
+## 2.0.1
+
+- Hotfix point QA library endpoint to production
+
 ## 2.0.0
 
 - SIMPLY-4065: Convert application to a new parcel build
