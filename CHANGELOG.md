@@ -2,6 +2,8 @@
 
 ## UNRELEASED CHANGES
 
+## 2.0.0
+
 - SIMPLY-4065: Convert application to a new parcel build
 - SIMPLY-4066: Install Reservoir (NYPL Design System) and use components to build UI.
 - SIMPLY-4126: Fix bug where "Registry Stage" dropdown was showing "testing" when it should have shown "canceled."
