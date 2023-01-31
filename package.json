@@ -1,6 +1,6 @@
 {
   "name": "registry_admin",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "admin UI for registered libraries",
   "repository": {
     "type": "git",
