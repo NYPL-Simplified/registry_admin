@@ -2,6 +2,10 @@
 
 ## UNRELEASED CHANGES
 
+## 2.0.2
+
+- Use /libraries/qa endpoint to fetch libraries on production
+
 ## 2.0.1
 
 - Hotfix point QA library endpoint to production
