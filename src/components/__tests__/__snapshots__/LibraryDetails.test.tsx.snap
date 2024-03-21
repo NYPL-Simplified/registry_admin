@@ -4,7 +4,7 @@ exports[`LibraryDetails Snapshot renders the UI snapshot correctly 1`] = `
 Array [
   <form
     aria-label="form"
-    className="css-0"
+    className="css-1xdhyk6"
     id="registry-form-1"
   >
     <div
@@ -72,7 +72,7 @@ Array [
                 >
                   <svg
                     aria-hidden={true}
-                    className="chakra-icon chakra-select__icon css-1vgifmd"
+                    className="chakra-icon chakra-select__icon css-1nreziu"
                     focusable={false}
                     id="libraryStage-1-icon"
                     role="presentation"
@@ -98,6 +98,13 @@ Array [
                 </div>
               </div>
             </div>
+            <div
+              aria-atomic={true}
+              aria-live="polite"
+              className="css-bl03f5"
+              data-isinvalid={false}
+              id="libraryStage-1-helperText"
+            />
           </div>
         </div>
         <div
@@ -157,7 +164,7 @@ Array [
                 >
                   <svg
                     aria-hidden={true}
-                    className="chakra-icon chakra-select__icon css-1vgifmd"
+                    className="chakra-icon chakra-select__icon css-1nreziu"
                     focusable={false}
                     id="registryStage-1-icon"
                     role="presentation"
@@ -183,6 +190,13 @@ Array [
                 </div>
               </div>
             </div>
+            <div
+              aria-atomic={true}
+              aria-live="polite"
+              className="css-bl03f5"
+              data-isinvalid={false}
+              id="registryStage-1-helperText"
+            />
           </div>
         </div>
       </div>
@@ -294,9 +308,8 @@ Array [
         className="css-l3f8vc"
       >
         <button
-          aria-label="Previous"
-          className="chakra-button css-1fhylxi"
-          data-testid="button"
+          aria-label="Scroll tabs left"
+          className="chakra-button css-1c0zt5w"
           id="tabs-previous-tabs-1"
           onClick={[Function]}
           type="button"
@@ -311,7 +324,7 @@ Array [
             xmlns="http://www.w3.org/2000/svg"
           >
             <title>
-              arrow icon
+              previous arrow
             </title>
             <path
               clipRule="evenodd"
@@ -375,9 +388,8 @@ Array [
           </div>
         </div>
         <button
-          aria-label="Next"
-          className="chakra-button css-12jygyh"
-          data-testid="button"
+          aria-label="Scroll tabs right"
+          className="chakra-button css-rvrlhv"
           id="tabs-next-tabs-1"
           onClick={[Function]}
           type="button"
@@ -392,7 +404,7 @@ Array [
             xmlns="http://www.w3.org/2000/svg"
           >
             <title>
-              arrow icon
+              next arrow
             </title>
             <path
               clipRule="evenodd"
