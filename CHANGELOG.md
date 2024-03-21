@@ -2,6 +2,8 @@
 
 ## UNRELEASED CHANGES
 
+- Upgrade to Node 20
+
 ## 2.0.2
 
 - Use /libraries/qa endpoint to fetch libraries on production

@@ -47,7 +47,7 @@ const LoginForm = ({ error, setError }: LoginFormProps) => {
     body.append('username', username);
     body.append('password', password);
 
-    fetch(LOGIN as RequestInfo | URL, {
+    fetch(LOGIN, {
       method: 'POST',
       body,
     })
