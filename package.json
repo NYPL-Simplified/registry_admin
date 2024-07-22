@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "parcel",
-    "build": "parcel build",
+    "build": "parcel build --no-cache",
     "local-prod": "npm run build && npm start",
     "test": "jest",
     "test:ci": "jest --ci --silent --coverage --maxWorkers=2",
