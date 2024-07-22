@@ -3,7 +3,6 @@
 const { defaults } = require('jest-config');
 
 module.exports = {
-  // preset: 'ts-jest',
   testEnvironment: 'jest-environment-jsdom',
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   transformIgnorePatterns: [

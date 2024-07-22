@@ -1,6 +1,6 @@
 {
   "name": "registry_admin",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "admin UI for registered libraries",
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     "@testing-library/react": "13.2.0",
     "@types/jest": "27.5.0",
     "@types/js-cookie": "3.0.2",
+    "@types/lodash": "4.14.202",
     "@types/node": "17.0.45",
     "@types/react": "18.0.8",
     "@types/react-dom": "18.0.3",

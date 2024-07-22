@@ -8,7 +8,7 @@ To see screenshots, read in-depth documentation, and find out more about the pro
 
 ## Local Development & Installation
 
-This project is a React app bundled with parcel.
+This project is a React app bundled with [parcel](https://parceljs.org/).
 
 One the repo is cloned, change directory to `registry_admin` and then install the dependencies.
 
@@ -17,19 +17,13 @@ cd registry_admin
 npm install
 ```
 
-## Accessibility
-
-In order to develop user interfaces that are accessible to everyone, there are tools added to the workflow. Besides the Typescript `tslint-react-a11y` plugin, `react-axe` is also installed for local development. Using that module while running the app uses a lot of resources so it should be only when specifically testing for accessibility and not while actively developing new features or fixing bugs.
-
-In order to run the app with `react-axe`, run `npm run dev-test-axe`. This will add a local global variable `process.env.TEST_AXE` (through webpack) that will trigger `react-axe` in `/src/index.tsx`. The output will be seen in the _browser's_ console terminal.
-
 ## Tests
 
 Like the codebase, all the unit tests are written in Typescript. Tests are written for all React components as well as redux and utility functions, and all can be found in their respective `__tests__` folders.
 
 To run the tests, perform `npm test`.
 
-We use Travis CI for continuous integration. Any pull requests submitted must have tests and those tests must pass on Travis CI.
+We use Github Actions for continuous integration. Any pull requests submitted must have tests, whether new or updated, and those tests must pass on Github Actions.
 
 Manual tests and expectations for the Registry Admin's functionality can be found [here](https://docs.google.com/spreadsheets/d/1q9joHeNZpkTsZU-u1NwPBRUFYcxvRo23eP2vw79xPG4/edit#gid=0).
 
