@@ -17,7 +17,6 @@
     "trailingComma": "es5",
     "endOfLine": "lf"
   },
-  "type": "module",
   "scripts": {
     "start": "parcel",
     "build": "parcel build",

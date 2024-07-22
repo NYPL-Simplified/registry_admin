@@ -7,19 +7,19 @@ module.exports = {
   testEnvironment: 'jest-environment-jsdom',
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   transformIgnorePatterns: [
-    "./node_modules/",
-    "^.+\\.module\\.(css|sass|scss)$",
+    './node_modules/',
+    '^.+\\.module\\.(css|sass|scss)$',
   ],
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/testHelper/browser.ts'],
   clearMocks: true,
   globals: {
-    "ts-jest": {
+    'ts-jest': {
       tsconfig: {
-        jsx: "react"
-      }
-    }
-  }
+        jsx: 'react',
+      },
+    },
+  },
 };
