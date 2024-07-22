@@ -39,7 +39,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
           >
             <input
               aria-required={true}
-              autocomplete={null}
+              autoComplete={null}
               className="chakra-input css-0"
               disabled={false}
               id="username"
@@ -51,13 +51,6 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
               type="text"
             />
           </div>
-          <div
-            aria-atomic={true}
-            aria-live="polite"
-            className="css-1xdhyk6"
-            data-isinvalid={false}
-            id="username-helperText"
-          />
         </div>
       </div>
       <div
@@ -80,7 +73,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
           >
             <input
               aria-required={true}
-              autocomplete={null}
+              autoComplete={null}
               className="chakra-input css-0"
               disabled={false}
               id="password"
@@ -92,13 +85,6 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
               type="password"
             />
           </div>
-          <div
-            aria-atomic={true}
-            aria-live="polite"
-            className="css-1xdhyk6"
-            data-isinvalid={false}
-            id="password-helperText"
-          />
         </div>
       </div>
       <div
@@ -122,7 +108,8 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
     data-isinvalid={false}
     id="loginError"
   >
-    <span
+    <div
+      className="css-0"
       dangerouslySetInnerHTML={
         Object {
           "__html": "",
@@ -172,7 +159,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
           >
             <input
               aria-required={true}
-              autocomplete={null}
+              autoComplete={null}
               className="chakra-input css-0"
               disabled={false}
               id="username"
@@ -184,13 +171,6 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
               type="text"
             />
           </div>
-          <div
-            aria-atomic={true}
-            aria-live="polite"
-            className="css-1xdhyk6"
-            data-isinvalid={false}
-            id="username-helperText"
-          />
         </div>
       </div>
       <div
@@ -213,7 +193,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
           >
             <input
               aria-required={true}
-              autocomplete={null}
+              autoComplete={null}
               className="chakra-input css-0"
               disabled={false}
               id="password"
@@ -225,13 +205,6 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
               type="password"
             />
           </div>
-          <div
-            aria-atomic={true}
-            aria-live="polite"
-            className="css-1xdhyk6"
-            data-isinvalid={false}
-            id="password-helperText"
-          />
         </div>
       </div>
       <div
@@ -255,7 +228,8 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
     data-isinvalid={false}
     id="loginError"
   >
-    <span
+    <div
+      className="css-0"
       dangerouslySetInnerHTML={
         Object {
           "__html": "",

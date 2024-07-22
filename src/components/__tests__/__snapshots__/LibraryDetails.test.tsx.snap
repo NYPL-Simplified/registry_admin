@@ -91,20 +91,13 @@ Array [
                     </title>
                     <path
                       clipRule="evenodd"
-                      d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+                      d="M10.526 12.871L.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 01-2.948 0z"
                       fillRule="evenodd"
                     />
                   </svg>
                 </div>
               </div>
             </div>
-            <div
-              aria-atomic={true}
-              aria-live="polite"
-              className="css-bl03f5"
-              data-isinvalid={false}
-              id="libraryStage-1-helperText"
-            />
           </div>
         </div>
         <div
@@ -183,20 +176,13 @@ Array [
                     </title>
                     <path
                       clipRule="evenodd"
-                      d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+                      d="M10.526 12.871L.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 01-2.948 0z"
                       fillRule="evenodd"
                     />
                   </svg>
                 </div>
               </div>
             </div>
-            <div
-              aria-atomic={true}
-              aria-live="polite"
-              className="css-bl03f5"
-              data-isinvalid={false}
-              id="registryStage-1-helperText"
-            />
           </div>
         </div>
       </div>
@@ -204,14 +190,12 @@ Array [
   </form>,
   <table
     className="chakra-table css-1xdhyk6"
-    role="table"
   >
     <thead
       className="css-0"
     >
       <tr
         className="css-0"
-        role="row"
       >
         <th
           className="css-0"
@@ -228,22 +212,24 @@ Array [
     >
       <tr
         className="css-0"
-        role="row"
       >
         <th
           className="css-0"
           scope="row"
         >
-          <span />
+          <span
+            className="css-dsyim5"
+          />
           <span>
             contact email
           </span>
         </th>
         <td
           className="css-0"
-          role="gridcell"
         >
-          <span />
+          <span
+            className="css-dsyim5"
+          />
           <span>
             actonlibrary@actonlibrary.org
           </span>
@@ -251,22 +237,24 @@ Array [
       </tr>
       <tr
         className="css-0"
-        role="row"
       >
         <th
           className="css-0"
           scope="row"
         >
-          <span />
+          <span
+            className="css-dsyim5"
+          />
           <span>
             copyright email
           </span>
         </th>
         <td
           className="css-0"
-          role="gridcell"
         >
-          <span />
+          <span
+            className="css-dsyim5"
+          />
           <span>
             actonlibrary@actonlibrary.org
           </span>
@@ -274,22 +262,24 @@ Array [
       </tr>
       <tr
         className="css-0"
-        role="row"
       >
         <th
           className="css-0"
           scope="row"
         >
-          <span />
+          <span
+            className="css-dsyim5"
+          />
           <span>
             help email
           </span>
         </th>
         <td
           className="css-0"
-          role="gridcell"
         >
-          <span />
+          <span
+            className="css-dsyim5"
+          />
           <span>
             actonlibrary@actonlibrary.org
           </span>
@@ -301,7 +291,7 @@ Array [
     className="css-11z2e9m"
   >
     <div
-      className="chakra-tabs css-1xdhyk6"
+      className="chakra-tabs css-19sk4h4"
       id="tabs-1"
     >
       <div
@@ -309,7 +299,7 @@ Array [
       >
         <button
           aria-label="Scroll tabs left"
-          className="chakra-button css-1c0zt5w"
+          className="chakra-button css-18qhlcl"
           id="tabs-previous-tabs-1"
           onClick={[Function]}
           type="button"
@@ -328,7 +318,7 @@ Array [
             </title>
             <path
               clipRule="evenodd"
-              d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+              d="M10.526 12.871L.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 01-2.948 0z"
               fillRule="evenodd"
             />
           </svg>
@@ -337,59 +327,61 @@ Array [
           className="css-0"
         >
           <div
-            className="css-tjdjds"
+            aria-orientation="horizontal"
+            className="chakra-tabs__tablist css-k008qs"
+            onKeyDown={[Function]}
+            role="tablist"
           >
-            <div
-              aria-orientation="horizontal"
-              className="chakra-tabs__tablist css-k008qs"
-              onKeyDown={[Function]}
-              role="tablist"
+            <button
+              aria-controls="tabs-tabs-1--tabpanel--1"
+              aria-disabled={false}
+              aria-selected={false}
+              className="chakra-tabs__tab css-p5yrdq"
+              disabled={false}
+              id="tabs-tabs-1--tab--1"
+              onClick={[Function]}
+              onFocus={[Function]}
+              role="tab"
+              tabIndex={-1}
+              type="button"
             >
-              <button
-                aria-controls="tabs-1--tabpanel--1"
-                aria-selected={false}
-                className="chakra-tabs__tab css-abpfcx"
-                id="tabs-1--tab--1"
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="tab"
-                tabIndex={-1}
-                type="button"
-              >
-                Basic Information
-              </button>
-              <button
-                aria-controls="tabs-1--tabpanel--1"
-                aria-selected={false}
-                className="chakra-tabs__tab css-abpfcx"
-                id="tabs-1--tab--1"
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="tab"
-                tabIndex={-1}
-                type="button"
-              >
-                Contact & URLs
-              </button>
-              <button
-                aria-controls="tabs-1--tabpanel--1"
-                aria-selected={false}
-                className="chakra-tabs__tab css-abpfcx"
-                id="tabs-1--tab--1"
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="tab"
-                tabIndex={-1}
-                type="button"
-              >
-                Areas
-              </button>
-            </div>
+              Basic Information
+            </button>
+            <button
+              aria-controls="tabs-tabs-1--tabpanel--1"
+              aria-disabled={false}
+              aria-selected={false}
+              className="chakra-tabs__tab css-p5yrdq"
+              disabled={false}
+              id="tabs-tabs-1--tab--1"
+              onClick={[Function]}
+              onFocus={[Function]}
+              role="tab"
+              tabIndex={-1}
+              type="button"
+            >
+              Contact & URLs
+            </button>
+            <button
+              aria-controls="tabs-tabs-1--tabpanel--1"
+              aria-disabled={false}
+              aria-selected={false}
+              className="chakra-tabs__tab css-p5yrdq"
+              disabled={false}
+              id="tabs-tabs-1--tab--1"
+              onClick={[Function]}
+              onFocus={[Function]}
+              role="tab"
+              tabIndex={-1}
+              type="button"
+            >
+              Areas
+            </button>
           </div>
         </div>
         <button
           aria-label="Scroll tabs right"
-          className="chakra-button css-rvrlhv"
+          className="chakra-button css-1djleqc"
           id="tabs-next-tabs-1"
           onClick={[Function]}
           type="button"
@@ -408,7 +400,7 @@ Array [
             </title>
             <path
               clipRule="evenodd"
-              d="M10.526 12.871.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 0 1-2.948 0z"
+              d="M10.526 12.871L.263 1.676 1.737.324 12 11.52 22.263.324l1.474 1.352L13.474 12.87a2 2 0 01-2.948 0z"
               fillRule="evenodd"
             />
           </svg>
@@ -418,10 +410,10 @@ Array [
         className="chakra-tabs__tab-panels css-8atqhb"
       >
         <div
-          aria-labelledby="tabs-1--tab-0"
+          aria-labelledby="tabs-tabs-1--tab-0"
           className="chakra-tabs__tab-panel css-sjt5nk"
           hidden={false}
-          id="tabs-1--tabpanel-0"
+          id="tabs-tabs-1--tabpanel-0"
           role="tabpanel"
           tabIndex={0}
         >
@@ -481,18 +473,18 @@ Array [
           </section>
         </div>
         <div
-          aria-labelledby="tabs-1--tab-1"
+          aria-labelledby="tabs-tabs-1--tab-1"
           className="chakra-tabs__tab-panel css-sjt5nk"
           hidden={true}
-          id="tabs-1--tabpanel-1"
+          id="tabs-tabs-1--tabpanel-1"
           role="tabpanel"
           tabIndex={0}
         />
         <div
-          aria-labelledby="tabs-1--tab-2"
+          aria-labelledby="tabs-tabs-1--tab-2"
           className="chakra-tabs__tab-panel css-sjt5nk"
           hidden={true}
-          id="tabs-1--tabpanel-2"
+          id="tabs-tabs-1--tabpanel-2"
           role="tabpanel"
           tabIndex={0}
         />

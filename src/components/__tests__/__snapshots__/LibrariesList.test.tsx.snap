@@ -16,7 +16,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
       className="css-0"
     >
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -28,7 +28,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -40,7 +40,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -52,7 +52,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -64,7 +64,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -76,7 +76,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -88,7 +88,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -100,7 +100,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -112,7 +112,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -124,7 +124,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -136,7 +136,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -148,7 +148,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -160,7 +160,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -172,7 +172,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -184,7 +184,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -196,7 +196,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -208,7 +208,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -220,7 +220,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -232,7 +232,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-1akrz52"
+        className="chakra-skeleton css-lx2l1e"
       >
         <div
           className="css-0"
@@ -244,7 +244,7 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
         />
       </div>
       <div
-        className="chakra-skeleton css-tz3wol"
+        className="chakra-skeleton css-1l0joh4"
       >
         <div
           className="css-0"
@@ -263,14 +263,12 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 1`] = `
 exports[`LibrariesList Snapshot renders the UI snapshot correctly 2`] = `
 <table
   className="chakra-table css-1xdhyk6"
-  role="table"
 >
   <thead
     className="css-0"
   >
     <tr
       className="css-0"
-      role="row"
     >
       <th
         className="css-b91dz6"
@@ -291,257 +289,422 @@ exports[`LibrariesList Snapshot renders the UI snapshot correctly 2`] = `
   >
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Acton Public Library
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Acton Public Library
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        9
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          9
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Ak-Chin Indian Community Library, AZ
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Ak-Chin Indian Community Library, AZ
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        5
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          5
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Alameda County Library
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Alameda County Library
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        1839
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          1839
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Alicia Salinas City of Alice Public Library, TX
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Alicia Salinas City of Alice Public Library, TX
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        2
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          2
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Allan Shivers Library & Museum, TX
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Allan Shivers Library & Museum, TX
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        0
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          0
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Allegany County Library System
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Allegany County Library System
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        0
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          0
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Allen Memorial Public Library, TX
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Allen Memorial Public Library, TX
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        9
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          9
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Alpine Public Library, TX
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Alpine Public Library, TX
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        59
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          59
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Amarillo Public Library, TX
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Amarillo Public Library, TX
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        78
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          78
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Amigos Demo Library
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Amigos Demo Library
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        22
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          22
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Amigos Test Library Two
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Amigos Test Library Two
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        0
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          0
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Anacortes Public Library
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Anacortes Public Library
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        0
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          0
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Andrews County Library, TX
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Andrews County Library, TX
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        1
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          1
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Anne Arundel Co. Public Library
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Anne Arundel Co. Public Library
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        0
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          0
+        </span>
       </td>
     </tr>
     <tr
       className="css-0"
-      role="row"
     >
       <td
         className="css-0"
-        role="gridcell"
       >
-        Ansonia Public Library
+        <span
+          className="css-dsyim5"
+        >
+          Library Name
+        </span>
+        <span>
+          Ansonia Public Library
+        </span>
       </td>
       <td
         className="css-0"
-        role="gridcell"
       >
-        0
+        <span
+          className="css-dsyim5"
+        >
+          Patron Count
+        </span>
+        <span>
+          0
+        </span>
       </td>
     </tr>
   </tbody>
