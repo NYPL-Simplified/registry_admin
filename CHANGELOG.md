@@ -2,7 +2,25 @@
 
 ## UNRELEASED CHANGES
 
-- Upgrade to Node 20
+## 2.1.0
+
+### Add
+
+- Adds the following `npm` packages:
+  `babel/preset-typescript`, `babel-jest`
+
+### Update
+
+- Upgrade to Node 20.
+- Uses `ts-jest` over `esbuild-jest`.
+- Updates the Reservoir DS to `3.1.7` and removes unnecessary stylesheet.
+- Updates the following `npm` packages:
+  `@nypl/design-system-react-components`, `@parcel/transformer-sass`, `@testing-library/jest-dom`, `@testing-library/react`, `@types/jest`, `@types/js-cookie`, `@types/node`, `@types/react`, `@types/react-dom`, `@types/react-test-renderer`, `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `esbuild`, `eslint`, `eslint-config-prettier`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, `eslint-plugin-prettier`, `eslint-plugin-react`, `eslint-plugin-react-hooks`, `husky`, `jest`, `jest-config`, `jest-environment-jsdom`, `js-cookie`, `lint-staged`, `os-browserify`, `parcel`, `path-browserify`, `process`, `react`, `react-dom`, `react-error-boundary`, `react-test-renderer`, `ts-jest`, `ts-node`
+
+### Remove
+
+- Removes the following `npm` packages:
+  `esbuild-jest`
 
 ## 2.0.2
 
