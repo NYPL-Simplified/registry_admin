@@ -11,7 +11,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
   </h2>
   <form
     aria-label="form"
-    className="css-0"
+    className="css-1xdhyk6"
     id="login"
     onSubmit={[Function]}
   >
@@ -34,18 +34,23 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
           >
             Username
           </label>
-          <input
-            aria-required={true}
-            className="chakra-input css-0"
-            disabled={false}
-            id="username"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            required={true}
-            step={null}
-            type="text"
-          />
+          <div
+            className="css-79elbk"
+          >
+            <input
+              aria-required={true}
+              autoComplete={null}
+              className="chakra-input css-0"
+              disabled={false}
+              id="username"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              step={null}
+              type="text"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -63,18 +68,23 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
           >
             Password
           </label>
-          <input
-            aria-required={true}
-            className="chakra-input css-0"
-            disabled={false}
-            id="password"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            required={true}
-            step={null}
-            type="password"
-          />
+          <div
+            className="css-79elbk"
+          >
+            <input
+              aria-required={true}
+              autoComplete={null}
+              className="chakra-input css-0"
+              disabled={false}
+              id="password"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              step={null}
+              type="password"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -82,8 +92,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
         id="login-child2"
       >
         <button
-          className="chakra-button css-65jkji"
-          data-testid="button"
+          className="chakra-button css-3cqj6h"
           id="submit"
           type="submit"
         >
@@ -94,16 +103,20 @@ exports[`Login Snapshot renders the UI snapshot correctly 1`] = `
   </form>
   <div
     aria-atomic={false}
-    aria-live="off"
+    aria-live="assertive"
     className="css-1oqrfgm"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "",
-      }
-    }
     data-isinvalid={false}
     id="loginError"
-  />
+  >
+    <div
+      className="css-0"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "",
+        }
+      }
+    />
+  </div>
 </div>
 `;
 
@@ -118,7 +131,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
   </h2>
   <form
     aria-label="form"
-    className="css-0"
+    className="css-1xdhyk6"
     id="login"
     onSubmit={[Function]}
   >
@@ -141,18 +154,23 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
           >
             Username
           </label>
-          <input
-            aria-required={true}
-            className="chakra-input css-0"
-            disabled={false}
-            id="username"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            required={true}
-            step={null}
-            type="text"
-          />
+          <div
+            className="css-79elbk"
+          >
+            <input
+              aria-required={true}
+              autoComplete={null}
+              className="chakra-input css-0"
+              disabled={false}
+              id="username"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              step={null}
+              type="text"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -170,18 +188,23 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
           >
             Password
           </label>
-          <input
-            aria-required={true}
-            className="chakra-input css-0"
-            disabled={false}
-            id="password"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            required={true}
-            step={null}
-            type="password"
-          />
+          <div
+            className="css-79elbk"
+          >
+            <input
+              aria-required={true}
+              autoComplete={null}
+              className="chakra-input css-0"
+              disabled={false}
+              id="password"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              step={null}
+              type="password"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -189,8 +212,7 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
         id="login-child2"
       >
         <button
-          className="chakra-button css-65jkji"
-          data-testid="button"
+          className="chakra-button css-3cqj6h"
           id="submit"
           type="submit"
         >
@@ -201,15 +223,19 @@ exports[`Login Snapshot renders the UI snapshot correctly 2`] = `
   </form>
   <div
     aria-atomic={false}
-    aria-live="off"
+    aria-live="assertive"
     className="css-1oqrfgm"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "",
-      }
-    }
     data-isinvalid={false}
     id="loginError"
-  />
+  >
+    <div
+      className="css-0"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "",
+        }
+      }
+    />
+  </div>
 </div>
 `;
