@@ -1,3 +1,4 @@
+# Note: No AWS QA environment at the moment.
 # On merge to master, build a container and deploy to ECR
 name: Publish to QA environment
 
