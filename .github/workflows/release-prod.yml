@@ -13,7 +13,7 @@ jobs:
   publish_qa:
     name: Publish image to ECR
     # only run if PR is merged (not just closed)
-    if: github.event.pull_request.merged
+    # if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
       - name: checkout
