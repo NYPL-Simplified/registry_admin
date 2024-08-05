@@ -3,12 +3,22 @@
 const { defaults } = require('jest-config');
 
 module.exports = {
-  preset: 'ts-jest',
   testEnvironment: 'jest-environment-jsdom',
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
+  transformIgnorePatterns: [
+    './node_modules/',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
   transform: {
-    '^.+\\.tsx?$': 'esbuild-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/testHelper/browser.ts'],
   clearMocks: true,
+  globals: {
+    'ts-jest': {
+      tsconfig: {
+        jsx: 'react',
+      },
+    },
+  },
 };

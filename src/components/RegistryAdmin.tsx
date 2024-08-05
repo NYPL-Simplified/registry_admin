@@ -43,7 +43,7 @@ const RegistryAdmin = () => {
     const refreshToken = Cookies.get('refreshToken');
     // If a refreshToken exists, send it as a header to the refresh endpoint.
     if (refreshToken) {
-      fetch(REFRESH as RequestInfo | URL, {
+      fetch(REFRESH, {
         method: 'POST',
         headers: { Authorization: `Bearer ${refreshToken}` },
       })
@@ -77,7 +77,7 @@ const RegistryAdmin = () => {
 
   // Fetch the libraries with the accessToken.
   const fetchLibraries = () => {
-    fetch(FETCH_LIBRARIES as RequestInfo | URL, {
+    fetch(FETCH_LIBRARIES, {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
       .then((response) => {
